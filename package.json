@@ -1,0 +1,19 @@
+{
+    "name": "life_restart",
+    "type": "module",
+    "main": "repl/index.js",
+    "version": "2.1.0",
+    "author": "Vick Scarlet <vick@syaro.io>",
+    "scripts": {
+        "xlsx2json": "vt transform -d public \"data/**/*.xlsx\"",
+        "dev": "vite",
+        "build": "vite build",
+        "start": "vite preview",
+        "test": "vitest"
+    },
+    "devDependencies": {
+        "v-transform": "^2.2.1",
+        "vite": "^8.0.3",
+        "vitest": "^4.1.2"
+    }
+}

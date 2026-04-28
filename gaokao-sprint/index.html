@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高三 365 天重开模拟器 冲刺版</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="panel setup" id="setup">
+      <div class="titlebar">
+        <div>
+          <p class="eyebrow">方案 2 MVP</p>
+          <h1>高三 365 天重开模拟器</h1>
+        </div>
+        <button id="rerollTalents" type="button">换一批天赋</button>
+      </div>
+
+      <div class="calendar" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <div class="layout">
+        <section>
+          <h2>选择 3 个冲刺天赋</h2>
+          <div class="talents" id="talentList"></div>
+        </section>
+        <section>
+          <h2>开局模板</h2>
+          <div class="templates" id="templates"></div>
+          <button id="startGame" class="primary" type="button" disabled>进入高三</button>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel game hidden" id="game">
+      <div class="titlebar">
+        <div>
+          <p class="eyebrow" id="phaseLabel">第 1 天</p>
+          <h1 id="gameTitle">冲刺回合</h1>
+        </div>
+        <div class="actions">
+          <button id="autoAction" type="button">智能行动</button>
+          <button id="restart" type="button">重开</button>
+        </div>
+      </div>
+
+      <div class="progress">
+        <span id="progressText">Day 1 / 365</span>
+        <i id="progressBar"></i>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <div class="content">
+        <section>
+          <div class="section-title">
+            <h2>本回合行动</h2>
+            <span id="actionCounter">0 / 2</span>
+          </div>
+          <div class="actionGrid" id="actionList"></div>
+          <h2>本局天赋</h2>
+          <div class="picked" id="pickedTalents"></div>
+        </section>
+        <section>
+          <h2>记录</h2>
+          <ol class="log" id="log"></ol>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>

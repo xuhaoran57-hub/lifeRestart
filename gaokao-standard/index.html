@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高考重开模拟器 标准版</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="panel setup" id="setup">
+      <div class="titlebar">
+        <div>
+          <p class="eyebrow">方案 1 MVP</p>
+          <h1>高考重开模拟器</h1>
+        </div>
+        <button id="rerollTalents" type="button">换一批天赋</button>
+      </div>
+
+      <div class="track" aria-hidden="true">
+        <span>学前</span><span>小学</span><span>初中</span><span>高中</span><span>出分</span>
+      </div>
+
+      <div class="layout">
+        <section>
+          <h2>选择 3 个天赋</h2>
+          <div class="talents" id="talentList"></div>
+        </section>
+
+        <section>
+          <h2>分配初始属性</h2>
+          <div class="points">剩余点数：<strong id="pointsLeft">20</strong></div>
+          <div class="allocations" id="allocationList"></div>
+          <button id="startGame" class="primary" type="button" disabled>开始重开</button>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel game hidden" id="game">
+      <div class="titlebar">
+        <div>
+          <p class="eyebrow" id="phaseLabel">第 3 岁</p>
+          <h1 id="gameTitle">升学轨迹</h1>
+        </div>
+        <div class="actions">
+          <button id="nextAge" type="button">下一年</button>
+          <button id="autoRun" type="button">自动跑完</button>
+          <button id="restart" type="button">重开</button>
+        </div>
+      </div>
+
+      <div class="stats" id="stats"></div>
+      <div class="score">
+        <div>
+          <span>分数潜力</span>
+          <strong id="scoreText">0</strong>
+        </div>
+        <div class="scorebar"><i id="scoreBar"></i></div>
+      </div>
+
+      <div class="content">
+        <section>
+          <h2>本局天赋</h2>
+          <div class="picked" id="pickedTalents"></div>
+        </section>
+        <section>
+          <h2>轨迹</h2>
+          <ol class="log" id="log"></ol>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
