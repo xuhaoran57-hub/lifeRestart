@@ -1,0 +1,342 @@
+[
+  {
+    "id": 52001,
+    "name": "县中黑马",
+    "description": "资源不高，但长线耐力极强。",
+    "unlockCondition": "AEND?[41121]",
+    "init": {
+      "INT": 6,
+      "STR": 6,
+      "MNY": 3,
+      "SPR": 6,
+      "VOL": 10
+    },
+    "talents": [
+      21003,
+      21004
+    ]
+  },
+  {
+    "id": 52002,
+    "name": "志愿军师",
+    "description": "分数不是唯一武器，信息也是。",
+    "unlockCondition": "AEND?[41005,41129]",
+    "init": {
+      "INT": 5,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 45
+    },
+    "talents": [
+      21013,
+      21710
+    ]
+  },
+  {
+    "id": 52003,
+    "name": "竞赛苗子",
+    "description": "适合体验竞赛和强基路线。",
+    "unlockCondition": "AEND?[41003,41122]",
+    "init": {
+      "INT": 8,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 5,
+      "VOL": 20
+    },
+    "talents": [
+      21010,
+      21502
+    ]
+  },
+  {
+    "id": 52004,
+    "name": "艺体生",
+    "description": "文化课和专业路两头拉扯。",
+    "unlockCondition": "AEND?[41006,41126]",
+    "init": {
+      "INT": 4,
+      "STR": 8,
+      "MNY": 5,
+      "SPR": 7,
+      "VOL": 25
+    },
+    "talents": [
+      21011,
+      21508
+    ]
+  },
+  {
+    "id": 52005,
+    "name": "稳健一本",
+    "description": "没有神话，但每一步都很稳。",
+    "unlockCondition": "AEND?[41004]",
+    "init": {
+      "INT": 5,
+      "STR": 6,
+      "MNY": 5,
+      "SPR": 7,
+      "VOL": 25
+    },
+    "talents": [
+      21007,
+      21321
+    ]
+  },
+  {
+    "id": 52006,
+    "name": "强基少年",
+    "description": "提前准备基础学科路线。",
+    "unlockCondition": "AEND?[41105,41155]",
+    "init": {
+      "INT": 7,
+      "STR": 5,
+      "MNY": 6,
+      "SPR": 5,
+      "VOL": 40
+    },
+    "talents": [
+      21511,
+      21524
+    ]
+  },
+  {
+    "id": 52007,
+    "name": "作文选手",
+    "description": "押中素材时有很高上限。",
+    "unlockCondition": "AEND?[41125,41165]",
+    "init": {
+      "INT": 6,
+      "STR": 5,
+      "MNY": 4,
+      "SPR": 7,
+      "VOL": 20
+    },
+    "talents": [
+      21202,
+      21506
+    ]
+  },
+  {
+    "id": 52008,
+    "name": "高压家庭",
+    "description": "分数会涨，心态也会被消耗。",
+    "unlockCondition": "AEND?[41134]",
+    "init": {
+      "INT": 6,
+      "STR": 5,
+      "MNY": 6,
+      "SPR": 3,
+      "VOL": 18
+    },
+    "talents": [
+      21008,
+      21314
+    ]
+  },
+  {
+    "id": 52009,
+    "name": "专业雷达",
+    "description": "适合走专业优先和捡漏路线。",
+    "unlockCondition": "AEND?[41131,41142]",
+    "init": {
+      "INT": 5,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 50
+    },
+    "talents": [
+      21701,
+      21718
+    ]
+  },
+  {
+    "id": 52010,
+    "name": "临场冷血",
+    "description": "高考当天有额外稳定感。",
+    "unlockCondition": "AEND?[41139]",
+    "init": {
+      "INT": 6,
+      "STR": 6,
+      "MNY": 4,
+      "SPR": 8,
+      "VOL": 20
+    },
+    "talents": [
+      21601,
+      21306
+    ]
+  },
+  {
+    "id": 52011,
+    "name": "玻璃心做题家",
+    "description": "上限不错，但压力管理很难。",
+    "unlockCondition": "AEND?[41116,41140]",
+    "init": {
+      "INT": 7,
+      "STR": 5,
+      "MNY": 4,
+      "SPR": 3,
+      "VOL": 12
+    },
+    "talents": [
+      21006,
+      21317
+    ]
+  },
+  {
+    "id": 52012,
+    "name": "章程猎人",
+    "description": "适合体验志愿填报细节线。",
+    "unlockCondition": "AEND?[41130,41168]",
+    "init": {
+      "INT": 5,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 55
+    },
+    "talents": [
+      21712,
+      21710
+    ]
+  },
+  {
+    "id": 52013,
+    "name": "强校门票",
+    "description": "强平台开局，但压力更密集。",
+    "unlockCondition": "TMS>=20",
+    "init": {
+      "INT": 6,
+      "STR": 5,
+      "MNY": 8,
+      "SPR": 5,
+      "VOL": 35
+    },
+    "talents": [
+      21118,
+      21402
+    ]
+  },
+  {
+    "id": 52014,
+    "name": "低分捡漏王",
+    "description": "靠志愿情报把有限分数用到极致。",
+    "unlockCondition": "AEND?[41112]",
+    "init": {
+      "INT": 4,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 70
+    },
+    "talents": [
+      21703,
+      21710
+    ]
+  },
+  {
+    "id": 52015,
+    "name": "长跑型选手",
+    "description": "慢慢积累，后期不容易崩。",
+    "unlockCondition": "AEND?[41138]",
+    "init": {
+      "INT": 5,
+      "STR": 8,
+      "MNY": 4,
+      "SPR": 7,
+      "VOL": 20
+    },
+    "talents": [
+      21321,
+      21219
+    ]
+  },
+  {
+    "id": 52016,
+    "name": "手机黑洞",
+    "description": "风险很高，但也更戏剧化。",
+    "unlockCondition": "TMS>=5",
+    "init": {
+      "INT": 5,
+      "STR": 4,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 8
+    },
+    "talents": [
+      21304,
+      21016
+    ]
+  },
+  {
+    "id": 52017,
+    "name": "信息闭塞挑战",
+    "description": "适合挑战滑档边缘翻盘。",
+    "unlockCondition": "AEND?[41008]",
+    "init": {
+      "INT": 6,
+      "STR": 6,
+      "MNY": 4,
+      "SPR": 6,
+      "VOL": 0
+    },
+    "talents": [
+      21012,
+      21003
+    ]
+  },
+  {
+    "id": 52018,
+    "name": "开明家庭",
+    "description": "心态优势明显，路线选择更顺。",
+    "unlockCondition": "AEND?[41135]",
+    "init": {
+      "INT": 5,
+      "STR": 6,
+      "MNY": 6,
+      "SPR": 8,
+      "VOL": 30
+    },
+    "talents": [
+      21111,
+      21416
+    ]
+  },
+  {
+    "id": 52019,
+    "name": "政策窗口",
+    "description": "政策和信息一起发力的路线。",
+    "unlockCondition": "AEND?[41141]",
+    "init": {
+      "INT": 5,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 35
+    },
+    "talents": [
+      21604,
+      21014
+    ]
+  },
+  {
+    "id": 52020,
+    "name": "押题体感",
+    "description": "高三和高考阶段更有戏剧性。",
+    "unlockCondition": "AEND?[41165]",
+    "init": {
+      "INT": 6,
+      "STR": 5,
+      "MNY": 5,
+      "SPR": 6,
+      "VOL": 25
+    },
+    "talents": [
+      21603,
+      21016
+    ]
+  }
+]

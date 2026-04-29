@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: #f3f0e8;
+  color: #202124;
+  font-family: Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+button {
+  min-height: 44px;
+  border: 1px solid #c8c2b8;
+  border-radius: 8px;
+  background: #fffdf8;
+  color: #202124;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+}
+
+h2 {
+  font-size: 1.25rem;
+}

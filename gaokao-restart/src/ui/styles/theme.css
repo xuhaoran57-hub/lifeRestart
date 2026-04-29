@@ -1,0 +1,296 @@
+#app {
+  min-height: 100vh;
+}
+
+.shell {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.topbar p,
+.muted {
+  color: #6d6860;
+}
+
+.panel,
+.card,
+.log-item {
+  border: 1px solid #d8d0c2;
+  border-radius: 8px;
+  background: #fffdf8;
+}
+
+.panel {
+  padding: 18px;
+}
+
+.home-panel {
+  display: grid;
+  gap: 16px;
+}
+
+.stack {
+  display: grid;
+  gap: 14px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.talent-card button {
+  display: grid;
+  width: 100%;
+  min-height: 148px;
+  align-content: start;
+  gap: 8px;
+  padding: 12px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.talent-card.rarity-common {
+  border-color: #d8d0c2;
+}
+
+.talent-card.rarity-rare {
+  border-color: #5aa7ff;
+  box-shadow: inset 0 0 0 1px rgba(90, 167, 255, 0.16);
+}
+
+.talent-card.rarity-epic {
+  border-color: #a56cff;
+  box-shadow: inset 0 0 0 1px rgba(165, 108, 255, 0.16);
+}
+
+.talent-card.rarity-legendary {
+  border-color: #f0a23a;
+  box-shadow: inset 0 0 0 1px rgba(240, 162, 58, 0.22);
+}
+
+.talent-card.selected,
+.inherit.selected {
+  border-color: #2f6f73;
+  background: #e8f2ee;
+}
+
+.card-title {
+  font-weight: 700;
+}
+
+.talent-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.grade,
+.rarity-badge,
+.category-badge,
+.pill,
+.tier {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 24px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #ece3cf;
+  color: #5c4c2d;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.rarity-common .rarity-badge {
+  background: #f3f0e8;
+  color: #514d46;
+}
+
+.rarity-rare .rarity-badge {
+  background: #e5f1ff;
+  color: #155996;
+}
+
+.rarity-epic .rarity-badge {
+  background: #f0e8ff;
+  color: #6840b6;
+}
+
+.rarity-legendary .rarity-badge {
+  background: #fff1d8;
+  color: #8a4d00;
+}
+
+.category-badge {
+  background: #f0eee7;
+  color: #5d5a54;
+  font-weight: 600;
+}
+
+.description,
+.tags {
+  color: #5d5a54;
+  line-height: 1.45;
+}
+
+.tags {
+  font-size: 0.85rem;
+}
+
+.primary {
+  border-color: #205f63;
+  background: #2f6f73;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.ghost {
+  background: transparent;
+}
+
+.wide {
+  width: 100%;
+}
+
+.message {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff0d8;
+  color: #7b4300;
+}
+
+.prop-list {
+  display: grid;
+  gap: 10px;
+}
+
+.prop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee6d8;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: 44px 48px 44px;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(86px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stats span {
+  display: grid;
+  min-height: 58px;
+  align-content: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f4efe5;
+}
+
+.stats em {
+  color: #686157;
+  font-size: 0.8rem;
+  font-style: normal;
+}
+
+.stats strong {
+  font-size: 1.1rem;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.log-list {
+  display: grid;
+  max-height: 56vh;
+  gap: 10px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.log-item {
+  padding: 12px;
+}
+
+.log-item p {
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.branch {
+  color: #2f6f73;
+  font-size: 0.92rem;
+}
+
+.summary {
+  border-color: #2f6f73;
+}
+
+.summary h2 {
+  margin-top: 10px;
+}
+
+.inherit-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inherit {
+  min-height: 38px;
+  padding: 0 12px;
+}
+
+@media (max-width: 640px) {
+  .shell {
+    padding: 14px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}

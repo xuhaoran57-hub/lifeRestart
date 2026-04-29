@@ -1,0 +1,4009 @@
+[
+  {
+    "step": 1,
+    "age": 3,
+    "round": 1,
+    "roundName": "春季启蒙",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 80
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 30
+      },
+      {
+        "id": 31101,
+        "weight": 80
+      },
+      {
+        "id": 31105,
+        "weight": 60
+      },
+      {
+        "id": 31109,
+        "weight": 100
+      },
+      {
+        "id": 31113,
+        "weight": 90
+      },
+      {
+        "id": 31117,
+        "weight": 70
+      },
+      {
+        "id": 31121,
+        "weight": 50
+      },
+      {
+        "id": 31125,
+        "weight": 100
+      },
+      {
+        "id": 31129,
+        "weight": 80
+      },
+      {
+        "id": 31133,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-春季启蒙",
+    "note": "3 岁第 1 回合：春季启蒙"
+  },
+  {
+    "step": 2,
+    "age": 3,
+    "round": 2,
+    "roundName": "夏季陪伴",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 80
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 30
+      },
+      {
+        "id": 31102,
+        "weight": 90
+      },
+      {
+        "id": 31106,
+        "weight": 70
+      },
+      {
+        "id": 31110,
+        "weight": 50
+      },
+      {
+        "id": 31114,
+        "weight": 100
+      },
+      {
+        "id": 31118,
+        "weight": 80
+      },
+      {
+        "id": 31122,
+        "weight": 60
+      },
+      {
+        "id": 31126,
+        "weight": 50
+      },
+      {
+        "id": 31130,
+        "weight": 90
+      },
+      {
+        "id": 31134,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-夏季陪伴",
+    "note": "3 岁第 2 回合：夏季陪伴"
+  },
+  {
+    "step": 3,
+    "age": 3,
+    "round": 3,
+    "roundName": "秋季习惯",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 80
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 30
+      },
+      {
+        "id": 31103,
+        "weight": 100
+      },
+      {
+        "id": 31107,
+        "weight": 80
+      },
+      {
+        "id": 31111,
+        "weight": 60
+      },
+      {
+        "id": 31115,
+        "weight": 50
+      },
+      {
+        "id": 31119,
+        "weight": 90
+      },
+      {
+        "id": 31123,
+        "weight": 70
+      },
+      {
+        "id": 31127,
+        "weight": 60
+      },
+      {
+        "id": 31131,
+        "weight": 100
+      },
+      {
+        "id": 31135,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-秋季习惯",
+    "note": "3 岁第 3 回合：秋季习惯"
+  },
+  {
+    "step": 4,
+    "age": 3,
+    "round": 4,
+    "roundName": "年末变化",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 80
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 30
+      },
+      {
+        "id": 31104,
+        "weight": 50
+      },
+      {
+        "id": 31108,
+        "weight": 90
+      },
+      {
+        "id": 31112,
+        "weight": 70
+      },
+      {
+        "id": 31116,
+        "weight": 60
+      },
+      {
+        "id": 31120,
+        "weight": 100
+      },
+      {
+        "id": 31124,
+        "weight": 80
+      },
+      {
+        "id": 31128,
+        "weight": 70
+      },
+      {
+        "id": 31132,
+        "weight": 50
+      },
+      {
+        "id": 31136,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-年末变化",
+    "note": "3 岁第 4 回合：年末变化"
+  },
+  {
+    "step": 5,
+    "age": 4,
+    "round": 1,
+    "roundName": "春季启蒙",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 70
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31003,
+        "weight": 40
+      },
+      {
+        "id": 31101,
+        "weight": 80
+      },
+      {
+        "id": 31105,
+        "weight": 60
+      },
+      {
+        "id": 31109,
+        "weight": 100
+      },
+      {
+        "id": 31113,
+        "weight": 90
+      },
+      {
+        "id": 31117,
+        "weight": 70
+      },
+      {
+        "id": 31121,
+        "weight": 50
+      },
+      {
+        "id": 31125,
+        "weight": 100
+      },
+      {
+        "id": 31129,
+        "weight": 80
+      },
+      {
+        "id": 31133,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-春季启蒙",
+    "note": "4 岁第 1 回合：春季启蒙"
+  },
+  {
+    "step": 6,
+    "age": 4,
+    "round": 2,
+    "roundName": "夏季陪伴",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 70
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31003,
+        "weight": 40
+      },
+      {
+        "id": 31102,
+        "weight": 90
+      },
+      {
+        "id": 31106,
+        "weight": 70
+      },
+      {
+        "id": 31110,
+        "weight": 50
+      },
+      {
+        "id": 31114,
+        "weight": 100
+      },
+      {
+        "id": 31118,
+        "weight": 80
+      },
+      {
+        "id": 31122,
+        "weight": 60
+      },
+      {
+        "id": 31126,
+        "weight": 50
+      },
+      {
+        "id": 31130,
+        "weight": 90
+      },
+      {
+        "id": 31134,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-夏季陪伴",
+    "note": "4 岁第 2 回合：夏季陪伴"
+  },
+  {
+    "step": 7,
+    "age": 4,
+    "round": 3,
+    "roundName": "秋季习惯",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 70
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31003,
+        "weight": 40
+      },
+      {
+        "id": 31103,
+        "weight": 100
+      },
+      {
+        "id": 31107,
+        "weight": 80
+      },
+      {
+        "id": 31111,
+        "weight": 60
+      },
+      {
+        "id": 31115,
+        "weight": 50
+      },
+      {
+        "id": 31119,
+        "weight": 90
+      },
+      {
+        "id": 31123,
+        "weight": 70
+      },
+      {
+        "id": 31127,
+        "weight": 60
+      },
+      {
+        "id": 31131,
+        "weight": 100
+      },
+      {
+        "id": 31135,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-秋季习惯",
+    "note": "4 岁第 3 回合：秋季习惯"
+  },
+  {
+    "step": 8,
+    "age": 4,
+    "round": 4,
+    "roundName": "年末变化",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31001,
+        "weight": 70
+      },
+      {
+        "id": 31002,
+        "weight": 60
+      },
+      {
+        "id": 31003,
+        "weight": 40
+      },
+      {
+        "id": 31104,
+        "weight": 50
+      },
+      {
+        "id": 31108,
+        "weight": 90
+      },
+      {
+        "id": 31112,
+        "weight": 70
+      },
+      {
+        "id": 31116,
+        "weight": 60
+      },
+      {
+        "id": 31120,
+        "weight": 100
+      },
+      {
+        "id": 31124,
+        "weight": 80
+      },
+      {
+        "id": 31128,
+        "weight": 70
+      },
+      {
+        "id": 31132,
+        "weight": 50
+      },
+      {
+        "id": 31136,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-年末变化",
+    "note": "4 岁第 4 回合：年末变化"
+  },
+  {
+    "step": 9,
+    "age": 5,
+    "round": 1,
+    "roundName": "春季启蒙",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31003,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 40
+      },
+      {
+        "id": 31101,
+        "weight": 80
+      },
+      {
+        "id": 31105,
+        "weight": 60
+      },
+      {
+        "id": 31109,
+        "weight": 100
+      },
+      {
+        "id": 31113,
+        "weight": 90
+      },
+      {
+        "id": 31117,
+        "weight": 70
+      },
+      {
+        "id": 31121,
+        "weight": 50
+      },
+      {
+        "id": 31125,
+        "weight": 100
+      },
+      {
+        "id": 31129,
+        "weight": 80
+      },
+      {
+        "id": 31133,
+        "weight": 60
+      }
+    ],
+    "talentPool": [
+      21001
+    ],
+    "scoreFormulaTag": "学前期-春季启蒙",
+    "note": "5 岁第 1 回合：春季启蒙"
+  },
+  {
+    "step": 10,
+    "age": 5,
+    "round": 2,
+    "roundName": "夏季陪伴",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31003,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 40
+      },
+      {
+        "id": 31102,
+        "weight": 90
+      },
+      {
+        "id": 31106,
+        "weight": 70
+      },
+      {
+        "id": 31110,
+        "weight": 50
+      },
+      {
+        "id": 31114,
+        "weight": 100
+      },
+      {
+        "id": 31118,
+        "weight": 80
+      },
+      {
+        "id": 31122,
+        "weight": 60
+      },
+      {
+        "id": 31126,
+        "weight": 50
+      },
+      {
+        "id": 31130,
+        "weight": 90
+      },
+      {
+        "id": 31134,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-夏季陪伴",
+    "note": "5 岁第 2 回合：夏季陪伴"
+  },
+  {
+    "step": 11,
+    "age": 5,
+    "round": 3,
+    "roundName": "秋季习惯",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31003,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 40
+      },
+      {
+        "id": 31103,
+        "weight": 100
+      },
+      {
+        "id": 31107,
+        "weight": 80
+      },
+      {
+        "id": 31111,
+        "weight": 60
+      },
+      {
+        "id": 31115,
+        "weight": 50
+      },
+      {
+        "id": 31119,
+        "weight": 90
+      },
+      {
+        "id": 31123,
+        "weight": 70
+      },
+      {
+        "id": 31127,
+        "weight": 60
+      },
+      {
+        "id": 31131,
+        "weight": 100
+      },
+      {
+        "id": 31135,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-秋季习惯",
+    "note": "5 岁第 3 回合：秋季习惯"
+  },
+  {
+    "step": 12,
+    "age": 5,
+    "round": 4,
+    "roundName": "年末变化",
+    "phase": "preschool",
+    "phaseName": "学前期",
+    "eventPool": [
+      {
+        "id": 31003,
+        "weight": 60
+      },
+      {
+        "id": 31004,
+        "weight": 40
+      },
+      {
+        "id": 31104,
+        "weight": 50
+      },
+      {
+        "id": 31108,
+        "weight": 90
+      },
+      {
+        "id": 31112,
+        "weight": 70
+      },
+      {
+        "id": 31116,
+        "weight": 60
+      },
+      {
+        "id": 31120,
+        "weight": 100
+      },
+      {
+        "id": 31124,
+        "weight": 80
+      },
+      {
+        "id": 31128,
+        "weight": 70
+      },
+      {
+        "id": 31132,
+        "weight": 50
+      },
+      {
+        "id": 31136,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "学前期-年末变化",
+    "note": "5 岁第 4 回合：年末变化"
+  },
+  {
+    "step": 13,
+    "age": 6,
+    "round": 1,
+    "roundName": "开学适应",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31007,
+        "weight": 30
+      },
+      {
+        "id": 31201,
+        "weight": 60
+      },
+      {
+        "id": 31205,
+        "weight": 100
+      },
+      {
+        "id": 31209,
+        "weight": 80
+      },
+      {
+        "id": 31213,
+        "weight": 70
+      },
+      {
+        "id": 31217,
+        "weight": 50
+      },
+      {
+        "id": 31221,
+        "weight": 90
+      },
+      {
+        "id": 31225,
+        "weight": 80
+      },
+      {
+        "id": 31229,
+        "weight": 60
+      },
+      {
+        "id": 31233,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-开学适应",
+    "note": "6 岁第 1 回合：开学适应"
+  },
+  {
+    "step": 14,
+    "age": 6,
+    "round": 2,
+    "roundName": "阶段练习",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31007,
+        "weight": 30
+      },
+      {
+        "id": 31202,
+        "weight": 70
+      },
+      {
+        "id": 31206,
+        "weight": 50
+      },
+      {
+        "id": 31210,
+        "weight": 90
+      },
+      {
+        "id": 31214,
+        "weight": 80
+      },
+      {
+        "id": 31218,
+        "weight": 60
+      },
+      {
+        "id": 31222,
+        "weight": 100
+      },
+      {
+        "id": 31226,
+        "weight": 90
+      },
+      {
+        "id": 31230,
+        "weight": 70
+      },
+      {
+        "id": 31234,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-阶段练习",
+    "note": "6 岁第 2 回合：阶段练习"
+  },
+  {
+    "step": 15,
+    "age": 6,
+    "round": 3,
+    "roundName": "期中波动",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31007,
+        "weight": 30
+      },
+      {
+        "id": 31203,
+        "weight": 80
+      },
+      {
+        "id": 31207,
+        "weight": 60
+      },
+      {
+        "id": 31211,
+        "weight": 100
+      },
+      {
+        "id": 31215,
+        "weight": 90
+      },
+      {
+        "id": 31219,
+        "weight": 70
+      },
+      {
+        "id": 31223,
+        "weight": 50
+      },
+      {
+        "id": 31227,
+        "weight": 100
+      },
+      {
+        "id": 31231,
+        "weight": 80
+      },
+      {
+        "id": 31235,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期中波动",
+    "note": "6 岁第 3 回合：期中波动"
+  },
+  {
+    "step": 16,
+    "age": 6,
+    "round": 4,
+    "roundName": "期末反馈",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31007,
+        "weight": 30
+      },
+      {
+        "id": 31204,
+        "weight": 90
+      },
+      {
+        "id": 31208,
+        "weight": 70
+      },
+      {
+        "id": 31212,
+        "weight": 50
+      },
+      {
+        "id": 31216,
+        "weight": 100
+      },
+      {
+        "id": 31220,
+        "weight": 80
+      },
+      {
+        "id": 31224,
+        "weight": 60
+      },
+      {
+        "id": 31228,
+        "weight": 50
+      },
+      {
+        "id": 31232,
+        "weight": 90
+      },
+      {
+        "id": 31236,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期末反馈",
+    "note": "6 岁第 4 回合：期末反馈"
+  },
+  {
+    "step": 17,
+    "age": 7,
+    "round": 1,
+    "roundName": "开学适应",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31201,
+        "weight": 60
+      },
+      {
+        "id": 31205,
+        "weight": 100
+      },
+      {
+        "id": 31209,
+        "weight": 80
+      },
+      {
+        "id": 31213,
+        "weight": 70
+      },
+      {
+        "id": 31217,
+        "weight": 50
+      },
+      {
+        "id": 31221,
+        "weight": 90
+      },
+      {
+        "id": 31225,
+        "weight": 80
+      },
+      {
+        "id": 31229,
+        "weight": 60
+      },
+      {
+        "id": 31233,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-开学适应",
+    "note": "7 岁第 1 回合：开学适应"
+  },
+  {
+    "step": 18,
+    "age": 7,
+    "round": 2,
+    "roundName": "阶段练习",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31202,
+        "weight": 70
+      },
+      {
+        "id": 31206,
+        "weight": 50
+      },
+      {
+        "id": 31210,
+        "weight": 90
+      },
+      {
+        "id": 31214,
+        "weight": 80
+      },
+      {
+        "id": 31218,
+        "weight": 60
+      },
+      {
+        "id": 31222,
+        "weight": 100
+      },
+      {
+        "id": 31226,
+        "weight": 90
+      },
+      {
+        "id": 31230,
+        "weight": 70
+      },
+      {
+        "id": 31234,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-阶段练习",
+    "note": "7 岁第 2 回合：阶段练习"
+  },
+  {
+    "step": 19,
+    "age": 7,
+    "round": 3,
+    "roundName": "期中波动",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31203,
+        "weight": 80
+      },
+      {
+        "id": 31207,
+        "weight": 60
+      },
+      {
+        "id": 31211,
+        "weight": 100
+      },
+      {
+        "id": 31215,
+        "weight": 90
+      },
+      {
+        "id": 31219,
+        "weight": 70
+      },
+      {
+        "id": 31223,
+        "weight": 50
+      },
+      {
+        "id": 31227,
+        "weight": 100
+      },
+      {
+        "id": 31231,
+        "weight": 80
+      },
+      {
+        "id": 31235,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期中波动",
+    "note": "7 岁第 3 回合：期中波动"
+  },
+  {
+    "step": 20,
+    "age": 7,
+    "round": 4,
+    "roundName": "期末反馈",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31006,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31204,
+        "weight": 90
+      },
+      {
+        "id": 31208,
+        "weight": 70
+      },
+      {
+        "id": 31212,
+        "weight": 50
+      },
+      {
+        "id": 31216,
+        "weight": 100
+      },
+      {
+        "id": 31220,
+        "weight": 80
+      },
+      {
+        "id": 31224,
+        "weight": 60
+      },
+      {
+        "id": 31228,
+        "weight": 50
+      },
+      {
+        "id": 31232,
+        "weight": 90
+      },
+      {
+        "id": 31236,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期末反馈",
+    "note": "7 岁第 4 回合：期末反馈"
+  },
+  {
+    "step": 21,
+    "age": 8,
+    "round": 1,
+    "roundName": "开学适应",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31201,
+        "weight": 60
+      },
+      {
+        "id": 31205,
+        "weight": 100
+      },
+      {
+        "id": 31209,
+        "weight": 80
+      },
+      {
+        "id": 31213,
+        "weight": 70
+      },
+      {
+        "id": 31217,
+        "weight": 50
+      },
+      {
+        "id": 31221,
+        "weight": 90
+      },
+      {
+        "id": 31225,
+        "weight": 80
+      },
+      {
+        "id": 31229,
+        "weight": 60
+      },
+      {
+        "id": 31233,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-开学适应",
+    "note": "8 岁第 1 回合：开学适应"
+  },
+  {
+    "step": 22,
+    "age": 8,
+    "round": 2,
+    "roundName": "阶段练习",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31202,
+        "weight": 70
+      },
+      {
+        "id": 31206,
+        "weight": 50
+      },
+      {
+        "id": 31210,
+        "weight": 90
+      },
+      {
+        "id": 31214,
+        "weight": 80
+      },
+      {
+        "id": 31218,
+        "weight": 60
+      },
+      {
+        "id": 31222,
+        "weight": 100
+      },
+      {
+        "id": 31226,
+        "weight": 90
+      },
+      {
+        "id": 31230,
+        "weight": 70
+      },
+      {
+        "id": 31234,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-阶段练习",
+    "note": "8 岁第 2 回合：阶段练习"
+  },
+  {
+    "step": 23,
+    "age": 8,
+    "round": 3,
+    "roundName": "期中波动",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31203,
+        "weight": 80
+      },
+      {
+        "id": 31207,
+        "weight": 60
+      },
+      {
+        "id": 31211,
+        "weight": 100
+      },
+      {
+        "id": 31215,
+        "weight": 90
+      },
+      {
+        "id": 31219,
+        "weight": 70
+      },
+      {
+        "id": 31223,
+        "weight": 50
+      },
+      {
+        "id": 31227,
+        "weight": 100
+      },
+      {
+        "id": 31231,
+        "weight": 80
+      },
+      {
+        "id": 31235,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期中波动",
+    "note": "8 岁第 3 回合：期中波动"
+  },
+  {
+    "step": 24,
+    "age": 8,
+    "round": 4,
+    "roundName": "期末反馈",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31204,
+        "weight": 90
+      },
+      {
+        "id": 31208,
+        "weight": 70
+      },
+      {
+        "id": 31212,
+        "weight": 50
+      },
+      {
+        "id": 31216,
+        "weight": 100
+      },
+      {
+        "id": 31220,
+        "weight": 80
+      },
+      {
+        "id": 31224,
+        "weight": 60
+      },
+      {
+        "id": 31228,
+        "weight": 50
+      },
+      {
+        "id": 31232,
+        "weight": 90
+      },
+      {
+        "id": 31236,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期末反馈",
+    "note": "8 岁第 4 回合：期末反馈"
+  },
+  {
+    "step": 25,
+    "age": 9,
+    "round": 1,
+    "roundName": "开学适应",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 60
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31201,
+        "weight": 60
+      },
+      {
+        "id": 31205,
+        "weight": 100
+      },
+      {
+        "id": 31209,
+        "weight": 80
+      },
+      {
+        "id": 31213,
+        "weight": 70
+      },
+      {
+        "id": 31217,
+        "weight": 50
+      },
+      {
+        "id": 31221,
+        "weight": 90
+      },
+      {
+        "id": 31225,
+        "weight": 80
+      },
+      {
+        "id": 31229,
+        "weight": 60
+      },
+      {
+        "id": 31233,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-开学适应",
+    "note": "9 岁第 1 回合：开学适应"
+  },
+  {
+    "step": 26,
+    "age": 9,
+    "round": 2,
+    "roundName": "阶段练习",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 60
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31202,
+        "weight": 70
+      },
+      {
+        "id": 31206,
+        "weight": 50
+      },
+      {
+        "id": 31210,
+        "weight": 90
+      },
+      {
+        "id": 31214,
+        "weight": 80
+      },
+      {
+        "id": 31218,
+        "weight": 60
+      },
+      {
+        "id": 31222,
+        "weight": 100
+      },
+      {
+        "id": 31226,
+        "weight": 90
+      },
+      {
+        "id": 31230,
+        "weight": 70
+      },
+      {
+        "id": 31234,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-阶段练习",
+    "note": "9 岁第 2 回合：阶段练习"
+  },
+  {
+    "step": 27,
+    "age": 9,
+    "round": 3,
+    "roundName": "期中波动",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 60
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31203,
+        "weight": 80
+      },
+      {
+        "id": 31207,
+        "weight": 60
+      },
+      {
+        "id": 31211,
+        "weight": 100
+      },
+      {
+        "id": 31215,
+        "weight": 90
+      },
+      {
+        "id": 31219,
+        "weight": 70
+      },
+      {
+        "id": 31223,
+        "weight": 50
+      },
+      {
+        "id": 31227,
+        "weight": 100
+      },
+      {
+        "id": 31231,
+        "weight": 80
+      },
+      {
+        "id": 31235,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期中波动",
+    "note": "9 岁第 3 回合：期中波动"
+  },
+  {
+    "step": 28,
+    "age": 9,
+    "round": 4,
+    "roundName": "期末反馈",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 60
+      },
+      {
+        "id": 31008,
+        "weight": 50
+      },
+      {
+        "id": 31204,
+        "weight": 90
+      },
+      {
+        "id": 31208,
+        "weight": 70
+      },
+      {
+        "id": 31212,
+        "weight": 50
+      },
+      {
+        "id": 31216,
+        "weight": 100
+      },
+      {
+        "id": 31220,
+        "weight": 80
+      },
+      {
+        "id": 31224,
+        "weight": 60
+      },
+      {
+        "id": 31228,
+        "weight": 50
+      },
+      {
+        "id": 31232,
+        "weight": 90
+      },
+      {
+        "id": 31236,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期末反馈",
+    "note": "9 岁第 4 回合：期末反馈"
+  },
+  {
+    "step": 29,
+    "age": 10,
+    "round": 1,
+    "roundName": "开学适应",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31201,
+        "weight": 60
+      },
+      {
+        "id": 31205,
+        "weight": 100
+      },
+      {
+        "id": 31209,
+        "weight": 80
+      },
+      {
+        "id": 31213,
+        "weight": 70
+      },
+      {
+        "id": 31217,
+        "weight": 50
+      },
+      {
+        "id": 31221,
+        "weight": 90
+      },
+      {
+        "id": 31225,
+        "weight": 80
+      },
+      {
+        "id": 31229,
+        "weight": 60
+      },
+      {
+        "id": 31233,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-开学适应",
+    "note": "10 岁第 1 回合：开学适应"
+  },
+  {
+    "step": 30,
+    "age": 10,
+    "round": 2,
+    "roundName": "阶段练习",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31202,
+        "weight": 70
+      },
+      {
+        "id": 31206,
+        "weight": 50
+      },
+      {
+        "id": 31210,
+        "weight": 90
+      },
+      {
+        "id": 31214,
+        "weight": 80
+      },
+      {
+        "id": 31218,
+        "weight": 60
+      },
+      {
+        "id": 31222,
+        "weight": 100
+      },
+      {
+        "id": 31226,
+        "weight": 90
+      },
+      {
+        "id": 31230,
+        "weight": 70
+      },
+      {
+        "id": 31234,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-阶段练习",
+    "note": "10 岁第 2 回合：阶段练习"
+  },
+  {
+    "step": 31,
+    "age": 10,
+    "round": 3,
+    "roundName": "期中波动",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31203,
+        "weight": 80
+      },
+      {
+        "id": 31207,
+        "weight": 60
+      },
+      {
+        "id": 31211,
+        "weight": 100
+      },
+      {
+        "id": 31215,
+        "weight": 90
+      },
+      {
+        "id": 31219,
+        "weight": 70
+      },
+      {
+        "id": 31223,
+        "weight": 50
+      },
+      {
+        "id": 31227,
+        "weight": 100
+      },
+      {
+        "id": 31231,
+        "weight": 80
+      },
+      {
+        "id": 31235,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期中波动",
+    "note": "10 岁第 3 回合：期中波动"
+  },
+  {
+    "step": 32,
+    "age": 10,
+    "round": 4,
+    "roundName": "期末反馈",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31005,
+        "weight": 60
+      },
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 40
+      },
+      {
+        "id": 31204,
+        "weight": 90
+      },
+      {
+        "id": 31208,
+        "weight": 70
+      },
+      {
+        "id": 31212,
+        "weight": 50
+      },
+      {
+        "id": 31216,
+        "weight": 100
+      },
+      {
+        "id": 31220,
+        "weight": 80
+      },
+      {
+        "id": 31224,
+        "weight": 60
+      },
+      {
+        "id": 31228,
+        "weight": 50
+      },
+      {
+        "id": 31232,
+        "weight": 90
+      },
+      {
+        "id": 31236,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期末反馈",
+    "note": "10 岁第 4 回合：期末反馈"
+  },
+  {
+    "step": 33,
+    "age": 11,
+    "round": 1,
+    "roundName": "开学适应",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31201,
+        "weight": 60
+      },
+      {
+        "id": 31205,
+        "weight": 100
+      },
+      {
+        "id": 31209,
+        "weight": 80
+      },
+      {
+        "id": 31213,
+        "weight": 70
+      },
+      {
+        "id": 31217,
+        "weight": 50
+      },
+      {
+        "id": 31221,
+        "weight": 90
+      },
+      {
+        "id": 31225,
+        "weight": 80
+      },
+      {
+        "id": 31229,
+        "weight": 60
+      },
+      {
+        "id": 31233,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-开学适应",
+    "note": "11 岁第 1 回合：开学适应"
+  },
+  {
+    "step": 34,
+    "age": 11,
+    "round": 2,
+    "roundName": "阶段练习",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31202,
+        "weight": 70
+      },
+      {
+        "id": 31206,
+        "weight": 50
+      },
+      {
+        "id": 31210,
+        "weight": 90
+      },
+      {
+        "id": 31214,
+        "weight": 80
+      },
+      {
+        "id": 31218,
+        "weight": 60
+      },
+      {
+        "id": 31222,
+        "weight": 100
+      },
+      {
+        "id": 31226,
+        "weight": 90
+      },
+      {
+        "id": 31230,
+        "weight": 70
+      },
+      {
+        "id": 31234,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-阶段练习",
+    "note": "11 岁第 2 回合：阶段练习"
+  },
+  {
+    "step": 35,
+    "age": 11,
+    "round": 3,
+    "roundName": "期中波动",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31203,
+        "weight": 80
+      },
+      {
+        "id": 31207,
+        "weight": 60
+      },
+      {
+        "id": 31211,
+        "weight": 100
+      },
+      {
+        "id": 31215,
+        "weight": 90
+      },
+      {
+        "id": 31219,
+        "weight": 70
+      },
+      {
+        "id": 31223,
+        "weight": 50
+      },
+      {
+        "id": 31227,
+        "weight": 100
+      },
+      {
+        "id": 31231,
+        "weight": 80
+      },
+      {
+        "id": 31235,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期中波动",
+    "note": "11 岁第 3 回合：期中波动"
+  },
+  {
+    "step": 36,
+    "age": 11,
+    "round": 4,
+    "roundName": "期末反馈",
+    "phase": "primary",
+    "phaseName": "小学期",
+    "eventPool": [
+      {
+        "id": 31006,
+        "weight": 70
+      },
+      {
+        "id": 31007,
+        "weight": 50
+      },
+      {
+        "id": 31008,
+        "weight": 40
+      },
+      {
+        "id": 31204,
+        "weight": 90
+      },
+      {
+        "id": 31208,
+        "weight": 70
+      },
+      {
+        "id": 31212,
+        "weight": 50
+      },
+      {
+        "id": 31216,
+        "weight": 100
+      },
+      {
+        "id": 31220,
+        "weight": 80
+      },
+      {
+        "id": 31224,
+        "weight": 60
+      },
+      {
+        "id": 31228,
+        "weight": 50
+      },
+      {
+        "id": 31232,
+        "weight": 90
+      },
+      {
+        "id": 31236,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "小学期-期末反馈",
+    "note": "11 岁第 4 回合：期末反馈"
+  },
+  {
+    "step": 37,
+    "age": 12,
+    "round": 1,
+    "roundName": "开学定位",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 50
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 30
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31301,
+        "weight": 100
+      },
+      {
+        "id": 31305,
+        "weight": 80
+      },
+      {
+        "id": 31309,
+        "weight": 60
+      },
+      {
+        "id": 31313,
+        "weight": 50
+      },
+      {
+        "id": 31317,
+        "weight": 90
+      },
+      {
+        "id": 31321,
+        "weight": 70
+      },
+      {
+        "id": 31325,
+        "weight": 60
+      },
+      {
+        "id": 31329,
+        "weight": 100
+      },
+      {
+        "id": 31333,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-开学定位",
+    "note": "12 岁第 1 回合：开学定位"
+  },
+  {
+    "step": 38,
+    "age": 12,
+    "round": 2,
+    "roundName": "月考排名",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 50
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 30
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31302,
+        "weight": 50
+      },
+      {
+        "id": 31306,
+        "weight": 90
+      },
+      {
+        "id": 31310,
+        "weight": 70
+      },
+      {
+        "id": 31314,
+        "weight": 60
+      },
+      {
+        "id": 31318,
+        "weight": 100
+      },
+      {
+        "id": 31322,
+        "weight": 80
+      },
+      {
+        "id": 31326,
+        "weight": 70
+      },
+      {
+        "id": 31330,
+        "weight": 50
+      },
+      {
+        "id": 31334,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-月考排名",
+    "note": "12 岁第 2 回合：月考排名"
+  },
+  {
+    "step": 39,
+    "age": 12,
+    "round": 3,
+    "roundName": "分流压力",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 50
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 30
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31303,
+        "weight": 60
+      },
+      {
+        "id": 31307,
+        "weight": 100
+      },
+      {
+        "id": 31311,
+        "weight": 80
+      },
+      {
+        "id": 31315,
+        "weight": 70
+      },
+      {
+        "id": 31319,
+        "weight": 50
+      },
+      {
+        "id": 31323,
+        "weight": 90
+      },
+      {
+        "id": 31327,
+        "weight": 80
+      },
+      {
+        "id": 31331,
+        "weight": 60
+      },
+      {
+        "id": 31335,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-分流压力",
+    "note": "12 岁第 3 回合：分流压力"
+  },
+  {
+    "step": 40,
+    "age": 12,
+    "round": 4,
+    "roundName": "阶段总结",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 50
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 30
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31304,
+        "weight": 70
+      },
+      {
+        "id": 31308,
+        "weight": 50
+      },
+      {
+        "id": 31312,
+        "weight": 90
+      },
+      {
+        "id": 31316,
+        "weight": 80
+      },
+      {
+        "id": 31320,
+        "weight": 60
+      },
+      {
+        "id": 31324,
+        "weight": 100
+      },
+      {
+        "id": 31328,
+        "weight": 90
+      },
+      {
+        "id": 31332,
+        "weight": 70
+      },
+      {
+        "id": 31336,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-阶段总结",
+    "note": "12 岁第 4 回合：阶段总结"
+  },
+  {
+    "step": 41,
+    "age": 13,
+    "round": 1,
+    "roundName": "开学定位",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 90
+      },
+      {
+        "id": 31011,
+        "weight": 40
+      },
+      {
+        "id": 31012,
+        "weight": 50
+      },
+      {
+        "id": 31301,
+        "weight": 100
+      },
+      {
+        "id": 31305,
+        "weight": 80
+      },
+      {
+        "id": 31309,
+        "weight": 60
+      },
+      {
+        "id": 31313,
+        "weight": 50
+      },
+      {
+        "id": 31317,
+        "weight": 90
+      },
+      {
+        "id": 31321,
+        "weight": 70
+      },
+      {
+        "id": 31325,
+        "weight": 60
+      },
+      {
+        "id": 31329,
+        "weight": 100
+      },
+      {
+        "id": 31333,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-开学定位",
+    "note": "13 岁第 1 回合：开学定位"
+  },
+  {
+    "step": 42,
+    "age": 13,
+    "round": 2,
+    "roundName": "月考排名",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 90
+      },
+      {
+        "id": 31011,
+        "weight": 40
+      },
+      {
+        "id": 31012,
+        "weight": 50
+      },
+      {
+        "id": 31302,
+        "weight": 50
+      },
+      {
+        "id": 31306,
+        "weight": 90
+      },
+      {
+        "id": 31310,
+        "weight": 70
+      },
+      {
+        "id": 31314,
+        "weight": 60
+      },
+      {
+        "id": 31318,
+        "weight": 100
+      },
+      {
+        "id": 31322,
+        "weight": 80
+      },
+      {
+        "id": 31326,
+        "weight": 70
+      },
+      {
+        "id": 31330,
+        "weight": 50
+      },
+      {
+        "id": 31334,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-月考排名",
+    "note": "13 岁第 2 回合：月考排名"
+  },
+  {
+    "step": 43,
+    "age": 13,
+    "round": 3,
+    "roundName": "分流压力",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 90
+      },
+      {
+        "id": 31011,
+        "weight": 40
+      },
+      {
+        "id": 31012,
+        "weight": 50
+      },
+      {
+        "id": 31303,
+        "weight": 60
+      },
+      {
+        "id": 31307,
+        "weight": 100
+      },
+      {
+        "id": 31311,
+        "weight": 80
+      },
+      {
+        "id": 31315,
+        "weight": 70
+      },
+      {
+        "id": 31319,
+        "weight": 50
+      },
+      {
+        "id": 31323,
+        "weight": 90
+      },
+      {
+        "id": 31327,
+        "weight": 80
+      },
+      {
+        "id": 31331,
+        "weight": 60
+      },
+      {
+        "id": 31335,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-分流压力",
+    "note": "13 岁第 3 回合：分流压力"
+  },
+  {
+    "step": 44,
+    "age": 13,
+    "round": 4,
+    "roundName": "阶段总结",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 90
+      },
+      {
+        "id": 31011,
+        "weight": 40
+      },
+      {
+        "id": 31012,
+        "weight": 50
+      },
+      {
+        "id": 31304,
+        "weight": 70
+      },
+      {
+        "id": 31308,
+        "weight": 50
+      },
+      {
+        "id": 31312,
+        "weight": 90
+      },
+      {
+        "id": 31316,
+        "weight": 80
+      },
+      {
+        "id": 31320,
+        "weight": 60
+      },
+      {
+        "id": 31324,
+        "weight": 100
+      },
+      {
+        "id": 31328,
+        "weight": 90
+      },
+      {
+        "id": 31332,
+        "weight": 70
+      },
+      {
+        "id": 31336,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-阶段总结",
+    "note": "13 岁第 4 回合：阶段总结"
+  },
+  {
+    "step": 45,
+    "age": 14,
+    "round": 1,
+    "roundName": "开学定位",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 50
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31301,
+        "weight": 100
+      },
+      {
+        "id": 31305,
+        "weight": 80
+      },
+      {
+        "id": 31309,
+        "weight": 60
+      },
+      {
+        "id": 31313,
+        "weight": 50
+      },
+      {
+        "id": 31317,
+        "weight": 90
+      },
+      {
+        "id": 31321,
+        "weight": 70
+      },
+      {
+        "id": 31325,
+        "weight": 60
+      },
+      {
+        "id": 31329,
+        "weight": 100
+      },
+      {
+        "id": 31333,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-开学定位",
+    "note": "14 岁第 1 回合：开学定位"
+  },
+  {
+    "step": 46,
+    "age": 14,
+    "round": 2,
+    "roundName": "月考排名",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 50
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31302,
+        "weight": 50
+      },
+      {
+        "id": 31306,
+        "weight": 90
+      },
+      {
+        "id": 31310,
+        "weight": 70
+      },
+      {
+        "id": 31314,
+        "weight": 60
+      },
+      {
+        "id": 31318,
+        "weight": 100
+      },
+      {
+        "id": 31322,
+        "weight": 80
+      },
+      {
+        "id": 31326,
+        "weight": 70
+      },
+      {
+        "id": 31330,
+        "weight": 50
+      },
+      {
+        "id": 31334,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-月考排名",
+    "note": "14 岁第 2 回合：月考排名"
+  },
+  {
+    "step": 47,
+    "age": 14,
+    "round": 3,
+    "roundName": "分流压力",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 50
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31303,
+        "weight": 60
+      },
+      {
+        "id": 31307,
+        "weight": 100
+      },
+      {
+        "id": 31311,
+        "weight": 80
+      },
+      {
+        "id": 31315,
+        "weight": 70
+      },
+      {
+        "id": 31319,
+        "weight": 50
+      },
+      {
+        "id": 31323,
+        "weight": 90
+      },
+      {
+        "id": 31327,
+        "weight": 80
+      },
+      {
+        "id": 31331,
+        "weight": 60
+      },
+      {
+        "id": 31335,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-分流压力",
+    "note": "14 岁第 3 回合：分流压力"
+  },
+  {
+    "step": 48,
+    "age": 14,
+    "round": 4,
+    "roundName": "阶段总结",
+    "phase": "middle",
+    "phaseName": "初中期",
+    "eventPool": [
+      {
+        "id": 31009,
+        "weight": 60
+      },
+      {
+        "id": 31010,
+        "weight": 80
+      },
+      {
+        "id": 31011,
+        "weight": 50
+      },
+      {
+        "id": 31012,
+        "weight": 40
+      },
+      {
+        "id": 31304,
+        "weight": 70
+      },
+      {
+        "id": 31308,
+        "weight": 50
+      },
+      {
+        "id": 31312,
+        "weight": 90
+      },
+      {
+        "id": 31316,
+        "weight": 80
+      },
+      {
+        "id": 31320,
+        "weight": 60
+      },
+      {
+        "id": 31324,
+        "weight": 100
+      },
+      {
+        "id": 31328,
+        "weight": 90
+      },
+      {
+        "id": 31332,
+        "weight": 70
+      },
+      {
+        "id": 31336,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "初中期-阶段总结",
+    "note": "14 岁第 4 回合：阶段总结"
+  },
+  {
+    "step": 49,
+    "age": 15,
+    "round": 1,
+    "roundName": "入学适应",
+    "phase": "senior1",
+    "phaseName": "高一期",
+    "eventPool": [
+      {
+        "id": 31013,
+        "weight": 70
+      },
+      {
+        "id": 31014,
+        "weight": 70
+      },
+      {
+        "id": 31015,
+        "weight": 50
+      },
+      {
+        "id": 31016,
+        "weight": 50
+      },
+      {
+        "id": 31401,
+        "weight": 80
+      },
+      {
+        "id": 31405,
+        "weight": 60
+      },
+      {
+        "id": 31409,
+        "weight": 100
+      },
+      {
+        "id": 31413,
+        "weight": 90
+      },
+      {
+        "id": 31417,
+        "weight": 70
+      },
+      {
+        "id": 31421,
+        "weight": 50
+      },
+      {
+        "id": 31425,
+        "weight": 100
+      },
+      {
+        "id": 31429,
+        "weight": 80
+      },
+      {
+        "id": 31433,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高一期-入学适应",
+    "note": "15 岁第 1 回合：入学适应"
+  },
+  {
+    "step": 50,
+    "age": 15,
+    "round": 2,
+    "roundName": "选科观察",
+    "phase": "senior1",
+    "phaseName": "高一期",
+    "eventPool": [
+      {
+        "id": 31013,
+        "weight": 70
+      },
+      {
+        "id": 31014,
+        "weight": 70
+      },
+      {
+        "id": 31015,
+        "weight": 50
+      },
+      {
+        "id": 31016,
+        "weight": 50
+      },
+      {
+        "id": 31402,
+        "weight": 90
+      },
+      {
+        "id": 31406,
+        "weight": 70
+      },
+      {
+        "id": 31410,
+        "weight": 50
+      },
+      {
+        "id": 31414,
+        "weight": 100
+      },
+      {
+        "id": 31418,
+        "weight": 80
+      },
+      {
+        "id": 31422,
+        "weight": 60
+      },
+      {
+        "id": 31426,
+        "weight": 50
+      },
+      {
+        "id": 31430,
+        "weight": 90
+      },
+      {
+        "id": 31434,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高一期-选科观察",
+    "note": "15 岁第 2 回合：选科观察"
+  },
+  {
+    "step": 51,
+    "age": 15,
+    "round": 3,
+    "roundName": "分班磨合",
+    "phase": "senior1",
+    "phaseName": "高一期",
+    "eventPool": [
+      {
+        "id": 31013,
+        "weight": 70
+      },
+      {
+        "id": 31014,
+        "weight": 70
+      },
+      {
+        "id": 31015,
+        "weight": 50
+      },
+      {
+        "id": 31016,
+        "weight": 50
+      },
+      {
+        "id": 31403,
+        "weight": 100
+      },
+      {
+        "id": 31407,
+        "weight": 80
+      },
+      {
+        "id": 31411,
+        "weight": 60
+      },
+      {
+        "id": 31415,
+        "weight": 50
+      },
+      {
+        "id": 31419,
+        "weight": 90
+      },
+      {
+        "id": 31423,
+        "weight": 70
+      },
+      {
+        "id": 31427,
+        "weight": 60
+      },
+      {
+        "id": 31431,
+        "weight": 100
+      },
+      {
+        "id": 31435,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高一期-分班磨合",
+    "note": "15 岁第 3 回合：分班磨合"
+  },
+  {
+    "step": 52,
+    "age": 15,
+    "round": 4,
+    "roundName": "期末定位",
+    "phase": "senior1",
+    "phaseName": "高一期",
+    "eventPool": [
+      {
+        "id": 31013,
+        "weight": 70
+      },
+      {
+        "id": 31014,
+        "weight": 70
+      },
+      {
+        "id": 31015,
+        "weight": 50
+      },
+      {
+        "id": 31016,
+        "weight": 50
+      },
+      {
+        "id": 31404,
+        "weight": 50
+      },
+      {
+        "id": 31408,
+        "weight": 90
+      },
+      {
+        "id": 31412,
+        "weight": 70
+      },
+      {
+        "id": 31416,
+        "weight": 60
+      },
+      {
+        "id": 31420,
+        "weight": 100
+      },
+      {
+        "id": 31424,
+        "weight": 80
+      },
+      {
+        "id": 31428,
+        "weight": 70
+      },
+      {
+        "id": 31432,
+        "weight": 50
+      },
+      {
+        "id": 31436,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高一期-期末定位",
+    "note": "15 岁第 4 回合：期末定位"
+  },
+  {
+    "step": 53,
+    "age": 16,
+    "round": 1,
+    "roundName": "路线试探",
+    "phase": "senior2",
+    "phaseName": "高二期",
+    "eventPool": [
+      {
+        "id": 31017,
+        "weight": 20
+      },
+      {
+        "id": 31018,
+        "weight": 60
+      },
+      {
+        "id": 31019,
+        "weight": 70
+      },
+      {
+        "id": 31020,
+        "weight": 80
+      },
+      {
+        "id": 31501,
+        "weight": 60
+      },
+      {
+        "id": 31505,
+        "weight": 100
+      },
+      {
+        "id": 31509,
+        "weight": 80
+      },
+      {
+        "id": 31513,
+        "weight": 70
+      },
+      {
+        "id": 31517,
+        "weight": 50
+      },
+      {
+        "id": 31521,
+        "weight": 90
+      },
+      {
+        "id": 31525,
+        "weight": 80
+      },
+      {
+        "id": 31529,
+        "weight": 60
+      },
+      {
+        "id": 31533,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高二期-路线试探",
+    "note": "16 岁第 1 回合：路线试探"
+  },
+  {
+    "step": 54,
+    "age": 16,
+    "round": 2,
+    "roundName": "平台调整",
+    "phase": "senior2",
+    "phaseName": "高二期",
+    "eventPool": [
+      {
+        "id": 31017,
+        "weight": 20
+      },
+      {
+        "id": 31018,
+        "weight": 60
+      },
+      {
+        "id": 31019,
+        "weight": 70
+      },
+      {
+        "id": 31020,
+        "weight": 80
+      },
+      {
+        "id": 31502,
+        "weight": 70
+      },
+      {
+        "id": 31506,
+        "weight": 50
+      },
+      {
+        "id": 31510,
+        "weight": 90
+      },
+      {
+        "id": 31514,
+        "weight": 80
+      },
+      {
+        "id": 31518,
+        "weight": 60
+      },
+      {
+        "id": 31522,
+        "weight": 100
+      },
+      {
+        "id": 31526,
+        "weight": 90
+      },
+      {
+        "id": 31530,
+        "weight": 70
+      },
+      {
+        "id": 31534,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高二期-平台调整",
+    "note": "16 岁第 2 回合：平台调整"
+  },
+  {
+    "step": 55,
+    "age": 16,
+    "round": 3,
+    "roundName": "竞赛强基",
+    "phase": "senior2",
+    "phaseName": "高二期",
+    "eventPool": [
+      {
+        "id": 31017,
+        "weight": 20
+      },
+      {
+        "id": 31018,
+        "weight": 60
+      },
+      {
+        "id": 31019,
+        "weight": 70
+      },
+      {
+        "id": 31020,
+        "weight": 80
+      },
+      {
+        "id": 31503,
+        "weight": 80
+      },
+      {
+        "id": 31507,
+        "weight": 60
+      },
+      {
+        "id": 31511,
+        "weight": 100
+      },
+      {
+        "id": 31515,
+        "weight": 90
+      },
+      {
+        "id": 31519,
+        "weight": 70
+      },
+      {
+        "id": 31523,
+        "weight": 50
+      },
+      {
+        "id": 31527,
+        "weight": 100
+      },
+      {
+        "id": 31531,
+        "weight": 80
+      },
+      {
+        "id": 31535,
+        "weight": 60
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高二期-竞赛强基",
+    "note": "16 岁第 3 回合：竞赛强基"
+  },
+  {
+    "step": 56,
+    "age": 16,
+    "round": 4,
+    "roundName": "期末定型",
+    "phase": "senior2",
+    "phaseName": "高二期",
+    "eventPool": [
+      {
+        "id": 31017,
+        "weight": 20
+      },
+      {
+        "id": 31018,
+        "weight": 60
+      },
+      {
+        "id": 31019,
+        "weight": 70
+      },
+      {
+        "id": 31020,
+        "weight": 80
+      },
+      {
+        "id": 31504,
+        "weight": 90
+      },
+      {
+        "id": 31508,
+        "weight": 70
+      },
+      {
+        "id": 31512,
+        "weight": 50
+      },
+      {
+        "id": 31516,
+        "weight": 100
+      },
+      {
+        "id": 31520,
+        "weight": 80
+      },
+      {
+        "id": 31524,
+        "weight": 60
+      },
+      {
+        "id": 31528,
+        "weight": 50
+      },
+      {
+        "id": 31532,
+        "weight": 90
+      },
+      {
+        "id": 31536,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高二期-期末定型",
+    "note": "16 岁第 4 回合：期末定型"
+  },
+  {
+    "step": 57,
+    "age": 17,
+    "round": 1,
+    "roundName": "一轮复习",
+    "phase": "senior3",
+    "phaseName": "高三期",
+    "eventPool": [
+      {
+        "id": 31021,
+        "weight": 80
+      },
+      {
+        "id": 31022,
+        "weight": 90
+      },
+      {
+        "id": 31023,
+        "weight": 70
+      },
+      {
+        "id": 31024,
+        "weight": 40
+      },
+      {
+        "id": 31601,
+        "weight": 100
+      },
+      {
+        "id": 31605,
+        "weight": 80
+      },
+      {
+        "id": 31609,
+        "weight": 60
+      },
+      {
+        "id": 31613,
+        "weight": 50
+      },
+      {
+        "id": 31617,
+        "weight": 90
+      },
+      {
+        "id": 31621,
+        "weight": 70
+      },
+      {
+        "id": 31625,
+        "weight": 60
+      },
+      {
+        "id": 31629,
+        "weight": 100
+      },
+      {
+        "id": 31633,
+        "weight": 80
+      }
+    ],
+    "talentPool": [
+      21015,
+      21016
+    ],
+    "scoreFormulaTag": "高三期-一轮复习",
+    "note": "17 岁第 1 回合：一轮复习"
+  },
+  {
+    "step": 58,
+    "age": 17,
+    "round": 2,
+    "roundName": "二轮瓶颈",
+    "phase": "senior3",
+    "phaseName": "高三期",
+    "eventPool": [
+      {
+        "id": 31021,
+        "weight": 80
+      },
+      {
+        "id": 31022,
+        "weight": 90
+      },
+      {
+        "id": 31023,
+        "weight": 70
+      },
+      {
+        "id": 31024,
+        "weight": 40
+      },
+      {
+        "id": 31602,
+        "weight": 50
+      },
+      {
+        "id": 31606,
+        "weight": 90
+      },
+      {
+        "id": 31610,
+        "weight": 70
+      },
+      {
+        "id": 31614,
+        "weight": 60
+      },
+      {
+        "id": 31618,
+        "weight": 100
+      },
+      {
+        "id": 31622,
+        "weight": 80
+      },
+      {
+        "id": 31626,
+        "weight": 70
+      },
+      {
+        "id": 31630,
+        "weight": 50
+      },
+      {
+        "id": 31634,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高三期-二轮瓶颈",
+    "note": "17 岁第 2 回合：二轮瓶颈"
+  },
+  {
+    "step": 59,
+    "age": 17,
+    "round": 3,
+    "roundName": "百日冲刺",
+    "phase": "senior3",
+    "phaseName": "高三期",
+    "eventPool": [
+      {
+        "id": 31021,
+        "weight": 80
+      },
+      {
+        "id": 31022,
+        "weight": 90
+      },
+      {
+        "id": 31023,
+        "weight": 70
+      },
+      {
+        "id": 31024,
+        "weight": 40
+      },
+      {
+        "id": 31603,
+        "weight": 60
+      },
+      {
+        "id": 31607,
+        "weight": 100
+      },
+      {
+        "id": 31611,
+        "weight": 80
+      },
+      {
+        "id": 31615,
+        "weight": 70
+      },
+      {
+        "id": 31619,
+        "weight": 50
+      },
+      {
+        "id": 31623,
+        "weight": 90
+      },
+      {
+        "id": 31627,
+        "weight": 80
+      },
+      {
+        "id": 31631,
+        "weight": 60
+      },
+      {
+        "id": 31635,
+        "weight": 100
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高三期-百日冲刺",
+    "note": "17 岁第 3 回合：百日冲刺"
+  },
+  {
+    "step": 60,
+    "age": 17,
+    "round": 4,
+    "roundName": "考前状态",
+    "phase": "senior3",
+    "phaseName": "高三期",
+    "eventPool": [
+      {
+        "id": 31021,
+        "weight": 80
+      },
+      {
+        "id": 31022,
+        "weight": 90
+      },
+      {
+        "id": 31023,
+        "weight": 70
+      },
+      {
+        "id": 31024,
+        "weight": 40
+      },
+      {
+        "id": 31604,
+        "weight": 70
+      },
+      {
+        "id": 31608,
+        "weight": 50
+      },
+      {
+        "id": 31612,
+        "weight": 90
+      },
+      {
+        "id": 31616,
+        "weight": 80
+      },
+      {
+        "id": 31620,
+        "weight": 60
+      },
+      {
+        "id": 31624,
+        "weight": 100
+      },
+      {
+        "id": 31628,
+        "weight": 90
+      },
+      {
+        "id": 31632,
+        "weight": 70
+      },
+      {
+        "id": 31636,
+        "weight": 50
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "高三期-考前状态",
+    "note": "17 岁第 4 回合：考前状态"
+  },
+  {
+    "step": 61,
+    "age": 18,
+    "round": 1,
+    "roundName": "考前调整",
+    "phase": "final",
+    "phaseName": "出分填报期",
+    "eventPool": [
+      {
+        "id": 31025,
+        "weight": 50
+      },
+      {
+        "id": 31026,
+        "weight": 60
+      },
+      {
+        "id": 31027,
+        "weight": 70
+      },
+      {
+        "id": 31028,
+        "weight": 70
+      },
+      {
+        "id": 31701,
+        "weight": 80
+      },
+      {
+        "id": 31705,
+        "weight": 60
+      },
+      {
+        "id": 31709,
+        "weight": 100
+      },
+      {
+        "id": 31713,
+        "weight": 90
+      },
+      {
+        "id": 31717,
+        "weight": 70
+      },
+      {
+        "id": 31721,
+        "weight": 50
+      },
+      {
+        "id": 31725,
+        "weight": 100
+      },
+      {
+        "id": 31729,
+        "weight": 80
+      },
+      {
+        "id": 31733,
+        "weight": 60
+      }
+    ],
+    "talentPool": [
+      21014
+    ],
+    "scoreFormulaTag": "出分填报期-考前调整",
+    "note": "高考结算第 1 回合：考前调整"
+  },
+  {
+    "step": 62,
+    "age": 18,
+    "round": 2,
+    "roundName": "高考当日",
+    "phase": "final",
+    "phaseName": "出分填报期",
+    "eventPool": [
+      {
+        "id": 31025,
+        "weight": 50
+      },
+      {
+        "id": 31026,
+        "weight": 60
+      },
+      {
+        "id": 31027,
+        "weight": 70
+      },
+      {
+        "id": 31028,
+        "weight": 70
+      },
+      {
+        "id": 31702,
+        "weight": 90
+      },
+      {
+        "id": 31706,
+        "weight": 70
+      },
+      {
+        "id": 31710,
+        "weight": 50
+      },
+      {
+        "id": 31714,
+        "weight": 100
+      },
+      {
+        "id": 31718,
+        "weight": 80
+      },
+      {
+        "id": 31722,
+        "weight": 60
+      },
+      {
+        "id": 31726,
+        "weight": 50
+      },
+      {
+        "id": 31730,
+        "weight": 90
+      },
+      {
+        "id": 31734,
+        "weight": 70
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "出分填报期-高考当日",
+    "note": "高考结算第 2 回合：高考当日"
+  },
+  {
+    "step": 63,
+    "age": 18,
+    "round": 3,
+    "roundName": "出分估分",
+    "phase": "final",
+    "phaseName": "出分填报期",
+    "eventPool": [
+      {
+        "id": 31025,
+        "weight": 50
+      },
+      {
+        "id": 31026,
+        "weight": 60
+      },
+      {
+        "id": 31027,
+        "weight": 70
+      },
+      {
+        "id": 31028,
+        "weight": 70
+      },
+      {
+        "id": 31703,
+        "weight": 100
+      },
+      {
+        "id": 31707,
+        "weight": 80
+      },
+      {
+        "id": 31711,
+        "weight": 60
+      },
+      {
+        "id": 31715,
+        "weight": 50
+      },
+      {
+        "id": 31719,
+        "weight": 90
+      },
+      {
+        "id": 31723,
+        "weight": 70
+      },
+      {
+        "id": 31727,
+        "weight": 60
+      },
+      {
+        "id": 31731,
+        "weight": 100
+      },
+      {
+        "id": 31735,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "出分填报期-出分估分",
+    "note": "高考结算第 3 回合：出分估分"
+  },
+  {
+    "step": 64,
+    "age": 18,
+    "round": 4,
+    "roundName": "志愿录取",
+    "phase": "final",
+    "phaseName": "出分填报期",
+    "eventPool": [
+      {
+        "id": 31025,
+        "weight": 50
+      },
+      {
+        "id": 31026,
+        "weight": 60
+      },
+      {
+        "id": 31027,
+        "weight": 70
+      },
+      {
+        "id": 31028,
+        "weight": 70
+      },
+      {
+        "id": 31704,
+        "weight": 50
+      },
+      {
+        "id": 31708,
+        "weight": 90
+      },
+      {
+        "id": 31712,
+        "weight": 70
+      },
+      {
+        "id": 31716,
+        "weight": 60
+      },
+      {
+        "id": 31720,
+        "weight": 100
+      },
+      {
+        "id": 31724,
+        "weight": 80
+      },
+      {
+        "id": 31728,
+        "weight": 70
+      },
+      {
+        "id": 31732,
+        "weight": 50
+      },
+      {
+        "id": 31736,
+        "weight": 90
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "出分填报期-志愿录取",
+    "note": "高考结算第 4 回合：志愿录取"
+  }
+]
