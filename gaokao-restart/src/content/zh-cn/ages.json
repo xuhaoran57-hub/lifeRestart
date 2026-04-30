@@ -3753,56 +3753,28 @@
     "phaseName": "出分填报期",
     "eventPool": [
       {
-        "id": 31025,
+        "id": 31706,
+        "weight": 70
+      },
+      {
+        "id": 31710,
         "weight": 50
       },
       {
-        "id": 31026,
-        "weight": 60
-      },
-      {
-        "id": 31027,
-        "weight": 70
-      },
-      {
-        "id": 31028,
-        "weight": 70
-      },
-      {
-        "id": 31701,
+        "id": 31718,
         "weight": 80
       },
       {
-        "id": 31705,
+        "id": 31722,
         "weight": 60
       },
       {
-        "id": 31709,
-        "weight": 100
-      },
-      {
-        "id": 31713,
+        "id": 31730,
         "weight": 90
       },
       {
-        "id": 31717,
+        "id": 31734,
         "weight": 70
-      },
-      {
-        "id": 31721,
-        "weight": 50
-      },
-      {
-        "id": 31725,
-        "weight": 100
-      },
-      {
-        "id": 31729,
-        "weight": 80
-      },
-      {
-        "id": 31733,
-        "weight": 60
       }
     ],
     "talentPool": [
@@ -3828,47 +3800,51 @@
         "weight": 60
       },
       {
-        "id": 31027,
-        "weight": 70
-      },
-      {
-        "id": 31028,
-        "weight": 70
+        "id": 31701,
+        "weight": 80
       },
       {
         "id": 31702,
         "weight": 90
       },
       {
-        "id": 31706,
-        "weight": 70
+        "id": 31703,
+        "weight": 100
       },
       {
-        "id": 31710,
+        "id": 31704,
         "weight": 50
+      },
+      {
+        "id": 31713,
+        "weight": 90
       },
       {
         "id": 31714,
         "weight": 100
       },
       {
-        "id": 31718,
-        "weight": 80
+        "id": 31715,
+        "weight": 50
       },
       {
-        "id": 31722,
+        "id": 31716,
         "weight": 60
+      },
+      {
+        "id": 31725,
+        "weight": 100
       },
       {
         "id": 31726,
         "weight": 50
       },
       {
-        "id": 31730,
-        "weight": 90
+        "id": 31727,
+        "weight": 60
       },
       {
-        "id": 31734,
+        "id": 31728,
         "weight": 70
       }
     ],
@@ -3880,18 +3856,10 @@
     "step": 63,
     "age": 18,
     "round": 3,
-    "roundName": "出分估分",
+    "roundName": "志愿填报",
     "phase": "final",
     "phaseName": "出分填报期",
     "eventPool": [
-      {
-        "id": 31025,
-        "weight": 50
-      },
-      {
-        "id": 31026,
-        "weight": 60
-      },
       {
         "id": 31027,
         "weight": 70
@@ -3899,103 +3867,62 @@
       {
         "id": 31028,
         "weight": 70
-      },
-      {
-        "id": 31703,
-        "weight": 100
       },
       {
         "id": 31707,
         "weight": 80
       },
       {
-        "id": 31711,
-        "weight": 60
-      },
-      {
-        "id": 31715,
-        "weight": 50
-      },
-      {
-        "id": 31719,
+        "id": 31708,
         "weight": 90
       },
       {
-        "id": 31723,
-        "weight": 70
-      },
-      {
-        "id": 31727,
-        "weight": 60
-      },
-      {
-        "id": 31731,
+        "id": 31709,
         "weight": 100
       },
       {
-        "id": 31735,
-        "weight": 80
-      }
-    ],
-    "talentPool": [],
-    "scoreFormulaTag": "出分填报期-出分估分",
-    "note": "高考结算第 3 回合：出分估分"
-  },
-  {
-    "step": 64,
-    "age": 18,
-    "round": 4,
-    "roundName": "志愿录取",
-    "phase": "final",
-    "phaseName": "出分填报期",
-    "eventPool": [
-      {
-        "id": 31025,
-        "weight": 50
-      },
-      {
-        "id": 31026,
+        "id": 31711,
         "weight": 60
-      },
-      {
-        "id": 31027,
-        "weight": 70
-      },
-      {
-        "id": 31028,
-        "weight": 70
-      },
-      {
-        "id": 31704,
-        "weight": 50
-      },
-      {
-        "id": 31708,
-        "weight": 90
       },
       {
         "id": 31712,
         "weight": 70
       },
       {
-        "id": 31716,
-        "weight": 60
+        "id": 31719,
+        "weight": 90
       },
       {
         "id": 31720,
         "weight": 100
       },
       {
+        "id": 31721,
+        "weight": 50
+      },
+      {
+        "id": 31723,
+        "weight": 70
+      },
+      {
         "id": 31724,
         "weight": 80
       },
       {
-        "id": 31728,
-        "weight": 70
+        "id": 31731,
+        "weight": 100
       },
       {
         "id": 31732,
         "weight": 50
+      },
+      {
+        "id": 31733,
+        "weight": 60
+      },
+      {
+        "id": 31735,
+        "weight": 80
       },
       {
         "id": 31736,
@@ -4003,7 +3930,32 @@
       }
     ],
     "talentPool": [],
-    "scoreFormulaTag": "出分填报期-志愿录取",
-    "note": "高考结算第 4 回合：志愿录取"
+    "scoreFormulaTag": "出分填报期-志愿填报",
+    "note": "高考结算第 3 回合：志愿填报"
+  },
+  {
+    "step": 64,
+    "age": 18,
+    "round": 4,
+    "roundName": "出分录取",
+    "phase": "final",
+    "phaseName": "出分填报期",
+    "eventPool": [
+      {
+        "id": 31705,
+        "weight": 60
+      },
+      {
+        "id": 31717,
+        "weight": 70
+      },
+      {
+        "id": 31729,
+        "weight": 80
+      }
+    ],
+    "talentPool": [],
+    "scoreFormulaTag": "出分填报期-出分录取",
+    "note": "高考结算第 4 回合：出分录取"
   }
 ]

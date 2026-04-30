@@ -15,6 +15,9 @@ const content = {
   ages: readJson('ages'),
   endings: readJson('endings'),
   achievements: readJson('achievements'),
+  admissionProfiles: readJson('admissions/profiles'),
+  universities: readJson('admissions/universities'),
+  admissionLines: readJson('admissions/admission-lines'),
 };
 
 const rarityOrder = ['common', 'rare', 'epic', 'legendary'];
@@ -74,8 +77,15 @@ function simulate(runs = 1000) {
   let totalVOL = 0;
   let totalRSK = 0;
   let totalSCOREMOD = 0;
+  let totalFinalScore = 0;
+  let canReach985 = 0;
+  let canReach211 = 0;
+  let admitted985 = 0;
+  let admitted211 = 0;
+  let slideCount = 0;
   const candidateRarityDistribution = new Map();
   const selectedRarityDistribution = new Map();
+  const admissionDistribution = new Map();
   let legendaryCandidateRuns = 0;
 
   for (let index = 0; index < runs; index += 1) {
@@ -91,6 +101,17 @@ function simulate(runs = 1000) {
       totalVOL += result.props.VOL;
       totalRSK += result.props.RSK;
       totalSCOREMOD += result.props.SCOREMOD;
+      totalFinalScore += result.admission.finalScore;
+      if (result.admission.canReach985) canReach985 += 1;
+      if (result.admission.canReach211) canReach211 += 1;
+      if (result.admission.admissionTier === '985') admitted985 += 1;
+      if (result.admission.admissionTier === '211') admitted211 += 1;
+      if (result.admission.admissionTier === 'slide') slideCount += 1;
+      if (result.admission.admittedUniversity) {
+        addCount(admissionDistribution, result.admission.admittedUniversity.name);
+      } else {
+        addCount(admissionDistribution, result.admission.admissionTier);
+      }
       if (result.candidateTalents.some(talent => talentRarity(talent) === 'legendary')) legendaryCandidateRuns += 1;
       for (const talent of result.candidateTalents) addCount(candidateRarityDistribution, talentRarity(talent));
       for (const talent of result.selectedTalents) addCount(selectedRarityDistribution, talentRarity(talent));
@@ -107,6 +128,12 @@ function simulate(runs = 1000) {
   console.log(`Average VOL: ${(totalVOL / completed).toFixed(1)}`);
   console.log(`Average RSK: ${(totalRSK / completed).toFixed(1)}`);
   console.log(`Average SCOREMOD: ${(totalSCOREMOD / completed).toFixed(1)}`);
+  console.log(`Average final score: ${(totalFinalScore / completed).toFixed(1)}`);
+  console.log(`985 reachable: ${canReach985} (${(canReach985 / completed * 100).toFixed(1)}%)`);
+  console.log(`211 reachable: ${canReach211} (${(canReach211 / completed * 100).toFixed(1)}%)`);
+  console.log(`985 admitted: ${admitted985} (${(admitted985 / completed * 100).toFixed(1)}%)`);
+  console.log(`211 admitted: ${admitted211} (${(admitted211 / completed * 100).toFixed(1)}%)`);
+  console.log(`Slide: ${slideCount} (${(slideCount / completed * 100).toFixed(1)}%)`);
   console.log(`Runs with legendary candidate: ${legendaryCandidateRuns} (${(legendaryCandidateRuns / completed * 100).toFixed(1)}%)`);
   console.log('Candidate rarity distribution:');
   printRarityDistribution(candidateRarityDistribution, completed * 10);
@@ -118,6 +145,10 @@ function simulate(runs = 1000) {
   }
   console.log('Ending distribution:');
   for (const [name, count] of [...distribution.entries()].sort((a, b) => b[1] - a[1])) {
+    console.log(`- ${name}: ${count} (${(count / completed * 100).toFixed(1)}%)`);
+  }
+  console.log('Admission distribution:');
+  for (const [name, count] of [...admissionDistribution.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20)) {
     console.log(`- ${name}: ${count} (${(count / completed * 100).toFixed(1)}%)`);
   }
 }
@@ -190,8 +221,100 @@ function runOne(random) {
     .find(item => evaluate(item.condition, props, selectedTalentIds, eventIds))
     ?? content.endings.find(item => item.id === (props.HSCR >= 520 ? 41111 : 41007));
   if (!ending) throw new Error('no ending');
+  const exam = calculateExamScore(props, random);
+  const admission = resolveAdmission(props, selectedTalentIds, eventIds, exam);
   props.SUM = Math.round(props.HSCR * 0.45 + (props.INT + props.STR + props.MNY + props.SPR) * 8 + props.HVOL * 0.8 + ending.scoreBonus);
-  return { ending, props, candidateTalents: talentPick.candidateTalents, selectedTalents: talentPick.selectedTalents };
+  return { ending, props, admission, candidateTalents: talentPick.candidateTalents, selectedTalents: talentPick.selectedTalents };
+}
+
+function calculateExamScore(props, random) {
+  const potentialScore = props.SCR;
+  const stabilityBonus = clamp(props.SPR * 0.8 - props.RSK * 0.12, -10, 10);
+  const varianceRange = clamp(18 + props.RSK * 0.22 - props.SPR * 1.1, 6, 35);
+  const variance = Math.round((random.next() * 2 - 1) * varianceRange);
+  const finalScore = clamp(Math.round(potentialScore + stabilityBonus + variance), 250, 750);
+  return { finalScore, potentialScore, variance };
+}
+
+function resolveAdmission(props, selectedTalentIds, eventIds, exam) {
+  const profile = content.admissionProfiles.find(item => item.default) ?? content.admissionProfiles[0];
+  const universities = new Map(content.universities.map(item => [item.code, item]));
+  const lines = content.admissionLines
+    .filter(line => line.profileId === profile.id)
+    .map(line => ({ line, university: universities.get(line.universityCode), margin: exam.finalScore - line.minScore }))
+    .filter(item => item.university);
+  const reachable = lines.filter(item => item.margin >= 0);
+  const reachable985 = reachable.filter(item => item.university.tags.includes('985'));
+  const reachable211 = reachable.filter(item => item.university.tags.includes('211'));
+  const strategyScore = props.HVOL - props.RSK * 0.35 + routeBonus(selectedTalentIds, eventIds);
+  const slide = reachable.length > 0 && strategyScore < 10 && props.RSK >= 65 && props.HVOL < 25;
+  const picked = slide ? null : pickAdmittedLine(reachable, strategyScore);
+
+  if (!picked) {
+    return {
+      finalScore: exam.finalScore,
+      canReach985: reachable985.length > 0,
+      canReach211: reachable211.length > 0,
+      admitted: false,
+      admissionTier: slide ? 'slide' : exam.finalScore >= 300 ? 'college' : 'retake',
+    };
+  }
+
+  return {
+    finalScore: exam.finalScore,
+    canReach985: reachable985.length > 0,
+    canReach211: reachable211.length > 0,
+    admitted: true,
+    admittedLine: picked.line,
+    admittedUniversity: picked.university,
+    admissionTier: universityAdmissionTier(picked.university),
+    margin: picked.margin,
+  };
+}
+
+function pickAdmittedLine(reachable, strategyScore) {
+  if (reachable.length === 0) return null;
+  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 22 : 48;
+  const minMargin = strategyScore >= 65 ? 0 : strategyScore >= 35 ? 8 : 28;
+  const maxMargin = strategyScore >= 65 ? 24 : strategyScore >= 35 ? 42 : 90;
+  const preferred = reachable.filter(item => item.margin >= minMargin && item.margin <= maxMargin);
+  const pool = preferred.length ? preferred : reachable;
+  return [...pool].sort((a, b) => admissionChoiceScore(b, targetMargin) - admissionChoiceScore(a, targetMargin))[0] ?? null;
+}
+
+function admissionChoiceScore(candidate, targetMargin) {
+  return linePrestigeScore(candidate) - Math.abs(candidate.margin - targetMargin) * 3;
+}
+
+function linePrestigeScore(candidate) {
+  const tierWeight = { top: 5000, strong: 3800, solid: 2800, regional: 1600, private: 500 }[candidate.university.prestigeTier];
+  const tagBonus = candidate.university.tags.includes('985')
+    ? 1400
+    : candidate.university.tags.includes('211')
+      ? 900
+      : candidate.university.tags.includes('doubleFirstClass')
+        ? 650
+        : 0;
+  return tierWeight + tagBonus + candidate.line.minScore;
+}
+
+function routeBonus(selectedTalentIds, eventIds) {
+  const talentBonus = selectedTalentIds
+    .map(id => content.talents.find(item => item.id === id))
+    .reduce((sum, talent) => {
+      if (talent?.category === 'volunteer') return sum + 8;
+      if (talent?.category === 'route') return sum + 4;
+      return sum;
+    }, 0);
+  const eventBonus = eventIds.some(id => [31027, 31708, 31720, 31732].includes(id)) ? 8 : 0;
+  return Math.min(18, talentBonus + eventBonus);
+}
+
+function universityAdmissionTier(university) {
+  if (university.tags.includes('985')) return '985';
+  if (university.tags.includes('211')) return '211';
+  if (university.tags.includes('doubleFirstClass')) return 'doubleFirstClass';
+  return 'undergraduate';
 }
 
 function pickTalents(random) {

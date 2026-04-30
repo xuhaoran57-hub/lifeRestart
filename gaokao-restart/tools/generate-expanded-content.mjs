@@ -584,11 +584,11 @@ const phaseSeed = {
     ['英语听力设备有杂音，你心态受了点影响。', { SCOREMOD: -8, SPR: -1 }, '听力干扰', '高考,英语'],
     ['理综最后几分钟，你改对了一个关键选项。', { SCOREMOD: 8 }, '临场改对', '高考,理综'],
     ['出分那天，你的分数比估分高了一截。', { SCOREMOD: 12, SPR: 1 }, '估分偏低', '出分,惊喜'],
-    ['你估分过高，填报策略一开始偏激进。', { VOL: -8, RSK: 6 }, '估分偏高', '志愿,风险'],
+    ['你提前踩点考场，把路线和入场时间都确认了一遍。', { SPR: 1, RSK: -4 }, '考场踩点', '考前,准备'],
     ['你认真比较了城市、学校和专业。', { VOL: 18 }, '三角比较', '志愿,策略'],
     ['招生章程里一行小字救了你。', { VOL: 20, RSK: -6 }, '章程避坑', '志愿,细节'],
     ['你被一个听起来很新潮的专业名吸引。', { VOL: -8, RSK: 5 }, '专业误读', '志愿,风险'],
-    ['你选择服从调剂，保住了学校层级。', { VOL: 8, SPR: -1 }, '服从调剂', '志愿,取舍'],
+    ['考前一晚，你按计划收起复习资料，尽量把觉睡踏实。', { SPR: 2 }, '考前睡眠', '考前,心态'],
     ['你放弃冲名校，保住了喜欢的专业。', { VOL: 12, SPR: 1 }, '保专业', '志愿,取舍'],
     ['你在最后一天才确认志愿顺序，差点错过提交。', { RSK: 8, SPR: -1 }, '提交惊险', '志愿,风险'],
   ],
@@ -597,18 +597,78 @@ const phaseSeed = {
 function expandPhase(startId, phase) {
   const seeds = phaseSeed[phase];
   const modifiers = [
-    ['这件事后来被你反复想起。', { VOL: 2 }],
-    ['当时看不出影响，分数曲线却悄悄变了。', { RSK: 2 }],
-    ['你把它记进了自己的小本子。', { STR: 1 }],
+    { suffixes: [''], effects: [{}] },
+    {
+      suffixes: [
+        '后来你才发现，这一步改变了复习节奏。',
+        '老师的一句提醒，让你重新调整了方法。',
+        '它没有立刻见效，却慢慢影响了心态。',
+        '你开始对类似情况更敏感。',
+        '那几天的状态，给后面的选择留了伏笔。',
+        '你和同学聊过之后，换了一个处理方式。',
+        '这件小事让你重新估计了自己的承受力。',
+        '你第一次认真意识到信息差也会影响结果。',
+        '它让你在下一次考试前多准备了一步。',
+        '你把注意力从情绪拉回了具体问题。',
+        '这段经历让家里对你的判断发生了微调。',
+        '你没有马上改变，但心里多了一个提醒。',
+      ],
+      effects: [
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+        { RSK: 2 },
+      ],
+    },
+    {
+      suffixes: [
+        '复盘时，你把原因拆成了几条可执行的动作。',
+        '后来遇到同类问题，你处理得更快了一点。',
+        '这次波动被你当成了一次提前演练。',
+        '你给自己留了一条更稳的后路。',
+        '它逼着你把计划从“想一想”改成“写下来”。',
+        '那天之后，你对节奏失控更警惕了。',
+        '你开始分清哪些事该争，哪些事该放。',
+        '这让你在关键节点少走了一点弯路。',
+        '你把经验告诉了身边的人，自己也更笃定。',
+        '它没有改变所有事，却改变了你看问题的角度。',
+        '你把这次教训折进了下一轮安排。',
+        '后来回头看，它确实不是一件小事。',
+      ],
+      effects: [
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+        { STR: 1 },
+      ],
+    },
   ];
   let cursor = startId;
   const phaseEvents = [];
   for (let round = 0; round < 3; round += 1) {
-    for (const [text, effect, flag, tagText] of seeds) {
-      const [suffix, extraEffect] = modifiers[round];
+    for (const [seedIndex, [text, effect, flag, tagText]] of seeds.entries()) {
+      const modifier = modifiers[round];
+      const suffix = modifier.suffixes[seedIndex % modifier.suffixes.length];
+      const extraEffect = modifier.effects[seedIndex % modifier.effects.length];
       const merged = { ...effect };
       for (const [key, value] of Object.entries(extraEffect)) merged[key] = (merged[key] || 0) + value;
-      const eventText = round === 0 ? text : `${text}${suffix}`;
+      const eventText = suffix ? `${text}${suffix}` : text;
       phaseEvents.push(event(cursor, phase, eventText, merged, {
         weight: 50 + ((cursor + round) % 6) * 10,
         grade: flag.includes('超常') || flag.includes('押中') || flag.includes('强基') ? 2 : (cursor % 5 === 0 ? 1 : 0),
@@ -662,20 +722,36 @@ const ROUND_NAMES = {
   senior1: ['入学适应', '选科观察', '分班磨合', '期末定位'],
   senior2: ['路线试探', '平台调整', '竞赛强基', '期末定型'],
   senior3: ['一轮复习', '二轮瓶颈', '百日冲刺', '考前状态'],
-  final: ['考前调整', '高考当日', '出分估分', '志愿录取'],
+  final: ['考前调整', '高考当日', '志愿填报', '出分录取'],
 };
+
+function generatedEventBelongsToRound(item, index, round) {
+  if (item.phase === 'final' && item.tags?.includes('考前')) return round === 1;
+  if (item.phase === 'final' && item.tags?.includes('高考')) return round === 2;
+  if (item.phase === 'final' && item.tags?.includes('志愿')) return round === 3;
+  if (item.phase === 'final' && item.tags?.includes('出分')) return round === 4;
+  return index % 4 === round - 1;
+}
+
+function baseEventBelongsToRound(id, age, round) {
+  if (age !== 18) return true;
+  if ([31027, 31028].includes(id)) return round === 3;
+  if ([31025, 31026].includes(id)) return round === 2;
+  return true;
+}
 
 const ages = [];
 for (let age = 3; age <= 18; age += 1) {
   const phase = phaseForAge(age);
   const generated = events
     .filter(item => item.phase === phase && item.id >= 31101);
-  const base = (baseAgePools[age] || []).map(([id, weight]) => ({ id, weight }));
+  const baseRefs = (baseAgePools[age] || []).map(([id, weight]) => ({ id, weight }));
   for (let round = 1; round <= 4; round += 1) {
     const roundName = ROUND_NAMES[phase][round - 1];
     const roundGenerated = generated
-      .filter((_, index) => index % 4 === round - 1)
+      .filter((item, index) => generatedEventBelongsToRound(item, index, round))
       .map(item => ({ id: item.id, weight: item.weight }));
+    const base = baseRefs.filter(item => baseEventBelongsToRound(item.id, age, round));
     ages.push({
       step: (age - 3) * 4 + round,
       age,

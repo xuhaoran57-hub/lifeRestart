@@ -1,0 +1,250 @@
+[
+  {
+    "code": "10001",
+    "name": "北京大学",
+    "province": "北京",
+    "city": "北京",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10003",
+    "name": "清华大学",
+    "province": "北京",
+    "city": "北京",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10002",
+    "name": "中国人民大学",
+    "province": "北京",
+    "city": "北京",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10006",
+    "name": "北京航空航天大学",
+    "province": "北京",
+    "city": "北京",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10007",
+    "name": "北京理工大学",
+    "province": "北京",
+    "city": "北京",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10013",
+    "name": "北京邮电大学",
+    "province": "北京",
+    "city": "北京",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "10055",
+    "name": "南开大学",
+    "province": "天津",
+    "city": "天津",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10056",
+    "name": "天津大学",
+    "province": "天津",
+    "city": "天津",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10062",
+    "name": "天津医科大学",
+    "province": "天津",
+    "city": "天津",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "10246",
+    "name": "复旦大学",
+    "province": "上海",
+    "city": "上海",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10247",
+    "name": "同济大学",
+    "province": "上海",
+    "city": "上海",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10248",
+    "name": "上海交通大学",
+    "province": "上海",
+    "city": "上海",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10251",
+    "name": "华东理工大学",
+    "province": "上海",
+    "city": "上海",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "10255",
+    "name": "东华大学",
+    "province": "上海",
+    "city": "上海",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "solid"
+  },
+  {
+    "code": "10335",
+    "name": "浙江大学",
+    "province": "浙江",
+    "city": "杭州",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10384",
+    "name": "厦门大学",
+    "province": "福建",
+    "city": "厦门",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10386",
+    "name": "福州大学",
+    "province": "福建",
+    "city": "福州",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "solid"
+  },
+  {
+    "code": "10532",
+    "name": "湖南大学",
+    "province": "湖南",
+    "city": "长沙",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10558",
+    "name": "中山大学",
+    "province": "广东",
+    "city": "广州",
+    "tags": ["985", "211", "doubleFirstClass"],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "10559",
+    "name": "暨南大学",
+    "province": "广东",
+    "city": "广州",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "solid"
+  },
+  {
+    "code": "10590",
+    "name": "深圳大学",
+    "province": "广东",
+    "city": "深圳",
+    "tags": [],
+    "prestigeTier": "solid"
+  },
+  {
+    "code": "10593",
+    "name": "广西大学",
+    "province": "广西",
+    "city": "南宁",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "solid"
+  },
+  {
+    "code": "10594",
+    "name": "广西科技大学",
+    "province": "广西",
+    "city": "柳州",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "10595",
+    "name": "桂林电子科技大学",
+    "province": "广西",
+    "city": "桂林",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "10596",
+    "name": "桂林理工大学",
+    "province": "广西",
+    "city": "桂林",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "10598",
+    "name": "广西医科大学",
+    "province": "广西",
+    "city": "南宁",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "10626",
+    "name": "四川农业大学",
+    "province": "四川",
+    "city": "雅安",
+    "tags": ["211", "doubleFirstClass"],
+    "prestigeTier": "solid"
+  },
+  {
+    "code": "13639",
+    "name": "柳州工学院",
+    "province": "广西",
+    "city": "柳州",
+    "tags": ["private"],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "13640",
+    "name": "广西民族大学相思湖学院",
+    "province": "广西",
+    "city": "南宁",
+    "tags": ["private"],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "13641",
+    "name": "桂林学院",
+    "province": "广西",
+    "city": "桂林",
+    "tags": ["private"],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "13642",
+    "name": "南宁师范大学师园学院",
+    "province": "广西",
+    "city": "南宁",
+    "tags": ["private"],
+    "prestigeTier": "private"
+  }
+]

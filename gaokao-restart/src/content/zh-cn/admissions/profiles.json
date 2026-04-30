@@ -1,0 +1,12 @@
+[
+  {
+    "id": "gx-2024-physics",
+    "name": "广西 2024 首选物理",
+    "year": 2024,
+    "sourceProvince": "广西",
+    "subjectTrack": "首选物理",
+    "scoreScale": 750,
+    "batch": "本科普通批",
+    "default": true
+  }
+]

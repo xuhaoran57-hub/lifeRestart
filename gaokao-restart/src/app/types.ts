@@ -102,6 +102,70 @@ export interface Ending {
   tags?: string[];
 }
 
+export type AdmissionTier = '985' | '211' | 'doubleFirstClass' | 'undergraduate' | 'college' | 'retake' | 'slide';
+export type AdmissionStrategyLabel = '稳妥' | '均衡' | '冲刺' | '失误';
+
+export interface AdmissionProfile {
+  id: string;
+  name: string;
+  year: number;
+  sourceProvince: string;
+  subjectTrack: string;
+  scoreScale: number;
+  batch: string;
+  default?: boolean;
+}
+
+export interface University {
+  code: string;
+  name: string;
+  province: string;
+  city: string;
+  tags: string[];
+  prestigeTier: 'top' | 'strong' | 'solid' | 'regional' | 'private';
+}
+
+export interface AdmissionLine {
+  profileId: string;
+  universityCode: string;
+  universityName: string;
+  groupCode: string;
+  groupName: string;
+  batch: string;
+  minScore: number;
+  minRank: number | null;
+  subjectRequirement: string;
+  sourceName: string;
+  sourceUrl: string;
+  sourcePublishedAt: string;
+}
+
+export interface ExamScoreResult {
+  finalScore: number;
+  potentialScore: number;
+  variance: number;
+  explanation: string;
+}
+
+export interface AdmissionResult {
+  profileId: string;
+  profileName: string;
+  finalScore: number;
+  potentialScore: number;
+  variance: number;
+  canReach985: boolean;
+  canReach211: boolean;
+  bestReachable985?: AdmissionLine;
+  bestReachable211?: AdmissionLine;
+  admitted: boolean;
+  admittedLine?: AdmissionLine;
+  admittedUniversity?: University;
+  admissionTier: AdmissionTier;
+  margin?: number;
+  strategyLabel: AdmissionStrategyLabel;
+  reason: string;
+}
+
 export interface Achievement {
   id: number;
   name: string;
@@ -127,6 +191,9 @@ export interface GameContent {
   endings: Ending[];
   achievements: Achievement[];
   characters: CharacterPreset[];
+  admissionProfiles: AdmissionProfile[];
+  universities: University[];
+  admissionLines: AdmissionLine[];
 }
 
 export interface Allocation {
@@ -160,6 +227,7 @@ export interface GameState {
   stepIndex: number;
   currentRound: AgeRound | null;
   finalEnding: Ending | null;
+  admissionResult: AdmissionResult | null;
   isFinished: boolean;
 }
 
@@ -167,11 +235,13 @@ export interface StepResult {
   state: GameState;
   log: RunLog;
   ending: Ending | null;
+  admission: AdmissionResult | null;
 }
 
 export interface FinalResult {
   state: GameState;
   ending: Ending;
+  admission: AdmissionResult;
 }
 
 export interface SaveData {

@@ -244,6 +244,10 @@
   padding-right: 4px;
 }
 
+.summary-log {
+  max-height: 46vh;
+}
+
 .log-item {
   padding: 12px;
 }
@@ -264,6 +268,62 @@
 
 .summary h2 {
   margin-top: 10px;
+}
+
+.admission-panel {
+  border-color: #b8c7d9;
+  background: #fbfcff;
+}
+
+.score-badge {
+  display: inline-flex;
+  min-width: 74px;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #153f63;
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.admission-school {
+  display: grid;
+  gap: 4px;
+  margin: 10px 0 12px;
+}
+
+.admission-school strong {
+  font-size: 1.2rem;
+}
+
+.admission-school span,
+.admission-reason,
+.source-note {
+  color: #5d5a54;
+  line-height: 1.5;
+}
+
+.admission-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(98px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.admission-facts span {
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #eef4fb;
+}
+
+.admission-facts em {
+  color: #596779;
+  font-size: 0.8rem;
+  font-style: normal;
 }
 
 .inherit-list {

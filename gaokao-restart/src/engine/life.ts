@@ -12,6 +12,7 @@ import type {
   StepResult,
   Talent,
 } from '../app/types';
+import { calculateExamScore, resolveAdmission } from './admission';
 import { evaluateCondition } from './condition';
 import { pickEnding } from './endings';
 import { createConditionContext, getEventMap, isEventAvailable, pickEventForRound } from './events';
@@ -68,6 +69,7 @@ export class LifeEngine {
       stepIndex: 0,
       currentRound: null,
       finalEnding: null,
+      admissionResult: null,
       isFinished: false,
     };
 
@@ -112,24 +114,32 @@ export class LifeEngine {
     state.logs.push(log);
 
     let ending = null;
+    let admission = null;
     if (ageRound.age === 18 && ageRound.round === 4) {
       ending = pickEnding(this.content, state);
+      const exam = calculateExamScore(state.props, this.random);
+      admission = resolveAdmission(this.content, state, exam);
       state.finalEnding = ending;
+      state.admissionResult = admission;
       state.endingIds = [ending.id];
       state.props.SUM = calculateSummaryScore(state.props, ending.scoreBonus);
       state.isFinished = true;
     }
 
-    return { state: this.snapshot(), log, ending };
+    return { state: this.snapshot(), log, ending, admission };
   }
 
   runToEnd(): FinalResult {
     let ending = this.requireState().finalEnding;
+    let admission = this.requireState().admissionResult;
     while (!this.requireState().isFinished) {
-      ending = this.next().ending;
+      const step = this.next();
+      ending = step.ending;
+      admission = step.admission;
     }
     if (!ending) throw new Error('结局结算失败');
-    return { state: this.snapshot(), ending };
+    if (!admission) throw new Error('录取结算失败');
+    return { state: this.snapshot(), ending, admission };
   }
 
   getState(): GameState {
@@ -196,6 +206,7 @@ export class LifeEngine {
       logs: state.logs.map(log => ({ ...log, props: { ...log.props } })),
       currentRound: state.currentRound ? { ...state.currentRound } : null,
       finalEnding: state.finalEnding ? { ...state.finalEnding } : null,
+      admissionResult: state.admissionResult ? { ...state.admissionResult } : null,
     };
   }
 }

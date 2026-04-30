@@ -15,6 +15,8 @@ describe('LifeEngine', () => {
     expect(result.state.currentRound?.round).toBe(4);
     expect(result.ending.id).toBeGreaterThan(0);
     expect(result.state.props.HSCR).toBeGreaterThanOrEqual(250);
+    expect(result.admission.finalScore).toBeGreaterThanOrEqual(250);
+    expect(result.state.admissionResult?.finalScore).toBe(result.admission.finalScore);
   });
 
   it('rejects mutually exclusive talents', () => {
@@ -65,5 +67,25 @@ describe('LifeEngine', () => {
     expect(rarityCounts.epic).toBeLessThan(1100);
     expect(rarityCounts.legendary).toBeGreaterThan(120);
     expect(rarityCounts.legendary).toBeLessThan(320);
+  });
+
+  it('keeps age 18 prep, exam, volunteer, and score events in their own rounds', () => {
+    const eventMap = new Map(zhCnContent.events.map(item => [item.id, item]));
+    for (const round of zhCnContent.ages.filter(item => item.age === 18)) {
+      const hasPrepEvent = round.eventPool.some(ref => eventMap.get(ref.id)?.tags?.includes('考前'));
+      const hasVolunteerEvent = round.eventPool.some(ref => eventMap.get(ref.id)?.tags?.includes('志愿'));
+      const hasExamEvent = round.eventPool.some(ref => eventMap.get(ref.id)?.tags?.includes('高考'));
+      const hasScoreEvent = round.eventPool.some(ref => eventMap.get(ref.id)?.tags?.includes('出分'));
+      expect(hasPrepEvent).toBe(round.round === 1);
+      expect(hasExamEvent).toBe(round.round === 2);
+      expect(hasVolunteerEvent).toBe(round.round === 3);
+      expect(hasScoreEvent).toBe(round.round === 4);
+    }
+  });
+
+  it('does not include repeated placeholder event suffixes', () => {
+    const texts = zhCnContent.events.map(item => item.text).join('\n');
+    expect(texts).not.toContain('分数曲线却悄悄变了');
+    expect(texts).not.toContain('记进了自己的小本子');
   });
 });

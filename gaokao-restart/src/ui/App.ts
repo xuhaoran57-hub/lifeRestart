@@ -1,5 +1,5 @@
 import type { GameApp } from '../app/createGame';
-import type { Allocation, FinalResult, GameState, Talent } from '../app/types';
+import type { AdmissionResult, Allocation, FinalResult, GameState, Talent } from '../app/types';
 import { LifeEngine } from '../engine/life';
 import { recordFinalResult, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
@@ -9,6 +9,7 @@ type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary';
 interface UiState {
   screen: Screen;
   candidates: Talent[];
+  inheritedCandidateId: number | null;
   selectedTalentIds: number[];
   allocation: Allocation;
   engine: LifeEngine | null;
@@ -22,6 +23,7 @@ export function createApp(root: HTMLElement, game: GameApp): void {
   const state: UiState = {
     screen: 'home',
     candidates: [],
+    inheritedCandidateId: null,
     selectedTalentIds: [],
     allocation: { INT: 5, STR: 5, MNY: 5, SPR: 5 },
     engine: null,
@@ -54,9 +56,12 @@ export function createApp(root: HTMLElement, game: GameApp): void {
 
 function handleAction(action: string, target: HTMLElement, state: UiState, game: GameApp): void {
   if (action === 'start') {
-    state.candidates = drawTalentCandidates(game.content, 10, game.save.inheritedTalentId, Date.now(), game.save.achievedIds);
+    const inheritedTalentId = game.save.inheritedTalentId;
+    state.candidates = drawTalentCandidates(game.content, 10, inheritedTalentId, Date.now(), game.save.achievedIds);
+    state.inheritedCandidateId = state.candidates.some(item => item.id === inheritedTalentId) ? inheritedTalentId : null;
     state.selectedTalentIds = [];
     state.screen = 'talents';
+    if (inheritedTalentId !== null) game.persist(setInheritedTalent(game.save, null));
     return;
   }
 
@@ -116,6 +121,7 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
     state.engine = null;
     state.gameState = null;
     state.result = null;
+    state.inheritedCandidateId = null;
     state.persistedResult = false;
     return;
   }
@@ -147,8 +153,8 @@ function runOneRound(state: UiState, game: GameApp): void {
   if (!state.engine) throw new Error('本局还未开始');
   const step = state.engine.next();
   state.gameState = step.state;
-  if (step.ending) {
-    const result: FinalResult = { state: step.state, ending: step.ending };
+  if (step.ending && step.admission) {
+    const result: FinalResult = { state: step.state, ending: step.ending, admission: step.admission };
     state.result = result;
     state.screen = 'summary';
     if (!state.persistedResult) {
@@ -203,7 +209,7 @@ function renderTalents(state: UiState, game: GameApp): string {
   const selected = new Set(state.selectedTalentIds);
   const cards = state.candidates.map(talent => {
     const active = selected.has(talent.id);
-    const inherited = game.save.inheritedTalentId === talent.id;
+    const inherited = state.inheritedCandidateId === talent.id;
     const rarity = talent.rarity ?? 'common';
     const rarityName = talent.rarityName ?? talentRarityName(talent.grade);
     const categoryName = talent.categoryName ?? '天赋';
@@ -305,6 +311,8 @@ function renderSummary(state: UiState, game: GameApp): string {
         <p>${escapeHtml(ending.description)}</p>
         ${renderStats(state.result.state)}
       </div>
+      ${renderAdmission(state.result.admission)}
+      ${renderSummaryLogs(state.result.state)}
       <div class="panel">
         <div class="section-title">
           <h2>继承天赋</h2>
@@ -320,6 +328,58 @@ function renderSummary(state: UiState, game: GameApp): string {
       </div>
       <button class="primary wide" data-action="restart">再来一局</button>
     </section>
+  `;
+}
+
+function renderSummaryLogs(gameState: GameState): string {
+  return `
+    <div class="panel">
+      <div class="section-title">
+        <h2>本局事件</h2>
+        <p>${gameState.logs.length} 回合</p>
+      </div>
+      <div class="log-list summary-log">
+        ${gameState.logs.slice().reverse().map(renderLogItem).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderAdmission(admission: AdmissionResult): string {
+  const admitted = admission.admitted && admission.admittedLine && admission.admittedUniversity;
+  const reach = [
+    admission.canReach985 ? '可达 985' : null,
+    admission.canReach211 ? '可达 211' : null,
+  ].filter(Boolean).join(' · ') || '未达样本 211/985';
+  return `
+    <div class="panel admission-panel">
+      <div class="section-title">
+        <div>
+          <h2>高考录取</h2>
+          <p class="muted">${escapeHtml(admission.profileName)}</p>
+        </div>
+        <span class="score-badge">${admission.finalScore}</span>
+      </div>
+      ${admitted ? `
+        <div class="admission-school">
+          <strong>${escapeHtml(admission.admittedUniversity!.name)}</strong>
+          <span>${escapeHtml(admission.admittedLine!.groupName)}</span>
+        </div>
+        <div class="admission-facts">
+          <span><em>层级</em><strong>${escapeHtml(admissionTierName(admission.admissionTier))}</strong></span>
+          <span><em>投档线</em><strong>${admission.admittedLine!.minScore}</strong></span>
+          <span><em>超线</em><strong>+${admission.margin ?? 0}</strong></span>
+          <span><em>策略</em><strong>${escapeHtml(admission.strategyLabel)}</strong></span>
+        </div>
+      ` : `
+        <div class="admission-school">
+          <strong>${escapeHtml(admissionTierName(admission.admissionTier))}</strong>
+          <span>${escapeHtml(reach)}</span>
+        </div>
+      `}
+      <p class="admission-reason">${escapeHtml(admission.reason)}</p>
+      <p class="muted source-note">投档线来源：广西招生考试院，本模拟不是志愿填报建议。</p>
+    </div>
   `;
 }
 
@@ -388,4 +448,16 @@ function escapeHtml(value: string): string {
 
 function formatNumber(value: string | number): string {
   return typeof value === 'number' ? String(Math.round(value)) : value;
+}
+
+function admissionTierName(tier: AdmissionResult['admissionTier']): string {
+  return {
+    '985': '985',
+    '211': '211',
+    doubleFirstClass: '双一流',
+    undergraduate: '本科',
+    college: '专科/后续批次',
+    retake: '复读/再规划',
+    slide: '滑档',
+  }[tier];
 }
