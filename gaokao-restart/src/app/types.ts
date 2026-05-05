@@ -163,6 +163,8 @@ export interface AdmissionResult {
   admissionTier: AdmissionTier;
   margin?: number;
   strategyLabel: AdmissionStrategyLabel;
+  strategyScore?: number;
+  highScoreLowAdmission?: boolean;
   reason: string;
 }
 

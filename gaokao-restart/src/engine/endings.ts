@@ -1,9 +1,9 @@
-import type { Ending, GameContent, GameState } from '../app/types';
+import type { AdmissionResult, Ending, GameContent, GameState } from '../app/types';
 import { evaluateCondition } from './condition';
 import { createConditionContext } from './events';
 
-export function pickEnding(content: GameContent, state: GameState): Ending {
-  const context = createConditionContext(state);
+export function pickEnding(content: GameContent, state: GameState, admission: AdmissionResult | null = null): Ending {
+  const context = createConditionContext(state, {}, admission);
   const ending = [...content.endings]
     .sort((a, b) => effectivePriority(b) - effectivePriority(a))
     .find(item => evaluateCondition(item.condition, context));

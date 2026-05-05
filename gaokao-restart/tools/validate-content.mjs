@@ -230,6 +230,7 @@ for (const line of admissionLines) {
 
 const defaultProfile = admissionProfiles.find(item => item.default);
 const defaultLines = admissionLines.filter(item => item.profileId === defaultProfile.id);
+if (defaultLines.length < 80) fail(`default admission profile should have at least 80 lines, got ${defaultLines.length}`);
 if (!defaultLines.some(line => universities.find(item => item.code === line.universityCode)?.tags.includes('985'))) fail('default admission profile has no 985 line');
 if (!defaultLines.some(line => universities.find(item => item.code === line.universityCode)?.tags.includes('211'))) fail('default admission profile has no 211 line');
 if (!defaultLines.some(line => universities.find(item => item.code === line.universityCode)?.prestigeTier === 'regional')) fail('default admission profile has no regional undergraduate line');

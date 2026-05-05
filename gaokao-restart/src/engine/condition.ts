@@ -1,16 +1,19 @@
-import type { PropCode } from '../app/types';
+import type { AdmissionResult, PropCode } from '../app/types';
 
 export interface ConditionContext {
-  props: Partial<Record<PropCode, number>>;
+  props: Partial<Record<PropCode | string, number>>;
   talentIds: Set<number>;
   eventIds: Set<number>;
   endingIds: Set<number>;
+  admission?: AdmissionResult | null;
 }
 
 type Token =
   | { type: 'number'; value: number }
   | { type: 'ident'; value: string }
   | { type: 'op'; value: string };
+
+type MembershipValue = number | string;
 
 const operators = ['>=', '<=', '!=', '>', '<', '=', '&', '|', '(', ')', '?', '!', '[', ']', ','];
 
@@ -44,7 +47,7 @@ function tokenize(input: string): Token[] {
       continue;
     }
 
-    const identMatch = input.slice(index).match(/^[A-Z]+/);
+    const identMatch = input.slice(index).match(/^[A-Za-z][A-Za-z0-9_]*/);
     if (identMatch) {
       tokens.push({ type: 'ident', value: identMatch[0] });
       index += identMatch[0].length;
@@ -105,7 +108,7 @@ class Parser {
 
     const operator = this.expectComparisonOperator();
     const right = this.expectNumber();
-    const left = this.context.props[ident as PropCode] ?? 0;
+    const left = this.numericValue(ident);
     switch (operator) {
       case '>':
         return left > right;
@@ -124,19 +127,37 @@ class Parser {
     }
   }
 
-  private parseIdList(): number[] {
+  private parseIdList(): MembershipValue[] {
     this.expect('[');
-    const ids = [this.expectNumber()];
-    while (this.consume(',')) ids.push(this.expectNumber());
+    const ids = [this.expectMembershipValue()];
+    while (this.consume(',')) ids.push(this.expectMembershipValue());
     this.expect(']');
     return ids;
   }
 
-  private hasMembership(ident: string, id: number): boolean {
-    if (ident === 'TLT') return this.context.talentIds.has(id);
-    if (ident === 'EVT') return this.context.eventIds.has(id);
-    if (ident === 'END') return this.context.endingIds.has(id);
-    return this.context.props[ident as PropCode] === id;
+  private hasMembership(ident: string, id: MembershipValue): boolean {
+    if (ident === 'TLT' && typeof id === 'number') return this.context.talentIds.has(id);
+    if (ident === 'EVT' && typeof id === 'number') return this.context.eventIds.has(id);
+    if (ident === 'END' && typeof id === 'number') return this.context.endingIds.has(id);
+    if (ident === 'ADM') return this.hasAdmissionTier(String(id));
+    if (ident === 'SCHOOL') return this.context.admission?.admittedUniversity?.code === String(id);
+    return this.context.props[ident] === id;
+  }
+
+  private hasAdmissionTier(tier: string): boolean {
+    const admission = this.context.admission;
+    if (!admission?.admitted) return false;
+    if (tier === '985') return admission.admissionTier === '985';
+    if (tier === '211') return admission.admissionTier === '985' || admission.admissionTier === '211';
+    if (tier === 'doubleFirstClass') return ['985', '211', 'doubleFirstClass'].includes(admission.admissionTier);
+    return admission.admissionTier === tier;
+  }
+
+  private numericValue(ident: string): number {
+    if (ident === 'ADMSCORE') return this.context.admission?.finalScore ?? 0;
+    if (ident === 'MARGIN') return this.context.admission?.margin ?? 0;
+    if (ident === 'SLIDE') return this.context.admission?.admissionTier === 'slide' ? 1 : 0;
+    return this.context.props[ident] ?? 0;
   }
 
   private expectComparisonOperator(): string {
@@ -164,6 +185,19 @@ class Parser {
       return token.value;
     }
     throw new Error(`Expected number, got ${this.peekText()}`);
+  }
+
+  private expectMembershipValue(): MembershipValue {
+    const token = this.peek();
+    if (token?.type === 'number') {
+      this.cursor += 1;
+      return token.value;
+    }
+    if (token?.type === 'ident') {
+      this.cursor += 1;
+      return token.value;
+    }
+    throw new Error(`Expected membership value, got ${this.peekText()}`);
   }
 
   private expect(value: string): void {

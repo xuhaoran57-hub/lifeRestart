@@ -11,7 +11,7 @@ import type {
   University,
 } from '../app/types';
 import { clamp } from './properties';
-import { Random } from './random';
+import { pickWeighted, Random } from './random';
 
 interface LineCandidate {
   line: AdmissionLine;
@@ -34,7 +34,12 @@ export function calculateExamScore(props: Props, random: Random): ExamScoreResul
   };
 }
 
-export function resolveAdmission(content: GameContent, state: GameState, exam: ExamScoreResult): AdmissionResult {
+export function resolveAdmission(
+  content: GameContent,
+  state: GameState,
+  exam: ExamScoreResult,
+  random: Random,
+): AdmissionResult {
   const profile = getDefaultProfile(content);
   const universities = new Map(content.universities.map(item => [item.code, item]));
   const lines = content.admissionLines
@@ -51,9 +56,10 @@ export function resolveAdmission(content: GameContent, state: GameState, exam: E
   const bestReachable985 = pickBestReachable(reachable985)?.line;
   const bestReachable211 = pickBestReachable(reachable211)?.line;
   const strategyScore = state.props.HVOL - state.props.RSK * 0.35 + routeBonus(content, state);
-  const slide = shouldSlide(state, strategyScore, reachable);
-  const picked = slide ? null : pickAdmittedLine(reachable, strategyScore);
+  const slide = shouldSlide(content, state, strategyScore, reachable, random);
+  const picked = slide ? null : pickAdmittedLine(reachable, strategyScore, random);
   const strategyLabel = labelStrategy(strategyScore, slide);
+  const highScoreLowAdmission = isHighScoreLowAdmission(reachable985.length > 0, reachable211.length > 0, picked);
 
   if (!picked) {
     const fallbackTier = resolveFallbackTier(exam.finalScore, reachable.length, slide);
@@ -70,6 +76,8 @@ export function resolveAdmission(content: GameContent, state: GameState, exam: E
       admitted: false,
       admissionTier: fallbackTier,
       strategyLabel,
+      strategyScore,
+      highScoreLowAdmission: slide && (reachable985.length > 0 || reachable211.length > 0),
       reason: slide
         ? '分数本可填报部分本科院校，但志愿信息不足且风险过高，本轮模拟判定为滑档。'
         : exam.finalScore >= 300
@@ -94,6 +102,8 @@ export function resolveAdmission(content: GameContent, state: GameState, exam: E
     admissionTier: universityAdmissionTier(picked.university),
     margin: picked.margin,
     strategyLabel,
+    strategyScore,
+    highScoreLowAdmission,
     reason: buildAdmissionReason(picked, profile, strategyLabel, reachable985.length > 0, reachable211.length > 0),
   };
 }
@@ -108,20 +118,24 @@ function pickBestReachable(candidates: LineCandidate[]): LineCandidate | null {
   return [...candidates].sort((a, b) => linePrestigeScore(b) - linePrestigeScore(a))[0] ?? null;
 }
 
-function pickAdmittedLine(reachable: LineCandidate[], strategyScore: number): LineCandidate | null {
+function pickAdmittedLine(reachable: LineCandidate[], strategyScore: number, random: Random): LineCandidate | null {
   if (reachable.length === 0) return null;
 
-  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 22 : 48;
-  const minMargin = strategyScore >= 65 ? 0 : strategyScore >= 35 ? 8 : 28;
-  const maxMargin = strategyScore >= 65 ? 24 : strategyScore >= 35 ? 42 : 90;
+  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 24 : 58;
+  const minMargin = strategyScore >= 65 ? 0 : strategyScore >= 35 ? 6 : 26;
+  const maxMargin = strategyScore >= 65 ? 36 : strategyScore >= 35 ? 78 : 150;
   const preferred = reachable.filter(item => item.margin >= minMargin && item.margin <= maxMargin);
   const pool = preferred.length ? preferred : reachable;
 
-  return [...pool].sort((a, b) => admissionChoiceScore(b, targetMargin) - admissionChoiceScore(a, targetMargin))[0] ?? null;
+  return pickWeighted(pool, item => admissionChoiceWeight(item, targetMargin, strategyScore), random);
 }
 
-function admissionChoiceScore(candidate: LineCandidate, targetMargin: number): number {
-  return linePrestigeScore(candidate) - Math.abs(candidate.margin - targetMargin) * 3;
+function admissionChoiceWeight(candidate: LineCandidate, targetMargin: number, strategyScore: number): number {
+  const marginFit = Math.max(6, 95 - Math.abs(candidate.margin - targetMargin) * 2.4);
+  const prestige = linePrestigeScore(candidate) / 160;
+  const prestigeWeight = strategyScore >= 65 ? 1 : strategyScore >= 35 ? 0.65 : 0.28;
+  const safetyBonus = strategyScore < 35 ? Math.min(candidate.margin, 90) * 0.42 : 0;
+  return Math.max(1, marginFit + prestige * prestigeWeight + safetyBonus);
 }
 
 function linePrestigeScore(candidate: LineCandidate): number {
@@ -142,9 +156,24 @@ function linePrestigeScore(candidate: LineCandidate): number {
   return tierWeight + tagBonus + candidate.line.minScore;
 }
 
-function shouldSlide(state: GameState, strategyScore: number, reachable: LineCandidate[]): boolean {
+function shouldSlide(
+  content: GameContent,
+  state: GameState,
+  strategyScore: number,
+  reachable: LineCandidate[],
+  random: Random,
+): boolean {
   if (reachable.length === 0) return false;
-  return strategyScore < 10 && state.props.RSK >= 65 && state.props.HVOL < 25;
+  const route = routeSignal(content, state);
+  let chance = 0;
+  if (strategyScore < 10 && state.props.RSK >= 65) chance += 0.1;
+  if (strategyScore < 0) chance += 0.08;
+  if (state.props.HVOL < 25) chance += 0.08;
+  if (state.props.RSK >= 75) chance += 0.05;
+  chance += route.risk * 0.045;
+  chance -= route.steady * 0.035;
+  chance = clamp(chance, 0, 0.45);
+  return random.next() < chance;
 }
 
 function resolveFallbackTier(finalScore: number, reachableCount: number, slide: boolean): AdmissionTier {
@@ -178,6 +207,36 @@ function routeBonus(content: GameContent, state: GameState): number {
     }, 0);
   const eventBonus = state.eventIds.some(id => [31027, 31708, 31720, 31732].includes(id)) ? 8 : 0;
   return Math.min(18, talentBonus + eventBonus);
+}
+
+function routeSignal(content: GameContent, state: GameState): { risk: number; steady: number } {
+  const events = new Map(content.events.map(item => [item.id, item]));
+  const talents = new Map(content.talents.map(item => [item.id, item]));
+  const riskFlags = new Set(['志愿翻车', '专业误读', '提交惊险']);
+  const steadyFlags = new Set(['志愿稳健', '章程避坑', '三角比较']);
+  const riskTalentNames = new Set(['名校滤镜', '冲校上头']);
+  const steadyTalentNames = new Set(['风险分层']);
+  let risk = 0;
+  let steady = 0;
+  for (const id of state.eventIds) {
+    const flag = events.get(id)?.flag;
+    if (flag && riskFlags.has(flag)) risk += 1;
+    if (flag && steadyFlags.has(flag)) steady += 1;
+  }
+  for (const id of state.selectedTalentIds) {
+    const name = talents.get(id)?.name;
+    if (name && riskTalentNames.has(name)) risk += 1;
+    if (name && steadyTalentNames.has(name)) steady += 1;
+  }
+  return { risk, steady };
+}
+
+function isHighScoreLowAdmission(canReach985: boolean, canReach211: boolean, picked: LineCandidate | null): boolean {
+  if (!picked) return canReach985 || canReach211;
+  const actualTier = universityAdmissionTier(picked.university);
+  if (canReach985) return actualTier !== '985';
+  if (canReach211) return !['985', '211'].includes(actualTier);
+  return false;
 }
 
 function buildAdmissionReason(

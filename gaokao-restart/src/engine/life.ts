@@ -21,8 +21,8 @@ import { Random } from './random';
 import { getTalentMap, validateTalentSelection } from './talents';
 
 const eventEffectScale: Partial<Record<CorePropCode, number>> = {
-  INT: 0.5,
-  STR: 0.5,
+  INT: 0.42,
+  STR: 0.42,
   MNY: 0.5,
   SPR: 0.4,
   VOL: 0.5,
@@ -116,9 +116,9 @@ export class LifeEngine {
     let ending = null;
     let admission = null;
     if (ageRound.age === 18 && ageRound.round === 4) {
-      ending = pickEnding(this.content, state);
       const exam = calculateExamScore(state.props, this.random);
-      admission = resolveAdmission(this.content, state, exam);
+      admission = resolveAdmission(this.content, state, exam, this.random);
+      ending = pickEnding(this.content, state, admission);
       state.finalEnding = ending;
       state.admissionResult = admission;
       state.endingIds = [ending.id];

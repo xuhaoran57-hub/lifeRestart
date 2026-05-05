@@ -40,8 +40,8 @@ const phaseBase = {
 };
 
 const eventEffectScale = {
-  INT: 0.5,
-  STR: 0.5,
+  INT: 0.42,
+  STR: 0.42,
   MNY: 0.5,
   SPR: 0.4,
   VOL: 0.5,
@@ -83,9 +83,13 @@ function simulate(runs = 1000) {
   let admitted985 = 0;
   let admitted211 = 0;
   let slideCount = 0;
+  let highScoreLowAdmissionCount = 0;
+  let lowVolunteerHighRiskCount = 0;
   const candidateRarityDistribution = new Map();
   const selectedRarityDistribution = new Map();
   const admissionDistribution = new Map();
+  const scoreBuckets = new Map();
+  const capCounts = { INT: 0, STR: 0, SPR: 0, VOL: 0 };
   let legendaryCandidateRuns = 0;
 
   for (let index = 0; index < runs; index += 1) {
@@ -102,11 +106,18 @@ function simulate(runs = 1000) {
       totalRSK += result.props.RSK;
       totalSCOREMOD += result.props.SCOREMOD;
       totalFinalScore += result.admission.finalScore;
+      addCount(scoreBuckets, scoreBucket(result.admission.finalScore));
+      if (result.props.INT >= 10) capCounts.INT += 1;
+      if (result.props.STR >= 10) capCounts.STR += 1;
+      if (result.props.SPR >= 10) capCounts.SPR += 1;
+      if (result.props.VOL >= 85) capCounts.VOL += 1;
+      if (result.props.HVOL < 25 && result.props.RSK >= 65) lowVolunteerHighRiskCount += 1;
       if (result.admission.canReach985) canReach985 += 1;
       if (result.admission.canReach211) canReach211 += 1;
       if (result.admission.admissionTier === '985') admitted985 += 1;
       if (result.admission.admissionTier === '211') admitted211 += 1;
       if (result.admission.admissionTier === 'slide') slideCount += 1;
+      if (result.admission.highScoreLowAdmission) highScoreLowAdmissionCount += 1;
       if (result.admission.admittedUniversity) {
         addCount(admissionDistribution, result.admission.admittedUniversity.name);
       } else {
@@ -134,6 +145,20 @@ function simulate(runs = 1000) {
   console.log(`985 admitted: ${admitted985} (${(admitted985 / completed * 100).toFixed(1)}%)`);
   console.log(`211 admitted: ${admitted211} (${(admitted211 / completed * 100).toFixed(1)}%)`);
   console.log(`Slide: ${slideCount} (${(slideCount / completed * 100).toFixed(1)}%)`);
+  console.log(`High score low admission: ${highScoreLowAdmissionCount} (${(highScoreLowAdmissionCount / completed * 100).toFixed(1)}%)`);
+  console.log(`Low volunteer high risk: ${lowVolunteerHighRiskCount} (${(lowVolunteerHighRiskCount / completed * 100).toFixed(1)}%)`);
+  printEndingCoverage(distribution);
+  printConcentration('Ending concentration', distribution, completed, [1, 3, 5]);
+  printConcentration('Admission concentration', admissionDistribution, completed, [1, 2, 5]);
+  console.log('Score buckets:');
+  for (const bucket of ['<420', '420-499', '500-549', '550-579', '580-609', '610-639', '640+']) {
+    const count = scoreBuckets.get(bucket) ?? 0;
+    console.log(`- ${bucket}: ${count} (${(count / completed * 100).toFixed(1)}%)`);
+  }
+  console.log('Cap rate:');
+  for (const prop of ['INT', 'STR', 'SPR', 'VOL']) {
+    console.log(`- ${prop}: ${capCounts[prop]} (${(capCounts[prop] / completed * 100).toFixed(1)}%)`);
+  }
   console.log(`Runs with legendary candidate: ${legendaryCandidateRuns} (${(legendaryCandidateRuns / completed * 100).toFixed(1)}%)`);
   console.log('Candidate rarity distribution:');
   printRarityDistribution(candidateRarityDistribution, completed * 10);
@@ -216,13 +241,13 @@ function runOne(random) {
     refreshScore(props, ageRound.phase);
   }
 
+  const exam = calculateExamScore(props, random);
+  const admission = resolveAdmission(props, selectedTalentIds, eventIds, exam, random);
   const ending = [...content.endings]
     .sort((a, b) => effectivePriority(b) - effectivePriority(a))
-    .find(item => evaluate(item.condition, props, selectedTalentIds, eventIds))
+    .find(item => evaluate(item.condition, props, selectedTalentIds, eventIds, admission))
     ?? content.endings.find(item => item.id === (props.HSCR >= 520 ? 41111 : 41007));
   if (!ending) throw new Error('no ending');
-  const exam = calculateExamScore(props, random);
-  const admission = resolveAdmission(props, selectedTalentIds, eventIds, exam);
   props.SUM = Math.round(props.HSCR * 0.45 + (props.INT + props.STR + props.MNY + props.SPR) * 8 + props.HVOL * 0.8 + ending.scoreBonus);
   return { ending, props, admission, candidateTalents: talentPick.candidateTalents, selectedTalents: talentPick.selectedTalents };
 }
@@ -236,7 +261,7 @@ function calculateExamScore(props, random) {
   return { finalScore, potentialScore, variance };
 }
 
-function resolveAdmission(props, selectedTalentIds, eventIds, exam) {
+function resolveAdmission(props, selectedTalentIds, eventIds, exam, random) {
   const profile = content.admissionProfiles.find(item => item.default) ?? content.admissionProfiles[0];
   const universities = new Map(content.universities.map(item => [item.code, item]));
   const lines = content.admissionLines
@@ -247,8 +272,9 @@ function resolveAdmission(props, selectedTalentIds, eventIds, exam) {
   const reachable985 = reachable.filter(item => item.university.tags.includes('985'));
   const reachable211 = reachable.filter(item => item.university.tags.includes('211'));
   const strategyScore = props.HVOL - props.RSK * 0.35 + routeBonus(selectedTalentIds, eventIds);
-  const slide = reachable.length > 0 && strategyScore < 10 && props.RSK >= 65 && props.HVOL < 25;
-  const picked = slide ? null : pickAdmittedLine(reachable, strategyScore);
+  const slide = shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachable, random);
+  const picked = slide ? null : pickAdmittedLine(reachable, strategyScore, random);
+  const highScoreLowAdmission = isHighScoreLowAdmission(reachable985.length > 0, reachable211.length > 0, picked);
 
   if (!picked) {
     return {
@@ -257,6 +283,8 @@ function resolveAdmission(props, selectedTalentIds, eventIds, exam) {
       canReach211: reachable211.length > 0,
       admitted: false,
       admissionTier: slide ? 'slide' : exam.finalScore >= 300 ? 'college' : 'retake',
+      strategyScore,
+      highScoreLowAdmission: slide && (reachable985.length > 0 || reachable211.length > 0),
     };
   }
 
@@ -269,21 +297,27 @@ function resolveAdmission(props, selectedTalentIds, eventIds, exam) {
     admittedUniversity: picked.university,
     admissionTier: universityAdmissionTier(picked.university),
     margin: picked.margin,
+    strategyScore,
+    highScoreLowAdmission,
   };
 }
 
-function pickAdmittedLine(reachable, strategyScore) {
+function pickAdmittedLine(reachable, strategyScore, random) {
   if (reachable.length === 0) return null;
-  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 22 : 48;
-  const minMargin = strategyScore >= 65 ? 0 : strategyScore >= 35 ? 8 : 28;
-  const maxMargin = strategyScore >= 65 ? 24 : strategyScore >= 35 ? 42 : 90;
+  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 24 : 58;
+  const minMargin = strategyScore >= 65 ? 0 : strategyScore >= 35 ? 6 : 26;
+  const maxMargin = strategyScore >= 65 ? 36 : strategyScore >= 35 ? 78 : 150;
   const preferred = reachable.filter(item => item.margin >= minMargin && item.margin <= maxMargin);
   const pool = preferred.length ? preferred : reachable;
-  return [...pool].sort((a, b) => admissionChoiceScore(b, targetMargin) - admissionChoiceScore(a, targetMargin))[0] ?? null;
+  return pickWeighted(pool, item => admissionChoiceWeight(item, targetMargin, strategyScore), random);
 }
 
-function admissionChoiceScore(candidate, targetMargin) {
-  return linePrestigeScore(candidate) - Math.abs(candidate.margin - targetMargin) * 3;
+function admissionChoiceWeight(candidate, targetMargin, strategyScore) {
+  const marginFit = Math.max(6, 95 - Math.abs(candidate.margin - targetMargin) * 2.4);
+  const prestige = linePrestigeScore(candidate) / 160;
+  const prestigeWeight = strategyScore >= 65 ? 1 : strategyScore >= 35 ? 0.65 : 0.28;
+  const safetyBonus = strategyScore < 35 ? Math.min(candidate.margin, 90) * 0.42 : 0;
+  return Math.max(1, marginFit + prestige * prestigeWeight + safetyBonus);
 }
 
 function linePrestigeScore(candidate) {
@@ -308,6 +342,48 @@ function routeBonus(selectedTalentIds, eventIds) {
     }, 0);
   const eventBonus = eventIds.some(id => [31027, 31708, 31720, 31732].includes(id)) ? 8 : 0;
   return Math.min(18, talentBonus + eventBonus);
+}
+
+function routeSignal(selectedTalentIds, eventIds) {
+  const riskFlags = new Set(['志愿翻车', '专业误读', '提交惊险']);
+  const steadyFlags = new Set(['志愿稳健', '章程避坑', '三角比较']);
+  const riskTalentNames = new Set(['名校滤镜', '冲校上头']);
+  const steadyTalentNames = new Set(['风险分层']);
+  let risk = 0;
+  let steady = 0;
+  for (const id of eventIds) {
+    const flag = content.events.find(item => item.id === id)?.flag;
+    if (flag && riskFlags.has(flag)) risk += 1;
+    if (flag && steadyFlags.has(flag)) steady += 1;
+  }
+  for (const id of selectedTalentIds) {
+    const name = content.talents.find(item => item.id === id)?.name;
+    if (name && riskTalentNames.has(name)) risk += 1;
+    if (name && steadyTalentNames.has(name)) steady += 1;
+  }
+  return { risk, steady };
+}
+
+function shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachable, random) {
+  if (reachable.length === 0) return false;
+  const route = routeSignal(selectedTalentIds, eventIds);
+  let chance = 0;
+  if (strategyScore < 10 && props.RSK >= 65) chance += 0.1;
+  if (strategyScore < 0) chance += 0.08;
+  if (props.HVOL < 25) chance += 0.08;
+  if (props.RSK >= 75) chance += 0.05;
+  chance += route.risk * 0.045;
+  chance -= route.steady * 0.035;
+  chance = clamp(chance, 0, 0.45);
+  return random.next() < chance;
+}
+
+function isHighScoreLowAdmission(canReach985, canReach211, picked) {
+  if (!picked) return canReach985 || canReach211;
+  const actualTier = universityAdmissionTier(picked.university);
+  if (canReach985) return actualTier !== '985';
+  if (canReach211) return !['985', '211'].includes(actualTier);
+  return false;
 }
 
 function universityAdmissionTier(university) {
@@ -410,21 +486,38 @@ function refreshScore(props, phase) {
   props.HVOL = Math.max(props.HVOL, props.VOL);
 }
 
-function evaluate(condition, props, talentIds, eventIds) {
+function evaluate(condition, props, talentIds, eventIds, admission = null) {
   if (!condition) return true;
+  const admissionProps = {
+    ADMSCORE: admission?.finalScore ?? 0,
+    MARGIN: admission?.margin ?? 0,
+    SLIDE: admission?.admissionTier === 'slide' ? 1 : 0,
+  };
   let expr = condition
     .replace(/TLT\?\[([0-9,]+)\]/g, (_, ids) => ids.split(',').some(id => talentIds.includes(Number(id))))
     .replace(/TLT!\[([0-9,]+)\]/g, (_, ids) => !ids.split(',').some(id => talentIds.includes(Number(id))))
     .replace(/EVT\?\[([0-9,]+)\]/g, (_, ids) => ids.split(',').some(id => eventIds.includes(Number(id))))
     .replace(/EVT!\[([0-9,]+)\]/g, (_, ids) => !ids.split(',').some(id => eventIds.includes(Number(id))))
+    .replace(/ADM\?\[([A-Za-z0-9_,]+)\]/g, (_, ids) => ids.split(',').some(id => hasAdmissionTier(admission, id)))
+    .replace(/ADM!\[([A-Za-z0-9_,]+)\]/g, (_, ids) => !ids.split(',').some(id => hasAdmissionTier(admission, id)))
+    .replace(/SCHOOL\?\[([0-9,]+)\]/g, (_, ids) => ids.split(',').some(id => admission?.admittedUniversity?.code === String(id)))
+    .replace(/SCHOOL!\[([0-9,]+)\]/g, (_, ids) => !ids.split(',').some(id => admission?.admittedUniversity?.code === String(id)))
     .replace(/([A-Z]+)\?\[([0-9,]+)\]/g, (_, key, ids) => ids.split(',').some(id => props[key] === Number(id)))
     .replace(/([A-Z]+)!\[([0-9,]+)\]/g, (_, key, ids) => !ids.split(',').some(id => props[key] === Number(id)));
-  for (const key of Object.keys(props).sort((a, b) => b.length - a.length)) {
-    expr = expr.replace(new RegExp(`\\b${key}\\b`, 'g'), String(props[key]));
+  for (const key of Object.keys({ ...props, ...admissionProps }).sort((a, b) => b.length - a.length)) {
+    expr = expr.replace(new RegExp(`\\b${key}\\b`, 'g'), String(admissionProps[key] ?? props[key]));
   }
   expr = expr.replace(/(?<![<>=!])=(?!=)/g, '===').replace(/&/g, '&&').replace(/\|/g, '||');
   if (!/^[0-9.\s<>=!&|()truefals-]+$/.test(expr)) throw new Error(`unsafe condition ${condition}`);
   return Boolean(Function(`"use strict"; return (${expr});`)());
+}
+
+function hasAdmissionTier(admission, tier) {
+  if (!admission?.admitted) return false;
+  if (tier === '985') return admission.admissionTier === '985';
+  if (tier === '211') return ['985', '211'].includes(admission.admissionTier);
+  if (tier === 'doubleFirstClass') return ['985', '211', 'doubleFirstClass'].includes(admission.admissionTier);
+  return admission.admissionTier === tier;
 }
 
 function pickWeighted(items, weightOf, random) {
@@ -460,6 +553,37 @@ function printRarityDistribution(distribution, total) {
     const count = distribution.get(rarity) ?? 0;
     console.log(`- ${rarity}: ${count} (${(count / Math.max(1, total) * 100).toFixed(1)}%)`);
   }
+}
+
+function printEndingCoverage(distribution) {
+  const observedNames = new Set(distribution.keys());
+  const missing = content.endings.filter(ending => !observedNames.has(ending.name));
+  console.log(`Ending coverage: ${content.endings.length - missing.length}/${content.endings.length}`);
+  console.log('Missing endings by tier:');
+  const tiers = [...new Set(content.endings.map(ending => ending.tier))].sort();
+  for (const tier of tiers) {
+    const names = missing.filter(ending => ending.tier === tier).map(ending => ending.name);
+    console.log(`- ${tier}: ${names.length ? names.join('、') : 'None'}`);
+  }
+}
+
+function printConcentration(label, distribution, total, topSizes) {
+  const sorted = [...distribution.entries()].sort((a, b) => b[1] - a[1]);
+  console.log(`${label}:`);
+  for (const size of topSizes) {
+    const count = sorted.slice(0, size).reduce((sum, item) => sum + item[1], 0);
+    console.log(`- Top ${size}: ${count} (${(count / Math.max(1, total) * 100).toFixed(1)}%)`);
+  }
+}
+
+function scoreBucket(score) {
+  if (score < 420) return '<420';
+  if (score < 500) return '420-499';
+  if (score < 550) return '500-549';
+  if (score < 580) return '550-579';
+  if (score < 610) return '580-609';
+  if (score < 640) return '610-639';
+  return '640+';
 }
 
 function clamp(value, min, max) {
