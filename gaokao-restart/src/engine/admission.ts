@@ -12,6 +12,7 @@ import type {
 } from '../app/types';
 import { clamp } from './properties';
 import { pickWeighted, Random } from './random';
+import { subjectTrackName, subjectTrackProfileId } from './subjectTrack';
 
 interface LineCandidate {
   line: AdmissionLine;
@@ -40,7 +41,8 @@ export function resolveAdmission(
   exam: ExamScoreResult,
   random: Random,
 ): AdmissionResult {
-  const profile = getDefaultProfile(content);
+  const profile = getProfileForTrack(content, state);
+  const trackName = subjectTrackName(state.subjectTrack!);
   const universities = new Map(content.universities.map(item => [item.code, item]));
   const lines = content.admissionLines
     .filter(item => item.profileId === profile.id)
@@ -66,6 +68,8 @@ export function resolveAdmission(
     return {
       profileId: profile.id,
       profileName: profile.name,
+      subjectTrack: state.subjectTrack!,
+      subjectTrackName: trackName,
       finalScore: exam.finalScore,
       potentialScore: exam.potentialScore,
       variance: exam.variance,
@@ -89,6 +93,8 @@ export function resolveAdmission(
   return {
     profileId: profile.id,
     profileName: profile.name,
+    subjectTrack: state.subjectTrack!,
+    subjectTrackName: trackName,
     finalScore: exam.finalScore,
     potentialScore: exam.potentialScore,
     variance: exam.variance,
@@ -108,9 +114,11 @@ export function resolveAdmission(
   };
 }
 
-function getDefaultProfile(content: GameContent): AdmissionProfile {
-  const profile = content.admissionProfiles.find(item => item.default) ?? content.admissionProfiles[0];
-  if (!profile) throw new Error('缺少录取档案');
+function getProfileForTrack(content: GameContent, state: GameState): AdmissionProfile {
+  if (!state.subjectTrack) throw new Error('缺少分科结果，无法结算录取');
+  const profileId = subjectTrackProfileId(state.subjectTrack);
+  const profile = content.admissionProfiles.find(item => item.id === profileId);
+  if (!profile) throw new Error(`缺少录取档案 ${profileId}`);
   return profile;
 }
 

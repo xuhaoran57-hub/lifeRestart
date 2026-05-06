@@ -1,759 +1,9916 @@
 [
   {
-    "code": "10001",
-    "name": "北京大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10002",
-    "name": "中国人民大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10003",
-    "name": "清华大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10004",
-    "name": "北京交通大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10005",
-    "name": "北京工业大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10006",
-    "name": "北京航空航天大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10007",
-    "name": "北京理工大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10008",
-    "name": "北京科技大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10010",
-    "name": "北京化工大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10013",
-    "name": "北京邮电大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10019",
-    "name": "中国农业大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10022",
-    "name": "北京林业大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10025",
-    "name": "首都医科大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10027",
-    "name": "北京师范大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10030",
-    "name": "北京外国语大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10034",
-    "name": "中央财经大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10036",
-    "name": "对外经济贸易大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10052",
-    "name": "中央民族大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10053",
-    "name": "中国政法大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10054",
-    "name": "华北电力大学",
-    "province": "北京",
-    "city": "北京",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10055",
-    "name": "南开大学",
-    "province": "天津",
-    "city": "天津",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10056",
-    "name": "天津大学",
-    "province": "天津",
-    "city": "天津",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10062",
-    "name": "天津医科大学",
-    "province": "天津",
-    "city": "天津",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10079",
-    "name": "华北电力大学(保定)",
-    "province": "河北",
-    "city": "保定",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10080",
-    "name": "河北工业大学",
-    "province": "天津",
-    "city": "天津",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10112",
-    "name": "太原理工大学",
-    "province": "山西",
-    "city": "太原",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10126",
-    "name": "内蒙古大学",
-    "province": "内蒙古",
-    "city": "呼和浩特",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10140",
-    "name": "辽宁大学",
-    "province": "辽宁",
-    "city": "沈阳",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10141",
-    "name": "大连理工大学",
-    "province": "辽宁",
-    "city": "大连",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10145",
-    "name": "东北大学",
-    "province": "辽宁",
-    "city": "沈阳",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10151",
-    "name": "大连海事大学",
-    "province": "辽宁",
-    "city": "大连",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10246",
-    "name": "复旦大学",
-    "province": "上海",
-    "city": "上海",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10247",
-    "name": "同济大学",
-    "province": "上海",
-    "city": "上海",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10248",
-    "name": "上海交通大学",
-    "province": "上海",
-    "city": "上海",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10251",
-    "name": "华东理工大学",
-    "province": "上海",
-    "city": "上海",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10255",
-    "name": "东华大学",
-    "province": "上海",
-    "city": "上海",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "solid"
-  },
-  {
-    "code": "10335",
-    "name": "浙江大学",
-    "province": "浙江",
-    "city": "杭州",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10384",
-    "name": "厦门大学",
-    "province": "福建",
-    "city": "厦门",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10386",
-    "name": "福州大学",
-    "province": "福建",
-    "city": "福州",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "solid"
-  },
-  {
-    "code": "10532",
-    "name": "湖南大学",
-    "province": "湖南",
-    "city": "长沙",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10558",
-    "name": "中山大学",
-    "province": "广东",
-    "city": "广州",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "top"
-  },
-  {
-    "code": "10559",
-    "name": "暨南大学",
-    "province": "广东",
-    "city": "广州",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "solid"
-  },
-  {
-    "code": "10590",
-    "name": "深圳大学",
-    "province": "广东",
-    "city": "深圳",
-    "tags": [],
-    "prestigeTier": "solid"
-  },
-  {
-    "code": "10593",
-    "name": "广西大学",
-    "province": "广西",
-    "city": "南宁",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10594",
-    "name": "广西科技大学",
-    "province": "广西",
-    "city": "柳州",
+    "code": "006",
+    "name": "安徽工程大学",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
     "prestigeTier": "regional"
   },
   {
-    "code": "10595",
-    "name": "桂林电子科技大学",
-    "province": "广西",
-    "city": "桂林",
+    "code": "0909",
+    "name": "南京理工大学紫金学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10596",
-    "name": "桂林理工大学",
-    "province": "广西",
-    "city": "桂林",
+    "code": "1003",
+    "name": "安康学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10598",
-    "name": "广西医科大学",
-    "province": "广西",
-    "city": "南宁",
+    "code": "1005",
+    "name": "安阳工学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10599",
-    "name": "右江民族医学院",
-    "province": "广西",
-    "city": "百色",
+    "code": "1006",
+    "name": "安阳师范学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10600",
-    "name": "广西中医药大学",
-    "province": "广西",
-    "city": "南宁",
+    "code": "1009",
+    "name": "鞍山师范学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10601",
-    "name": "桂林医学院",
-    "province": "广西",
-    "city": "桂林",
+    "code": "1013",
+    "name": "白城师范学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10602",
-    "name": "广西师范大学",
-    "province": "广西",
-    "city": "桂林",
+    "code": "1020",
+    "name": "宝鸡文理学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "solid"
+    "prestigeTier": "private"
   },
   {
-    "code": "10603",
-    "name": "南宁师范大学",
-    "province": "广西",
-    "city": "南宁",
+    "code": "1023",
+    "name": "保定学院",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
-    "prestigeTier": "regional"
+    "prestigeTier": "private"
   },
   {
-    "code": "10604",
-    "name": "广西民族师范学院",
-    "province": "广西",
-    "city": "崇左",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "10605",
-    "name": "河池学院",
-    "province": "广西",
-    "city": "河池",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "10606",
-    "name": "玉林师范学院",
-    "province": "广西",
-    "city": "玉林",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "10608",
-    "name": "广西民族大学",
-    "province": "广西",
-    "city": "南宁",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "10609",
-    "name": "百色学院",
-    "province": "广西",
-    "city": "百色",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "10610",
-    "name": "四川大学",
-    "province": "四川",
-    "city": "成都",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10611",
-    "name": "重庆大学",
-    "province": "重庆",
-    "city": "重庆",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10613",
-    "name": "西南交通大学",
-    "province": "四川",
-    "city": "成都",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10614",
-    "name": "电子科技大学",
-    "province": "四川",
-    "city": "成都",
-    "tags": [
-      "985",
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10617",
-    "name": "重庆邮电大学",
-    "province": "重庆",
-    "city": "重庆",
-    "tags": [],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "10618",
-    "name": "重庆交通大学",
-    "province": "重庆",
-    "city": "重庆",
-    "tags": [],
-    "prestigeTier": "solid"
-  },
-  {
-    "code": "10621",
-    "name": "成都信息工程大学",
-    "province": "四川",
-    "city": "成都",
-    "tags": [],
-    "prestigeTier": "solid"
-  },
-  {
-    "code": "10624",
-    "name": "中国民用航空飞行学院",
-    "province": "四川",
-    "city": "德阳",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "10626",
-    "name": "四川农业大学",
-    "province": "四川",
-    "city": "雅安",
-    "tags": [
-      "211",
-      "doubleFirstClass"
-    ],
-    "prestigeTier": "strong"
-  },
-  {
-    "code": "11548",
-    "name": "广西财经学院",
-    "province": "广西",
-    "city": "南宁",
-    "tags": [],
-    "prestigeTier": "regional"
-  },
-  {
-    "code": "11607",
+    "code": "1024",
     "name": "北部湾大学",
-    "province": "广西",
-    "city": "钦州",
+    "province": "未知",
+    "city": "未知",
     "tags": [],
     "prestigeTier": "regional"
   },
   {
-    "code": "13639",
-    "name": "柳州工学院",
-    "province": "广西",
-    "city": "柳州",
-    "tags": [
-      "private"
-    ],
+    "code": "1025",
+    "name": "北方工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1026",
+    "name": "北方民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1028",
+    "name": "北海艺术设计学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
     "prestigeTier": "private"
   },
   {
-    "code": "13640",
-    "name": "广西民族大学相思湖学院",
-    "province": "广西",
-    "city": "南宁",
-    "tags": [
-      "private"
-    ],
+    "code": "1029",
+    "name": "北华大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1030",
+    "name": "北华航天工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
     "prestigeTier": "private"
   },
   {
-    "code": "13641",
+    "code": "1031",
+    "name": "北京城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1032",
+    "name": "北京大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "1033",
+    "name": "北京大学医学部",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "1034",
+    "name": "北京第二外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1035",
+    "name": "北京电影学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1037",
+    "name": "北京服装学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1038",
+    "name": "北京工商大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1039",
+    "name": "北京工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1041",
+    "name": "北京航空航天大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1042",
+    "name": "北京化工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1043",
+    "name": "北京建筑大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1044",
+    "name": "北京交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1051",
+    "name": "北京科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1054",
+    "name": "北京理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1055",
+    "name": "北京联合大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1056",
+    "name": "北京林业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1057",
+    "name": "北京农学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1060",
+    "name": "北京师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1061",
+    "name": "北京师范大学（珠海校区）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1062",
+    "name": "北京石油化工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1063",
+    "name": "北京体育大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1064",
+    "name": "北京外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1066",
+    "name": "北京物资学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1067",
+    "name": "北京协和医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1068",
+    "name": "北京信息科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1070",
+    "name": "北京印刷学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1071",
+    "name": "北京邮电大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1072",
+    "name": "北京语言大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1074",
+    "name": "北京中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1075",
+    "name": "北师香港浸会大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1078",
+    "name": "滨州医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1081",
+    "name": "渤海大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1083",
+    "name": "沧州师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1087",
+    "name": "昌吉学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1088",
+    "name": "长安大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1090",
+    "name": "长春财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1091",
+    "name": "长春大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1092",
+    "name": "长春电子科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1094",
+    "name": "长春工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1095",
+    "name": "长春工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1096",
+    "name": "长春光华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1097",
+    "name": "长春建筑学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1099",
+    "name": "长春科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1100",
+    "name": "长春理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1101",
+    "name": "长春汽车职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1102",
+    "name": "长春人文学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1103",
+    "name": "长春师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1107",
+    "name": "长春职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1108",
+    "name": "长春中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1109",
+    "name": "长江大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1111",
+    "name": "长江师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1116",
+    "name": "长沙理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1120",
+    "name": "长沙师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1123",
+    "name": "长沙学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1124",
+    "name": "长沙医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1127",
+    "name": "长治学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1128",
+    "name": "长治医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1129",
+    "name": "常德学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1130",
+    "name": "常州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1133",
+    "name": "常州工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1137",
+    "name": "朝阳师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1138",
+    "name": "成都大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1139",
+    "name": "成都东软学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1141",
+    "name": "成都工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1143",
+    "name": "成都锦城学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1144",
+    "name": "成都理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1146",
+    "name": "成都师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1147",
+    "name": "成都体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1148",
+    "name": "成都外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1150",
+    "name": "成都信息工程大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1151",
+    "name": "成都医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1153",
+    "name": "成都银杏酒店管理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1154",
+    "name": "成都中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1156",
+    "name": "承德医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1158",
+    "name": "赤峰学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1159",
+    "name": "重庆财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1165",
+    "name": "重庆大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1166",
+    "name": "重庆大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1167",
+    "name": "重庆第二师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1170",
+    "name": "重庆电子科技职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1171",
+    "name": "重庆对外经贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1172",
+    "name": "重庆工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1174",
+    "name": "重庆工商大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1182",
+    "name": "重庆机电职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1186",
+    "name": "重庆交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1187",
+    "name": "重庆科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1189",
+    "name": "重庆理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1194",
+    "name": "重庆人文科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1195",
+    "name": "重庆三峡学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1199",
+    "name": "重庆师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1202",
+    "name": "重庆外语外事学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1203",
+    "name": "重庆文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1206",
+    "name": "重庆医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1208",
+    "name": "重庆移通学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1210",
+    "name": "重庆邮电大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1213",
+    "name": "重庆中医药学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1214",
+    "name": "楚雄师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1216",
+    "name": "川北医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1217",
+    "name": "大理大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1219",
+    "name": "大连财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1220",
+    "name": "大连大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1221",
+    "name": "大连东软信息学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1223",
+    "name": "大连工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1224",
+    "name": "大连海事大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1225",
+    "name": "大连海洋大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1227",
+    "name": "大连交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1228",
+    "name": "大连科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1229",
+    "name": "大连理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1230",
+    "name": "大连理工大学（盘锦校区）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1231",
+    "name": "大连民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1233",
+    "name": "大连外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1234",
+    "name": "大连医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1235",
+    "name": "大连艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1238",
+    "name": "大庆师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1248",
+    "name": "德州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1250",
+    "name": "滇池学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1251",
+    "name": "电子科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1252",
+    "name": "电子科技大学（沙河校区）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1253",
+    "name": "东北财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1254",
+    "name": "东北大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1255",
+    "name": "东北大学秦皇岛分校",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1256",
+    "name": "东北电力大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1257",
+    "name": "东北林业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1258",
+    "name": "东北农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1259",
+    "name": "东北师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1260",
+    "name": "东北石油大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1261",
+    "name": "东莞理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1263",
+    "name": "东华大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1264",
+    "name": "东华理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1265",
+    "name": "东南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1266",
+    "name": "东南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1270",
+    "name": "对外经济贸易大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1273",
+    "name": "防灾科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1274",
+    "name": "佛山大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1278",
+    "name": "福建技术师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1279",
+    "name": "福建江夏学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1280",
+    "name": "福建警察学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1281",
+    "name": "福建理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1283",
+    "name": "福建农林大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1285",
+    "name": "福建商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1286",
+    "name": "福建师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1290",
+    "name": "福建医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1292",
+    "name": "福建中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1293",
+    "name": "福州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1294",
+    "name": "福州工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1296",
+    "name": "福州理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1298",
+    "name": "福州外语外贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1304",
+    "name": "复旦大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "1305",
+    "name": "复旦大学医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1309",
+    "name": "甘肃林业职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1310",
+    "name": "甘肃民族师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1311",
+    "name": "甘肃农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1313",
+    "name": "甘肃医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1314",
+    "name": "甘肃政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1315",
+    "name": "甘肃中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1316",
+    "name": "赣东学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1317",
+    "name": "赣南科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1318",
+    "name": "赣南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1320",
+    "name": "赣南医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1324",
+    "name": "广东白云学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1326",
+    "name": "广东财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1329",
+    "name": "广东第二师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1330",
+    "name": "广东东软学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1333",
+    "name": "广东工商职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1334",
+    "name": "广东工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1335",
+    "name": "广东海洋大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1338",
+    "name": "广东技术师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1341",
+    "name": "广东金融学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1343",
+    "name": "广东科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1350",
+    "name": "广东培正学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1351",
+    "name": "广东轻工职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1352",
+    "name": "广东石油化工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1357",
+    "name": "广东外语外贸大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1362",
+    "name": "广东药科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1363",
+    "name": "广东医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1369",
+    "name": "广西财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1370",
+    "name": "广西城市职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1371",
+    "name": "广西大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1378",
+    "name": "广西警察学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1379",
+    "name": "广西科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1380",
+    "name": "广西科技师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1382",
+    "name": "广西民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1383",
+    "name": "广西农业职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1385",
+    "name": "广西师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1388",
+    "name": "广西外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1390",
+    "name": "广西医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1391",
+    "name": "广西艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1394",
+    "name": "广西中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1398",
+    "name": "广州城市理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1399",
+    "name": "广州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1402",
+    "name": "广州工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1403",
+    "name": "广州航海学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1405",
+    "name": "广州华立学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1407",
+    "name": "广州华商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1412",
+    "name": "广州理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1415",
+    "name": "广州南方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1417",
+    "name": "广州软件学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1418",
+    "name": "广州商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1420",
+    "name": "广州体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1423",
+    "name": "广州新华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1424",
+    "name": "广州医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1425",
+    "name": "广州应用科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1426",
+    "name": "广州中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1429",
+    "name": "贵阳信息科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1430",
+    "name": "贵州财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1433",
+    "name": "贵州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1435",
+    "name": "贵州工程应用技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1441",
+    "name": "贵州理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1443",
+    "name": "贵州民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1444",
+    "name": "贵州黔南科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1445",
+    "name": "贵州商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1447",
+    "name": "贵州师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1448",
+    "name": "贵州师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1451",
+    "name": "贵州医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1454",
+    "name": "贵州中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1455",
+    "name": "桂林电子科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1456",
+    "name": "桂林航天工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1457",
+    "name": "桂林理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1458",
+    "name": "桂林旅游学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1461",
+    "name": "桂林信息科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1462",
     "name": "桂林学院",
-    "province": "广西",
-    "city": "桂林",
-    "tags": [
-      "private"
-    ],
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
     "prestigeTier": "private"
   },
   {
-    "code": "13642",
-    "name": "南宁师范大学师园学院",
-    "province": "广西",
-    "city": "南宁",
+    "code": "1463",
+    "name": "桂林医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1468",
+    "name": "哈尔滨工程大学",
+    "province": "未知",
+    "city": "未知",
     "tags": [
-      "private"
+      "211",
+      "doubleFirstClass"
     ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1469",
+    "name": "哈尔滨工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1470",
+    "name": "哈尔滨工业大学（深圳）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1471",
+    "name": "哈尔滨工业大学（威海）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1472",
+    "name": "哈尔滨广厦学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1473",
+    "name": "哈尔滨华德学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1474",
+    "name": "哈尔滨剑桥学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1475",
+    "name": "哈尔滨金融学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1477",
+    "name": "哈尔滨理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1478",
+    "name": "哈尔滨商业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1479",
+    "name": "哈尔滨师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1480",
+    "name": "哈尔滨石油学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1481",
+    "name": "哈尔滨体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1483",
+    "name": "哈尔滨学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1484",
+    "name": "哈尔滨医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1487",
+    "name": "哈尔滨职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1488",
+    "name": "海军军医大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1489",
+    "name": "海口经济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1490",
+    "name": "海南比勒费尔德应用科学大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1491",
+    "name": "海南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1496",
+    "name": "海南科技职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1497",
+    "name": "海南热带海洋学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1499",
+    "name": "海南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1502",
+    "name": "海南医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1505",
+    "name": "邯郸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1509",
+    "name": "汉江师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1510",
+    "name": "汉口学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1512",
+    "name": "杭州电子科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1514",
+    "name": "杭州师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1516",
+    "name": "杭州医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1518",
+    "name": "合肥工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1519",
+    "name": "合肥工业大学（宣城校区）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1522",
+    "name": "河北北方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1523",
+    "name": "河北传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1524",
+    "name": "河北大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1525",
+    "name": "河北地质大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1526",
+    "name": "河北东方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1528",
+    "name": "河北工程大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1529",
+    "name": "河北工程技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1530",
+    "name": "河北工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1531",
+    "name": "河北工业职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1536",
+    "name": "河北环境工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1539",
+    "name": "河北建筑工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1541",
+    "name": "河北金融学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1542",
+    "name": "河北经贸大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1543",
+    "name": "河北科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1544",
+    "name": "河北科技工程职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1545",
+    "name": "河北科技师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1546",
+    "name": "河北科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1551",
+    "name": "河北农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1553",
+    "name": "河北师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1554",
+    "name": "河北右油职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1555",
+    "name": "河北水利电力学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1557",
+    "name": "河北外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1558",
+    "name": "河北医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1560",
+    "name": "河北中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1561",
+    "name": "河池学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1562",
+    "name": "河海大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1563",
+    "name": "河南财经政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1564",
+    "name": "河南财政金融学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1566",
+    "name": "河南城建学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1567",
+    "name": "河南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1569",
+    "name": "河南工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1570",
+    "name": "河南工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1571",
+    "name": "河南工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1576",
+    "name": "河南开封科技传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1577",
+    "name": "河南科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1578",
+    "name": "河南科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1579",
+    "name": "河南理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1580",
+    "name": "河南牧业经济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1581",
+    "name": "河南农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1584",
+    "name": "河南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1591",
+    "name": "河南中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1592",
+    "name": "河西学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1595",
+    "name": "菏泽学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1597",
+    "name": "贺州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1600",
+    "name": "黑河学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1601",
+    "name": "黑龙江八一农垦大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1603",
+    "name": "黑龙江财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1604",
+    "name": "黑龙江大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1605",
+    "name": "黑龙江东方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1606",
+    "name": "黑龙江工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1607",
+    "name": "黑龙江工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1611",
+    "name": "黑龙江科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1623",
+    "name": "黑龙江外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1627",
+    "name": "黑龙江中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1628",
+    "name": "衡水学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1630",
+    "name": "衡阳师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1631",
+    "name": "红河学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1632",
+    "name": "呼伦贝尔学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1634",
+    "name": "湖北大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1635",
+    "name": "湖北第二师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1636",
+    "name": "湖北恩施学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1637",
+    "name": "湖北工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1639",
+    "name": "湖北工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1644",
+    "name": "湖北经济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1645",
+    "name": "湖北警官学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1647",
+    "name": "湖北科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1649",
+    "name": "湖北理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1650",
+    "name": "湖北美术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1651",
+    "name": "湖北民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1652",
+    "name": "湖北汽车工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1653",
+    "name": "湖北三峡航空学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1655",
+    "name": "湖北商贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1658",
+    "name": "湖北师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1662",
+    "name": "湖北文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1663",
+    "name": "湖北医药学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1667",
+    "name": "湖北中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1671",
+    "name": "湖南财政经济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1673",
+    "name": "湖南城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1674",
+    "name": "湖南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1676",
+    "name": "湖南第一师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1679",
+    "name": "湖南工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1681",
+    "name": "湖南工商大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1682",
+    "name": "湖南工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1683",
+    "name": "湖南工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1691",
+    "name": "湖南科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1692",
+    "name": "湖南科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1695",
+    "name": "湖南理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1696",
+    "name": "湖南农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1697",
+    "name": "湖南女子学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1699",
+    "name": "湖南人文科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1703",
+    "name": "湖南涉外经济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1705",
+    "name": "湖南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1712",
+    "name": "湖南文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1714",
+    "name": "湖南医药学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1715",
+    "name": "湖南应用技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1718",
+    "name": "湖南中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1719",
+    "name": "湖州师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1720",
+    "name": "湖州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1722",
+    "name": "华北电力大学（保定）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1723",
+    "name": "华北电力大学（北京）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1724",
+    "name": "华北科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1725",
+    "name": "华北理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1726",
+    "name": "华北水利水电大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1727",
+    "name": "华东交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1728",
+    "name": "华东理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1729",
+    "name": "华东师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1730",
+    "name": "华东政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1731",
+    "name": "华南理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1732",
+    "name": "华南农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1733",
+    "name": "华南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1734",
+    "name": "华侨大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1735",
+    "name": "华中科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1736",
+    "name": "华中农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1737",
+    "name": "华中师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1738",
+    "name": "怀化学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1739",
+    "name": "淮阴工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1740",
+    "name": "淮阴师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1742",
+    "name": "黄冈师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1744",
+    "name": "黄河科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1746",
+    "name": "黄淮学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1750",
+    "name": "惠州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1753",
+    "name": "吉利学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1754",
+    "name": "吉林财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1755",
+    "name": "吉林大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1757",
+    "name": "吉林动画学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1758",
+    "name": "吉林工程技术师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1759",
+    "name": "吉林工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1761",
+    "name": "吉林化工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1762",
+    "name": "吉林建筑大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1763",
+    "name": "吉林建筑科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1765",
+    "name": "吉林警察学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1766",
+    "name": "吉林农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1767",
+    "name": "吉林农业科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1768",
+    "name": "吉林师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1771",
+    "name": "吉林体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1772",
+    "name": "吉林铁道职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1773",
+    "name": "吉林外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1774",
+    "name": "吉林医药学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1775",
+    "name": "吉林艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1776",
+    "name": "吉首大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1777",
+    "name": "集美大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1778",
+    "name": "济南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1782",
+    "name": "济宁学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1783",
+    "name": "济宁医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1786",
+    "name": "暨南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1787",
+    "name": "暨南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1789",
+    "name": "佳木斯大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1791",
+    "name": "嘉兴大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1792",
+    "name": "嘉兴南湖学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1795",
+    "name": "嘉应学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1798",
+    "name": "江汉大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1801",
+    "name": "江南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1808",
+    "name": "江苏大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1809",
+    "name": "江苏第二师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1813",
+    "name": "江苏海洋大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1819",
+    "name": "江苏科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1820",
+    "name": "江苏理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1825",
+    "name": "江苏师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1830",
+    "name": "江西财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1834",
+    "name": "江西飞行学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1836",
+    "name": "江西服装学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1837",
+    "name": "江西工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1850",
+    "name": "江西警察学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1851",
+    "name": "江西科技师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1852",
+    "name": "江西科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1854",
+    "name": "江西理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1856",
+    "name": "江西农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1858",
+    "name": "江西软件职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1860",
+    "name": "江西师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1875",
+    "name": "江西应用科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1877",
+    "name": "江西职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1879",
+    "name": "江西中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1885",
+    "name": "金华职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1887",
+    "name": "金陵科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1890",
+    "name": "锦州医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1891",
+    "name": "晋中信息学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1892",
+    "name": "晋中学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1893",
+    "name": "荆楚理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1897",
+    "name": "井冈山大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1898",
+    "name": "景德镇陶瓷大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1900",
+    "name": "景德镇学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1901",
+    "name": "景德镇艺术职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1902",
+    "name": "九江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1906",
+    "name": "喀什大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1912",
+    "name": "空军军医大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1916",
+    "name": "昆明理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1918",
+    "name": "昆明文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1919",
+    "name": "昆明学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1921",
+    "name": "昆明医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1926",
+    "name": "拉萨师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1929",
+    "name": "兰州博文科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1930",
+    "name": "兰州财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1931",
+    "name": "兰州城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1932",
+    "name": "兰州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1933",
+    "name": "兰州工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1934",
+    "name": "兰州工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1935",
+    "name": "兰州交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1936",
+    "name": "兰州理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1937",
+    "name": "兰州石化职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1939",
+    "name": "兰州文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1940",
+    "name": "兰州信息科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1941",
+    "name": "兰州资源环境职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1942",
+    "name": "廊坊师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1944",
+    "name": "乐山师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1946",
+    "name": "丽江文化旅游学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1947",
+    "name": "丽水学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1949",
+    "name": "连云港师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1951",
+    "name": "辽东学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1952",
+    "name": "辽宁财贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1953",
+    "name": "辽宁传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1954",
+    "name": "辽宁大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "1956",
+    "name": "辽宁对外经贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1957",
+    "name": "辽宁工程技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1959",
+    "name": "辽宁工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1962",
+    "name": "辽宁何氏医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1967",
+    "name": "辽宁科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1968",
+    "name": "辽宁科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1969",
+    "name": "辽宁理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1970",
+    "name": "辽宁理工职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1976",
+    "name": "辽宁师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1978",
+    "name": "辽宁石油化工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1985",
+    "name": "辽宁中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1989",
+    "name": "聊城大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1992",
+    "name": "临沂大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "1995",
+    "name": "岭南师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1996",
+    "name": "柳州工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "1999",
+    "name": "六盘水师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2001",
+    "name": "龙岩学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2002",
+    "name": "陇东学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2006",
+    "name": "鲁东大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2008",
+    "name": "陆军军医大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2009",
+    "name": "洛阳理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2010",
+    "name": "洛阳师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2015",
+    "name": "吕梁学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2017",
+    "name": "茅台学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2020",
+    "name": "绵阳城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2022",
+    "name": "绵阳师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2024",
+    "name": "民政职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2027",
+    "name": "闽江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2028",
+    "name": "闽南科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2029",
+    "name": "闽南理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2030",
+    "name": "闽南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2034",
+    "name": "牡丹江师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2035",
+    "name": "牡丹江医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2036",
+    "name": "南昌大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2037",
+    "name": "江西水利电力大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2038",
+    "name": "南昌工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2039",
+    "name": "南昌航空大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2041",
+    "name": "南昌交通学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2042",
+    "name": "南昌理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2043",
+    "name": "南昌师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2044",
+    "name": "南昌医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2045",
+    "name": "南昌应用技术师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2047",
+    "name": "南昌职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2052",
+    "name": "南方医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2053",
+    "name": "南华大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2054",
+    "name": "南京财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2056",
+    "name": "南京传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2057",
+    "name": "南京大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "2058",
+    "name": "南京大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "2059",
+    "name": "南京工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2060",
+    "name": "南京工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2061",
+    "name": "南京工业职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2062",
+    "name": "南京航空航天大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2067",
+    "name": "南京理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2068",
+    "name": "南京林业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2070",
+    "name": "南京农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2071",
+    "name": "南京审计大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2072",
+    "name": "南京师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2074",
+    "name": "南京特殊教育师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2075",
+    "name": "南京体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2077",
+    "name": "南京晓庄学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2078",
+    "name": "南京信息工程大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2080",
+    "name": "南京医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2081",
+    "name": "南京艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2082",
+    "name": "南京邮电大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2083",
+    "name": "南京中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2084",
+    "name": "南开大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2086",
+    "name": "南宁师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2087",
+    "name": "南宁学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2088",
+    "name": "南宁职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2089",
+    "name": "南通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2091",
+    "name": "南通理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2095",
+    "name": "南阳理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2097",
+    "name": "南阳师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2100",
+    "name": "内江师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2101",
+    "name": "内蒙古财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2102",
+    "name": "内蒙古大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2104",
+    "name": "内蒙古工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2106",
+    "name": "内蒙古科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2107",
+    "name": "内蒙古科技大学包头师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2108",
+    "name": "内蒙古科技大学包头医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2109",
+    "name": "内蒙古民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2110",
+    "name": "内蒙古农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2111",
+    "name": "内蒙古师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2112",
+    "name": "内蒙古医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2114",
+    "name": "宁波财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2116",
+    "name": "宁波大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2117",
+    "name": "宁波工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2122",
+    "name": "宁德师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2124",
+    "name": "宁夏大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2125",
+    "name": "宁夏理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2126",
+    "name": "宁夏师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2128",
+    "name": "宁夏医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2131",
+    "name": "攀枝花学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2134",
+    "name": "平顶山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2136",
+    "name": "萍乡学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2137",
+    "name": "莆田学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2141",
+    "name": "普洱学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2142",
+    "name": "齐鲁工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2143",
+    "name": "齐鲁理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2145",
+    "name": "齐鲁医药学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2146",
+    "name": "齐齐哈尔大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2148",
+    "name": "齐齐哈尔工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2149",
+    "name": "齐齐哈尔医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2156",
+    "name": "青岛滨海学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2157",
+    "name": "青岛城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2158",
+    "name": "青岛大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2160",
+    "name": "青岛工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2162",
+    "name": "青岛恒星科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2163",
+    "name": "青岛黄海学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2165",
+    "name": "香岛科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2166",
+    "name": "青岛理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2167",
+    "name": "青岛农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2170",
+    "name": "青海大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2172",
+    "name": "青海理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2173",
+    "name": "青海民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2174",
+    "name": "青海师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2175",
+    "name": "青海职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2176",
+    "name": "清华大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "2178",
+    "name": "琼台师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2179",
+    "name": "曲阜师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2181",
+    "name": "曲靖师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2183",
+    "name": "衢州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2192",
+    "name": "泉州师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2193",
+    "name": "泉州信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2195",
+    "name": "泉州职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2199",
+    "name": "三江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2201",
+    "name": "三明学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2203",
+    "name": "三峡大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2210",
+    "name": "三亚学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2213",
+    "name": "山东财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2217",
+    "name": "山东大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2218",
+    "name": "山东大学威海分校",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2219",
+    "name": "山东第二医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2220",
+    "name": "山东第一医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2222",
+    "name": "山东工程职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2223",
+    "name": "山东工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2225",
+    "name": "山东工艺美术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2226",
+    "name": "山东管理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2228",
+    "name": "山东航空学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2229",
+    "name": "山东华宇工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2231",
+    "name": "山东建筑大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2232",
+    "name": "山东交通学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2235",
+    "name": "山东科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2238",
+    "name": "山东理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2243",
+    "name": "山东农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2244",
+    "name": "山东农业工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2245",
+    "name": "山东女子学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2246",
+    "name": "山东青年政治学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2251",
+    "name": "山东师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2252",
+    "name": "山东石油化工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2257",
+    "name": "山东外国语职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2261",
+    "name": "山东现代学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2262",
+    "name": "山东协和学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2266",
+    "name": "山东艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2267",
+    "name": "山东英才学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2268",
+    "name": "山东政法学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2270",
+    "name": "山东中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2272",
+    "name": "山西财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2273",
+    "name": "山西传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2274",
+    "name": "山西大同大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2275",
+    "name": "山西大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2276",
+    "name": "山西工程技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2277",
+    "name": "山西工程科技职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2278",
+    "name": "山西工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2279",
+    "name": "山西工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2280",
+    "name": "山西晋中理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2281",
+    "name": "山西科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2283",
+    "name": "山西农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2285",
+    "name": "山西师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2289",
+    "name": "山西医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2291",
+    "name": "山西中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2294",
+    "name": "陕西服装工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2297",
+    "name": "陕西国际商贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2302",
+    "name": "陕西科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2303",
+    "name": "陕西理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2306",
+    "name": "陕西师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2308",
+    "name": "陕西学前师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2311",
+    "name": "陕西中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2312",
+    "name": "汕头大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2314",
+    "name": "商洛学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2316",
+    "name": "商丘工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2317",
+    "name": "商丘师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2321",
+    "name": "上海财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2324",
+    "name": "上海大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2325",
+    "name": "上海第二工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2326",
+    "name": "上海电机学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2327",
+    "name": "上海电力大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2331",
+    "name": "上海对外经贸大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2332",
+    "name": "上海工程技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2336",
+    "name": "上海海关学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2337",
+    "name": "上海海事大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2338",
+    "name": "上海海洋大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2340",
+    "name": "上海建桥学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2342",
+    "name": "上海健康医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2343",
+    "name": "上海交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "2344",
+    "name": "上海交通大学医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2347",
+    "name": "上海科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2349",
+    "name": "上海理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2350",
+    "name": "上海立达学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2351",
+    "name": "上海立信会计金融学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2360",
+    "name": "上海杉达学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2361",
+    "name": "上海商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2362",
+    "name": "上海师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2363",
+    "name": "上海视觉艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2365",
+    "name": "上海体育大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2366",
+    "name": "上海外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2367",
+    "name": "上海戏剧学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2370",
+    "name": "上海兴伟学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2371",
+    "name": "上海音乐学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2372",
+    "name": "上海应用技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2374",
+    "name": "上海政法学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2375",
+    "name": "上海中侨职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2376",
+    "name": "上海中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2377",
+    "name": "上饶师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2381",
+    "name": "韶关学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2382",
+    "name": "邵阳学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2383",
+    "name": "绍兴文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2386",
+    "name": "深圳大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2387",
+    "name": "深圳技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2391",
+    "name": "沈阳城市建设学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2392",
+    "name": "沈阳城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2393",
+    "name": "沈阳大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2394",
+    "name": "沈阳工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2395",
+    "name": "沈阳工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2396",
+    "name": "沈阳工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2397",
+    "name": "沈阳航空航天大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2398",
+    "name": "沈阳化工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2399",
+    "name": "沈阳建筑大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2400",
+    "name": "沈阳科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2401",
+    "name": "沈阳理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2402",
+    "name": "沈阳农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2403",
+    "name": "沈阳师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2404",
+    "name": "沈阳体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2405",
+    "name": "沈阳药科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2406",
+    "name": "沈阳医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2407",
+    "name": "沈阳音乐学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2409",
+    "name": "石河子大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2413",
+    "name": "石家庄铁道大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2416",
+    "name": "石家庄学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2421",
+    "name": "首都经济贸易大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2422",
+    "name": "首都师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2424",
+    "name": "首都医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2429",
+    "name": "四川传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2430",
+    "name": "四川大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2431",
+    "name": "四川电影电视学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2433",
+    "name": "四川工程职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2434",
+    "name": "四川工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2435",
+    "name": "四川工业科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2443",
+    "name": "四川旅游学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2444",
+    "name": "四川美术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2446",
+    "name": "四川农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2448",
+    "name": "四川轻化工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2449",
+    "name": "四川师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2453",
+    "name": "四川外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2456",
+    "name": "四川文化艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2457",
+    "name": "四川文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2467",
+    "name": "苏州城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2468",
+    "name": "苏州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2470",
+    "name": "苏州工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2477",
+    "name": "苏州科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2482",
+    "name": "宿迁学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2486",
+    "name": "绥化学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2491",
+    "name": "塔里木大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2494",
+    "name": "台州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2497",
+    "name": "太原工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2498",
+    "name": "太原科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2499",
+    "name": "太原理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2500",
+    "name": "太原师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2501",
+    "name": "太原学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2503",
+    "name": "泰山科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2504",
+    "name": "泰山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2506",
+    "name": "泰州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2509",
+    "name": "唐山师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2510",
+    "name": "唐山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2517",
+    "name": "天津财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2518",
+    "name": "天津城建大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2521",
+    "name": "天津传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2522",
+    "name": "天津大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2524",
+    "name": "天津工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2532",
+    "name": "天津科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2533",
+    "name": "天津理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2534",
+    "name": "天津美术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2535",
+    "name": "天津农学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2537",
+    "name": "天津仁爱学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2539",
+    "name": "天津商业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2541",
+    "name": "天津师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2546",
+    "name": "天津天狮学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2548",
+    "name": "天津外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2550",
+    "name": "天津医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2554",
+    "name": "天津职业技术师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2555",
+    "name": "天津中德应用技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2556",
+    "name": "天津中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2558",
+    "name": "天水师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2562",
+    "name": "通化师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2563",
+    "name": "同济大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2575",
+    "name": "潍坊科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2576",
+    "name": "潍坊理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2578",
+    "name": "潍坊学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2580",
+    "name": "渭南师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2582",
+    "name": "温州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2585",
+    "name": "温州理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2586",
+    "name": "温州商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2587",
+    "name": "温州医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2589",
+    "name": "文华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2590",
+    "name": "文山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2591",
+    "name": "乌鲁木齐职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2598",
+    "name": "无锡太湖学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2599",
+    "name": "无锡学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2601",
+    "name": "梧州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2603",
+    "name": "五邑大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2604",
+    "name": "武昌工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2605",
+    "name": "武昌理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2606",
+    "name": "武昌首义学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2608",
+    "name": "武汉城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2610",
+    "name": "武汉传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2612",
+    "name": "武汉大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2613",
+    "name": "武汉大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2614",
+    "name": "武汉大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2616",
+    "name": "武汉东湖学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2617",
+    "name": "武汉纺织大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2618",
+    "name": "武汉工程大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2619",
+    "name": "武汉工程科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2621",
+    "name": "武汉工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2625",
+    "name": "武汉华夏理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2628",
+    "name": "武汉科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2630",
+    "name": "武汉理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2632",
+    "name": "武汉轻工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2633",
+    "name": "武汉晴川学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2636",
+    "name": "武汉商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2637",
+    "name": "武汉设计工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2638",
+    "name": "武汉生物工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2639",
+    "name": "武汉体育学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2643",
+    "name": "武汉文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2645",
+    "name": "武汉学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2647",
+    "name": "武汉职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2649",
+    "name": "武夷学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2650",
+    "name": "西安财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2652",
+    "name": "西安电子科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2653",
+    "name": "西安翻译学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2655",
+    "name": "西安工程大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2657",
+    "name": "西安工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2659",
+    "name": "西安航空学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2661",
+    "name": "西安建筑科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2662",
+    "name": "西安交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2663",
+    "name": "西安交通工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2664",
+    "name": "西安科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2665",
+    "name": "西安理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2666",
+    "name": "西安美术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2667",
+    "name": "西安明德理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2668",
+    "name": "西安欧亚学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2669",
+    "name": "西安培华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2670",
+    "name": "西安汽车职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2671",
+    "name": "西安石油大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2672",
+    "name": "西安思源学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2675",
+    "name": "西安外国语大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2676",
+    "name": "西安外事学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2677",
+    "name": "西安文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2678",
+    "name": "西安信息职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2680",
+    "name": "西安医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2682",
+    "name": "西安邮电大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2684",
+    "name": "西北大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2685",
+    "name": "西北工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2686",
+    "name": "西北民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2687",
+    "name": "西北农林科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2688",
+    "name": "西北师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2689",
+    "name": "西北政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2690",
+    "name": "西藏大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2692",
+    "name": "西藏农牧学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2694",
+    "name": "西昌学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2695",
+    "name": "西华大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2696",
+    "name": "西华师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2698",
+    "name": "西京学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2699",
+    "name": "西南财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2700",
+    "name": "西南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2701",
+    "name": "西南大学（荣昌校区）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2702",
+    "name": "西南交通大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2703",
+    "name": "西南科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2704",
+    "name": "西南林业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2705",
+    "name": "西南民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2706",
+    "name": "西南石油大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2707",
+    "name": "西南医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2708",
+    "name": "西南政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2711",
+    "name": "厦门大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2712",
+    "name": "厦门大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2714",
+    "name": "厦门工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2717",
+    "name": "厦门华厦学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2718",
+    "name": "厦门理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2723",
+    "name": "厦门医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2726",
+    "name": "咸阳师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2729",
+    "name": "湘南学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2731",
+    "name": "湘潭大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2732",
+    "name": "湘潭理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2738",
+    "name": "忻州师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2739",
+    "name": "新疆财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2740",
+    "name": "新疆大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2741",
+    "name": "新疆第二医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2742",
+    "name": "新疆工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2743",
+    "name": "新疆工业学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2744",
+    "name": "新疆和田学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2746",
+    "name": "新疆警察学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2747",
+    "name": "新疆科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2750",
+    "name": "新疆理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2752",
+    "name": "新疆农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2753",
+    "name": "新疆农业职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2756",
+    "name": "新疆师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2758",
+    "name": "新疆天山职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2759",
+    "name": "新疆医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2760",
+    "name": "新疆艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2761",
+    "name": "新疆政法学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2763",
+    "name": "新乡学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2764",
+    "name": "河南医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2766",
+    "name": "新余学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2769",
+    "name": "信阳农林学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2771",
+    "name": "信阳师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2772",
+    "name": "信阳学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2776",
+    "name": "邢台学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2779",
+    "name": "兴义民族师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2780",
+    "name": "徐州工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2783",
+    "name": "徐州医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2785",
+    "name": "许昌学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2787",
+    "name": "烟台大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2790",
+    "name": "烟台科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2791",
+    "name": "烟台理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2792",
+    "name": "烟台南山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2795",
+    "name": "延安大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2797",
+    "name": "延边大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2799",
+    "name": "盐城工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2800",
+    "name": "盐城师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2802",
+    "name": "燕山大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2803",
+    "name": "扬州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2807",
+    "name": "阳光学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2809",
+    "name": "伊犁师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2811",
+    "name": "宜宾学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2814",
+    "name": "宜春学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2821",
+    "name": "银川能源学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2822",
+    "name": "营口理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2825",
+    "name": "右江民族医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2827",
+    "name": "榆林学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2828",
+    "name": "玉林师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2829",
+    "name": "玉溪师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2830",
+    "name": "豫北医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2831",
+    "name": "豫章师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2833",
+    "name": "岳阳学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2835",
+    "name": "云南财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2837",
+    "name": "云南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2842",
+    "name": "云南经济管理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2844",
+    "name": "云南警官学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2848",
+    "name": "云南民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2850",
+    "name": "云南农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2851",
+    "name": "云南师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2854",
+    "name": "云南艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2855",
+    "name": "云南中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2858",
+    "name": "运城学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2860",
+    "name": "运城职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2862",
+    "name": "枣庄学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2867",
+    "name": "张家口学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2873",
+    "name": "昭通学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2874",
+    "name": "肇庆学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2875",
+    "name": "肇庆医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2876",
+    "name": "浙大城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2877",
+    "name": "浙大宁波理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2879",
+    "name": "浙江财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2880",
+    "name": "浙江传媒学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2881",
+    "name": "浙江大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "2882",
+    "name": "浙江大学医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2886",
+    "name": "浙江工商大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2888",
+    "name": "浙江工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2890",
+    "name": "浙江广厦建设职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2892",
+    "name": "浙江海洋大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2894",
+    "name": "浙江机电职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2901",
+    "name": "浙江科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2902",
+    "name": "浙江理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2904",
+    "name": "浙江农林大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2907",
+    "name": "浙江师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2908",
+    "name": "浙江树人学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2909",
+    "name": "浙江水利水电学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2912",
+    "name": "浙江外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2913",
+    "name": "浙江万里学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2914",
+    "name": "浙江药科职业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2919",
+    "name": "浙江越秀外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2920",
+    "name": "浙江中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2923",
+    "name": "郑州财经学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2924",
+    "name": "郑州大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2926",
+    "name": "郑州工程技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2927",
+    "name": "郑州工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2928",
+    "name": "郑州工业应用技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2929",
+    "name": "郑州航空工业管理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2930",
+    "name": "郑州健康学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2931",
+    "name": "郑州经贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2933",
+    "name": "郑州科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2936",
+    "name": "郑州轻工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2937",
+    "name": "郑州商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2938",
+    "name": "郑州升达经贸管理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2939",
+    "name": "郑州师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2943",
+    "name": "郑州西亚斯学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2948",
+    "name": "中北大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2949",
+    "name": "中国传媒大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2950",
+    "name": "中国地质大学（北京）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2951",
+    "name": "中国地质大学（武汉）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2952",
+    "name": "中国海洋大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2953",
+    "name": "中国计量大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2954",
+    "name": "中国科学技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
+  },
+  {
+    "code": "2955",
+    "name": "中国矿业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2956",
+    "name": "中国矿业大学（北京）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2957",
+    "name": "中国劳动关系学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2958",
+    "name": "中国美术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2959",
+    "name": "中国民航大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2960",
+    "name": "中国民用航空飞行学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2961",
+    "name": "中国农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2962",
+    "name": "中国人民大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2963",
+    "name": "中国人民大学（苏州校区）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2965",
+    "name": "中国人民警察大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2966",
+    "name": "中国社会科学院大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2967",
+    "name": "中国石油大学（北京）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2968",
+    "name": "中国石油大学（北京）克拉玛依校区",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2969",
+    "name": "中国石油大学（华东）",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2970",
+    "name": "中国戏曲学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2973",
+    "name": "中国药科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2974",
+    "name": "中国医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2976",
+    "name": "中国政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2977",
+    "name": "中华女子学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2978",
+    "name": "中南财经政法大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2979",
+    "name": "中南大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2980",
+    "name": "中南林业科技大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2981",
+    "name": "中南民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2982",
+    "name": "中山大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2985",
+    "name": "中央财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2987",
+    "name": "中央民族大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2989",
+    "name": "中央戏剧学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "2991",
+    "name": "中原工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2992",
+    "name": "中原科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2994",
+    "name": "周口师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "2997",
+    "name": "珠海科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "3003",
+    "name": "遵义师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "3004",
+    "name": "遵义医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "3007",
+    "name": "绍兴理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5001",
+    "name": "北京科技大学天津学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5002",
+    "name": "北京中医药大学东方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5003",
+    "name": "长春大学旅游学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5004",
+    "name": "长春工业大学人文信息学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5005",
+    "name": "长江大学文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5006",
+    "name": "常州大学怀德学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5007",
+    "name": "成都理工大学工程技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5008",
+    "name": "重庆工商大学派斯学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5009",
+    "name": "大连工业大学艺术与信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5010",
+    "name": "大连理工大学城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5011",
+    "name": "大连医科大学中山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5012",
+    "name": "电子科技大学成都学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5013",
+    "name": "电子科技大学中山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5014",
+    "name": "东南大学成贤学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5015",
+    "name": "福建农林大学金山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5016",
+    "name": "福建师范大学协和学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5017",
+    "name": "福州大学至诚学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5018",
+    "name": "赣南师范大学科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5019",
+    "name": "广东外语外贸大学南国商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5020",
+    "name": "广西民族大学相思湖学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5021",
+    "name": "广西中医药大学赛恩斯新医药学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5022",
+    "name": "杭州电子科技大学信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5023",
+    "name": "河北地质大学华信学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5024",
+    "name": "河北工程大学科信学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5025",
+    "name": "河北医科大学临床学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5026",
+    "name": "黑龙江工程学院昆仑旅游学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5027",
+    "name": "衡阳师范学院南岳学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5028",
+    "name": "湖北大学知行学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5029",
+    "name": "湖北工程学院新技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5030",
+    "name": "湖北工业大学工程技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5031",
+    "name": "湖北经济学院法商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5032",
+    "name": "湖北师范大学文理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5033",
+    "name": "湖北文理学院理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5034",
+    "name": "湖北医药学院药护学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5035",
+    "name": "湖南工程学院应用技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5036",
+    "name": "湖南科技大学潇湘学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5037",
+    "name": "湖南农业大学东方科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5038",
+    "name": "湖南中医药大学湘杏学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5039",
+    "name": "华北理工大学轻工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5040",
+    "name": "吉林师范大学博达学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5041",
+    "name": "集美大学诚毅学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5042",
+    "name": "江苏大学京江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5043",
+    "name": "江苏科技大学苏州理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5044",
+    "name": "江苏师范大学科文学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5045",
+    "name": "江西财经大学现代经济管理学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5046",
+    "name": "江西农业大学南昌商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5047",
+    "name": "江西师范大学科学技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5048",
+    "name": "锦州医科大学医疗学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5049",
+    "name": "昆明理工大学津桥学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5050",
+    "name": "昆明医科大学海源学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5051",
+    "name": "辽宁师范大学海华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5052",
+    "name": "辽宁中医药大学杏林学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5053",
+    "name": "聊城大学东昌学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5054",
+    "name": "南昌大学科学技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5055",
+    "name": "南昌航空大学科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5056",
+    "name": "南京财经大学红山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5057",
+    "name": "南京工业大学浦江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5058",
+    "name": "南京航空航天大学金城学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5059",
+    "name": "南京理工大学泰州科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5060",
+    "name": "南京理工大学紫金学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5061",
+    "name": "南京审计大学金审学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5062",
+    "name": "南京师范大学泰州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5063",
+    "name": "南京师范大学中北学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5064",
+    "name": "南京医科大学康达学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5065",
+    "name": "南京邮电大学通达学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5066",
+    "name": "南宁师范大学师园学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5067",
+    "name": "南通大学杏林学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5068",
+    "name": "宁波大学科学技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5069",
+    "name": "宁夏大学新华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5070",
+    "name": "青岛农业大学海都学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5071",
+    "name": "三峡大学科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5072",
+    "name": "山东财经大学东方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5073",
+    "name": "陕西科技大学镐京学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5074",
+    "name": "上海财经大学浙江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5075",
+    "name": "上海师范大学天华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5076",
+    "name": "上海外国语大学贤达经济人文学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5078",
+    "name": "石家庄铁道大学四方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5079",
+    "name": "四川大学锦江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5080",
+    "name": "苏州大学应用技术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5081",
+    "name": "苏州科技大学天平学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5082",
+    "name": "天津财经大学珠江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5083",
+    "name": "天津理工大学中环信息学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5084",
+    "name": "天津商业大学宝德学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5085",
+    "name": "天津外国语大学滨海外事学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5086",
+    "name": "天津医科大学临床医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5087",
+    "name": "温州医科大学仁济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5088",
+    "name": "武汉纺织大学外经贸学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5089",
+    "name": "武汉工程大学邮电与信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5090",
+    "name": "武汉体育学院体育科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5091",
+    "name": "西安财经大学行知学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5092",
+    "name": "西安建筑科技太学华清学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5093",
+    "name": "西安科技大学高新学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5095",
+    "name": "西南财经大学天府学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5096",
+    "name": "西南交通大学希望学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5097",
+    "name": "厦门大学嘉庚学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5098",
+    "name": "延安大学西安创新学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5099",
+    "name": "扬州大学广陵学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5100",
+    "name": "浙江财经大学东方学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5101",
+    "name": "浙江工商大学杭州商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5102",
+    "name": "浙江工业大学之江学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5103",
+    "name": "浙江理工大学科技与艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5104",
+    "name": "浙江农林大学暨阳学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5105",
+    "name": "浙江师范大学行知学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5106",
+    "name": "中国计里大学现代科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5107",
+    "name": "中国矿业大学徐海学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5108",
+    "name": "中南林业科技大学涉外学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "5109",
+    "name": "遵义医科大学医学与科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "6006",
+    "name": "安徽医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "6009",
+    "name": "大连工业大学艺术与信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "6609",
+    "name": "扬州大学广陵学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "8006",
+    "name": "安徽师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "8609",
+    "name": "延安大学西安创新学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9001",
+    "name": "安徽大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "strong"
+  },
+  {
+    "code": "9002",
+    "name": "安徽财经大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9003",
+    "name": "安徽工程大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9004",
+    "name": "安徽工业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9005",
+    "name": "安徽建筑大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9006",
+    "name": "安徽理工大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9007",
+    "name": "安徽农业大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9008",
+    "name": "安徽师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9009",
+    "name": "安徽医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9010",
+    "name": "安徽中医药大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9011",
+    "name": "安庆师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9012",
+    "name": "淮北师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9013",
+    "name": "阜阳师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9014",
+    "name": "蚌埠医科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9015",
+    "name": "合肥大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "9101",
+    "name": "安徽科技学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9102",
+    "name": "蚌埠学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9104",
+    "name": "亳州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9105",
+    "name": "巢湖学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9106",
+    "name": "池州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9107",
+    "name": "滁州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9109",
+    "name": "合肥师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9111",
+    "name": "淮南师范学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9112",
+    "name": "黄山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9113",
+    "name": "铜陵学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9114",
+    "name": "皖南医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9115",
+    "name": "皖西学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9116",
+    "name": "宿州学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9117",
+    "name": "安徽艺术学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9119",
+    "name": "合肥理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9120",
+    "name": "安徽第二医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9121",
+    "name": "安徽职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9122",
+    "name": "芜湖职业技术大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9201",
+    "name": "蚌埠工商学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9203",
+    "name": "马鞍山学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9204",
+    "name": "合肥城市学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9205",
+    "name": "合肥经济学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9206",
+    "name": "安徽三联学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9207",
+    "name": "芜湖学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9208",
+    "name": "安徽外国语学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9209",
+    "name": "安徽文达信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9210",
+    "name": "安徽新华学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9211",
+    "name": "安徽信息工程学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9212",
+    "name": "安徽医科大学临床医学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9213",
+    "name": "阜阳理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9214",
+    "name": "皖江工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9215",
+    "name": "淮北理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
+  },
+  {
+    "code": "9909",
+    "name": "南宁师范大学师园学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
     "prestigeTier": "private"
   }
 ]

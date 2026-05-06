@@ -7,6 +7,8 @@ export type PhaseCode =
   | 'senior3'
   | 'final';
 
+export type SubjectTrack = 'history' | 'physics';
+
 export type PropCode =
   | 'AGE'
   | 'INT'
@@ -71,6 +73,7 @@ export interface GameEvent {
   flag?: string;
   tags?: string[];
   grade?: number;
+  subjectTrack?: SubjectTrack;
 }
 
 export interface WeightedRef {
@@ -150,6 +153,8 @@ export interface ExamScoreResult {
 export interface AdmissionResult {
   profileId: string;
   profileName: string;
+  subjectTrack: SubjectTrack;
+  subjectTrackName: string;
   finalScore: number;
   potentialScore: number;
   variance: number;
@@ -221,6 +226,7 @@ export interface RunLog {
 
 export interface GameState {
   props: Props;
+  subjectTrack: SubjectTrack | null;
   selectedTalentIds: number[];
   triggeredTalentIds: number[];
   eventIds: number[];

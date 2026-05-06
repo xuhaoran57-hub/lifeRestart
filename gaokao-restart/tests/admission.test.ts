@@ -1,14 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import type { ExamScoreResult, GameState } from '../src/app/types';
+import type { ExamScoreResult, GameState, SubjectTrack } from '../src/app/types';
 import { zhCnContent } from '../src/content/zh-cn';
 import { resolveAdmission } from '../src/engine/admission';
 import { createInitialProps } from '../src/engine/properties';
 import { Random } from '../src/engine/random';
 
 describe('resolveAdmission', () => {
-  it('marks 985 and 211 reachable from real admission lines', () => {
+  it('marks 985 and 211 reachable from physics admission lines', () => {
     const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 75, RSK: 20 }), exam(650), new Random(1));
 
+    expect(result.profileId).toBe('ah-2025-physics');
+    expect(result.subjectTrack).toBe('physics');
     expect(result.canReach985).toBe(true);
     expect(result.canReach211).toBe(true);
     expect(result.admitted).toBe(true);
@@ -20,6 +22,15 @@ describe('resolveAdmission', () => {
 
     expect(result.canReach211).toBe(true);
     expect(result.admitted).toBe(true);
+  });
+
+  it('uses history admission lines for history track', () => {
+    const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 60, RSK: 25 }, 'history'), exam(590), new Random(2));
+
+    expect(result.profileId).toBe('ah-2025-history');
+    expect(result.subjectTrack).toBe('history');
+    expect(result.canReach211).toBe(true);
+    expect(result.canReach985).toBe(false);
   });
 
   it('falls back when score is below sampled undergraduate lines', () => {
@@ -57,9 +68,10 @@ function exam(finalScore: number): ExamScoreResult {
   };
 }
 
-function stateWithScoreProps(values: Partial<GameState['props']>): GameState {
+function stateWithScoreProps(values: Partial<GameState['props']>, subjectTrack: SubjectTrack = 'physics'): GameState {
   return {
     props: { ...createInitialProps(), ...values },
+    subjectTrack,
     selectedTalentIds: [],
     triggeredTalentIds: [],
     eventIds: [],

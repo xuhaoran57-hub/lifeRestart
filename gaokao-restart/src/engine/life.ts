@@ -18,6 +18,7 @@ import { pickEnding } from './endings';
 import { createConditionContext, getEventMap, isEventAvailable, pickEventForRound } from './events';
 import { applyPropDelta, calculateSummaryScore, createInitialProps, refreshScore } from './properties';
 import { Random } from './random';
+import { forcedSubjectTrackFromTalents, resolveSubjectTrack } from './subjectTrack';
 import { getTalentMap, validateTalentSelection } from './talents';
 
 const eventEffectScale: Partial<Record<CorePropCode, number>> = {
@@ -29,6 +30,13 @@ const eventEffectScale: Partial<Record<CorePropCode, number>> = {
   RSK: 0.35,
   SCOREMOD: 0.65,
 };
+
+const subjectTrackEventIds = {
+  forcedPhysics: 32001,
+  forcedHistory: 32002,
+  physics: 32003,
+  history: 32004,
+} as const;
 
 export class LifeEngine {
   private readonly random: Random;
@@ -61,6 +69,7 @@ export class LifeEngine {
 
     const state: GameState = {
       props,
+      subjectTrack: null,
       selectedTalentIds,
       triggeredTalentIds: [],
       eventIds: [],
@@ -96,6 +105,8 @@ export class LifeEngine {
     const event = pickEventForRound(ageRound, this.eventMap, state, this.random);
     this.applyEvent(state, event);
     const branchEvents = this.resolveBranches(state, event);
+    const subjectTrackEvent = this.resolveSubjectTrackForRound(state, ageRound);
+    if (subjectTrackEvent) branchEvents.push(subjectTrackEvent);
     refreshScore(state.props, ageRound.phase);
 
     state.stepIndex += 1;
@@ -182,6 +193,26 @@ export class LifeEngine {
     return branchEvents;
   }
 
+  private resolveSubjectTrackForRound(state: GameState, ageRound: AgeRound): GameEvent | null {
+    if (state.subjectTrack || ageRound.age !== 15 || ageRound.round !== 2) return null;
+
+    const forcedTrack = forcedSubjectTrackFromTalents(state);
+    const track = resolveSubjectTrack(state, this.random);
+    state.subjectTrack = track;
+
+    const eventId = forcedTrack === 'physics'
+      ? subjectTrackEventIds.forcedPhysics
+      : forcedTrack === 'history'
+        ? subjectTrackEventIds.forcedHistory
+        : track === 'physics'
+          ? subjectTrackEventIds.physics
+          : subjectTrackEventIds.history;
+    const event = this.eventMap.get(eventId);
+    if (!event) throw new Error(`缺少分科事件 ${eventId}`);
+    this.applyEvent(state, event);
+    return event;
+  }
+
   private applyEffect(props: Props, effect: Effect = {}, scaleOf: (prop: CorePropCode) => number = () => 1): void {
     for (const [prop, delta] of Object.entries(effect)) {
       const propCode = prop as CorePropCode;
@@ -199,6 +230,7 @@ export class LifeEngine {
     return {
       ...state,
       props: { ...state.props },
+      subjectTrack: state.subjectTrack,
       selectedTalentIds: [...state.selectedTalentIds],
       triggeredTalentIds: [...state.triggeredTalentIds],
       eventIds: [...state.eventIds],

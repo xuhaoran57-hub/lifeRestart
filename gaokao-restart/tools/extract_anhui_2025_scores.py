@@ -1,8 +1,11 @@
 from __future__ import annotations
 
 import re
+import json
+import os
 from bisect import bisect_right
 from collections import defaultdict
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime
 from pathlib import Path
 
@@ -18,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "anhui-2025-undergrad"
 RAW_DIR = DATA_DIR / "raw"
 OUT_PATH = DATA_DIR / "anhui_2025_undergraduate_scores.xlsx"
+OUT_JSON_PATH = DATA_DIR / "anhui_2025_undergraduate_scores.json"
 
 SOURCE_URLS = {
     "历史类": "https://www.ahzsks.cn/ggl/8466.htm",
@@ -74,6 +78,8 @@ DETAIL_HEADERS = [
     "校名置信度",
     "分数置信度",
 ]
+
+_OCR: RapidOCR | None = None
 
 
 def find_horizontal_lines(gray: np.ndarray) -> list[int]:
@@ -183,7 +189,7 @@ def ocr_column(
 
 def extract_image_rows(ocr: RapidOCR, subject: str, page: int, filename: str) -> list[dict]:
     path = RAW_DIR / filename
-    img = cv2.imread(str(path))
+    img = cv2.imdecode(np.fromfile(path, dtype=np.uint8), cv2.IMREAD_COLOR)
     if img is None:
         raise FileNotFoundError(path)
 
@@ -218,6 +224,19 @@ def extract_image_rows(ocr: RapidOCR, subject: str, page: int, filename: str) ->
             }
         )
     return rows
+
+
+def get_ocr() -> RapidOCR:
+    global _OCR
+    if _OCR is None:
+        _OCR = RapidOCR()
+    return _OCR
+
+
+def extract_image_task(task: tuple[int, str, int, str]) -> tuple[int, str, int, str, list[dict]]:
+    index, subject, page, filename = task
+    rows = extract_image_rows(get_ocr(), subject, page, filename)
+    return index, subject, page, filename, rows
 
 
 def best_school_rows(rows: list[dict]) -> list[dict]:
@@ -330,17 +349,57 @@ def write_workbook(detail_rows: list[dict]) -> None:
     wb.save(OUT_PATH)
 
 
+def write_json(detail_rows: list[dict]) -> None:
+    best_rows = best_school_rows(detail_rows)
+    pivot_rows = pivot_school_rows(best_rows)
+    payload = {
+        "metadata": {
+            "sourceName": "安徽省教育招生考试院官网",
+            "sourceUrls": SOURCE_URLS,
+            "publishedAt": "2025-07-24",
+            "generatedAt": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "detailRowCount": len(detail_rows),
+            "bestSchoolRowCount": len(best_rows),
+            "pivotSchoolRowCount": len(pivot_rows),
+        },
+        "detailRows": detail_rows,
+        "bestSchoolRows": best_rows,
+        "pivotSchoolRows": pivot_rows,
+    }
+    OUT_JSON_PATH.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+
+
 def main() -> None:
-    ocr = RapidOCR()
-    detail_rows: list[dict] = []
+    tasks = []
     for subject, filenames in IMAGE_GROUPS.items():
         for page, filename in enumerate(filenames, start=1):
-            rows = extract_image_rows(ocr, subject, page, filename)
-            detail_rows.extend(rows)
-            print(f"{subject} page {page}: {filename}, rows={len(rows)}")
+            tasks.append((len(tasks), subject, page, filename))
+
+    worker_count = max(1, int(os.environ.get("ANHUI_OCR_WORKERS", "3")))
+    page_rows: list[list[dict] | None] = [None] * len(tasks)
+
+    if worker_count == 1:
+        for task in tasks:
+            index, subject, page, filename, rows = extract_image_task(task)
+            page_rows[index] = rows
+            print(f"{subject} page {page}: {filename}, rows={len(rows)}", flush=True)
+    else:
+        with ProcessPoolExecutor(max_workers=worker_count) as executor:
+            futures = {executor.submit(extract_image_task, task): task for task in tasks}
+            for future in as_completed(futures):
+                index, subject, page, filename, rows = future.result()
+                page_rows[index] = rows
+                print(f"{subject} page {page}: {filename}, rows={len(rows)}", flush=True)
+
+    detail_rows = [row for rows in page_rows if rows is not None for row in rows]
 
     write_workbook(detail_rows)
+    write_json(detail_rows)
     print(f"wrote {OUT_PATH}")
+    print(f"wrote {OUT_JSON_PATH}")
 
 
 if __name__ == "__main__":

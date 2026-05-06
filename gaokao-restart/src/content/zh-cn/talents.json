@@ -3551,5 +3551,55 @@
     "polarity": "benefit",
     "rarity": "rare",
     "rarityName": "稀有"
+  },
+  {
+    "id": 21801,
+    "name": "文科定盘",
+    "grade": 1,
+    "description": "你很早就确认自己更适合历史类路线，高一分科时必定选择历史类",
+    "effect": {
+      "VOL": 6,
+      "SCOREMOD": 4
+    },
+    "inheritAllowed": true,
+    "tags": [
+      "分科",
+      "历史类",
+      "稀有"
+    ],
+    "exclude": [
+      21802
+    ],
+    "category": "route",
+    "categoryName": "赛道机会",
+    "effectBudget": 0.96,
+    "polarity": "benefit",
+    "rarity": "rare",
+    "rarityName": "稀有"
+  },
+  {
+    "id": 21802,
+    "name": "理科定盘",
+    "grade": 1,
+    "description": "你很早就确认自己更适合物理类路线，高一分科时必定选择物理类",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 4
+    },
+    "inheritAllowed": true,
+    "tags": [
+      "分科",
+      "物理类",
+      "稀有"
+    ],
+    "exclude": [
+      21801
+    ],
+    "category": "route",
+    "categoryName": "赛道机会",
+    "effectBudget": 1.48,
+    "polarity": "benefit",
+    "rarity": "rare",
+    "rarityName": "稀有"
   }
 ]

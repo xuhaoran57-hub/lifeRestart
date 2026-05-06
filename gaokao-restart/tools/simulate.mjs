@@ -48,6 +48,14 @@ const eventEffectScale = {
   RSK: 0.35,
   SCOREMOD: 0.65,
 };
+const historyLockTalentId = 21801;
+const physicsLockTalentId = 21802;
+const subjectTrackEventIds = {
+  forcedPhysics: 32001,
+  forcedHistory: 32002,
+  physics: 32003,
+  history: 32004,
+};
 
 class Random {
   constructor(seed = Date.now()) {
@@ -88,6 +96,11 @@ function simulate(runs = 1000) {
   const candidateRarityDistribution = new Map();
   const selectedRarityDistribution = new Map();
   const admissionDistribution = new Map();
+  const subjectTrackDistribution = new Map();
+  const subjectTrackAdmission = {
+    history: { runs: 0, canReach985: 0, canReach211: 0, admitted985: 0, admitted211: 0, slide: 0, totalFinalScore: 0 },
+    physics: { runs: 0, canReach985: 0, canReach211: 0, admitted985: 0, admitted211: 0, slide: 0, totalFinalScore: 0 },
+  };
   const scoreBuckets = new Map();
   const capCounts = { INT: 0, STR: 0, SPR: 0, VOL: 0 };
   let legendaryCandidateRuns = 0;
@@ -106,6 +119,10 @@ function simulate(runs = 1000) {
       totalRSK += result.props.RSK;
       totalSCOREMOD += result.props.SCOREMOD;
       totalFinalScore += result.admission.finalScore;
+      addCount(subjectTrackDistribution, result.subjectTrack);
+      const trackStats = subjectTrackAdmission[result.subjectTrack];
+      trackStats.runs += 1;
+      trackStats.totalFinalScore += result.admission.finalScore;
       addCount(scoreBuckets, scoreBucket(result.admission.finalScore));
       if (result.props.INT >= 10) capCounts.INT += 1;
       if (result.props.STR >= 10) capCounts.STR += 1;
@@ -113,10 +130,23 @@ function simulate(runs = 1000) {
       if (result.props.VOL >= 85) capCounts.VOL += 1;
       if (result.props.HVOL < 25 && result.props.RSK >= 65) lowVolunteerHighRiskCount += 1;
       if (result.admission.canReach985) canReach985 += 1;
-      if (result.admission.canReach211) canReach211 += 1;
-      if (result.admission.admissionTier === '985') admitted985 += 1;
-      if (result.admission.admissionTier === '211') admitted211 += 1;
-      if (result.admission.admissionTier === 'slide') slideCount += 1;
+      if (result.admission.canReach985) trackStats.canReach985 += 1;
+      if (result.admission.canReach211) {
+        canReach211 += 1;
+        trackStats.canReach211 += 1;
+      }
+      if (result.admission.admissionTier === '985') {
+        admitted985 += 1;
+        trackStats.admitted985 += 1;
+      }
+      if (result.admission.admissionTier === '211') {
+        admitted211 += 1;
+        trackStats.admitted211 += 1;
+      }
+      if (result.admission.admissionTier === 'slide') {
+        slideCount += 1;
+        trackStats.slide += 1;
+      }
       if (result.admission.highScoreLowAdmission) highScoreLowAdmissionCount += 1;
       if (result.admission.admittedUniversity) {
         addCount(admissionDistribution, result.admission.admittedUniversity.name);
@@ -147,6 +177,17 @@ function simulate(runs = 1000) {
   console.log(`Slide: ${slideCount} (${(slideCount / completed * 100).toFixed(1)}%)`);
   console.log(`High score low admission: ${highScoreLowAdmissionCount} (${(highScoreLowAdmissionCount / completed * 100).toFixed(1)}%)`);
   console.log(`Low volunteer high risk: ${lowVolunteerHighRiskCount} (${(lowVolunteerHighRiskCount / completed * 100).toFixed(1)}%)`);
+  console.log('Subject track distribution:');
+  for (const track of ['history', 'physics']) {
+    const count = subjectTrackDistribution.get(track) ?? 0;
+    console.log(`- ${track}: ${count} (${(count / completed * 100).toFixed(1)}%)`);
+  }
+  console.log('Subject track admission:');
+  for (const track of ['history', 'physics']) {
+    const item = subjectTrackAdmission[track];
+    const denominator = Math.max(1, item.runs);
+    console.log(`- ${track}: avgScore ${(item.totalFinalScore / denominator).toFixed(1)}, 985 reachable ${(item.canReach985 / denominator * 100).toFixed(1)}%, 211 reachable ${(item.canReach211 / denominator * 100).toFixed(1)}%, 985 admitted ${(item.admitted985 / denominator * 100).toFixed(1)}%, 211 admitted ${(item.admitted211 / denominator * 100).toFixed(1)}%, slide ${(item.slide / denominator * 100).toFixed(1)}%`);
+  }
   printEndingCoverage(distribution);
   printConcentration('Ending concentration', distribution, completed, [1, 3, 5]);
   printConcentration('Admission concentration', admissionDistribution, completed, [1, 2, 5]);
@@ -203,6 +244,7 @@ function runOne(random) {
   const eventMap = new Map(content.events.map(item => [item.id, item]));
   const triggeredTalentIds = [];
   const eventIds = [];
+  let subjectTrack = null;
 
   for (const id of selectedTalentIds) {
     const talent = talentMap.get(id);
@@ -224,32 +266,50 @@ function runOne(random) {
     const candidates = ageRound.eventPool
       .map(ref => ({ ref, event: eventMap.get(ref.id) }))
       .filter(item => item.event)
-      .filter(({ event }) => evaluate(event.include, props, selectedTalentIds, eventIds))
-      .filter(({ event }) => !event.exclude || !evaluate(event.exclude, props, selectedTalentIds, eventIds));
+      .filter(({ event }) => !event.noRandom)
+      .filter(({ event }) => !event.subjectTrack || event.subjectTrack === subjectTrack)
+      .filter(({ event }) => evaluate(event.include, props, selectedTalentIds, eventIds, null, subjectTrack))
+      .filter(({ event }) => !event.exclude || !evaluate(event.exclude, props, selectedTalentIds, eventIds, null, subjectTrack));
     const unseen = candidates.filter(({ event }) => !eventIds.includes(event.id));
     const picked = pickWeighted(unseen.length ? unseen : candidates, item => item.ref.weight || item.event.weight || 1, random);
     if (!picked) throw new Error('no event');
     applyEffect(props, picked.event.effect, true);
     eventIds.push(picked.event.id);
     for (const branch of picked.event.branch ?? []) {
-      if (!evaluate(branch.condition, props, selectedTalentIds, eventIds)) continue;
+      if (!evaluate(branch.condition, props, selectedTalentIds, eventIds, null, subjectTrack)) continue;
       const branchEvent = eventMap.get(branch.next);
       if (!branchEvent) continue;
       applyEffect(props, branchEvent.effect, true);
       eventIds.push(branchEvent.id);
     }
+    if (!subjectTrack && ageRound.age === 15 && ageRound.round === 2) {
+      const forcedTrack = forcedSubjectTrack(selectedTalentIds);
+      subjectTrack = forcedTrack ?? resolveSubjectTrack(props, selectedTalentIds, eventIds, random);
+      const eventId = forcedTrack === 'physics'
+        ? subjectTrackEventIds.forcedPhysics
+        : forcedTrack === 'history'
+          ? subjectTrackEventIds.forcedHistory
+          : subjectTrack === 'physics'
+            ? subjectTrackEventIds.physics
+            : subjectTrackEventIds.history;
+      const trackEvent = eventMap.get(eventId);
+      if (!trackEvent) throw new Error(`missing subject track event ${eventId}`);
+      applyEffect(props, trackEvent.effect, true);
+      eventIds.push(trackEvent.id);
+    }
     refreshScore(props, ageRound.phase);
   }
 
   const exam = calculateExamScore(props, random);
-  const admission = resolveAdmission(props, selectedTalentIds, eventIds, exam, random);
+  if (!subjectTrack) throw new Error('missing subject track');
+  const admission = resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam, random);
   const ending = [...content.endings]
     .sort((a, b) => effectivePriority(b) - effectivePriority(a))
-    .find(item => evaluate(item.condition, props, selectedTalentIds, eventIds, admission))
+    .find(item => evaluate(item.condition, props, selectedTalentIds, eventIds, admission, subjectTrack))
     ?? content.endings.find(item => item.id === (props.HSCR >= 520 ? 41111 : 41007));
   if (!ending) throw new Error('no ending');
   props.SUM = Math.round(props.HSCR * 0.45 + (props.INT + props.STR + props.MNY + props.SPR) * 8 + props.HVOL * 0.8 + ending.scoreBonus);
-  return { ending, props, admission, candidateTalents: talentPick.candidateTalents, selectedTalents: talentPick.selectedTalents };
+  return { ending, props, subjectTrack, admission, candidateTalents: talentPick.candidateTalents, selectedTalents: talentPick.selectedTalents };
 }
 
 function calculateExamScore(props, random) {
@@ -261,8 +321,28 @@ function calculateExamScore(props, random) {
   return { finalScore, potentialScore, variance };
 }
 
-function resolveAdmission(props, selectedTalentIds, eventIds, exam, random) {
-  const profile = content.admissionProfiles.find(item => item.default) ?? content.admissionProfiles[0];
+function forcedSubjectTrack(selectedTalentIds) {
+  if (selectedTalentIds.includes(historyLockTalentId)) return 'history';
+  if (selectedTalentIds.includes(physicsLockTalentId)) return 'physics';
+  return null;
+}
+
+function resolveSubjectTrack(props, selectedTalentIds, eventIds, random) {
+  const forced = forcedSubjectTrack(selectedTalentIds);
+  if (forced) return forced;
+  const scienceEventBonus = eventIds.some(id => [31011, 31013, 31017].includes(id)) ? 1.4 : 0;
+  const humanitiesEventBonus = eventIds.some(id => [31731, 31732, 31735].includes(id)) ? 0.9 : 0;
+  const riskPenalty = props.RSK * 0.04;
+  const jitter = (random.next() - 0.5) * 1.4;
+  const scorePhysics = props.INT * 1.2 + props.STR * 0.35 + props.MNY * 0.25 + scienceEventBonus - riskPenalty + jitter;
+  const scoreHistory = props.SPR * 1.0 + props.VOL * 0.08 + props.INT * 0.55 + humanitiesEventBonus - jitter;
+  return scorePhysics > scoreHistory ? 'physics' : 'history';
+}
+
+function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam, random) {
+  const profileId = subjectTrack === 'history' ? 'ah-2025-history' : 'ah-2025-physics';
+  const profile = content.admissionProfiles.find(item => item.id === profileId);
+  if (!profile) throw new Error(`missing profile ${profileId}`);
   const universities = new Map(content.universities.map(item => [item.code, item]));
   const lines = content.admissionLines
     .filter(line => line.profileId === profile.id)
@@ -278,6 +358,9 @@ function resolveAdmission(props, selectedTalentIds, eventIds, exam, random) {
 
   if (!picked) {
     return {
+      profileId: profile.id,
+      profileName: profile.name,
+      subjectTrack,
       finalScore: exam.finalScore,
       canReach985: reachable985.length > 0,
       canReach211: reachable211.length > 0,
@@ -289,6 +372,9 @@ function resolveAdmission(props, selectedTalentIds, eventIds, exam, random) {
   }
 
   return {
+    profileId: profile.id,
+    profileName: profile.name,
+    subjectTrack,
     finalScore: exam.finalScore,
     canReach985: reachable985.length > 0,
     canReach211: reachable211.length > 0,
@@ -486,7 +572,7 @@ function refreshScore(props, phase) {
   props.HVOL = Math.max(props.HVOL, props.VOL);
 }
 
-function evaluate(condition, props, talentIds, eventIds, admission = null) {
+function evaluate(condition, props, talentIds, eventIds, admission = null, subjectTrack = null) {
   if (!condition) return true;
   const admissionProps = {
     ADMSCORE: admission?.finalScore ?? 0,
@@ -502,6 +588,8 @@ function evaluate(condition, props, talentIds, eventIds, admission = null) {
     .replace(/ADM!\[([A-Za-z0-9_,]+)\]/g, (_, ids) => !ids.split(',').some(id => hasAdmissionTier(admission, id)))
     .replace(/SCHOOL\?\[([0-9,]+)\]/g, (_, ids) => ids.split(',').some(id => admission?.admittedUniversity?.code === String(id)))
     .replace(/SCHOOL!\[([0-9,]+)\]/g, (_, ids) => !ids.split(',').some(id => admission?.admittedUniversity?.code === String(id)))
+    .replace(/TRACK\?\[([A-Za-z0-9_,]+)\]/g, (_, ids) => ids.split(',').some(id => subjectTrack === id))
+    .replace(/TRACK!\[([A-Za-z0-9_,]+)\]/g, (_, ids) => !ids.split(',').some(id => subjectTrack === id))
     .replace(/([A-Z]+)\?\[([0-9,]+)\]/g, (_, key, ids) => ids.split(',').some(id => props[key] === Number(id)))
     .replace(/([A-Z]+)!\[([0-9,]+)\]/g, (_, key, ids) => !ids.split(',').some(id => props[key] === Number(id)));
   for (const key of Object.keys({ ...props, ...admissionProps }).sort((a, b) => b.length - a.length)) {

@@ -16,11 +16,13 @@ export function createConditionContext(
     talentIds: new Set([...state.selectedTalentIds, ...state.triggeredTalentIds]),
     eventIds: new Set(state.eventIds),
     endingIds: new Set(state.endingIds),
+    subjectTrack: state.subjectTrack,
     admission,
   };
 }
 
 export function isEventAvailable(event: GameEvent, state: GameState): boolean {
+  if (event.subjectTrack && event.subjectTrack !== state.subjectTrack) return false;
   const context = createConditionContext(state);
   return evaluateCondition(event.include, context) && (!event.exclude || !evaluateCondition(event.exclude, context));
 }

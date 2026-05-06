@@ -4879,5 +4879,79 @@
       "志愿",
       "风险"
     ]
+  },
+  {
+    "id": 32001,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你早早确认了物理类方向，分科表交上去时几乎没有犹豫。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 4
+    },
+    "noRandom": true,
+    "grade": 1,
+    "weight": 0,
+    "flag": "理科定盘",
+    "tags": [
+      "分科",
+      "物理类",
+      "锁定"
+    ]
+  },
+  {
+    "id": 32002,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你早早确认了历史类方向，分科表交上去时心里很稳。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "noRandom": true,
+    "grade": 1,
+    "weight": 0,
+    "flag": "文科定盘",
+    "tags": [
+      "分科",
+      "历史类",
+      "锁定"
+    ]
+  },
+  {
+    "id": 32003,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "几轮摸底之后，你选择了物理类路线，后面的复习开始围绕数理和专业组要求展开。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 4
+    },
+    "noRandom": true,
+    "grade": 0,
+    "weight": 0,
+    "flag": "物理类分科",
+    "tags": [
+      "分科",
+      "物理类"
+    ]
+  },
+  {
+    "id": 32004,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "几轮摸底之后，你选择了历史类路线，后面的复习开始围绕表达、材料和专业取舍展开。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "noRandom": true,
+    "grade": 0,
+    "weight": 0,
+    "flag": "历史类分科",
+    "tags": [
+      "分科",
+      "历史类"
+    ]
   }
 ]

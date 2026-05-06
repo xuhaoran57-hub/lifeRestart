@@ -1,10 +1,11 @@
-import type { AdmissionResult, PropCode } from '../app/types';
+import type { AdmissionResult, PropCode, SubjectTrack } from '../app/types';
 
 export interface ConditionContext {
   props: Partial<Record<PropCode | string, number>>;
   talentIds: Set<number>;
   eventIds: Set<number>;
   endingIds: Set<number>;
+  subjectTrack?: SubjectTrack | null;
   admission?: AdmissionResult | null;
 }
 
@@ -141,6 +142,7 @@ class Parser {
     if (ident === 'END' && typeof id === 'number') return this.context.endingIds.has(id);
     if (ident === 'ADM') return this.hasAdmissionTier(String(id));
     if (ident === 'SCHOOL') return this.context.admission?.admittedUniversity?.code === String(id);
+    if (ident === 'TRACK') return this.context.subjectTrack === id;
     return this.context.props[ident] === id;
   }
 

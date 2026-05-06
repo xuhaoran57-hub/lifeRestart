@@ -7,9 +7,12 @@ describe('evaluateCondition', () => {
     talentIds: new Set([21010, 21016]),
     eventIds: new Set([31017]),
     endingIds: new Set([41003]),
+    subjectTrack: 'physics' as const,
     admission: {
-      profileId: 'gx-2024-physics',
-      profileName: '广西 2024 首选物理',
+      profileId: 'ah-2025-physics',
+      profileName: '安徽 2025 物理类',
+      subjectTrack: 'physics' as const,
+      subjectTrackName: '物理类',
       finalScore: 612,
       potentialScore: 610,
       variance: 2,
@@ -53,5 +56,10 @@ describe('evaluateCondition', () => {
     expect(evaluateCondition('ADMSCORE>=650', context)).toBe(false);
     expect(evaluateCondition('MARGIN>=20', context)).toBe(true);
     expect(evaluateCondition('SLIDE=1', context)).toBe(false);
+  });
+
+  it('evaluates subject track membership', () => {
+    expect(evaluateCondition('TRACK?[physics]', context)).toBe(true);
+    expect(evaluateCondition('TRACK![history]', context)).toBe(true);
   });
 });
