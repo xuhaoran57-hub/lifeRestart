@@ -2,6 +2,11 @@ import type { AdmissionResult, AgeRound, GameContent, GameEvent, GameState, Weig
 import { evaluateCondition, type ConditionContext } from './condition';
 import { pickWeighted, Random } from './random';
 
+interface ConditionContextOptions {
+  eventScope?: 'all' | 'currentAttempt';
+  candidateEndingId?: number;
+}
+
 export function getEventMap(content: GameContent): Map<number, GameEvent> {
   return new Map(content.events.map(item => [item.id, item]));
 }
@@ -10,11 +15,19 @@ export function createConditionContext(
   state: GameState,
   extraProps: Record<string, number> = {},
   admission: AdmissionResult | null = null,
+  options: ConditionContextOptions = {},
 ): ConditionContext {
+  const eventIds = options.eventScope === 'currentAttempt' ? state.currentAttemptEventIds : state.eventIds;
   return {
-    props: { ...state.props, ...extraProps },
+    props: {
+      ...state.props,
+      ...retakeComparisonProps(state, admission, options.candidateEndingId),
+      ATTEMPT: state.attempt,
+      RETAKE: state.retakeUsed ? 1 : 0,
+      ...extraProps,
+    },
     talentIds: new Set([...state.selectedTalentIds, ...state.triggeredTalentIds]),
-    eventIds: new Set(state.eventIds),
+    eventIds: new Set(eventIds),
     endingIds: new Set(state.endingIds),
     subjectTrack: state.subjectTrack,
     admission,
@@ -69,4 +82,41 @@ function eventPickWeight(ref: WeightedRef, event: GameEvent, state: GameState): 
   }
 
   return Math.max(1, baseWeight * multiplier);
+}
+
+function retakeComparisonProps(
+  state: GameState,
+  admission: AdmissionResult | null,
+  candidateEndingId?: number,
+): Record<string, number> {
+  const previous = state.retakeFrom;
+  const currentTierRank = admission ? admissionTierRank(admission.admissionTier) : -1;
+  const previousTierRank = previous ? admissionTierRank(previous.admissionTier) : -1;
+  const currentSchool = admission?.admittedUniversity?.code;
+  const previousSchool = previous?.admittedUniversityCode;
+  return {
+    ADMITTED: admission?.admitted ? 1 : 0,
+    TIER_RANK: currentTierRank,
+    PREV_SCORE: previous?.finalScore ?? 0,
+    SCORE_DELTA: previous ? (admission?.finalScore ?? state.props.SCR) - previous.finalScore : 0,
+    PREV_TIER_RANK: previousTierRank,
+    TIER_DELTA: previous ? currentTierRank - previousTierRank : 0,
+    PREV_MARGIN: previous?.margin ?? 0,
+    PREV_CAN_REACH_985: previous?.canReach985 ? 1 : 0,
+    PREV_CAN_REACH_211: previous?.canReach211 ? 1 : 0,
+    SAME_SCHOOL: currentSchool && previousSchool && currentSchool === previousSchool ? 1 : 0,
+    SAME_ENDING: previous && candidateEndingId === previous.endingId ? 1 : 0,
+  };
+}
+
+function admissionTierRank(tier: AdmissionResult['admissionTier']): number {
+  return {
+    slide: -1,
+    retake: -1,
+    college: 0,
+    undergraduate: 1,
+    doubleFirstClass: 2,
+    '211': 3,
+    '985': 4,
+  }[tier];
 }

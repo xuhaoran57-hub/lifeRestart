@@ -4881,6 +4881,760 @@
     ]
   },
   {
+    "id": 31801,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "高三第一张周计划贴上墙，你把一轮复习拆成每天能完成的小任务。",
+    "effect": {
+      "SCOREMOD": 12,
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 90,
+    "flag": "一轮拆解",
+    "tags": [
+      "高三",
+      "一轮",
+      "计划"
+    ]
+  },
+  {
+    "id": 31802,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你给自己排了过满的任务表，几天后就开始拖延和补债。",
+    "effect": {
+      "SCOREMOD": -8,
+      "SPR": -1,
+      "RSK": 12,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "flag": "计划过载",
+    "tags": [
+      "高三",
+      "一轮",
+      "风险"
+    ]
+  },
+  {
+    "id": 31803,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "班主任帮你把目标拆成几档，你第一次看清自己该冲哪里、守哪里。",
+    "effect": {
+      "SCOREMOD": 6,
+      "VOL": 10,
+      "RSK": -4
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "目标分档",
+    "tags": [
+      "高三",
+      "定位",
+      "策略"
+    ]
+  },
+  {
+    "id": 31804,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你把错题按知识点重新归类，几个反复失分的洞终于露了出来。",
+    "effect": {
+      "SCOREMOD": 14,
+      "VOL": 6,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 90,
+    "flag": "错题地图",
+    "tags": [
+      "高三",
+      "基础",
+      "错题"
+    ]
+  },
+  {
+    "id": 31805,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "基础小测暴露出很多低级错误，你意识到前面的轻松有一部分是假象。",
+    "effect": {
+      "SCOREMOD": -12,
+      "SPR": -1,
+      "RSK": 10
+    },
+    "grade": 0,
+    "weight": 75,
+    "flag": "基础暴露",
+    "tags": [
+      "高三",
+      "基础",
+      "波动"
+    ]
+  },
+  {
+    "id": 31806,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你和同桌互相抽查易错点，很多模糊记忆被迫变得清楚。",
+    "effect": {
+      "SCOREMOD": 8,
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 0,
+    "weight": 80,
+    "flag": "互查易错",
+    "tags": [
+      "高三",
+      "基础",
+      "同伴"
+    ]
+  },
+  {
+    "id": 31807,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "一模前的限时训练很折磨人，但你开始能在规定时间里做完关键题。",
+    "effect": {
+      "SCOREMOD": 16,
+      "VOL": 6,
+      "RSK": 4
+    },
+    "grade": 1,
+    "weight": 85,
+    "flag": "限时训练",
+    "tags": [
+      "高三",
+      "一模",
+      "训练"
+    ]
+  },
+  {
+    "id": 31808,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你连续熬夜刷卷，第二天连会做的题都看得发飘。",
+    "effect": {
+      "SCOREMOD": -10,
+      "SPR": -2,
+      "STR": -1,
+      "RSK": 16
+    },
+    "grade": 0,
+    "weight": 70,
+    "flag": "熬夜透支",
+    "tags": [
+      "高三",
+      "一模",
+      "风险"
+    ]
+  },
+  {
+    "id": 31809,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "一模前一周，你把作息稳住了，进考场时脑子比想象中清醒。",
+    "effect": {
+      "SCOREMOD": 6,
+      "SPR": 2,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "作息稳住",
+    "tags": [
+      "高三",
+      "一模",
+      "心态"
+    ]
+  },
+  {
+    "id": 31810,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "一模成绩高过预期，你确认自己不是只能守住原来的位置。",
+    "effect": {
+      "SCOREMOD": 18,
+      "SPR": 2,
+      "VOL": 8
+    },
+    "grade": 2,
+    "weight": 80,
+    "flag": "一模超常",
+    "tags": [
+      "高三",
+      "一模",
+      "突破"
+    ]
+  },
+  {
+    "id": 31811,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "一模排名掉得很明显，你不得不承认最近的复习方式需要重做。",
+    "effect": {
+      "SCOREMOD": -18,
+      "SPR": -2,
+      "RSK": 14
+    },
+    "grade": 0,
+    "weight": 75,
+    "flag": "一模失利",
+    "tags": [
+      "高三",
+      "一模",
+      "挫折"
+    ]
+  },
+  {
+    "id": 31812,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你没有只盯着一模分数，而是把每科失分原因列成复盘清单。",
+    "effect": {
+      "SCOREMOD": 14,
+      "VOL": 10,
+      "RSK": -4
+    },
+    "grade": 1,
+    "weight": 90,
+    "flag": "一模复盘",
+    "tags": [
+      "高三",
+      "一模",
+      "复盘"
+    ]
+  },
+  {
+    "id": 31813,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "二轮专题课把零散知识串了起来，你终于能看出题目背后的套路。",
+    "effect": {
+      "SCOREMOD": 18,
+      "VOL": 6,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 85,
+    "flag": "专题突破",
+    "tags": [
+      "高三",
+      "二轮",
+      "专题"
+    ]
+  },
+  {
+    "id": 31814,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "偏科问题在套卷里被放大，你发现单靠强科已经很难补回来。",
+    "effect": {
+      "SCOREMOD": -14,
+      "SPR": -1,
+      "RSK": 10
+    },
+    "grade": 0,
+    "weight": 75,
+    "flag": "偏科拖拽",
+    "tags": [
+      "高三",
+      "二轮",
+      "短板"
+    ]
+  },
+  {
+    "id": 31815,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你开始练习放弃超时题，把能拿到的分先稳稳收下。",
+    "effect": {
+      "SCOREMOD": 10,
+      "VOL": 12,
+      "RSK": -5
+    },
+    "grade": 1,
+    "weight": 85,
+    "flag": "取舍训练",
+    "tags": [
+      "高三",
+      "二轮",
+      "策略"
+    ]
+  },
+  {
+    "id": 31816,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "二模成绩回暖，前一段压着你的怀疑终于松了一点。",
+    "effect": {
+      "SCOREMOD": 16,
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "二模回暖",
+    "tags": [
+      "高三",
+      "二模",
+      "回升"
+    ]
+  },
+  {
+    "id": 31817,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "二模几科一起失手，你第一次认真想过是不是目标定高了。",
+    "effect": {
+      "SCOREMOD": -20,
+      "SPR": -2,
+      "RSK": 18
+    },
+    "grade": 0,
+    "weight": 70,
+    "flag": "二模崩盘",
+    "tags": [
+      "高三",
+      "二模",
+      "挫折"
+    ]
+  },
+  {
+    "id": 31818,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "家里人没有继续追问排名，而是陪你把接下来两周重新排了一遍。",
+    "effect": {
+      "SCOREMOD": 4,
+      "SPR": 2,
+      "RSK": -10
+    },
+    "grade": 1,
+    "weight": 75,
+    "flag": "压力降温",
+    "tags": [
+      "高三",
+      "二模",
+      "家庭"
+    ]
+  },
+  {
+    "id": 31819,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "百日誓师之后，你把口号收进抽屉，真正开始按天复盘执行情况。",
+    "effect": {
+      "SCOREMOD": 18,
+      "VOL": 12,
+      "RSK": 2
+    },
+    "grade": 1,
+    "weight": 85,
+    "flag": "百日执行",
+    "tags": [
+      "高三",
+      "百日",
+      "冲刺"
+    ]
+  },
+  {
+    "id": 31820,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "长时间高强度复习让身体报警，你被迫停下来补觉和调整。",
+    "effect": {
+      "SCOREMOD": -12,
+      "STR": -2,
+      "SPR": -1,
+      "RSK": 16
+    },
+    "grade": 0,
+    "weight": 70,
+    "flag": "身体报警",
+    "tags": [
+      "高三",
+      "百日",
+      "风险"
+    ]
+  },
+  {
+    "id": 31821,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "老师用一节串讲课把几个高频题型讲透，你的下笔速度明显快了。",
+    "effect": {
+      "SCOREMOD": 14,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "串讲提速",
+    "tags": [
+      "高三",
+      "百日",
+      "提速"
+    ]
+  },
+  {
+    "id": 31822,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "三模让你看清大致位置，志愿目标也从模糊愿望变成了几档清单。",
+    "effect": {
+      "SCOREMOD": 8,
+      "VOL": 14,
+      "RSK": -4
+    },
+    "grade": 1,
+    "weight": 85,
+    "flag": "三模定位",
+    "tags": [
+      "高三",
+      "三模",
+      "定位"
+    ]
+  },
+  {
+    "id": 31823,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你盲目加练难题，基础题的手感反而被挤掉了。",
+    "effect": {
+      "SCOREMOD": -8,
+      "SPR": -1,
+      "RSK": 14
+    },
+    "grade": 0,
+    "weight": 70,
+    "flag": "盲目冲难",
+    "tags": [
+      "高三",
+      "三模",
+      "风险"
+    ]
+  },
+  {
+    "id": 31824,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你把最后阶段只留给高频失分点，复习范围缩小后反而更有效。",
+    "effect": {
+      "SCOREMOD": 16,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "查漏补缺",
+    "tags": [
+      "高三",
+      "三模",
+      "补缺"
+    ]
+  },
+  {
+    "id": 31825,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "考前你主动降低题量，把状态留给真正上场的那几天。",
+    "effect": {
+      "SCOREMOD": 6,
+      "SPR": 2,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "减量稳态",
+    "tags": [
+      "高三",
+      "考前",
+      "心态"
+    ]
+  },
+  {
+    "id": 31826,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "越临近考试，你越忍不住反复翻旧题，心里越翻越乱。",
+    "effect": {
+      "SCOREMOD": -10,
+      "SPR": -2,
+      "RSK": 18
+    },
+    "grade": 0,
+    "weight": 70,
+    "flag": "考前焦虑",
+    "tags": [
+      "高三",
+      "考前",
+      "焦虑"
+    ]
+  },
+  {
+    "id": 31827,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你每天保留一小段熟题训练，手感没有因为减量而断掉。",
+    "effect": {
+      "SCOREMOD": 12,
+      "VOL": 6,
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 80,
+    "flag": "手感保持",
+    "tags": [
+      "高三",
+      "考前",
+      "训练"
+    ]
+  },
+  {
+    "id": 31828,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "最后一套卷你没有追求满分，而是确认答题顺序和时间分配。",
+    "effect": {
+      "SCOREMOD": 10,
+      "VOL": 8,
+      "RSK": -2
+    },
+    "grade": 1,
+    "weight": 85,
+    "flag": "临门校准",
+    "tags": [
+      "高三",
+      "临门",
+      "策略"
+    ]
+  },
+  {
+    "id": 31829,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "考前突然发烧打乱了节奏，你只能一边恢复一边减少复习量。",
+    "effect": {
+      "SCOREMOD": -16,
+      "STR": -2,
+      "SPR": -1,
+      "RSK": 18
+    },
+    "grade": 0,
+    "weight": 60,
+    "flag": "考前生病",
+    "tags": [
+      "高三",
+      "临门",
+      "风险"
+    ]
+  },
+  {
+    "id": 31830,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "准考证和文具反复检查了三遍，最后一天总算没有再出新的岔子。",
+    "effect": {
+      "SCOREMOD": 6,
+      "SPR": 1,
+      "RSK": -6
+    },
+    "grade": 0,
+    "weight": 75,
+    "flag": "物品确认",
+    "tags": [
+      "高三",
+      "临门",
+      "准备"
+    ]
+  },
+  {
+    "id": 31831,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "复读第一周，你把首考卷和模拟卷摊开，先找真正反复失分的几类题。",
+    "effect": {
+      "SCOREMOD": 12,
+      "VOL": 10,
+      "RSK": -4
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 90,
+    "flag": "复读复盘",
+    "tags": [
+      "高三",
+      "复读",
+      "复盘"
+    ]
+  },
+  {
+    "id": 31832,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "过去做烂的题这次没有直接跳过，你按知识点重新做了一遍，手感慢慢回来。",
+    "effect": {
+      "SCOREMOD": 16,
+      "INT": 1,
+      "VOL": 4
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 85,
+    "flag": "旧题重做",
+    "tags": [
+      "高三",
+      "复读",
+      "基础"
+    ]
+  },
+  {
+    "id": 31833,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "你开始按考试时间整套训练，放弃几道缠人的题后，整张卷子的节奏稳了很多。",
+    "effect": {
+      "SCOREMOD": 12,
+      "STR": 1,
+      "VOL": 6,
+      "RSK": -5
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 85,
+    "flag": "节奏校准",
+    "tags": [
+      "高三",
+      "复读",
+      "策略"
+    ]
+  },
+  {
+    "id": 31834,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "同学已经进了大学，你偶尔会被消息刺一下，晚自习很难马上静下来。",
+    "effect": {
+      "SCOREMOD": -10,
+      "SPR": -2,
+      "RSK": 14
+    },
+    "include": "ATTEMPT=2",
+    "grade": 0,
+    "weight": 55,
+    "flag": "复读波动",
+    "tags": [
+      "高三",
+      "复读",
+      "风险"
+    ]
+  },
+  {
+    "id": 31835,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "班主任让你重新估分定位，冲稳保的边界比去年清楚得多。",
+    "effect": {
+      "SCOREMOD": 8,
+      "VOL": 18,
+      "RSK": -8
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 85,
+    "flag": "复读定位",
+    "tags": [
+      "高三",
+      "复读",
+      "定位"
+    ]
+  },
+  {
+    "id": 31836,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "复读的强度比想象中更磨人，你有一阵靠硬撑完成计划，身体先发出了警告。",
+    "effect": {
+      "SCOREMOD": -8,
+      "STR": -1,
+      "SPR": -1,
+      "RSK": 12
+    },
+    "include": "ATTEMPT=2",
+    "grade": 0,
+    "weight": 55,
+    "flag": "复读透支",
+    "tags": [
+      "高三",
+      "复读",
+      "风险"
+    ]
+  },
+  {
+    "id": 31837,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "第二次走到考前，你知道哪些焦虑不用理会，哪些检查必须提前完成。",
+    "effect": {
+      "SCOREMOD": 10,
+      "SPR": 2,
+      "RSK": -6
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 80,
+    "flag": "二战稳定",
+    "tags": [
+      "高三",
+      "复读",
+      "心态"
+    ]
+  },
+  {
+    "id": 31838,
+    "stage": "复读期",
+    "phase": "senior3",
+    "text": "你把去年的志愿表和实际录取结果对照了一遍，不再只盯着学校名字做判断。",
+    "effect": {
+      "SCOREMOD": 4,
+      "VOL": 18,
+      "RSK": -8
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 80,
+    "flag": "复读志愿稳健",
+    "tags": [
+      "高三",
+      "复读",
+      "志愿"
+    ]
+  },
+  {
+    "id": 31839,
+    "stage": "复读期",
+    "phase": "final",
+    "text": "出分后，你先按位次和专业组筛掉不稳定选项，再决定少量冲刺目标。",
+    "effect": {
+      "SCOREMOD": 2,
+      "VOL": 16,
+      "RSK": -8
+    },
+    "include": "ATTEMPT=2",
+    "grade": 1,
+    "weight": 80,
+    "flag": "复读志愿稳健",
+    "tags": [
+      "复读",
+      "志愿",
+      "稳健"
+    ]
+  },
+  {
     "id": 32001,
     "stage": "高一期",
     "phase": "senior1",

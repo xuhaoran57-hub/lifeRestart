@@ -45,8 +45,9 @@ export function createApp(root: HTMLElement, game: GameApp): void {
     if (!action) return;
 
     try {
+      const messageBeforeAction = state.message;
       handleAction(action, target, state, game);
-      state.message = null;
+      if (state.message === messageBeforeAction) state.message = null;
     } catch (error) {
       state.message = error instanceof Error ? error.message : '操作失败';
     }
@@ -60,14 +61,16 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
   if (action === 'start') {
     const inheritedTalentId = game.save.inheritedTalentId;
     state.candidates = drawTalentCandidates(game.content, 10, inheritedTalentId, Date.now(), game.save.achievedIds);
-    state.inheritedCandidateId = state.candidates.some(item => item.id === inheritedTalentId) ? inheritedTalentId : null;
-    state.selectedTalentIds = [];
+    const inheritedCandidateId = state.candidates.some(item => item.id === inheritedTalentId) ? inheritedTalentId : null;
+    state.inheritedCandidateId = inheritedCandidateId;
+    state.selectedTalentIds = inheritedCandidateId !== null ? [inheritedCandidateId] : [];
     state.screen = 'talents';
-    if (inheritedTalentId !== null) game.persist(setInheritedTalent(game.save, null));
+    if (inheritedTalentId !== null && inheritedCandidateId === null) game.persist(setInheritedTalent(game.save, null));
     return;
   }
 
   if (action === 'view-achievements') {
+    commitFinalResult(state, game);
     if (state.screen !== 'achievements') state.previousScreen = state.screen;
     state.screen = 'achievements';
     return;
@@ -101,6 +104,7 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
   if (action === 'begin-run') {
     const engine = new LifeEngine(game.content);
     const gameState = engine.start(state.selectedTalentIds, state.allocation);
+    if (game.save.inheritedTalentId !== null) game.persist(setInheritedTalent(game.save, null));
     state.engine = engine;
     state.gameState = gameState;
     state.result = null;
@@ -120,17 +124,30 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
   }
 
   if (action === 'inherit') {
+    commitFinalResult(state, game);
     const id = Number(target.closest<HTMLElement>('[data-id]')?.dataset.id);
     game.persist(setInheritedTalent(game.save, id));
     return;
   }
 
   if (action === 'clear-inherit') {
+    commitFinalResult(state, game);
     game.persist(setInheritedTalent(game.save, null));
     return;
   }
 
+  if (action === 'retake') {
+    if (!state.engine) throw new Error('本局还未开始');
+    if (state.persistedResult) throw new Error('本局结局已经确认，不能再复读');
+    state.gameState = state.engine.retake();
+    state.result = null;
+    state.screen = 'trajectory';
+    state.message = '你选择复读一年，保留当前属性，但心态下降、风险上升。';
+    return;
+  }
+
   if (action === 'restart') {
+    commitFinalResult(state, game);
     state.screen = 'home';
     state.previousScreen = null;
     state.engine = null;
@@ -172,11 +189,14 @@ function runOneRound(state: UiState, game: GameApp): void {
     const result: FinalResult = { state: step.state, ending: step.ending, admission: step.admission };
     state.result = result;
     state.screen = 'summary';
-    if (!state.persistedResult) {
-      game.persist(recordFinalResult(game.save, result, game.content));
-      state.persistedResult = true;
-    }
+    if (result.state.retakeUsed) commitFinalResult(state, game);
   }
+}
+
+function commitFinalResult(state: UiState, game: GameApp): void {
+  if (!state.result || state.persistedResult) return;
+  game.persist(recordFinalResult(game.save, state.result, game.content));
+  state.persistedResult = true;
 }
 
 function renderScreen(state: UiState, game: GameApp): string {
@@ -185,7 +205,7 @@ function renderScreen(state: UiState, game: GameApp): string {
     home: renderHome(game),
     talents: renderTalents(state, game),
     properties: renderProperties(state),
-    trajectory: renderTrajectory(state),
+    trajectory: renderTrajectory(state, game),
     summary: renderSummary(state, game),
     achievements: renderAchievements(game),
   }[state.screen];
@@ -216,7 +236,7 @@ function renderHome(game: GameApp): string {
     <section class="panel home-panel">
       <div>
         <h2>新一轮人生志愿表</h2>
-        <p class="muted">从 3 岁到 18 岁，每年 4 回合。</p>
+        <p class="muted">从 3 岁到高考收官季推进，高三扩展为 10 个冲刺回合。</p>
       </div>
       ${inherited ? `<p class="pill">继承天赋：${escapeHtml(inherited.name)}</p>` : ''}
       <div class="home-actions">
@@ -335,16 +355,18 @@ function renderProperties(state: UiState): string {
   `;
 }
 
-function renderTrajectory(state: UiState): string {
+function renderTrajectory(state: UiState, game: GameApp): string {
   const gameState = state.gameState;
   if (!gameState) return '';
   const latest = gameState.logs.at(-1);
+  const retakeRounds = gameState.retakeUsed ? game.content.ages.filter(round => round.age >= 17).length : 0;
+  const totalRounds = game.content.ages.length + retakeRounds;
   return `
     <section class="stack">
       <div class="panel">
         <div class="section-title">
           <h2>${renderRoundLabel(gameState)}</h2>
-          <p>${gameState.stepIndex}/64</p>
+          <p>${gameState.logs.length}/${totalRounds}</p>
         </div>
         ${renderStats(gameState)}
         <div class="actions">
@@ -363,6 +385,7 @@ function renderTrajectory(state: UiState): string {
 function renderSummary(state: UiState, game: GameApp): string {
   if (!state.result) return '';
   const { ending } = state.result;
+  const canRetake = !state.result.state.retakeUsed && !state.persistedResult;
   const talents = state.result.state.selectedTalentIds
     .map(id => game.content.talents.find(item => item.id === id))
     .filter((item): item is Talent => Boolean(item));
@@ -375,6 +398,7 @@ function renderSummary(state: UiState, game: GameApp): string {
         <p>${escapeHtml(ending.description)}</p>
         ${renderStats(state.result.state)}
       </div>
+      ${renderRetakeFrom(state.result.state)}
       ${renderAdmission(state.result.admission)}
       ${renderSummaryLogs(state.result.state)}
       <div class="panel">
@@ -390,8 +414,27 @@ function renderSummary(state: UiState, game: GameApp): string {
           `).join('')}
         </div>
       </div>
+      ${canRetake ? '<button class="wide" data-action="retake">复读一年</button>' : ''}
       <button class="primary wide" data-action="restart">再来一局</button>
     </section>
+  `;
+}
+
+function renderRetakeFrom(gameState: GameState): string {
+  if (!gameState.retakeFrom) return '';
+  const admittedUniversityName = gameState.retakeFrom.admittedUniversityName ?? '未录取到样本院校';
+  return `
+    <div class="panel retake-panel">
+      <div class="section-title">
+        <h2>首考结果</h2>
+        <span class="pill">${escapeHtml(gameState.retakeFrom.endingName)}</span>
+      </div>
+      <div class="admission-facts">
+        <span><em>首考分数</em><strong>${gameState.retakeFrom.finalScore}</strong></span>
+        <span><em>首考院校</em><strong>${escapeHtml(admittedUniversityName)}</strong></span>
+        <span><em>首考层级</em><strong>${escapeHtml(admissionTierName(gameState.retakeFrom.admissionTier))}</strong></span>
+      </div>
+    </div>
   `;
 }
 
@@ -472,7 +515,7 @@ function renderLogItem(log: GameState['logs'][number]): string {
     : '';
   return `
     <article class="log-item">
-      <strong>${log.age} 岁 · 第 ${log.round} 回合 · ${escapeHtml(log.roundName)}</strong>
+      <strong>${escapeHtml(ageStageName(log.age))} · 第 ${log.round} 回合 · ${escapeHtml(log.roundName)}</strong>
       <p>${escapeHtml(log.event.text)}</p>
       ${talents}
       ${branch}
@@ -497,7 +540,26 @@ function achievementGradeName(grade: number): string {
 function renderRoundLabel(state: GameState): string {
   const current = state.currentRound;
   if (!current) return '3 岁 · 第 1 回合';
-  return `${current.age} 岁 · 第 ${current.round} 回合 · ${current.roundName}`;
+  return `${ageStageName(current.age)} · 第 ${current.round} 回合 · ${current.roundName}`;
+}
+
+function ageStageName(age: number): string {
+  const gradeNames: Record<number, string> = {
+    6: '一年级',
+    7: '二年级',
+    8: '三年级',
+    9: '四年级',
+    10: '五年级',
+    11: '六年级',
+    12: '七年级',
+    13: '八年级',
+    14: '九年级',
+    15: '高一',
+    16: '高二',
+    17: '高三',
+    18: '高考收官季',
+  };
+  return gradeNames[age] ?? `${age} 岁`;
 }
 
 function remainingPoints(allocation: Allocation): number {

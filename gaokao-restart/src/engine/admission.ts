@@ -87,15 +87,15 @@ export function resolveAdmission(
 
   const reachable = lines.filter(item => item.margin >= 0);
   const reachable985 = reachable.filter(item => item.university.tags.includes('985'));
-  const reachable211 = reachable.filter(item => item.university.tags.includes('211'));
+  const reachable211Plus = reachable.filter(isAtLeast211Candidate);
   const bestReachable985 = pickBestReachable(reachable985)?.line;
-  const bestReachable211 = pickBestReachable(reachable211)?.line;
+  const bestReachable211 = pickBestReachable(reachable211Plus)?.line;
   const lowestReachable985 = pickLowestLine(reachable985);
-  const lowestReachable211 = pickLowestLine(reachable211);
+  const lowestReachable211 = pickLowestLine(reachable211Plus);
   const lowestReachable985Margin = lowestReachable985 ? exam.finalScore - lowestReachable985.line.minScore : undefined;
   const strategyScore = state.props.HVOL - state.props.RSK * 0.35 + routeBonus(content, state);
   const slide = shouldSlide(content, state, strategyScore, reachable, random);
-  const picked = slide ? null : pickAdmittedLine(reachable, strategyScore, random);
+  const picked = slide ? null : pickAdmittedLine(reachable, reachable985, reachable211Plus, strategyScore, state.props.RSK, exam.finalScore, random);
   const strategyLabel = labelStrategy(strategyScore, slide);
   const highScoreLowAdmission = isHighScoreLowAdmission(exam.finalScore, lowestReachable985, lowestReachable211, picked, slide);
 
@@ -110,7 +110,7 @@ export function resolveAdmission(
       potentialScore: exam.potentialScore,
       variance: exam.variance,
       canReach985: reachable985.length > 0,
-      canReach211: reachable211.length > 0,
+      canReach211: reachable211Plus.length > 0,
       ...(bestReachable985 ? { bestReachable985 } : {}),
       ...(bestReachable211 ? { bestReachable211 } : {}),
       ...(lowestReachable985Margin !== undefined ? { lowestReachable985Margin } : {}),
@@ -136,7 +136,7 @@ export function resolveAdmission(
     potentialScore: exam.potentialScore,
     variance: exam.variance,
     canReach985: reachable985.length > 0,
-    canReach211: reachable211.length > 0,
+    canReach211: reachable211Plus.length > 0,
     ...(bestReachable985 ? { bestReachable985 } : {}),
     ...(bestReachable211 ? { bestReachable211 } : {}),
     ...(lowestReachable985Margin !== undefined ? { lowestReachable985Margin } : {}),
@@ -148,7 +148,7 @@ export function resolveAdmission(
     strategyLabel,
     strategyScore,
     highScoreLowAdmission,
-    reason: buildAdmissionReason(picked, strategyLabel, reachable985.length > 0, reachable211.length > 0),
+    reason: buildAdmissionReason(picked, strategyLabel, reachable985.length > 0, reachable211Plus.length > 0),
   };
 }
 
@@ -168,15 +168,43 @@ function pickLowestLine(candidates: LineCandidate[]): LineCandidate | null {
   return [...candidates].sort((a, b) => a.line.minScore - b.line.minScore || (a.line.minRank ?? Number.MAX_SAFE_INTEGER) - (b.line.minRank ?? Number.MAX_SAFE_INTEGER))[0] ?? null;
 }
 
-function pickAdmittedLine(reachable: LineCandidate[], strategyScore: number, random: Random): LineCandidate | null {
+function pickAdmittedLine(
+  reachable: LineCandidate[],
+  reachable985: LineCandidate[],
+  reachable211Plus: LineCandidate[],
+  strategyScore: number,
+  risk: number,
+  finalScore: number,
+  random: Random,
+): LineCandidate | null {
   if (reachable.length === 0) return null;
+  const lowestReachable985 = pickLowestLine(reachable985);
+  const lowestReachable211 = pickLowestLine(reachable211Plus);
 
-  const sorted = [...reachable].sort((a, b) =>
+  if (
+    lowestReachable985
+    && random.next() < commit985Chance(finalScore - lowestReachable985.line.minScore, strategyScore, risk)
+  ) {
+    return pickFromCandidatePool(reachable985, strategyScore, finalScore, random);
+  }
+
+  if (
+    lowestReachable211
+    && random.next() < commit211Chance(finalScore - lowestReachable211.line.minScore, strategyScore, risk)
+  ) {
+    return pickFromCandidatePool(reachable211Plus, strategyScore, finalScore, random);
+  }
+
+  return pickFromCandidatePool(reachable, strategyScore, finalScore, random);
+}
+
+function pickFromCandidatePool(candidates: LineCandidate[], strategyScore: number, finalScore: number, random: Random): LineCandidate | null {
+  if (candidates.length === 0) return null;
+  const sorted = [...candidates].sort((a, b) =>
     b.line.minScore - a.line.minScore || linePrestigeScore(b) - linePrestigeScore(a),
   );
   const denominator = Math.max(1, sorted.length - 1);
   const ranked = sorted.map((item, index) => ({ ...item, rankPercentile: index / denominator }));
-  const finalScore = sorted[0].line.minScore + sorted[0].margin;
   const targetRank = targetAdmissionRank(strategyScore, finalScore);
   const highLineCandidates = ranked.filter(item => item.line.minScore >= 650);
   if (highLineCandidates.length > 0 && random.next() < highLineCommitChance(strategyScore)) {
@@ -188,6 +216,26 @@ function pickAdmittedLine(reachable: LineCandidate[], strategyScore: number, ran
   }
 
   return pickWeighted(ranked, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
+}
+
+function commit985Chance(lowestMargin: number, strategyScore: number, risk: number): number {
+  const base = lowestMargin >= 20 ? 0.76 : lowestMargin >= 8 ? 0.66 : 0.54;
+  return clamp(base + commitChanceAdjustment(strategyScore, risk), 0.38, 0.9);
+}
+
+function commit211Chance(lowestMargin: number, strategyScore: number, risk: number): number {
+  const base = lowestMargin >= 25 ? 0.82 : lowestMargin >= 10 ? 0.74 : 0.64;
+  return clamp(base + commitChanceAdjustment(strategyScore, risk), 0.46, 0.92);
+}
+
+function commitChanceAdjustment(strategyScore: number, risk: number): number {
+  let adjustment = 0;
+  if (strategyScore >= 65) adjustment += 0.06;
+  else if (strategyScore >= 35) adjustment += 0.02;
+  else if (strategyScore < 20) adjustment -= 0.1;
+  if (risk >= 80) adjustment -= 0.12;
+  else if (risk >= 70) adjustment -= 0.06;
+  return adjustment;
 }
 
 function highLineCommitChance(strategyScore: number): number {
@@ -287,6 +335,7 @@ function shouldSlide(
   if (state.props.RSK >= 75) chance += 0.05;
   chance += route.risk * 0.045;
   chance -= route.steady * 0.035;
+  if (state.retakeUsed) chance -= 0.025;
   chance = clamp(chance, 0, 0.45);
   return random.next() < chance;
 }
@@ -311,6 +360,10 @@ function universityAdmissionTier(university: University): AdmissionTier {
   return 'undergraduate';
 }
 
+function isAtLeast211Candidate(candidate: LineCandidate): boolean {
+  return ['985', '211'].includes(universityAdmissionTier(candidate.university));
+}
+
 function routeBonus(content: GameContent, state: GameState): number {
   const talentBonus = state.selectedTalentIds
     .map(id => content.talents.find(item => item.id === id))
@@ -320,15 +373,16 @@ function routeBonus(content: GameContent, state: GameState): number {
       if (talent?.category === 'route') return sum + 4;
       return sum;
     }, 0);
-  const eventBonus = state.eventIds.some(id => [31027, 31708, 31720, 31732].includes(id)) ? 8 : 0;
-  return Math.min(18, talentBonus + eventBonus);
+  const eventBonus = state.eventIds.some(id => [31027, 31708, 31720, 31732, 31838, 31839].includes(id)) ? 8 : 0;
+  const retakeBonus = state.retakeUsed ? 6 : 0;
+  return Math.min(22, talentBonus + eventBonus + retakeBonus);
 }
 
 function routeSignal(content: GameContent, state: GameState): { risk: number; steady: number } {
   const events = new Map(content.events.map(item => [item.id, item]));
   const talents = new Map(content.talents.map(item => [item.id, item]));
   const riskFlags = new Set(['志愿翻车', '专业误读', '提交惊险']);
-  const steadyFlags = new Set(['志愿稳健', '章程避坑', '三角比较']);
+  const steadyFlags = new Set(['志愿稳健', '章程避坑', '三角比较', '复读志愿稳健', '复读定位']);
   const riskTalentNames = new Set(['名校滤镜', '冲校上头']);
   const steadyTalentNames = new Set(['风险分层']);
   let risk = 0;

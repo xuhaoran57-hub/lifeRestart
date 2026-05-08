@@ -84,7 +84,7 @@ export interface WeightedRef {
 export interface AgeRound {
   step: number;
   age: number;
-  round: 1 | 2 | 3 | 4;
+  round: number;
   roundName: string;
   phase: PhaseCode;
   phaseName: string;
@@ -225,18 +225,35 @@ export interface RunLog {
   props: Props;
 }
 
+export interface RetakeSnapshot {
+  endingId: number;
+  endingName: string;
+  finalScore: number;
+  admissionTier: AdmissionTier;
+  admittedUniversityCode?: string;
+  admittedUniversityName?: string;
+  margin?: number;
+  canReach985: boolean;
+  canReach211: boolean;
+  props: Props;
+}
+
 export interface GameState {
   props: Props;
   subjectTrack: SubjectTrack | null;
   selectedTalentIds: number[];
   triggeredTalentIds: number[];
   eventIds: number[];
+  currentAttemptEventIds: number[];
   endingIds: number[];
   logs: RunLog[];
   stepIndex: number;
   currentRound: AgeRound | null;
   finalEnding: Ending | null;
   admissionResult: AdmissionResult | null;
+  retakeUsed: boolean;
+  retakeFrom: RetakeSnapshot | null;
+  attempt: 1 | 2;
   isFinished: boolean;
 }
 

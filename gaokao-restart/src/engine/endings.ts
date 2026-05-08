@@ -3,10 +3,17 @@ import { evaluateCondition } from './condition';
 import { createConditionContext } from './events';
 
 export function pickEnding(content: GameContent, state: GameState, admission: AdmissionResult | null = null): Ending {
-  const context = createConditionContext(state, {}, admission);
-  const ending = [...content.endings]
+  const eventScope = state.retakeUsed ? 'currentAttempt' : 'all';
+  const matched = [...content.endings]
     .sort((a, b) => effectivePriority(b) - effectivePriority(a))
-    .find(item => evaluateCondition(item.condition, context));
+    .filter(item => evaluateCondition(
+      item.condition,
+      createConditionContext(state, {}, admission, { eventScope, candidateEndingId: item.id }),
+    ));
+
+  const ending = state.retakeFrom && matched.length > 1 && matched[0]?.id === state.retakeFrom.endingId
+    ? matched[1]
+    : matched[0];
 
   if (ending) return ending;
 

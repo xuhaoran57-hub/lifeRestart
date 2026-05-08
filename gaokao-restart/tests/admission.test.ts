@@ -24,6 +24,26 @@ describe('resolveAdmission', () => {
     expect(result.admitted).toBe(true);
   });
 
+  it('usually commits to 985 when a strong 985 line is reachable', () => {
+    let admitted985 = 0;
+    for (let seed = 1; seed <= 60; seed += 1) {
+      const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 80, RSK: 15 }), exam(680), new Random(seed));
+      if (result.admissionTier === '985') admitted985 += 1;
+    }
+
+    expect(admitted985).toBeGreaterThanOrEqual(54);
+  });
+
+  it('usually commits to 211 or above when a 211 line is reachable', () => {
+    let admitted211Plus = 0;
+    for (let seed = 1; seed <= 60; seed += 1) {
+      const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 70, RSK: 20 }), exam(600), new Random(seed));
+      if (['985', '211'].includes(result.admissionTier)) admitted211Plus += 1;
+    }
+
+    expect(admitted211Plus).toBeGreaterThanOrEqual(50);
+  });
+
   it('uses history admission lines for history track', () => {
     const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 60, RSK: 25 }, 'history'), exam(590), new Random(2));
 
@@ -49,6 +69,13 @@ describe('resolveAdmission', () => {
     expect(result.admissionTier).toBe('slide');
   });
 
+  it('gives retake runs a small volunteer strategy correction', () => {
+    const first = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 45, RSK: 50 }), exam(590), new Random(4));
+    const retake = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 45, RSK: 50 }, 'physics', true), exam(590), new Random(4));
+
+    expect(retake.strategyScore ?? 0).toBeGreaterThan(first.strategyScore ?? 0);
+  });
+
   it('is reproducible with the same seed', () => {
     const state = stateWithScoreProps({ HVOL: 70, RSK: 20 });
     const first = resolveAdmission(zhCnContent, state, exam(610), new Random(2026));
@@ -68,19 +95,23 @@ function exam(finalScore: number): ExamScoreResult {
   };
 }
 
-function stateWithScoreProps(values: Partial<GameState['props']>, subjectTrack: SubjectTrack = 'physics'): GameState {
+function stateWithScoreProps(values: Partial<GameState['props']>, subjectTrack: SubjectTrack = 'physics', retakeUsed = false): GameState {
   return {
     props: { ...createInitialProps(), ...values },
     subjectTrack,
     selectedTalentIds: [],
     triggeredTalentIds: [],
     eventIds: [],
+    currentAttemptEventIds: [],
     endingIds: [],
     logs: [],
-    stepIndex: 64,
+    stepIndex: 70,
     currentRound: null,
     finalEnding: null,
     admissionResult: null,
+    retakeUsed,
+    retakeFrom: null,
+    attempt: 1,
     isFinished: false,
   };
 }

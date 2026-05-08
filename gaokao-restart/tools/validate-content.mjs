@@ -169,8 +169,9 @@ for (const [id, expectation] of subjectTrackEvents) {
 
 for (let age = 3; age <= 18; age += 1) {
   const rows = ages.filter(item => item.age === age);
-  if (rows.length !== 4) fail(`age ${age} should have 4 rounds, got ${rows.length}`);
-  for (let round = 1; round <= 4; round += 1) {
+  const expectedRounds = age === 17 ? 10 : 4;
+  if (rows.length !== expectedRounds) fail(`age ${age} should have ${expectedRounds} rounds, got ${rows.length}`);
+  for (let round = 1; round <= expectedRounds; round += 1) {
     if (!rows.some(item => item.round === round)) fail(`age ${age} missing round ${round}`);
   }
 }
@@ -209,8 +210,8 @@ for (const age of ages) {
     if (age.round === 4 && !hasTaggedEvent.score) fail('age 18 round 4 should contain score events');
   }
 }
-if (steps.size !== 64) fail(`expected 64 unique steps, got ${steps.size}`);
-for (let step = 1; step <= 64; step += 1) {
+if (steps.size !== 70) fail(`expected 70 unique steps, got ${steps.size}`);
+for (let step = 1; step <= 70; step += 1) {
   if (!steps.has(step)) fail(`missing step ${step}`);
 }
 

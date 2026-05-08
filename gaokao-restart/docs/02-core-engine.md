@@ -58,7 +58,7 @@ interface WeightedRef {
 interface AgeRound {
   step: number
   age: number
-  round: 1 | 2 | 3 | 4
+  round: number
   roundName: string
   phase: PhaseCode
   phaseName: string
@@ -89,11 +89,12 @@ interface AgeRound {
 class LifeEngine {
   start(selectedTalentIds: number[], allocation: Allocation): GameState
   next(): StepResult
+  retake(): GameState
   runToEnd(): FinalResult
 }
 ```
 
-年龄表按 3 到 18 岁、每年 4 回合组织，共 64 行。`step` 从 1 到 64 递增，UI 可显示为 `年龄 + 第几回合 + roundName`。
+年龄表按 3 到 18 岁推进，其中 17 岁高三扩展为 10 回合，其余年龄仍为 4 回合，共 70 行。`step` 从 1 到 70 递增，UI 可显示为 `年龄 + 第几回合 + roundName`。
 
 每回合流程：
 
@@ -101,9 +102,18 @@ class LifeEngine {
 2. 如果是该年龄第 1 回合，触发当前年龄天赋。
 3. 根据当前回合事件池筛选可触发事件。
 4. 加权随机一个事件。
-5. 结算事件和分支。普通事件效果按 64 回合长期成长缩放，天赋效果保持完整。
+5. 结算事件和分支。普通事件效果按长期成长缩放，17 岁高三事件使用更高的 `SCOREMOD/VOL/SPR/RSK` 权重，天赋效果保持完整。
 6. 刷新 `SCR/HSCR/HVOL`。
 7. 18 岁第 4 回合判定最终结局。
+
+复读流程：
+
+1. 首考结局页可以选择复读一年，每局最多一次。
+2. 复读保留首考结局时的成长属性、分科、天赋和事件记录。
+3. 复读会降低心态、增加风险，同时给少量 `SCOREMOD` 复读沉淀，避免复读潜力被硬性打穿。
+4. 复读后的 17 岁回合仍使用完整备考后的分数基准刷新 `SCR`，不再把潜力退回第一次高三的阶段基准。
+5. 复读后从 17 岁第 1 回合重新推进，到 18 岁第 4 回合再次结算。
+6. 首考结果不立即写入存档；选择复读后只记录最终复读结果，放弃复读则在确认结局时写入。
 
 ## 6. 分数与结局
 

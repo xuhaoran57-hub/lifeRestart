@@ -282,6 +282,11 @@
   background: #fbfcff;
 }
 
+.retake-panel {
+  border-color: #d6b57c;
+  background: #fffaf0;
+}
+
 .score-badge {
   display: inline-flex;
   min-width: 74px;

@@ -330,12 +330,145 @@
     "name": "状态崩盘出局",
     "tier": "D",
     "description": "你的分数、风险和志愿策略共同导向了「状态崩盘出局」。",
-    "condition": "(SPR<3)&(RSK>=68)",
+    "condition": "(SPR<3)&(RSK>=68)&(ADM![undergraduate,doubleFirstClass])",
     "priority": 96,
     "scoreBonus": -20,
     "tags": [
       "分数线",
       "D"
+    ]
+  },
+  {
+    "id": 41201,
+    "name": "复读冲进 985",
+    "tier": "SS",
+    "description": "第二次走进考场，你把首考没够到的顶尖门槛真正跨了过去。",
+    "condition": "(RETAKE=1)&(ADM?[985])&(PREV_TIER_RANK<4)&(SLIDE=0)",
+    "priority": 110,
+    "scoreBonus": 58,
+    "tags": [
+      "复读",
+      "985",
+      "突破"
+    ]
+  },
+  {
+    "id": 41202,
+    "name": "复读冲进 211",
+    "tier": "S",
+    "description": "复读这一年没有白熬，你把目标线往上推到了 211。",
+    "condition": "(RETAKE=1)&(ADM?[211])&(ADM![985])&(PREV_TIER_RANK<3)&(SLIDE=0)",
+    "priority": 104,
+    "scoreBonus": 42,
+    "tags": [
+      "复读",
+      "211",
+      "突破"
+    ]
+  },
+  {
+    "id": 41203,
+    "name": "二战逆袭上岸",
+    "tier": "S",
+    "description": "首考后的缺口被一点点补上，复读把你送到了更高一档的位置。",
+    "condition": "(RETAKE=1)&(SCORE_DELTA>=35)&(TIER_DELTA>=1)&(TIER_RANK>=1)&(SLIDE=0)",
+    "priority": 102,
+    "scoreBonus": 40,
+    "tags": [
+      "复读",
+      "逆袭"
+    ]
+  },
+  {
+    "id": 41204,
+    "name": "从专科到本科",
+    "tier": "A",
+    "description": "复读没有制造奇迹，但它把你从后续批次拉回了本科线内。",
+    "condition": "(RETAKE=1)&(PREV_TIER_RANK<=0)&(TIER_RANK>=1)&(SLIDE=0)",
+    "priority": 101,
+    "scoreBonus": 30,
+    "tags": [
+      "复读",
+      "本科"
+    ]
+  },
+  {
+    "id": 41205,
+    "name": "二战稳住本科",
+    "tier": "B",
+    "description": "这一次你没有大起大落，分数和志愿都比首考更稳。",
+    "condition": "(RETAKE=1)&(TIER_RANK=1)&(SCORE_DELTA>=10)&(TIER_DELTA>=0)&(SLIDE=0)",
+    "priority": 91,
+    "scoreBonus": 18,
+    "tags": [
+      "复读",
+      "稳住"
+    ]
+  },
+  {
+    "id": 41206,
+    "name": "复读收益有限",
+    "tier": "C",
+    "description": "你又走了一遍高三，但最后的结果和首考相比变化不大。",
+    "condition": "(RETAKE=1)&(SCORE_DELTA>-10)&(SCORE_DELTA<15)&(TIER_DELTA=0)",
+    "priority": 87,
+    "scoreBonus": 6,
+    "tags": [
+      "复读",
+      "持平"
+    ]
+  },
+  {
+    "id": 41207,
+    "name": "二战失手",
+    "tier": "D",
+    "description": "复读给了你更多准备时间，也放大了第二次失败的重量。",
+    "condition": "(RETAKE=1)&(SCORE_DELTA<=-30)&(TIER_DELTA<0)",
+    "priority": 103,
+    "scoreBonus": -18,
+    "tags": [
+      "复读",
+      "失手"
+    ]
+  },
+  {
+    "id": 41208,
+    "name": "复读滑档",
+    "tier": "D",
+    "description": "第二次出分并不算差，但志愿表还是在最后一步失了准头。",
+    "condition": "(RETAKE=1)&(SLIDE=1)",
+    "priority": 109,
+    "scoreBonus": -20,
+    "tags": [
+      "复读",
+      "滑档"
+    ]
+  },
+  {
+    "id": 41209,
+    "name": "二战高位稳住",
+    "tier": "S",
+    "description": "复读没有改变你的层级，却让这一次的高分录取更有把握。",
+    "condition": "(RETAKE=1)&(ADM?[985])&(PREV_TIER_RANK>=4)&(SCORE_DELTA>-15)&(SLIDE=0)",
+    "priority": 98,
+    "scoreBonus": 42,
+    "tags": [
+      "复读",
+      "985",
+      "稳住"
+    ]
+  },
+  {
+    "id": 41210,
+    "name": "二战换校上岸",
+    "tier": "B",
+    "description": "分数层级没有剧烈变化，但第二次志愿把你带去了另一所学校。",
+    "condition": "(RETAKE=1)&(SAME_SCHOOL=0)&(TIER_DELTA>=0)&(TIER_RANK>=1)&(SLIDE=0)",
+    "priority": 89,
+    "scoreBonus": 16,
+    "tags": [
+      "复读",
+      "志愿"
     ]
   },
   {
