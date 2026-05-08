@@ -141,6 +141,8 @@ export interface AdmissionLine {
   sourceName: string;
   sourceUrl: string;
   sourcePublishedAt: string;
+  lineType?: 'normal' | 'sinoForeign';
+  resourceNeed?: number;
 }
 
 export interface ExamScoreResult {
@@ -171,6 +173,9 @@ export interface AdmissionResult {
   strategyLabel: AdmissionStrategyLabel;
   strategyScore?: number;
   highScoreLowAdmission?: boolean;
+  isSinoForeign?: boolean;
+  resourceNeed?: number;
+  resourceGap?: number;
   reason: string;
 }
 

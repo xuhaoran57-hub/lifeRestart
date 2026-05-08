@@ -1433,8 +1433,12 @@
     "name": "复旦大学医学院",
     "province": "未知",
     "city": "未知",
-    "tags": [],
-    "prestigeTier": "private"
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
   },
   {
     "code": "1309",
@@ -1643,6 +1647,14 @@
     "city": "未知",
     "tags": [],
     "prestigeTier": "regional"
+  },
+  {
+    "code": "1364",
+    "name": "广东以色列理工学院",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "private"
   },
   {
     "code": "1369",
@@ -4812,6 +4824,14 @@
     "prestigeTier": "private"
   },
   {
+    "code": "2118",
+    "name": "宁波诺丁汉大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
     "code": "2122",
     "name": "宁德师范学院",
     "province": "未知",
@@ -5715,8 +5735,12 @@
     "name": "上海交通大学医学院",
     "province": "未知",
     "city": "未知",
-    "tags": [],
-    "prestigeTier": "private"
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
   },
   {
     "code": "2347",
@@ -5896,6 +5920,14 @@
     "city": "未知",
     "tags": [],
     "prestigeTier": "private"
+  },
+  {
+    "code": "2385",
+    "name": "深圳北理莫斯科大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
   },
   {
     "code": "2386",
@@ -6595,6 +6627,14 @@
     "prestigeTier": "regional"
   },
   {
+    "code": "2584",
+    "name": "温州肯恩大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
     "code": "2585",
     "name": "温州理工学院",
     "province": "未知",
@@ -7193,6 +7233,14 @@
   {
     "code": "2696",
     "name": "西华师范大学",
+    "province": "未知",
+    "city": "未知",
+    "tags": [],
+    "prestigeTier": "regional"
+  },
+  {
+    "code": "2697",
+    "name": "西交利物浦大学",
     "province": "未知",
     "city": "未知",
     "tags": [],
@@ -7984,8 +8032,12 @@
     "name": "浙江大学医学院",
     "province": "未知",
     "city": "未知",
-    "tags": [],
-    "prestigeTier": "private"
+    "tags": [
+      "985",
+      "211",
+      "doubleFirstClass"
+    ],
+    "prestigeTier": "top"
   },
   {
     "code": "2886",

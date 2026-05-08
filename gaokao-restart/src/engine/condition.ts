@@ -149,6 +149,7 @@ class Parser {
   private hasAdmissionTier(tier: string): boolean {
     const admission = this.context.admission;
     if (!admission?.admitted) return false;
+    if (tier === 'sinoForeign') return admission.isSinoForeign === true;
     if (tier === '985') return admission.admissionTier === '985';
     if (tier === '211') return admission.admissionTier === '985' || admission.admissionTier === '211';
     if (tier === 'doubleFirstClass') return ['985', '211', 'doubleFirstClass'].includes(admission.admissionTier);
@@ -160,6 +161,9 @@ class Parser {
     if (ident === 'MARGIN') return this.context.admission?.margin ?? 0;
     if (ident === 'LOWEST985MARGIN') return this.context.admission?.lowestReachable985Margin ?? 0;
     if (ident === 'SLIDE') return this.context.admission?.admissionTier === 'slide' ? 1 : 0;
+    if (ident === 'COOP') return this.context.admission?.isSinoForeign ? 1 : 0;
+    if (ident === 'RESOURCE_NEED') return this.context.admission?.resourceNeed ?? 0;
+    if (ident === 'RESOURCE_GAP') return this.context.admission?.resourceGap ?? 0;
     return this.context.props[ident] ?? 0;
   }
 

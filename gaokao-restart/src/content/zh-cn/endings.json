@@ -1198,5 +1198,61 @@
       "事件链",
       "X"
     ]
+  },
+  {
+    "id": 41173,
+    "name": "国际项目稳稳接住",
+    "tier": "S",
+    "description": "你的分数、志愿和家庭资源共同指向了中外合作项目，路线更国际化，也更考验长期投入。",
+    "condition": "(COOP=1)&(MNY>=7)&(VOL>=45)&(SLIDE=0)",
+    "priority": 83,
+    "scoreBonus": 32,
+    "tags": [
+      "中外合作",
+      "资源",
+      "S"
+    ]
+  },
+  {
+    "id": 41174,
+    "name": "中外合作压线进名校",
+    "tier": "S",
+    "description": "你抓住了名校中外合作专业组的窄门，分数、资源和志愿判断刚好咬合。",
+    "condition": "(COOP=1)&(ADM?[211])&(MARGIN<12)&(MNY>=6)&(SLIDE=0)",
+    "priority": 87,
+    "scoreBonus": 34,
+    "tags": [
+      "中外合作",
+      "压线",
+      "S"
+    ]
+  },
+  {
+    "id": 41175,
+    "name": "资源托底上岸",
+    "tier": "B",
+    "description": "普通路线未必最优，但中外合作专业组给了你一个更稳的本科入口。",
+    "condition": "(COOP=1)&(ADMSCORE<560)&(MNY>=5)&(SLIDE=0)",
+    "priority": 79,
+    "scoreBonus": 16,
+    "tags": [
+      "中外合作",
+      "保底",
+      "B"
+    ]
+  },
+  {
+    "id": 41176,
+    "name": "学费压力下的选择",
+    "tier": "C",
+    "description": "你录到了中外合作项目，但资源并不宽裕，这条路从一开始就带着现实压力。",
+    "condition": "(COOP=1)&(RESOURCE_GAP<0)&(SLIDE=0)",
+    "priority": 82,
+    "scoreBonus": 6,
+    "tags": [
+      "中外合作",
+      "资源压力",
+      "C"
+    ]
   }
 ]

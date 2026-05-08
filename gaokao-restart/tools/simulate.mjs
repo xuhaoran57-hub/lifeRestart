@@ -119,6 +119,11 @@ function simulate(runs = 1000, options = {}) {
   let admitted211 = 0;
   let slideCount = 0;
   let highScoreLowAdmissionCount = 0;
+  let sinoForeignAdmissionCount = 0;
+  let highResourceRuns = 0;
+  let highResourceSinoForeignCount = 0;
+  let lowResourceRuns = 0;
+  let lowResourceSinoForeignCount = 0;
   let lowVolunteerHighRiskCount = 0;
   const candidateRarityDistribution = new Map();
   const selectedRarityDistribution = new Map();
@@ -203,6 +208,15 @@ function simulate(runs = 1000, options = {}) {
         trackStats.slide += 1;
       }
       if (result.admission.highScoreLowAdmission) highScoreLowAdmissionCount += 1;
+      if (result.props.MNY >= 7) {
+        highResourceRuns += 1;
+        if (result.admission.isSinoForeign) highResourceSinoForeignCount += 1;
+      }
+      if (result.props.MNY <= 4) {
+        lowResourceRuns += 1;
+        if (result.admission.isSinoForeign) lowResourceSinoForeignCount += 1;
+      }
+      if (result.admission.isSinoForeign) sinoForeignAdmissionCount += 1;
       if (result.admission.admittedUniversity) {
         addCount(admissionDistribution, result.admission.admittedUniversity.name);
         admittedSchoolCodes.add(result.admission.admittedUniversity.code);
@@ -241,6 +255,8 @@ function simulate(runs = 1000, options = {}) {
   console.log(`211 admitted: ${admitted211} (${(admitted211 / completed * 100).toFixed(1)}%)`);
   console.log(`Slide: ${slideCount} (${(slideCount / completed * 100).toFixed(1)}%)`);
   console.log(`High score low admission: ${highScoreLowAdmissionCount} (${(highScoreLowAdmissionCount / completed * 100).toFixed(1)}%)`);
+  console.log(`Sino-foreign cooperation admitted: ${sinoForeignAdmissionCount} (${(sinoForeignAdmissionCount / completed * 100).toFixed(1)}%)`);
+  console.log(`Sino-foreign by resource: MNY>=7 ${highResourceSinoForeignCount}/${highResourceRuns} (${(highResourceSinoForeignCount / Math.max(1, highResourceRuns) * 100).toFixed(1)}%), MNY<=4 ${lowResourceSinoForeignCount}/${lowResourceRuns} (${(lowResourceSinoForeignCount / Math.max(1, lowResourceRuns) * 100).toFixed(1)}%)`);
   console.log(`Low volunteer high risk: ${lowVolunteerHighRiskCount} (${(lowVolunteerHighRiskCount / completed * 100).toFixed(1)}%)`);
   console.log('Subject track distribution:');
   for (const track of ['history', 'physics']) {
@@ -480,7 +496,7 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
   const highestReachableLineScore = reachable.reduce((max, item) => Math.max(max, item.line.minScore), 0);
   const strategyScore = props.HVOL - props.RSK * 0.35 + routeBonus(selectedTalentIds, eventIds);
   const slide = shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachable, random);
-  const picked = slide ? null : pickAdmittedLine(reachable, reachable985, reachable211Plus, strategyScore, props.RSK, exam.finalScore, random);
+  const picked = slide ? null : pickAdmittedLine(reachable, reachable985, reachable211Plus, strategyScore, props.RSK, exam.finalScore, props.MNY, random);
   const highScoreLowAdmission = isHighScoreLowAdmission(exam.finalScore, lowestReachable985, lowestReachable211, picked, slide);
 
   if (!picked) {
@@ -516,26 +532,31 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
     margin: picked.margin,
     strategyScore,
     highScoreLowAdmission,
+    ...(isSinoForeignLine(picked.line) ? {
+      isSinoForeign: true,
+      resourceNeed: lineResourceNeed(picked.line),
+      resourceGap: resourceGap(picked.line, props.MNY),
+    } : {}),
   };
 }
 
-function pickAdmittedLine(reachable, reachable985, reachable211Plus, strategyScore, risk, finalScore, random) {
+function pickAdmittedLine(reachable, reachable985, reachable211Plus, strategyScore, risk, finalScore, resourceLevel, random) {
   if (reachable.length === 0) return null;
   const lowestReachable985 = pickLowestLine(reachable985);
   const lowestReachable211 = pickLowestLine(reachable211Plus);
 
   if (lowestReachable985 && random.next() < commit985Chance(finalScore - lowestReachable985.line.minScore, strategyScore, risk)) {
-    return pickFromCandidatePool(reachable985, strategyScore, finalScore, random);
+    return pickFromCandidatePool(reachable985, strategyScore, finalScore, resourceLevel, random);
   }
 
   if (lowestReachable211 && random.next() < commit211Chance(finalScore - lowestReachable211.line.minScore, strategyScore, risk)) {
-    return pickFromCandidatePool(reachable211Plus, strategyScore, finalScore, random);
+    return pickFromCandidatePool(reachable211Plus, strategyScore, finalScore, resourceLevel, random);
   }
 
-  return pickFromCandidatePool(reachable, strategyScore, finalScore, random);
+  return pickFromCandidatePool(reachable, strategyScore, finalScore, resourceLevel, random);
 }
 
-function pickFromCandidatePool(candidates, strategyScore, finalScore, random) {
+function pickFromCandidatePool(candidates, strategyScore, finalScore, resourceLevel, random) {
   if (candidates.length === 0) return null;
   const sorted = [...candidates].sort((a, b) =>
     b.line.minScore - a.line.minScore || linePrestigeScore(b) - linePrestigeScore(a),
@@ -545,13 +566,13 @@ function pickFromCandidatePool(candidates, strategyScore, finalScore, random) {
   const targetRank = targetAdmissionRank(strategyScore, finalScore);
   const highLineCandidates = ranked.filter(item => item.line.minScore >= 650);
   if (highLineCandidates.length > 0 && random.next() < highLineCommitChance(strategyScore)) {
-    return pickWeighted(highLineCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
+    return pickWeighted(highLineCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore, resourceLevel), random);
   }
   const reasonableCandidates = ranked.filter(item => item.margin <= reasonableMarginLimit(strategyScore, finalScore));
   if (reasonableCandidates.length > 0 && random.next() < reasonableMarginCommitChance(strategyScore)) {
-    return pickWeighted(reasonableCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
+    return pickWeighted(reasonableCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore, resourceLevel), random);
   }
-  return pickWeighted(ranked, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
+  return pickWeighted(ranked, item => admissionChoiceWeight(item, targetRank, strategyScore, resourceLevel), random);
 }
 
 function commit985Chance(lowestMargin, strategyScore, risk) {
@@ -606,7 +627,7 @@ function targetAdmissionRank(strategyScore, finalScore) {
   return target;
 }
 
-function admissionChoiceWeight(candidate, targetRank, strategyScore) {
+function admissionChoiceWeight(candidate, targetRank, strategyScore, resourceLevel) {
   const spread = strategyScore >= 65 ? 0.12 : strategyScore >= 35 ? 0.24 : 0.3;
   const rankFit = Math.max(0, 1 - Math.abs(candidate.rankPercentile - targetRank) / spread);
   const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 12 : 16;
@@ -615,7 +636,7 @@ function admissionChoiceWeight(candidate, targetRank, strategyScore) {
   const prestigeWeight = strategyScore >= 65 ? 36 : strategyScore >= 35 ? 22 : 8;
   const tierBonus = admissionTierWeight(candidate.university, strategyScore);
   const baseWeight = 2 + rankFit * rankFit * 145 + marginFit * 42 + prestige * prestigeWeight + tierBonus;
-  return Math.max(0.2, baseWeight * marginPenalty(candidate.margin, strategyScore));
+  return Math.max(0.2, baseWeight * marginPenalty(candidate.margin, strategyScore) * resourceFitMultiplier(candidate.line, resourceLevel, strategyScore));
 }
 
 function marginPenalty(margin, strategyScore) {
@@ -646,6 +667,32 @@ function admissionTierWeight(university, strategyScore) {
   if (tags.includes('211')) return strategyScore >= 65 ? 58 : strategyScore >= 35 ? 36 : 10;
   if (tags.includes('doubleFirstClass')) return strategyScore >= 65 ? 36 : strategyScore >= 35 ? 24 : 6;
   return 0;
+}
+
+function resourceFitMultiplier(line, resourceLevel, strategyScore) {
+  if (!isSinoForeignLine(line)) return 1;
+  const gap = resourceLevel - lineResourceNeed(line);
+  const base = gap >= 2
+    ? 6
+    : gap >= 0
+      ? 4
+      : gap >= -1
+        ? 1.6
+        : 0.32;
+  const strategyMultiplier = strategyScore >= 65 ? 1.25 : strategyScore < 35 ? 0.82 : 1;
+  return base * strategyMultiplier;
+}
+
+function isSinoForeignLine(line) {
+  return line.lineType === 'sinoForeign';
+}
+
+function lineResourceNeed(line) {
+  return isSinoForeignLine(line) ? line.resourceNeed ?? 6 : 0;
+}
+
+function resourceGap(line, resourceLevel) {
+  return Math.floor(resourceLevel) - lineResourceNeed(line);
 }
 
 function routeBonus(selectedTalentIds, eventIds) {
@@ -857,6 +904,9 @@ function evaluate(condition, props, talentIds, eventIds, admission = null, subje
     MARGIN: admission?.margin ?? 0,
     LOWEST985MARGIN: admission?.lowestReachable985Margin ?? 0,
     SLIDE: admission?.admissionTier === 'slide' ? 1 : 0,
+    COOP: admission?.isSinoForeign ? 1 : 0,
+    RESOURCE_NEED: admission?.resourceNeed ?? 0,
+    RESOURCE_GAP: admission?.resourceGap ?? 0,
     TIER_RANK: admission ? admissionTierRank(admission.admissionTier) : -1,
     PREV_SCORE: 0,
     SCORE_DELTA: 0,
@@ -891,6 +941,7 @@ function evaluate(condition, props, talentIds, eventIds, admission = null, subje
 
 function hasAdmissionTier(admission, tier) {
   if (!admission?.admitted) return false;
+  if (tier === 'sinoForeign') return admission.isSinoForeign === true;
   if (tier === '985') return admission.admissionTier === '985';
   if (tier === '211') return ['985', '211'].includes(admission.admissionTier);
   if (tier === 'doubleFirstClass') return ['985', '211', 'doubleFirstClass'].includes(admission.admissionTier);

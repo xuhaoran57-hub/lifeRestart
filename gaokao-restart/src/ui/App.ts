@@ -455,6 +455,12 @@ function renderSummaryLogs(gameState: GameState): string {
 function renderAdmission(admission: AdmissionResult): string {
   const admitted = admission.admitted && admission.admittedLine && admission.admittedUniversity;
   const trackLabel = admission.subjectTrack === 'history' ? '历史组' : '物理组';
+  const cooperationFact = admitted && admission.isSinoForeign
+    ? '<span><em>类型</em><strong>中外合作</strong></span>'
+    : '';
+  const resourceFact = admitted && admission.isSinoForeign
+    ? `<span><em>资源</em><strong>${escapeHtml(formatResourceFit(admission))}</strong></span>`
+    : '';
   const reach = [
     admission.canReach985 ? '可达 985' : null,
     admission.canReach211 ? '可达 211' : null,
@@ -478,6 +484,8 @@ function renderAdmission(admission: AdmissionResult): string {
           <span><em>投档线</em><strong>${admission.admittedLine!.minScore}</strong></span>
           <span><em>超线</em><strong>+${admission.margin ?? 0}</strong></span>
           <span><em>策略</em><strong>${escapeHtml(admission.strategyLabel)}</strong></span>
+          ${cooperationFact}
+          ${resourceFact}
         </div>
       ` : `
         <div class="admission-school">
@@ -488,6 +496,13 @@ function renderAdmission(admission: AdmissionResult): string {
       <p class="admission-reason">${escapeHtml(admission.reason)}</p>
     </div>
   `;
+}
+
+function formatResourceFit(admission: AdmissionResult): string {
+  const gap = admission.resourceGap ?? 0;
+  if (gap >= 2) return '充足';
+  if (gap >= 0) return '匹配';
+  return `差 ${Math.abs(gap)}`;
 }
 
 function renderStats(state: GameState): string {

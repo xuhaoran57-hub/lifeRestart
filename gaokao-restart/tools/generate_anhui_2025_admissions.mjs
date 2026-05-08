@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const sourcePath = join(root, 'data', 'anhui-2025-undergrad', 'anhui_2025_undergraduate_scores_slim.json');
+const detailSourcePath = join(root, 'data', 'anhui-2025-undergrad', 'anhui_2025_undergraduate_scores.json');
 const admissionDir = join(root, 'src', 'content', 'zh-cn', 'admissions');
 
 const profileByTrack = {
@@ -192,60 +193,101 @@ const doubleFirstClassOnly = new Set([
 
 const privateNamePattern = /(民办|独立学院|职业技术大学|职业大学|信息工程学院|城市学院|科技学院|财经学院|商学院|工商学院|文理学院|艺术学院|传媒学院|外事学院|翻译学院|旅游学院|应用技术学院|工程技术学院|学院)$/;
 
+const cooperationSelections = [
+  { code: '2343', trackName: '物理类', groupCode: '005', resourceNeed: 9 },
+  { code: '2881', trackName: '物理类', groupCode: '006', resourceNeed: 9 },
+  { code: '2563', trackName: '物理类', groupCode: '005', resourceNeed: 9 },
+  { code: '2057', trackName: '物理类', groupCode: '004', resourceNeed: 9 },
+  { code: '1054', trackName: '物理类', groupCode: '006', resourceNeed: 8 },
+  { code: '2963', trackName: '物理类', groupCode: '001', resourceNeed: 8 },
+  { code: '2963', trackName: '历史类', groupCode: '002', resourceNeed: 8 },
+  { code: '1071', trackName: '物理类', groupCode: '006', resourceNeed: 8 },
+  { code: '1165', trackName: '物理类', groupCode: '008', resourceNeed: 8 },
+  { code: '1229', trackName: '物理类', groupCode: '004', resourceNeed: 8 },
+  { code: '2952', trackName: '物理类', groupCode: '009', resourceNeed: 7 },
+  { code: '2952', trackName: '历史类', groupCode: '004', resourceNeed: 7 },
+  { code: '2612', trackName: '物理类', groupCode: '010', resourceNeed: 8 },
+  { code: '2324', trackName: '物理类', groupCode: '003', resourceNeed: 7 },
+  { code: '2324', trackName: '物理类', groupCode: '005', resourceNeed: 7 },
+  { code: '2324', trackName: '历史类', groupCode: '003', resourceNeed: 7 },
+  { code: '2961', trackName: '物理类', groupCode: '004', resourceNeed: 7 },
+  { code: '2961', trackName: '历史类', groupCode: '003', resourceNeed: 7 },
+  { code: '1518', trackName: '物理类', groupCode: '005', resourceNeed: 6 },
+  { code: '9001', trackName: '物理类', groupCode: '010', resourceNeed: 6 },
+  { code: '2697', trackName: '物理类', groupCode: '002', resourceNeed: 7 },
+  { code: '2697', trackName: '物理类', groupCode: '001', resourceNeed: 7 },
+  { code: '2697', trackName: '历史类', groupCode: '001', resourceNeed: 7 },
+  { code: '2118', trackName: '物理类', groupCode: '001', resourceNeed: 7 },
+  { code: '2118', trackName: '物理类', groupCode: '002', resourceNeed: 7 },
+  { code: '2118', trackName: '历史类', groupCode: '001', resourceNeed: 7 },
+  { code: '2118', trackName: '历史类', groupCode: '002', resourceNeed: 7 },
+  { code: '2385', trackName: '物理类', groupCode: '003', resourceNeed: 7 },
+  { code: '1364', trackName: '物理类', groupCode: '001', resourceNeed: 6 },
+  { code: '2584', trackName: '历史类', groupCode: '001', resourceNeed: 6 },
+  { code: '2584', trackName: '物理类', groupCode: '001', resourceNeed: 6 },
+  { code: '9015', trackName: '历史类', groupCode: '002', resourceNeed: 5 },
+  { code: '9015', trackName: '物理类', groupCode: '004', resourceNeed: 5 },
+  { code: '9015', trackName: '物理类', groupCode: '006', resourceNeed: 5 },
+  { code: '9013', trackName: '历史类', groupCode: '005', resourceNeed: 5 },
+  { code: '9013', trackName: '物理类', groupCode: '004', resourceNeed: 5 },
+  { code: '9105', trackName: '历史类', groupCode: '003', resourceNeed: 5 },
+  { code: '9105', trackName: '物理类', groupCode: '004', resourceNeed: 5 },
+  { code: '9112', trackName: '历史类', groupCode: '004', resourceNeed: 5 },
+  { code: '9112', trackName: '物理类', groupCode: '004', resourceNeed: 5 },
+];
+
 function main() {
   const source = JSON.parse(readFileSync(sourcePath, 'utf8'));
+  const detailSource = JSON.parse(readFileSync(detailSourcePath, 'utf8'));
   const profiles = [profileByTrack.历史类, { ...profileByTrack.物理类, default: true }];
-  const universities = [];
+  const universities = new Map();
   const admissionLines = [];
+  const lineKeys = new Set();
   const skipped = [];
 
   for (const sourceUniversity of source.universities) {
     const code = String(sourceUniversity['院校代码']);
-    const name = sourceUniversity['院校名称'];
-    universities.push({
-      code,
-      name,
-      province: '未知',
-      city: '未知',
-      tags: tagsForUniversity(name),
-      prestigeTier: prestigeTierForUniversity(name),
-    });
+    const name = cleanUniversityName(sourceUniversity['院校名称']);
+    ensureUniversity(universities, code, name);
 
     for (const trackName of ['历史类', '物理类']) {
       const row = sourceUniversity[trackName];
       if (!row) continue;
-      const minScore = row['投档最低分'];
-      if (!Number.isInteger(minScore) || minScore < 250 || minScore > 750) {
-        skipped.push({ code, name, trackName, minScore, groupName: row['院校专业组'] });
-        continue;
-      }
-      const groupName = row['院校专业组'] ?? '';
-      admissionLines.push({
-        profileId: profileByTrack[trackName].id,
-        universityCode: code,
-        universityName: name,
-        groupCode: extractGroupCode(groupName),
-        groupName: `${name} ${groupName}`.trim(),
-        batch: '本科普通批',
-        minScore,
-        minRank: Number.isInteger(row['最低分名次']) ? row['最低分名次'] : null,
-        subjectRequirement: extractSubjectRequirement(groupName) || trackName,
-        sourceName: source.metadata.sourceName,
-        sourceUrl: source.metadata.sourceUrls?.[trackName] ?? '',
-        sourcePublishedAt: source.metadata.publishedAt,
+      pushAdmissionLine(admissionLines, lineKeys, source.metadata, code, name, trackName, row, {
+        lineType: 'normal',
+        skipped,
       });
     }
   }
 
+  const cooperationMissing = appendCooperationLines({
+    detailSource,
+    universities,
+    admissionLines,
+    lineKeys,
+    skipped,
+  });
+  const sortedUniversities = [...universities.values()].sort((a, b) => a.code.localeCompare(b.code));
+  admissionLines.sort((a, b) =>
+    a.profileId.localeCompare(b.profileId)
+      || a.universityCode.localeCompare(b.universityCode)
+      || a.groupCode.localeCompare(b.groupCode)
+      || a.lineType.localeCompare(b.lineType),
+  );
+
   writeJson('profiles.json', profiles);
-  writeJson('universities.json', universities);
+  writeJson('universities.json', sortedUniversities);
   writeJson('admission-lines.json', admissionLines);
 
-  console.log(`wrote ${universities.length} universities`);
+  console.log(`wrote ${sortedUniversities.length} universities`);
   console.log(`wrote ${admissionLines.length} admission lines`);
+  console.log(`appended ${cooperationSelections.length - cooperationMissing.length} sino-foreign cooperation lines`);
   console.log(`skipped ${skipped.length} invalid lines`);
   for (const item of skipped.slice(0, 20)) {
     console.log(`skip ${item.code} ${item.name} ${item.trackName} score=${item.minScore ?? 'null'} group=${item.groupName}`);
+  }
+  for (const item of cooperationMissing) {
+    console.log(`missing cooperation line ${item.code} ${item.trackName} ${item.groupCode}`);
   }
 }
 
@@ -273,6 +315,7 @@ function projectBaseName(name) {
 
 function isAllowedProjectBranchSuffix(suffix) {
   return suffix === '医学部'
+    || suffix === '医学院'
     || suffix === '分校'
     || suffix === '校区'
     || suffix.endsWith('分校')
@@ -298,13 +341,94 @@ function prestigeTierForUniversity(name) {
 }
 
 function extractGroupCode(groupName) {
-  const match = String(groupName).match(/^([A-Za-z0-9]+)/);
+  const match = String(groupName).match(/^([A-Za-z0-9.]+)/);
   return match?.[1] ?? String(groupName || 'unknown');
 }
 
 function extractSubjectRequirement(groupName) {
   const match = String(groupName).match(/[（(](.+?)[）)]/);
   return match?.[1] ?? '';
+}
+
+function ensureUniversity(universities, code, name) {
+  if (universities.has(code)) return universities.get(code);
+  const university = {
+    code,
+    name,
+    province: '未知',
+    city: '未知',
+    tags: tagsForUniversity(name),
+    prestigeTier: prestigeTierForUniversity(name),
+  };
+  universities.set(code, university);
+  return university;
+}
+
+function pushAdmissionLine(admissionLines, lineKeys, metadata, code, name, trackName, row, options = {}) {
+  const minScore = row['投档最低分'];
+  const groupName = row['院校专业组'] ?? '';
+  const groupCode = extractGroupCode(groupName);
+  const lineType = options.lineType ?? 'normal';
+  const key = `${profileByTrack[trackName].id}:${code}:${groupCode}`;
+  if (lineKeys.has(key)) return false;
+  if (!Number.isInteger(minScore) || minScore < 250 || minScore > 750) {
+    options.skipped?.push({ code, name, trackName, minScore, groupName });
+    return false;
+  }
+  lineKeys.add(key);
+  admissionLines.push({
+    profileId: profileByTrack[trackName].id,
+    universityCode: code,
+    universityName: name,
+    groupCode,
+    groupName: `${name} ${groupName}`.trim(),
+    batch: '本科普通批',
+    minScore,
+    minRank: Number.isInteger(row['最低分名次']) ? row['最低分名次'] : null,
+    subjectRequirement: extractSubjectRequirement(groupName) || trackName,
+    sourceName: metadata.sourceName,
+    sourceUrl: metadata.sourceUrls?.[trackName] ?? '',
+    sourcePublishedAt: metadata.publishedAt,
+    lineType,
+    ...(lineType === 'sinoForeign' ? { resourceNeed: options.resourceNeed } : {}),
+  });
+  return true;
+}
+
+function appendCooperationLines({ detailSource, universities, admissionLines, lineKeys, skipped }) {
+  const rows = detailSource.detailRows ?? [];
+  const missing = [];
+  for (const selection of cooperationSelections) {
+    const row = rows.find(item =>
+      String(item['院校代码']) === selection.code
+      && item['科类'] === selection.trackName
+      && extractGroupCode(item['院校专业组']) === selection.groupCode
+      && String(item['院校专业组'] ?? '').includes('中外合作'),
+    );
+    if (!row) {
+      missing.push(selection);
+      continue;
+    }
+    const name = canonicalUniversityName(universities, selection.code, row['院校名称']);
+    ensureUniversity(universities, selection.code, name);
+    pushAdmissionLine(admissionLines, lineKeys, detailSource.metadata, selection.code, name, selection.trackName, row, {
+      lineType: 'sinoForeign',
+      resourceNeed: selection.resourceNeed,
+      skipped,
+    });
+  }
+  return missing;
+}
+
+function canonicalUniversityName(universities, code, rawName) {
+  return universities.get(code)?.name ?? cleanUniversityName(rawName);
+}
+
+function cleanUniversityName(name) {
+  return String(name)
+    .replace(/[：:]+$/g, '')
+    .replace(/[·]+$/g, '')
+    .trim();
 }
 
 main();

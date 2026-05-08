@@ -31,6 +31,9 @@ describe('evaluateCondition', () => {
       admissionTier: '211' as const,
       margin: 32,
       strategyLabel: '均衡' as const,
+      isSinoForeign: true,
+      resourceNeed: 7,
+      resourceGap: 1,
       reason: 'test',
     },
   };
@@ -53,11 +56,15 @@ describe('evaluateCondition', () => {
     expect(evaluateCondition('ADM?[211]', context)).toBe(true);
     expect(evaluateCondition('ADM![985]', context)).toBe(true);
     expect(evaluateCondition('ADM?[doubleFirstClass]', context)).toBe(true);
+    expect(evaluateCondition('ADM?[sinoForeign]', context)).toBe(true);
     expect(evaluateCondition('SCHOOL?[10593]', context)).toBe(true);
     expect(evaluateCondition('ADMSCORE>=650', context)).toBe(false);
     expect(evaluateCondition('MARGIN>=20', context)).toBe(true);
     expect(evaluateCondition('LOWEST985MARGIN>=20', context)).toBe(false);
     expect(evaluateCondition('SLIDE=1', context)).toBe(false);
+    expect(evaluateCondition('COOP=1', context)).toBe(true);
+    expect(evaluateCondition('RESOURCE_NEED=7', context)).toBe(true);
+    expect(evaluateCondition('RESOURCE_GAP>=0', context)).toBe(true);
   });
 
   it('evaluates subject track membership', () => {

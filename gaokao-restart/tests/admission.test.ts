@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { ExamScoreResult, GameState, SubjectTrack } from '../src/app/types';
+import type { ExamScoreResult, GameContent, GameState, SubjectTrack } from '../src/app/types';
 import { zhCnContent } from '../src/content/zh-cn';
 import { resolveAdmission } from '../src/engine/admission';
 import { createInitialProps } from '../src/engine/properties';
@@ -84,6 +84,23 @@ describe('resolveAdmission', () => {
     expect(second.admittedUniversity?.code).toBe(first.admittedUniversity?.code);
     expect(second.admittedLine?.groupCode).toBe(first.admittedLine?.groupCode);
   });
+
+  it('links sino-foreign cooperation admission probability to resource level', () => {
+    let richCooperation = 0;
+    let lowResourceCooperation = 0;
+    const content = cooperationFixtureContent();
+
+    for (let seed = 1; seed <= 100; seed += 1) {
+      const rich = resolveAdmission(content, stateWithScoreProps({ MNY: 8, HVOL: 80, RSK: 12 }), exam(565), new Random(seed));
+      const low = resolveAdmission(content, stateWithScoreProps({ MNY: 2, HVOL: 80, RSK: 12 }), exam(565), new Random(seed));
+      if (rich.isSinoForeign) richCooperation += 1;
+      if (low.isSinoForeign) lowResourceCooperation += 1;
+    }
+
+    expect(richCooperation).toBeGreaterThan(lowResourceCooperation + 25);
+    expect(richCooperation).toBeGreaterThanOrEqual(80);
+    expect(lowResourceCooperation).toBeLessThanOrEqual(65);
+  });
 });
 
 function exam(finalScore: number): ExamScoreResult {
@@ -113,5 +130,78 @@ function stateWithScoreProps(values: Partial<GameState['props']>, subjectTrack: 
     retakeFrom: null,
     attempt: 1,
     isFinished: false,
+  };
+}
+
+function cooperationFixtureContent(): GameContent {
+  return {
+    talents: [],
+    events: [],
+    ages: [],
+    endings: [],
+    achievements: [],
+    characters: [],
+    admissionProfiles: [
+      {
+        id: 'ah-2025-physics',
+        name: '安徽 2025 物理类',
+        year: 2025,
+        sourceProvince: '安徽',
+        subjectTrack: '物理类',
+        scoreScale: 750,
+        batch: '本科普通批',
+      },
+    ],
+    universities: [
+      {
+        code: 'normal-u',
+        name: '普通本科大学',
+        province: '安徽',
+        city: '合肥',
+        tags: [],
+        prestigeTier: 'regional',
+      },
+      {
+        code: 'coop-u',
+        name: '合作办学大学',
+        province: '江苏',
+        city: '苏州',
+        tags: [],
+        prestigeTier: 'regional',
+      },
+    ],
+    admissionLines: [
+      {
+        profileId: 'ah-2025-physics',
+        universityCode: 'normal-u',
+        universityName: '普通本科大学',
+        groupCode: '001',
+        groupName: '普通本科大学 001专业组（不限）',
+        batch: '本科普通批',
+        minScore: 550,
+        minRank: 90000,
+        subjectRequirement: '不限',
+        sourceName: 'test',
+        sourceUrl: 'https://example.com/8467',
+        sourcePublishedAt: '2025-07-24',
+        lineType: 'normal',
+      },
+      {
+        profileId: 'ah-2025-physics',
+        universityCode: 'coop-u',
+        universityName: '合作办学大学',
+        groupCode: '002',
+        groupName: '合作办学大学 002专业组（不限）（中外合作办学）',
+        batch: '本科普通批',
+        minScore: 552,
+        minRank: 88000,
+        subjectRequirement: '不限',
+        sourceName: 'test',
+        sourceUrl: 'https://example.com/8467',
+        sourcePublishedAt: '2025-07-24',
+        lineType: 'sinoForeign',
+        resourceNeed: 7,
+      },
+    ],
   };
 }

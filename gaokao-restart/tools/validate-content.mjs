@@ -12,6 +12,7 @@ const rarityConfig = {
   legendary: { grade: 3, name: '传说', target: 12 },
 };
 const subjectTracks = new Set(['history', 'physics']);
+const admissionLineTypes = new Set(['normal', 'sinoForeign']);
 const requiredAdmissionProfiles = new Map([
   ['ah-2025-history', '历史类'],
   ['ah-2025-physics', '物理类'],
@@ -267,6 +268,13 @@ for (const line of admissionLines) {
   if (typeof line.minScore !== 'number' || line.minScore < 250 || line.minScore > 750) fail(`admission line ${line.universityName} has invalid minScore ${line.minScore}`);
   if (!line.groupCode || !line.groupName) fail(`admission line ${line.universityName} missing group`);
   if (!line.sourceName || !line.sourceUrl || !line.sourcePublishedAt) fail(`admission line ${line.universityName} missing source fields`);
+  if (line.lineType && !admissionLineTypes.has(line.lineType)) fail(`admission line ${line.universityName} has invalid lineType ${line.lineType}`);
+  if (line.lineType === 'sinoForeign') {
+    if (!line.groupName.includes('中外合作')) fail(`sino-foreign line ${line.universityName} should mention 中外合作`);
+    if (typeof line.resourceNeed !== 'number' || line.resourceNeed < 0 || line.resourceNeed > 10) {
+      fail(`sino-foreign line ${line.universityName} has invalid resourceNeed ${line.resourceNeed}`);
+    }
+  }
   const profile = admissionProfiles.find(item => item.id === line.profileId);
   if (profile?.subjectTrack === '历史类' && !line.sourceUrl.includes('8466')) fail(`history line ${line.universityName} should use history source URL`);
   if (profile?.subjectTrack === '物理类' && !line.sourceUrl.includes('8467')) fail(`physics line ${line.universityName} should use physics source URL`);
