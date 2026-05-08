@@ -158,6 +158,7 @@ class Parser {
   private numericValue(ident: string): number {
     if (ident === 'ADMSCORE') return this.context.admission?.finalScore ?? 0;
     if (ident === 'MARGIN') return this.context.admission?.margin ?? 0;
+    if (ident === 'LOWEST985MARGIN') return this.context.admission?.lowestReachable985Margin ?? 0;
     if (ident === 'SLIDE') return this.context.admission?.admissionTier === 'slide' ? 1 : 0;
     return this.context.props[ident] ?? 0;
   }

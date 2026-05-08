@@ -16,6 +16,13 @@
   margin-bottom: 16px;
 }
 
+.topbar-actions,
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 .topbar p,
 .muted {
   color: #6d6860;
@@ -299,8 +306,7 @@
 }
 
 .admission-school span,
-.admission-reason,
-.source-note {
+.admission-reason {
   color: #5d5a54;
   line-height: 1.5;
 }
@@ -337,6 +343,80 @@
   padding: 0 12px;
 }
 
+.achievement-stats,
+.achievement-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.achievement-stats {
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+}
+
+.achievement-stats span {
+  display: grid;
+  gap: 4px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #f4efe5;
+}
+
+.achievement-stats em {
+  color: #686157;
+  font-size: 0.8rem;
+  font-style: normal;
+}
+
+.achievement-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.achievement-card {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+}
+
+.achievement-card.unlocked {
+  border-color: #2f6f73;
+  background: #f6fbf8;
+}
+
+.achievement-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.achievement-grade,
+.achievement-status {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #ece3cf;
+  color: #5c4c2d;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.achievement-status {
+  background: #e8f2ee;
+  color: #2f6f73;
+}
+
+.achievement-card p {
+  color: #5d5a54;
+  line-height: 1.45;
+}
+
+.empty-state {
+  color: #6d6860;
+}
+
 @media (max-width: 640px) {
   .shell {
     padding: 14px;
@@ -344,6 +424,7 @@
 
   .topbar {
     align-items: flex-start;
+    flex-direction: column;
   }
 
   .grid {

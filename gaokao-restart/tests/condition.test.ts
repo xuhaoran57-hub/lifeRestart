@@ -18,6 +18,7 @@ describe('evaluateCondition', () => {
       variance: 2,
       canReach985: false,
       canReach211: true,
+      lowestReachable985Margin: 0,
       admitted: true,
       admittedUniversity: {
         code: '10593',
@@ -55,6 +56,7 @@ describe('evaluateCondition', () => {
     expect(evaluateCondition('SCHOOL?[10593]', context)).toBe(true);
     expect(evaluateCondition('ADMSCORE>=650', context)).toBe(false);
     expect(evaluateCondition('MARGIN>=20', context)).toBe(true);
+    expect(evaluateCondition('LOWEST985MARGIN>=20', context)).toBe(false);
     expect(evaluateCondition('SLIDE=1', context)).toBe(false);
   });
 

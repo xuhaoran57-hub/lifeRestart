@@ -18,9 +18,9 @@
   {
     "id": 42103,
     "name": "竞赛保送",
-    "description": "解锁竞赛保送生",
+    "description": "解锁保送类结局",
     "grade": 2,
-    "condition": "END?[41003]",
+    "condition": "END?[41003,41010]",
     "timing": "summary"
   },
   {

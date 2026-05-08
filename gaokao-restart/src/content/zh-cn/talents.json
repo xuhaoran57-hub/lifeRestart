@@ -3601,5 +3601,108 @@
     "polarity": "benefit",
     "rarity": "rare",
     "rarityName": "稀有"
+  },
+  {
+    "id": 21803,
+    "name": "北京户口",
+    "grade": 3,
+    "description": "你拥有极强的区位与政策红利",
+    "effect": {
+      "MNY": 2,
+      "VOL": 25,
+      "RSK": -10,
+      "SCOREMOD": 35
+    },
+    "inheritAllowed": false,
+    "tags": [
+      "家庭背景",
+      "传说",
+      "区位",
+      "政策"
+    ],
+    "category": "family",
+    "categoryName": "家庭背景",
+    "effectBudget": 9,
+    "polarity": "benefit",
+    "rarity": "legendary",
+    "rarityName": "传说"
+  },
+  {
+    "id": 21804,
+    "name": "保送机会",
+    "grade": 3,
+    "description": "你有机会在高三前拿到保送资格",
+    "effect": {
+      "INT": 2,
+      "VOL": 20,
+      "RSK": -8
+    },
+    "inheritAllowed": true,
+    "tags": [
+      "赛道机会",
+      "传说",
+      "保送",
+      "特殊线"
+    ],
+    "category": "route",
+    "categoryName": "赛道机会",
+    "effectBudget": 4.24,
+    "polarity": "benefit",
+    "rarity": "legendary",
+    "rarityName": "传说"
+  },
+  {
+    "id": 21805,
+    "name": "竞赛金牌苗子",
+    "grade": 3,
+    "description": "你在顶级竞赛赛道上有罕见天赋",
+    "effect": {
+      "INT": 3,
+      "STR": 1,
+      "RSK": 6,
+      "SCOREMOD": 12
+    },
+    "exclude": [
+      21011,
+      21521
+    ],
+    "inheritAllowed": true,
+    "tags": [
+      "赛道机会",
+      "传说",
+      "竞赛",
+      "特殊线"
+    ],
+    "category": "route",
+    "categoryName": "赛道机会",
+    "effectBudget": 5.13,
+    "polarity": "benefit",
+    "rarity": "legendary",
+    "rarityName": "传说"
+  },
+  {
+    "id": 21806,
+    "name": "顶级导师",
+    "grade": 3,
+    "description": "有一位真正懂你的老师长期指路",
+    "effect": {
+      "INT": 2,
+      "SPR": 1,
+      "VOL": 18,
+      "RSK": -8
+    },
+    "inheritAllowed": true,
+    "tags": [
+      "社会关系",
+      "传说",
+      "老师",
+      "长期指导"
+    ],
+    "category": "relation",
+    "categoryName": "社会关系",
+    "effectBudget": 5.08,
+    "polarity": "benefit",
+    "rarity": "legendary",
+    "rarityName": "传说"
   }
 ]

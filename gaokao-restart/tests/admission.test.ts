@@ -14,7 +14,7 @@ describe('resolveAdmission', () => {
     expect(result.canReach985).toBe(true);
     expect(result.canReach211).toBe(true);
     expect(result.admitted).toBe(true);
-    expect(['985', '211']).toContain(result.admissionTier);
+    expect(['985', '211', 'doubleFirstClass']).toContain(result.admissionTier);
   });
 
   it('marks 211 reachable at a mid sample score', () => {

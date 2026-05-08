@@ -39,11 +39,20 @@ const phaseBase = {
   final: 450,
 };
 
-const eventEffectScale = {
-  INT: 0.42,
-  STR: 0.42,
+const positiveEventEffectScale = {
+  INT: 0.19,
+  STR: 0.28,
   MNY: 0.5,
-  SPR: 0.4,
+  SPR: 0.42,
+  VOL: 0.5,
+  RSK: 0.35,
+  SCOREMOD: 0.65,
+};
+const negativeEventEffectScale = {
+  INT: 0.3,
+  STR: 0.35,
+  MNY: 0.5,
+  SPR: 0.42,
   VOL: 0.5,
   RSK: 0.35,
   SCOREMOD: 0.65,
@@ -72,7 +81,7 @@ class Random {
   }
 }
 
-function simulate(runs = 1000) {
+function simulate(runs = 1000, options = {}) {
   const random = new Random(20260429);
   const distribution = new Map();
   const tierDistribution = new Map();
@@ -96,18 +105,36 @@ function simulate(runs = 1000) {
   const candidateRarityDistribution = new Map();
   const selectedRarityDistribution = new Map();
   const admissionDistribution = new Map();
+  const admittedSchoolCodes = new Set();
   const subjectTrackDistribution = new Map();
   const subjectTrackAdmission = {
     history: { runs: 0, canReach985: 0, canReach211: 0, admitted985: 0, admitted211: 0, slide: 0, totalFinalScore: 0 },
     physics: { runs: 0, canReach985: 0, canReach211: 0, admitted985: 0, admitted211: 0, slide: 0, totalFinalScore: 0 },
   };
   const scoreBuckets = new Map();
+  const finalScoreValues = [];
+  const propertyNames = ['INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCOREMOD'];
+  const propertyBuckets = Object.fromEntries(propertyNames.map(prop => [prop, new Map()]));
+  const propertyValues = Object.fromEntries(propertyNames.map(prop => [prop, []]));
+  const admittedLineScoreBuckets = new Map();
+  const admittedLineScoreValues = [];
+  const marginBuckets = new Map();
+  const marginValues = [];
+  let highLineReachableRuns = 0;
+  let highLineAdmittedRuns = 0;
   const capCounts = { INT: 0, STR: 0, SPR: 0, VOL: 0 };
+  const nearCapCounts = { INT: 0, STR: 0 };
+  const belowInitialCounts = { INT: 0, STR: 0 };
   let legendaryCandidateRuns = 0;
+
+  if (options.fixedAllocation) {
+    const { INT, STR, MNY, SPR } = options.fixedAllocation;
+    console.log(`Initial allocation: fixed INT/STR/MNY/SPR ${INT}/${STR}/${MNY}/${SPR}`);
+  }
 
   for (let index = 0; index < runs; index += 1) {
     try {
-      const result = runOne(random);
+      const result = runOne(random, options);
       distribution.set(result.ending.name, (distribution.get(result.ending.name) ?? 0) + 1);
       tierDistribution.set(result.ending.tier, (tierDistribution.get(result.ending.tier) ?? 0) + 1);
       totalHSCR += result.props.HSCR;
@@ -123,9 +150,19 @@ function simulate(runs = 1000) {
       const trackStats = subjectTrackAdmission[result.subjectTrack];
       trackStats.runs += 1;
       trackStats.totalFinalScore += result.admission.finalScore;
+      finalScoreValues.push(result.admission.finalScore);
       addCount(scoreBuckets, scoreBucket(result.admission.finalScore));
+      for (const prop of propertyNames) {
+        const value = result.props[prop] ?? 0;
+        propertyValues[prop].push(value);
+        addCount(propertyBuckets[prop], propertyBucket(prop, value));
+      }
       if (result.props.INT >= 10) capCounts.INT += 1;
       if (result.props.STR >= 10) capCounts.STR += 1;
+      if (result.props.INT >= 9) nearCapCounts.INT += 1;
+      if (result.props.STR >= 9) nearCapCounts.STR += 1;
+      if (options.fixedAllocation && result.props.INT < options.fixedAllocation.INT) belowInitialCounts.INT += 1;
+      if (options.fixedAllocation && result.props.STR < options.fixedAllocation.STR) belowInitialCounts.STR += 1;
       if (result.props.SPR >= 10) capCounts.SPR += 1;
       if (result.props.VOL >= 85) capCounts.VOL += 1;
       if (result.props.HVOL < 25 && result.props.RSK >= 65) lowVolunteerHighRiskCount += 1;
@@ -150,8 +187,18 @@ function simulate(runs = 1000) {
       if (result.admission.highScoreLowAdmission) highScoreLowAdmissionCount += 1;
       if (result.admission.admittedUniversity) {
         addCount(admissionDistribution, result.admission.admittedUniversity.name);
+        admittedSchoolCodes.add(result.admission.admittedUniversity.code);
       } else {
         addCount(admissionDistribution, result.admission.admissionTier);
+      }
+      if ((result.admission.highestReachableLineScore ?? 0) >= 650) highLineReachableRuns += 1;
+      if (result.admission.admittedLine) {
+        const lineScore = result.admission.admittedLine.minScore;
+        if (lineScore >= 650) highLineAdmittedRuns += 1;
+        admittedLineScoreValues.push(lineScore);
+        marginValues.push(result.admission.margin);
+        addCount(admittedLineScoreBuckets, admissionLineScoreBucket(lineScore));
+        addCount(marginBuckets, admissionMarginBucket(result.admission.margin));
       }
       if (result.candidateTalents.some(talent => talentRarity(talent) === 'legendary')) legendaryCandidateRuns += 1;
       for (const talent of result.candidateTalents) addCount(candidateRarityDistribution, talentRarity(talent));
@@ -192,13 +239,37 @@ function simulate(runs = 1000) {
   printConcentration('Ending concentration', distribution, completed, [1, 3, 5]);
   printConcentration('Admission concentration', admissionDistribution, completed, [1, 2, 5]);
   console.log('Score buckets:');
-  for (const bucket of ['<420', '420-499', '500-549', '550-579', '580-609', '610-639', '640+']) {
+  for (const bucket of ['<450', '450-499', '500-549', '550-579', '580-609', '610-649', '650+']) {
     const count = scoreBuckets.get(bucket) ?? 0;
     console.log(`- ${bucket}: ${count} (${(count / completed * 100).toFixed(1)}%)`);
   }
+  printNumericSummary('Final score summary', finalScoreValues, 0);
+  console.log('Property buckets:');
+  for (const prop of propertyNames) {
+    printNumericSummary(`- ${prop} summary`, propertyValues[prop], prop === 'VOL' || prop === 'RSK' || prop === 'SCOREMOD' ? 0 : 1);
+    printBucketDistribution(`  ${prop}`, propertyBuckets[prop], propertyBucketOrder(prop), completed);
+  }
+  console.log(`Admitted line score samples: ${admittedLineScoreValues.length} (${(admittedLineScoreValues.length / completed * 100).toFixed(1)}% of runs)`);
+  console.log(`Admitted school coverage: ${admittedSchoolCodes.size}/${content.universities.length} (${(admittedSchoolCodes.size / Math.max(1, content.universities.length) * 100).toFixed(1)}%)`);
+  console.log(`650+ line reachable runs: ${highLineReachableRuns} (${(highLineReachableRuns / completed * 100).toFixed(1)}%)`);
+  console.log(`650+ line admitted runs: ${highLineAdmittedRuns} (${(highLineAdmittedRuns / completed * 100).toFixed(1)}%)`);
+  printNumericSummary('Admitted line score summary', admittedLineScoreValues, 0);
+  printBucketDistribution('Admitted line score buckets', admittedLineScoreBuckets, ['<500', '500-529', '530-549', '550-569', '570-589', '590-609', '610-629', '630-649', '650+'], admittedLineScoreValues.length);
+  printNumericSummary('Admission margin summary', marginValues, 0);
+  printBucketDistribution('Admission margin buckets', marginBuckets, ['<0', '0-5', '6-15', '16-30', '31-60', '61-100', '100+'], marginValues.length);
   console.log('Cap rate:');
   for (const prop of ['INT', 'STR', 'SPR', 'VOL']) {
     console.log(`- ${prop}: ${capCounts[prop]} (${(capCounts[prop] / completed * 100).toFixed(1)}%)`);
+  }
+  console.log('Near cap rate:');
+  for (const prop of ['INT', 'STR']) {
+    console.log(`- ${prop}>=9: ${nearCapCounts[prop]} (${(nearCapCounts[prop] / completed * 100).toFixed(1)}%)`);
+  }
+  if (options.fixedAllocation) {
+    console.log('Below initial rate:');
+    for (const prop of ['INT', 'STR']) {
+      console.log(`- ${prop}: ${belowInitialCounts[prop]} (${(belowInitialCounts[prop] / completed * 100).toFixed(1)}%)`);
+    }
   }
   console.log(`Runs with legendary candidate: ${legendaryCandidateRuns} (${(legendaryCandidateRuns / completed * 100).toFixed(1)}%)`);
   console.log('Candidate rarity distribution:');
@@ -219,7 +290,7 @@ function simulate(runs = 1000) {
   }
 }
 
-function runOne(random) {
+function runOne(random, options = {}) {
   const talentPick = pickTalents(random);
   const selectedTalentIds = talentPick.selectedTalents.map(talent => talent.id);
   const props = {
@@ -236,8 +307,12 @@ function runOne(random) {
     SCOREMOD: 0,
     SUM: 0,
   };
-  for (let point = 0; point < 20; point += 1) {
-    props[['INT', 'STR', 'MNY', 'SPR'][random.int(4)]] += 1;
+  if (options.fixedAllocation) {
+    Object.assign(props, options.fixedAllocation);
+  } else {
+    for (let point = 0; point < 20; point += 1) {
+      props[['INT', 'STR', 'MNY', 'SPR'][random.int(4)]] += 1;
+    }
   }
 
   const talentMap = new Map(content.talents.map(item => [item.id, item]));
@@ -271,7 +346,7 @@ function runOne(random) {
       .filter(({ event }) => evaluate(event.include, props, selectedTalentIds, eventIds, null, subjectTrack))
       .filter(({ event }) => !event.exclude || !evaluate(event.exclude, props, selectedTalentIds, eventIds, null, subjectTrack));
     const unseen = candidates.filter(({ event }) => !eventIds.includes(event.id));
-    const picked = pickWeighted(unseen.length ? unseen : candidates, item => item.ref.weight || item.event.weight || 1, random);
+    const picked = pickWeighted(unseen.length ? unseen : candidates, item => eventPickWeight(item.ref, item.event, props), random);
     if (!picked) throw new Error('no event');
     applyEffect(props, picked.event.effect, true);
     eventIds.push(picked.event.id);
@@ -315,10 +390,38 @@ function runOne(random) {
 function calculateExamScore(props, random) {
   const potentialScore = props.SCR;
   const stabilityBonus = clamp(props.SPR * 0.8 - props.RSK * 0.12, -10, 10);
-  const varianceRange = clamp(18 + props.RSK * 0.22 - props.SPR * 1.1, 6, 35);
+  const varianceRange = clamp(22 + props.RSK * 0.3 - props.SPR * 0.8, 10, 44);
   const variance = Math.round((random.next() * 2 - 1) * varianceRange);
-  const finalScore = clamp(Math.round(potentialScore + stabilityBonus + variance), 250, 750);
-  return { finalScore, potentialScore, variance };
+  const breakthrough = rollBreakthroughBonus(props, potentialScore, random);
+  const setback = breakthrough > 0 ? 0 : rollSetbackPenalty(props, potentialScore, random);
+  const finalScore = clamp(Math.round(potentialScore + stabilityBonus + variance + breakthrough - setback), 250, 750);
+  return { finalScore, potentialScore, variance: variance + breakthrough - setback };
+}
+
+function rollBreakthroughBonus(props, potentialScore, random) {
+  const baseChance = potentialScore >= 575 ? (potentialScore - 575) / 560 : 0;
+  const aptitudeChance =
+    Math.max(0, props.INT - 8) * 0.016
+    + Math.max(0, props.STR - 8) * 0.01
+    + Math.max(0, props.SPR - 6) * 0.008
+    + Math.max(0, props.HVOL - 55) * 0.001
+    + Math.max(0, props.SCOREMOD - 15) * 0.0014;
+  const riskPenalty = props.RSK >= 55 ? 0.02 : 0;
+  const chance = clamp(baseChance + aptitudeChance - riskPenalty, 0, 0.22);
+  if (random.next() >= chance) return 0;
+  return Math.round(clamp(22 + random.next() * 42 + Math.max(0, potentialScore - 615) * 0.35, 18, 85));
+}
+
+function rollSetbackPenalty(props, potentialScore, random) {
+  const chance = clamp(
+    Math.max(0, props.RSK - 45) * 0.006
+      + Math.max(0, 5 - props.SPR) * 0.018
+      + Math.max(0, 520 - potentialScore) * 0.0006,
+    0,
+    0.18,
+  );
+  if (random.next() >= chance) return 0;
+  return Math.round(clamp(20 + random.next() * 45 + Math.max(0, props.RSK - 65) * 0.4, 18, 75));
 }
 
 function forcedSubjectTrack(selectedTalentIds) {
@@ -333,9 +436,9 @@ function resolveSubjectTrack(props, selectedTalentIds, eventIds, random) {
   const scienceEventBonus = eventIds.some(id => [31011, 31013, 31017].includes(id)) ? 1.4 : 0;
   const humanitiesEventBonus = eventIds.some(id => [31731, 31732, 31735].includes(id)) ? 0.9 : 0;
   const riskPenalty = props.RSK * 0.04;
-  const jitter = (random.next() - 0.5) * 1.4;
-  const scorePhysics = props.INT * 1.2 + props.STR * 0.35 + props.MNY * 0.25 + scienceEventBonus - riskPenalty + jitter;
-  const scoreHistory = props.SPR * 1.0 + props.VOL * 0.08 + props.INT * 0.55 + humanitiesEventBonus - jitter;
+  const jitter = (random.next() - 0.5) * 2.6;
+  const scorePhysics = props.INT * 0.85 + props.STR * 0.25 + props.MNY * 0.2 + scienceEventBonus - riskPenalty + jitter;
+  const scoreHistory = props.SPR * 0.85 + props.VOL * 0.06 + props.INT * 0.45 + humanitiesEventBonus - jitter;
   return scorePhysics > scoreHistory ? 'physics' : 'history';
 }
 
@@ -351,10 +454,14 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
   const reachable = lines.filter(item => item.margin >= 0);
   const reachable985 = reachable.filter(item => item.university.tags.includes('985'));
   const reachable211 = reachable.filter(item => item.university.tags.includes('211'));
+  const lowestReachable985 = pickLowestLine(reachable985);
+  const lowestReachable211 = pickLowestLine(reachable211);
+  const lowestReachable985Margin = lowestReachable985 ? exam.finalScore - lowestReachable985.line.minScore : undefined;
+  const highestReachableLineScore = reachable.reduce((max, item) => Math.max(max, item.line.minScore), 0);
   const strategyScore = props.HVOL - props.RSK * 0.35 + routeBonus(selectedTalentIds, eventIds);
   const slide = shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachable, random);
   const picked = slide ? null : pickAdmittedLine(reachable, strategyScore, random);
-  const highScoreLowAdmission = isHighScoreLowAdmission(reachable985.length > 0, reachable211.length > 0, picked);
+  const highScoreLowAdmission = isHighScoreLowAdmission(exam.finalScore, lowestReachable985, lowestReachable211, picked, slide);
 
   if (!picked) {
     return {
@@ -364,6 +471,8 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
       finalScore: exam.finalScore,
       canReach985: reachable985.length > 0,
       canReach211: reachable211.length > 0,
+      lowestReachable985Margin,
+      highestReachableLineScore,
       admitted: false,
       admissionTier: slide ? 'slide' : exam.finalScore >= 300 ? 'college' : 'retake',
       strategyScore,
@@ -378,6 +487,8 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
     finalScore: exam.finalScore,
     canReach985: reachable985.length > 0,
     canReach211: reachable211.length > 0,
+    lowestReachable985Margin,
+    highestReachableLineScore,
     admitted: true,
     admittedLine: picked.line,
     admittedUniversity: picked.university,
@@ -390,20 +501,76 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
 
 function pickAdmittedLine(reachable, strategyScore, random) {
   if (reachable.length === 0) return null;
-  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 24 : 58;
-  const minMargin = strategyScore >= 65 ? 0 : strategyScore >= 35 ? 6 : 26;
-  const maxMargin = strategyScore >= 65 ? 36 : strategyScore >= 35 ? 78 : 150;
-  const preferred = reachable.filter(item => item.margin >= minMargin && item.margin <= maxMargin);
-  const pool = preferred.length ? preferred : reachable;
-  return pickWeighted(pool, item => admissionChoiceWeight(item, targetMargin, strategyScore), random);
+  const sorted = [...reachable].sort((a, b) =>
+    b.line.minScore - a.line.minScore || linePrestigeScore(b) - linePrestigeScore(a),
+  );
+  const denominator = Math.max(1, sorted.length - 1);
+  const ranked = sorted.map((item, index) => ({ ...item, rankPercentile: index / denominator }));
+  const finalScore = sorted[0].line.minScore + sorted[0].margin;
+  const targetRank = targetAdmissionRank(strategyScore, finalScore);
+  const highLineCandidates = ranked.filter(item => item.line.minScore >= 650);
+  if (highLineCandidates.length > 0 && random.next() < highLineCommitChance(strategyScore)) {
+    return pickWeighted(highLineCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
+  }
+  const reasonableCandidates = ranked.filter(item => item.margin <= reasonableMarginLimit(strategyScore, finalScore));
+  if (reasonableCandidates.length > 0 && random.next() < reasonableMarginCommitChance(strategyScore)) {
+    return pickWeighted(reasonableCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
+  }
+  return pickWeighted(ranked, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
 }
 
-function admissionChoiceWeight(candidate, targetMargin, strategyScore) {
-  const marginFit = Math.max(6, 95 - Math.abs(candidate.margin - targetMargin) * 2.4);
-  const prestige = linePrestigeScore(candidate) / 160;
-  const prestigeWeight = strategyScore >= 65 ? 1 : strategyScore >= 35 ? 0.65 : 0.28;
-  const safetyBonus = strategyScore < 35 ? Math.min(candidate.margin, 90) * 0.42 : 0;
-  return Math.max(1, marginFit + prestige * prestigeWeight + safetyBonus);
+function highLineCommitChance(strategyScore) {
+  if (strategyScore >= 65) return 0.9;
+  if (strategyScore >= 35) return 0.85;
+  return 0.8;
+}
+
+function reasonableMarginLimit(strategyScore, finalScore) {
+  const baseLimit = strategyScore >= 65 ? 34 : strategyScore >= 35 ? 42 : 52;
+  return finalScore >= 620 ? baseLimit + 12 : baseLimit;
+}
+
+function reasonableMarginCommitChance(strategyScore) {
+  if (strategyScore >= 65) return 0.96;
+  if (strategyScore >= 35) return 0.94;
+  return 0.9;
+}
+
+function pickLowestLine(candidates) {
+  return [...candidates].sort((a, b) => a.line.minScore - b.line.minScore || (a.line.minRank ?? Number.MAX_SAFE_INTEGER) - (b.line.minRank ?? Number.MAX_SAFE_INTEGER))[0] ?? null;
+}
+
+function targetAdmissionRank(strategyScore, finalScore) {
+  let target = strategyScore >= 65
+    ? clamp(0.08 - (strategyScore - 65) * 0.006, 0.02, 0.08)
+    : strategyScore >= 35
+      ? clamp(0.2 - (strategyScore - 35) * 0.002, 0.1, 0.2)
+      : clamp(0.36 - strategyScore * 0.0045, 0.16, 0.5);
+  if (finalScore >= 650) target = Math.min(target, strategyScore >= 65 ? 0.025 : strategyScore >= 35 ? 0.045 : 0.065);
+  else if (finalScore >= 620) target = Math.min(target, strategyScore >= 65 ? 0.06 : strategyScore >= 35 ? 0.12 : 0.18);
+  return target;
+}
+
+function admissionChoiceWeight(candidate, targetRank, strategyScore) {
+  const spread = strategyScore >= 65 ? 0.12 : strategyScore >= 35 ? 0.24 : 0.3;
+  const rankFit = Math.max(0, 1 - Math.abs(candidate.rankPercentile - targetRank) / spread);
+  const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 12 : 16;
+  const marginFit = Math.max(0, 1 - Math.abs(candidate.margin - targetMargin) / 95);
+  const prestige = linePrestigeScore(candidate) / 7000;
+  const prestigeWeight = strategyScore >= 65 ? 36 : strategyScore >= 35 ? 22 : 8;
+  const tierBonus = admissionTierWeight(candidate.university, strategyScore);
+  const baseWeight = 2 + rankFit * rankFit * 145 + marginFit * 42 + prestige * prestigeWeight + tierBonus;
+  return Math.max(0.2, baseWeight * marginPenalty(candidate.margin, strategyScore));
+}
+
+function marginPenalty(margin, strategyScore) {
+  const freeMargin = strategyScore >= 65 ? 24 : strategyScore >= 35 ? 30 : 36;
+  const excess = margin - freeMargin;
+  if (excess <= 0) return 1;
+  if (excess <= 18) return 0.58;
+  if (excess <= 42) return 0.22;
+  if (excess <= 80) return 0.07;
+  return 0.018;
 }
 
 function linePrestigeScore(candidate) {
@@ -416,6 +583,14 @@ function linePrestigeScore(candidate) {
         ? 650
         : 0;
   return tierWeight + tagBonus + candidate.line.minScore;
+}
+
+function admissionTierWeight(university, strategyScore) {
+  const tags = university.tags;
+  if (tags.includes('985')) return strategyScore >= 65 ? 90 : strategyScore >= 35 ? 52 : 14;
+  if (tags.includes('211')) return strategyScore >= 65 ? 58 : strategyScore >= 35 ? 36 : 10;
+  if (tags.includes('doubleFirstClass')) return strategyScore >= 65 ? 36 : strategyScore >= 35 ? 24 : 6;
+  return 0;
 }
 
 function routeBonus(selectedTalentIds, eventIds) {
@@ -453,9 +628,10 @@ function routeSignal(selectedTalentIds, eventIds) {
 function shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachable, random) {
   if (reachable.length === 0) return false;
   const route = routeSignal(selectedTalentIds, eventIds);
-  let chance = 0;
+  let chance = 0.012;
   if (strategyScore < 10 && props.RSK >= 65) chance += 0.1;
   if (strategyScore < 0) chance += 0.08;
+  if (strategyScore < 35) chance += 0.015;
   if (props.HVOL < 25) chance += 0.08;
   if (props.RSK >= 75) chance += 0.05;
   chance += route.risk * 0.045;
@@ -464,11 +640,13 @@ function shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachabl
   return random.next() < chance;
 }
 
-function isHighScoreLowAdmission(canReach985, canReach211, picked) {
-  if (!picked) return canReach985 || canReach211;
+function isHighScoreLowAdmission(finalScore, lowestReachable985, lowestReachable211, picked, slide) {
+  const hasComfortable985Score = Boolean(lowestReachable985 && finalScore >= lowestReachable985.line.minScore + 10);
+  const hasComfortable211Score = Boolean(lowestReachable211 && finalScore >= lowestReachable211.line.minScore + 40);
+  if (!picked) return slide && (hasComfortable985Score || hasComfortable211Score);
   const actualTier = universityAdmissionTier(picked.university);
-  if (canReach985) return actualTier !== '985';
-  if (canReach211) return !['985', '211'].includes(actualTier);
+  if (hasComfortable985Score) return actualTier !== '985';
+  if (hasComfortable211Score) return !['985', '211'].includes(actualTier);
   return false;
 }
 
@@ -557,12 +735,52 @@ function hasConflict(talent, selectedIds) {
 
 function applyEffect(props, effect = {}, scaled = false) {
   for (const [key, value] of Object.entries(effect)) {
-    props[key] = (props[key] ?? 0) + value * (scaled ? eventEffectScale[key] ?? 1 : 1);
+    const delta = scaled ? scaledEventDelta(key, value, props[key] ?? 0) : value;
+    props[key] = (props[key] ?? 0) + delta;
     if (['INT', 'STR', 'MNY', 'SPR'].includes(key)) props[key] = clamp(props[key], 0, 10);
     if (['VOL', 'HVOL'].includes(key)) props[key] = clamp(props[key], 0, 85);
     if (key === 'RSK') props[key] = clamp(props[key], 0, 90);
     if (key === 'SCOREMOD') props[key] = clamp(props[key], -60, 70);
   }
+}
+
+function eventPickWeight(ref, event, props) {
+  const baseWeight = ref.weight || event.weight || 1;
+  const intDelta = event.effect?.INT ?? 0;
+  const strDelta = event.effect?.STR ?? 0;
+  const hasGrowth = intDelta > 0 || strDelta > 0;
+  const hasSetback = intDelta < 0 || strDelta < 0;
+  let multiplier = 1;
+
+  if (hasGrowth) {
+    multiplier *= 0.8;
+    if (props.INT >= 8 && intDelta > 0) multiplier *= 0.75;
+    if (props.STR >= 8 && strDelta > 0) multiplier *= 0.75;
+  }
+
+  if (hasSetback) {
+    multiplier *= 1.1;
+    if (props.INT >= 7 && intDelta < 0) multiplier *= 1.05;
+    if (props.STR >= 7 && strDelta < 0) multiplier *= 1.05;
+  }
+
+  return Math.max(1, baseWeight * multiplier);
+}
+
+function scaledEventDelta(prop, delta, current) {
+  const scale = delta >= 0
+    ? positiveEventEffectScale[prop] ?? 1
+    : negativeEventEffectScale[prop] ?? 1;
+  return delta * scale * positiveEventSoftCap(prop, delta, current);
+}
+
+function positiveEventSoftCap(prop, delta, current) {
+  if (delta <= 0) return 1;
+  if (prop !== 'INT' && prop !== 'STR') return 1;
+  if (current >= 9) return 0.45;
+  if (current >= 8) return 0.65;
+  if (current >= 7) return 0.85;
+  return 1;
 }
 
 function refreshScore(props, phase) {
@@ -577,6 +795,7 @@ function evaluate(condition, props, talentIds, eventIds, admission = null, subje
   const admissionProps = {
     ADMSCORE: admission?.finalScore ?? 0,
     MARGIN: admission?.margin ?? 0,
+    LOWEST985MARGIN: admission?.lowestReachable985Margin ?? 0,
     SLIDE: admission?.admissionTier === 'slide' ? 1 : 0,
   };
   let expr = condition
@@ -665,17 +884,129 @@ function printConcentration(label, distribution, total, topSizes) {
 }
 
 function scoreBucket(score) {
-  if (score < 420) return '<420';
-  if (score < 500) return '420-499';
+  if (score < 450) return '<450';
+  if (score < 500) return '450-499';
   if (score < 550) return '500-549';
   if (score < 580) return '550-579';
   if (score < 610) return '580-609';
-  if (score < 640) return '610-639';
-  return '640+';
+  if (score < 650) return '610-649';
+  return '650+';
+}
+
+function propertyBucket(prop, value) {
+  if (['INT', 'STR', 'MNY', 'SPR'].includes(prop)) {
+    if (value < 4) return '0-3';
+    if (value < 6) return '4-5';
+    if (value < 8) return '6-7';
+    if (value < 9) return '8';
+    if (value < 10) return '9';
+    return '10';
+  }
+  if (prop === 'VOL') {
+    if (value < 25) return '<25';
+    if (value < 45) return '25-44';
+    if (value < 65) return '45-64';
+    if (value < 85) return '65-84';
+    return '85';
+  }
+  if (prop === 'RSK') {
+    if (value < 25) return '<25';
+    if (value < 45) return '25-44';
+    if (value < 65) return '45-64';
+    if (value < 80) return '65-79';
+    return '80+';
+  }
+  if (value < 0) return '<0';
+  if (value < 10) return '0-9';
+  if (value < 20) return '10-19';
+  if (value < 30) return '20-29';
+  return '30+';
+}
+
+function propertyBucketOrder(prop) {
+  if (['INT', 'STR', 'MNY', 'SPR'].includes(prop)) return ['0-3', '4-5', '6-7', '8', '9', '10'];
+  if (prop === 'VOL') return ['<25', '25-44', '45-64', '65-84', '85'];
+  if (prop === 'RSK') return ['<25', '25-44', '45-64', '65-79', '80+'];
+  return ['<0', '0-9', '10-19', '20-29', '30+'];
+}
+
+function admissionLineScoreBucket(score) {
+  if (score < 500) return '<500';
+  if (score < 530) return '500-529';
+  if (score < 550) return '530-549';
+  if (score < 570) return '550-569';
+  if (score < 590) return '570-589';
+  if (score < 610) return '590-609';
+  if (score < 630) return '610-629';
+  if (score < 650) return '630-649';
+  return '650+';
+}
+
+function admissionMarginBucket(margin) {
+  if (margin < 0) return '<0';
+  if (margin <= 5) return '0-5';
+  if (margin <= 15) return '6-15';
+  if (margin <= 30) return '16-30';
+  if (margin <= 60) return '31-60';
+  if (margin <= 100) return '61-100';
+  return '100+';
+}
+
+function printBucketDistribution(label, distribution, buckets, total) {
+  console.log(`${label}:`);
+  const denominator = Math.max(1, total);
+  for (const bucket of buckets) {
+    const count = distribution.get(bucket) ?? 0;
+    console.log(`- ${bucket}: ${count} (${(count / denominator * 100).toFixed(1)}%)`);
+  }
+}
+
+function printNumericSummary(label, values, digits = 1) {
+  if (values.length === 0) {
+    console.log(`${label}: no data`);
+    return;
+  }
+  const sorted = [...values].sort((a, b) => a - b);
+  const avg = values.reduce((sum, value) => sum + value, 0) / values.length;
+  const format = value => value.toFixed(digits);
+  console.log(`${label}: min ${format(sorted[0])}, p25 ${format(percentile(sorted, 0.25))}, median ${format(percentile(sorted, 0.5))}, p75 ${format(percentile(sorted, 0.75))}, max ${format(sorted.at(-1))}, avg ${format(avg)}`);
+}
+
+function percentile(sorted, ratio) {
+  if (sorted.length === 0) return 0;
+  const index = Math.round((sorted.length - 1) * ratio);
+  return sorted[index];
 }
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
 
-simulate(Number(process.argv[2] ?? 1000));
+const { runs, options } = parseArgs(process.argv.slice(2));
+simulate(runs, options);
+
+function parseArgs(args) {
+  let runs = 1000;
+  const options = {};
+  for (const arg of args) {
+    if (/^\d+$/.test(arg)) {
+      runs = Number(arg);
+      continue;
+    }
+    if (arg === '--fixed-5') {
+      options.fixedAllocation = { INT: 5, STR: 5, MNY: 5, SPR: 5 };
+      continue;
+    }
+    const fixedMatch = arg.match(/^--fixed-allocation=(\d+),(\d+),(\d+),(\d+)$/);
+    if (fixedMatch) {
+      const [, INT, STR, MNY, SPR] = fixedMatch;
+      options.fixedAllocation = {
+        INT: Number(INT),
+        STR: Number(STR),
+        MNY: Number(MNY),
+        SPR: Number(SPR),
+      };
+    }
+  }
+  return { runs, options };
+}

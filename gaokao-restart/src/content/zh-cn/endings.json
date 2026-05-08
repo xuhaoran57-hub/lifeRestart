@@ -17,12 +17,25 @@
     "name": "稳上 985",
     "tier": "S",
     "description": "你的实力和志愿都足够稳健。",
-    "condition": "(ADM?[985])&(MARGIN>=8)&(SLIDE=0)",
+    "condition": "(ADM?[985])&(LOWEST985MARGIN>=20)&(SLIDE=0)",
     "priority": 90,
     "scoreBonus": 40,
     "tags": [
       "985",
       "稳健"
+    ]
+  },
+  {
+    "id": 41009,
+    "name": "985 压线录取",
+    "tier": "S",
+    "description": "你的分数擦着线进入 985，惊险但足够漂亮。",
+    "condition": "(ADM?[985])&(MARGIN<8)&(SLIDE=0)",
+    "priority": 89,
+    "scoreBonus": 36,
+    "tags": [
+      "985",
+      "压线"
     ]
   },
   {
@@ -36,6 +49,20 @@
     "tags": [
       "竞赛",
       "保送"
+    ]
+  },
+  {
+    "id": 41010,
+    "name": "保送上岸",
+    "tier": "SSS",
+    "description": "你在竞赛、材料和长期积累里提前拿到了入场券。",
+    "condition": "((TLT?[21804])&(INT>=8)&(VOL>=50)&(RSK<50))|((TLT?[21805])&(EVT?[31017])&(INT>=8)&(RSK<65))",
+    "priority": 114,
+    "scoreBonus": 80,
+    "tags": [
+      "保送",
+      "特殊线",
+      "SSS"
     ]
   },
   {
@@ -56,8 +83,8 @@
     "name": "志愿填报鬼才",
     "tier": "X",
     "description": "分数不是最高，但你把每一分都用了个遍。",
-    "condition": "(HSCR>=540)&(VOL>=70)&(EVT?[31027])",
-    "priority": 80,
+    "condition": "(HSCR>=530)&(VOL>=60)&(EVT?[31027])",
+    "priority": 86,
     "scoreBonus": 35,
     "tags": [
       "志愿",
@@ -70,7 +97,7 @@
     "tier": "X",
     "description": "你走出了一条和文化课不同的成功路径。",
     "condition": "TLT?[21011]",
-    "priority": 75,
+    "priority": 85,
     "scoreBonus": 25,
     "tags": [
       "艺体",
@@ -82,8 +109,8 @@
     "name": "复读一年再战",
     "tier": "C",
     "description": "你不甘心，决定再给自己一次机会。",
-    "condition": "(HSCR<520)&(SPR>=3)&(EVT?[31026])",
-    "priority": 60,
+    "condition": "(ADMSCORE<520)&(SPR>=3)&(VOL<35)",
+    "priority": 80,
     "scoreBonus": 10,
     "tags": [
       "复读",
@@ -160,7 +187,7 @@
     "name": "强基入围翻盘",
     "tier": "SS",
     "description": "你的分数、风险和志愿策略共同导向了「强基入围翻盘」。",
-    "condition": "(HSCR>=640)&(VOL>=70)&(TLT?[21511,21518])",
+    "condition": "(HSCR>=625)&(VOL>=62)&(TLT?[21511,21518,21524])",
     "priority": 105,
     "scoreBonus": 55,
     "tags": [
@@ -199,8 +226,8 @@
     "name": "省会一本好专业",
     "tier": "A",
     "description": "你的分数、风险和志愿策略共同导向了「省会一本好专业」。",
-    "condition": "(HSCR>=570)&(VOL>=55)",
-    "priority": 82,
+    "condition": "(ADM?[undergraduate])&(HSCR>=570)&(VOL>=55)&(MARGIN>=8)",
+    "priority": 76,
     "scoreBonus": 25,
     "tags": [
       "分数线",
@@ -264,8 +291,8 @@
     "name": "民办本科咬牙上",
     "tier": "C",
     "description": "你的分数、风险和志愿策略共同导向了「民办本科咬牙上」。",
-    "condition": "(HSCR>=485)&(MNY>=6)",
-    "priority": 58,
+    "condition": "(ADM?[undergraduate])&(HSCR<560)&(MNY>=5)&(MARGIN<35)",
+    "priority": 68,
     "scoreBonus": 5,
     "tags": [
       "分数线",
@@ -277,8 +304,8 @@
     "name": "专科王牌路线",
     "tier": "C",
     "description": "你的分数、风险和志愿策略共同导向了「专科王牌路线」。",
-    "condition": "(HSCR>=440)&(VOL>=65)",
-    "priority": 57,
+    "condition": "(ADM![211])&(SLIDE=0)&(ADMSCORE>=420)&(ADMSCORE<500)&(VOL>=35)",
+    "priority": 72,
     "scoreBonus": 8,
     "tags": [
       "分数线",
@@ -290,8 +317,8 @@
     "name": "高复预备役",
     "tier": "C",
     "description": "你的分数、风险和志愿策略共同导向了「高复预备役」。",
-    "condition": "(HSCR<520)&(SPR>=5)&(RSK<70)",
-    "priority": 56,
+    "condition": "(ADM![211])&(ADMSCORE<520)&(SPR>=3)&(RSK<80)&(VOL<60)",
+    "priority": 71,
     "scoreBonus": 5,
     "tags": [
       "分数线",
@@ -342,8 +369,8 @@
     "name": "调剂陌生专业",
     "tier": "B",
     "description": "你的分数、风险和志愿策略共同导向了「调剂陌生专业」。",
-    "condition": "(ADM![211])&(ADMSCORE>=540)&(VOL<45)&(RSK<75)&(SLIDE=0)",
-    "priority": 74,
+    "condition": "(ADM?[undergraduate])&(ADMSCORE>=540)&(VOL<45)&(MARGIN<45)&(RSK<75)&(SLIDE=0)",
+    "priority": 70,
     "scoreBonus": 8,
     "tags": [
       "分数线",
@@ -459,8 +486,8 @@
     "name": "强基材料满格",
     "tier": "X",
     "description": "你的天赋组合把这局推向了「强基材料满格」。",
-    "condition": "(TLT?[21511,21524])&(VOL>=70)",
-    "priority": 78,
+    "condition": "(TLT?[21511,21524])&(VOL>=60)",
+    "priority": 88,
     "scoreBonus": 35,
     "tags": [
       "天赋路线",
@@ -472,8 +499,8 @@
     "name": "志愿数据怪",
     "tier": "X",
     "description": "你的天赋组合把这局推向了「志愿数据怪」。",
-    "condition": "(TLT?[21703])&(VOL>=85)",
-    "priority": 78,
+    "condition": "(TLT?[21703])&(VOL>=70)",
+    "priority": 88,
     "scoreBonus": 35,
     "tags": [
       "天赋路线",
@@ -486,7 +513,7 @@
     "tier": "X",
     "description": "你的天赋组合把这局推向了「招生章程猎人」。",
     "condition": "(TLT?[21712])&(EVT?[31708,31720,31732])",
-    "priority": 78,
+    "priority": 86,
     "scoreBonus": 35,
     "tags": [
       "天赋路线",
@@ -641,8 +668,8 @@
     "name": "专业洁癖的胜利",
     "tier": "X",
     "description": "你的天赋组合把这局推向了「专业洁癖的胜利」。",
-    "condition": "(TLT?[21718])&(VOL>=65)&(HSCR>=530)",
-    "priority": 78,
+    "condition": "(TLT?[21718])&(VOL>=55)&(HSCR>=515)",
+    "priority": 86,
     "scoreBonus": 35,
     "tags": [
       "天赋路线",
@@ -654,8 +681,8 @@
     "name": "风险分层大师",
     "tier": "X",
     "description": "你的天赋组合把这局推向了「风险分层大师」。",
-    "condition": "(TLT?[21710])&(RSK<30)&(VOL>=75)",
-    "priority": 78,
+    "condition": "(TLT?[21710])&(RSK<45)&(VOL>=60)",
+    "priority": 86,
     "scoreBonus": 35,
     "tags": [
       "天赋路线",
@@ -732,8 +759,8 @@
     "name": "中考定位成功",
     "tier": "A",
     "description": "关键经历串成了「中考定位成功」的路线。",
-    "condition": "(EVT?[31308,31320,31332])&(VOL>=35)&(RSK<70)&(HSCR>=500)",
-    "priority": 78,
+    "condition": "(EVT?[31308,31320,31332])&(VOL>=45)&(RSK<55)&(HSCR>=540)",
+    "priority": 72,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -771,8 +798,8 @@
     "name": "住校适应成功",
     "tier": "A",
     "description": "关键经历串成了「住校适应成功」的路线。",
-    "condition": "(EVT?[31405,31417,31429])&(STR>=6)",
-    "priority": 84,
+    "condition": "(EVT?[31405,31417,31429])&(STR>=6)&(SPR>=5)&(RSK<55)",
+    "priority": 74,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -810,8 +837,8 @@
     "name": "强基宣讲点醒",
     "tier": "X",
     "description": "关键经历串成了「强基宣讲点醒」的路线。",
-    "condition": "(EVT?[31501,31513,31525])&(VOL>=70)",
-    "priority": 72,
+    "condition": "(EVT?[31501,31513,31525])&(VOL>=60)",
+    "priority": 84,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -862,8 +889,8 @@
     "name": "手机上交奇效",
     "tier": "A",
     "description": "关键经历串成了「手机上交奇效」的路线。",
-    "condition": "(EVT?[31512,31524,31536])&(STR>=6)&(RSK<65)&(HSCR>=520)",
-    "priority": 77,
+    "condition": "(EVT?[31512,31524,31536])&(STR>=7)&(SPR>=5)&(RSK<50)&(HSCR>=550)",
+    "priority": 72,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -914,8 +941,8 @@
     "name": "志愿三套预案",
     "tier": "X",
     "description": "关键经历串成了「志愿三套预案」的路线。",
-    "condition": "(EVT?[31607,31619,31631])&(VOL>=75)",
-    "priority": 72,
+    "condition": "(EVT?[31607,31619,31631])&(VOL>=65)",
+    "priority": 84,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -927,8 +954,8 @@
     "name": "睡眠保护成功",
     "tier": "A",
     "description": "关键经历串成了「睡眠保护成功」的路线。",
-    "condition": "(EVT?[31610,31622,31634])&(RSK<40)",
-    "priority": 85,
+    "condition": "(EVT?[31610,31622,31634])&(RSK<35)&(SPR>=6)",
+    "priority": 75,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -966,8 +993,8 @@
     "name": "英语听力意外",
     "tier": "C",
     "description": "关键经历串成了「英语听力意外」的路线。",
-    "condition": "(EVT?[31703,31715,31727])&(SPR<6)",
-    "priority": 88,
+    "condition": "(EVT?[31703,31715,31727])&(SPR<6)&(RSK>=35)",
+    "priority": 74,
     "scoreBonus": 5,
     "tags": [
       "事件链",
@@ -980,7 +1007,7 @@
     "tier": "X",
     "description": "关键经历串成了「章程一行救命」的路线。",
     "condition": "(EVT?[31708,31720,31732])&(VOL>=60)",
-    "priority": 72,
+    "priority": 84,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -992,8 +1019,8 @@
     "name": "专业名误导",
     "tier": "D",
     "description": "关键经历串成了「专业名误导」的路线。",
-    "condition": "(EVT?[31709,31721,31733])&(VOL<48)&(RSK>=35)",
-    "priority": 78,
+    "condition": "(EVT?[31709,31721,31733])&(VOL<42)&(RSK>=42)",
+    "priority": 76,
     "scoreBonus": -12,
     "tags": [
       "事件链",
@@ -1005,8 +1032,8 @@
     "name": "保专业上岸",
     "tier": "X",
     "description": "关键经历串成了「保专业上岸」的路线。",
-    "condition": "(EVT?[31711,31723,31735])&(HSCR>=520)",
-    "priority": 72,
+    "condition": "(EVT?[31711,31723,31735])&(HSCR>=500)",
+    "priority": 84,
     "scoreBonus": 30,
     "tags": [
       "事件链",
@@ -1031,8 +1058,8 @@
     "name": "三角比较最优解",
     "tier": "X",
     "description": "关键经历串成了「三角比较最优解」的路线。",
-    "condition": "(EVT?[31707,31719,31731])&(VOL>=75)&(HSCR>=540)",
-    "priority": 72,
+    "condition": "(EVT?[31707,31719,31731])&(VOL>=65)&(HSCR>=520)",
+    "priority": 84,
     "scoreBonus": 30,
     "tags": [
       "事件链",

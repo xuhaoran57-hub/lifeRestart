@@ -162,6 +162,7 @@ export interface AdmissionResult {
   canReach211: boolean;
   bestReachable985?: AdmissionLine;
   bestReachable211?: AdmissionLine;
+  lowestReachable985Margin?: number;
   admitted: boolean;
   admittedLine?: AdmissionLine;
   admittedUniversity?: University;

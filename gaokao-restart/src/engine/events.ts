@@ -41,9 +41,32 @@ export function pickEventForRound(
 
   const unseen = candidates.filter(({ event }) => !state.eventIds.includes(event.id));
   const pool = unseen.length > 0 ? unseen : candidates;
-  const picked = pickWeighted(pool, item => item.ref.weight || item.event.weight || 1, random);
+  const picked = pickWeighted(pool, item => eventPickWeight(item.ref, item.event, state), random);
   if (!picked) {
     throw new Error(`No event available for age ${ageRound.age} round ${ageRound.round}`);
   }
   return picked.event;
+}
+
+function eventPickWeight(ref: WeightedRef, event: GameEvent, state: GameState): number {
+  const baseWeight = ref.weight || event.weight || 1;
+  const intDelta = event.effect?.INT ?? 0;
+  const strDelta = event.effect?.STR ?? 0;
+  const hasGrowth = intDelta > 0 || strDelta > 0;
+  const hasSetback = intDelta < 0 || strDelta < 0;
+  let multiplier = 1;
+
+  if (hasGrowth) {
+    multiplier *= 0.8;
+    if (state.props.INT >= 8 && intDelta > 0) multiplier *= 0.75;
+    if (state.props.STR >= 8 && strDelta > 0) multiplier *= 0.75;
+  }
+
+  if (hasSetback) {
+    multiplier *= 1.1;
+    if (state.props.INT >= 7 && intDelta < 0) multiplier *= 1.05;
+    if (state.props.STR >= 7 && strDelta < 0) multiplier *= 1.05;
+  }
+
+  return Math.max(1, baseWeight * multiplier);
 }

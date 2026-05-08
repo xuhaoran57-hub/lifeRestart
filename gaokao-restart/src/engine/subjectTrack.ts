@@ -25,10 +25,9 @@ export function resolveSubjectTrack(state: GameState, random: Random): SubjectTr
   const scienceEventBonus = state.eventIds.some(id => [31011, 31013, 31017].includes(id)) ? 1.4 : 0;
   const humanitiesEventBonus = state.eventIds.some(id => [31731, 31732, 31735].includes(id)) ? 0.9 : 0;
   const riskPenalty = state.props.RSK * 0.04;
-  const jitter = (random.next() - 0.5) * 1.4;
-  const scorePhysics = state.props.INT * 1.2 + state.props.STR * 0.35 + state.props.MNY * 0.25 + scienceEventBonus - riskPenalty + jitter;
-  const scoreHistory = state.props.SPR * 1.0 + state.props.VOL * 0.08 + state.props.INT * 0.55 + humanitiesEventBonus - jitter;
+  const jitter = (random.next() - 0.5) * 2.6;
+  const scorePhysics = state.props.INT * 0.85 + state.props.STR * 0.25 + state.props.MNY * 0.2 + scienceEventBonus - riskPenalty + jitter;
+  const scoreHistory = state.props.SPR * 0.85 + state.props.VOL * 0.06 + state.props.INT * 0.45 + humanitiesEventBonus - jitter;
 
   return scorePhysics > scoreHistory ? 'physics' : 'history';
 }
-

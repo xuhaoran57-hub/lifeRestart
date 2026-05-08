@@ -9,7 +9,7 @@ const rarityConfig = {
   common: { grade: 0, name: '普通', target: 64 },
   rare: { grade: 1, name: '稀有', target: 58 },
   epic: { grade: 2, name: '史诗', target: 32 },
-  legendary: { grade: 3, name: '传说', target: 8 },
+  legendary: { grade: 3, name: '传说', target: 12 },
 };
 const subjectTracks = new Set(['history', 'physics']);
 const requiredAdmissionProfiles = new Map([

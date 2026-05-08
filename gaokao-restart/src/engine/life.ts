@@ -21,11 +21,21 @@ import { Random } from './random';
 import { forcedSubjectTrackFromTalents, resolveSubjectTrack } from './subjectTrack';
 import { getTalentMap, validateTalentSelection } from './talents';
 
-const eventEffectScale: Partial<Record<CorePropCode, number>> = {
-  INT: 0.42,
-  STR: 0.42,
+const positiveEventEffectScale: Partial<Record<CorePropCode, number>> = {
+  INT: 0.19,
+  STR: 0.28,
   MNY: 0.5,
-  SPR: 0.4,
+  SPR: 0.42,
+  VOL: 0.5,
+  RSK: 0.35,
+  SCOREMOD: 0.65,
+};
+
+const negativeEventEffectScale: Partial<Record<CorePropCode, number>> = {
+  INT: 0.3,
+  STR: 0.35,
+  MNY: 0.5,
+  SPR: 0.42,
   VOL: 0.5,
   RSK: 0.35,
   SCOREMOD: 0.65,
@@ -177,7 +187,7 @@ export class LifeEngine {
   }
 
   private applyEvent(state: GameState, event: GameEvent): void {
-    this.applyEffect(state.props, event.effect, prop => eventEffectScale[prop] ?? 1);
+    this.applyEffect(state.props, event.effect, scaledEventDelta);
     if (!state.eventIds.includes(event.id)) state.eventIds.push(event.id);
   }
 
@@ -213,10 +223,14 @@ export class LifeEngine {
     return event;
   }
 
-  private applyEffect(props: Props, effect: Effect = {}, scaleOf: (prop: CorePropCode) => number = () => 1): void {
+  private applyEffect(
+    props: Props,
+    effect: Effect = {},
+    scaleDelta: (prop: CorePropCode, delta: number, current: number) => number = (_prop, delta) => delta,
+  ): void {
     for (const [prop, delta] of Object.entries(effect)) {
       const propCode = prop as CorePropCode;
-      applyPropDelta(props, propCode, (delta ?? 0) * scaleOf(propCode));
+      applyPropDelta(props, propCode, scaleDelta(propCode, delta ?? 0, props[propCode] ?? 0));
     }
   }
 
@@ -241,4 +255,20 @@ export class LifeEngine {
       admissionResult: state.admissionResult ? { ...state.admissionResult } : null,
     };
   }
+}
+
+function scaledEventDelta(prop: CorePropCode, delta: number, current: number): number {
+  const scale = delta >= 0
+    ? positiveEventEffectScale[prop] ?? 1
+    : negativeEventEffectScale[prop] ?? 1;
+  return delta * scale * positiveEventSoftCap(prop, delta, current);
+}
+
+function positiveEventSoftCap(prop: CorePropCode, delta: number, current: number): number {
+  if (delta <= 0) return 1;
+  if (prop !== 'INT' && prop !== 'STR') return 1;
+  if (current >= 9) return 0.45;
+  if (current >= 8) return 0.65;
+  if (current >= 7) return 0.85;
+  return 1;
 }

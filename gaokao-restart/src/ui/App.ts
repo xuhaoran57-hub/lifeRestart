@@ -1,13 +1,14 @@
 import type { GameApp } from '../app/createGame';
-import type { AdmissionResult, Allocation, FinalResult, GameState, Talent } from '../app/types';
+import type { Achievement, AdmissionResult, Allocation, FinalResult, GameState, Talent } from '../app/types';
 import { LifeEngine } from '../engine/life';
 import { recordFinalResult, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
 
-type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary';
+type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements';
 
 interface UiState {
   screen: Screen;
+  previousScreen: Screen | null;
   candidates: Talent[];
   inheritedCandidateId: number | null;
   selectedTalentIds: number[];
@@ -22,6 +23,7 @@ interface UiState {
 export function createApp(root: HTMLElement, game: GameApp): void {
   const state: UiState = {
     screen: 'home',
+    previousScreen: null,
     candidates: [],
     inheritedCandidateId: null,
     selectedTalentIds: [],
@@ -62,6 +64,18 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
     state.selectedTalentIds = [];
     state.screen = 'talents';
     if (inheritedTalentId !== null) game.persist(setInheritedTalent(game.save, null));
+    return;
+  }
+
+  if (action === 'view-achievements') {
+    if (state.screen !== 'achievements') state.previousScreen = state.screen;
+    state.screen = 'achievements';
+    return;
+  }
+
+  if (action === 'close-achievements') {
+    state.screen = state.previousScreen && state.previousScreen !== 'achievements' ? state.previousScreen : 'home';
+    state.previousScreen = null;
     return;
   }
 
@@ -118,6 +132,7 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
 
   if (action === 'restart') {
     state.screen = 'home';
+    state.previousScreen = null;
     state.engine = null;
     state.gameState = null;
     state.result = null;
@@ -172,6 +187,7 @@ function renderScreen(state: UiState, game: GameApp): string {
     properties: renderProperties(state),
     trajectory: renderTrajectory(state),
     summary: renderSummary(state, game),
+    achievements: renderAchievements(game),
   }[state.screen];
 
   return `
@@ -179,9 +195,12 @@ function renderScreen(state: UiState, game: GameApp): string {
       <header class="topbar">
         <div>
           <h1>高考重开模拟器</h1>
-          <p>${game.save.times} 次重开 · ${game.save.unlockedEndingIds.length} 个结局</p>
+          <p>${game.save.times} 次重开 · ${game.save.unlockedEndingIds.length} 个结局 · ${game.save.achievedIds.length} 个成就</p>
         </div>
-        <button class="ghost" data-action="restart">首页</button>
+        <div class="topbar-actions">
+          <button class="ghost" data-action="view-achievements">成就</button>
+          <button class="ghost" data-action="restart">首页</button>
+        </div>
       </header>
       ${message}
       ${body}
@@ -200,8 +219,53 @@ function renderHome(game: GameApp): string {
         <p class="muted">从 3 岁到 18 岁，每年 4 回合。</p>
       </div>
       ${inherited ? `<p class="pill">继承天赋：${escapeHtml(inherited.name)}</p>` : ''}
+      <div class="home-actions">
+        <button data-action="view-achievements">查看成就 ${game.save.achievedIds.length}/${game.content.achievements.length}</button>
+      </div>
       <button class="primary wide" data-action="start">开始重开</button>
     </section>
+  `;
+}
+
+function renderAchievements(game: GameApp): string {
+  const unlocked = new Set(game.save.achievedIds);
+  const unlockedAchievements = game.content.achievements.filter(item => unlocked.has(item.id));
+  const cards = unlockedAchievements.length
+    ? unlockedAchievements.map(renderAchievementCard).join('')
+    : '<div class="panel empty-state">还没有解锁成就，先完成一局看看。</div>';
+
+  return `
+    <section class="stack">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>成就</h2>
+            <p class="muted">已解锁 ${unlockedAchievements.length}/${game.content.achievements.length}</p>
+          </div>
+          <button class="ghost" data-action="close-achievements">返回</button>
+        </div>
+        <div class="achievement-stats">
+          <span><em>重开</em><strong>${game.save.times}</strong></span>
+          <span><em>结局</em><strong>${game.save.unlockedEndingIds.length}</strong></span>
+          <span><em>事件</em><strong>${game.save.seenEventIds.length}</strong></span>
+          <span><em>天赋</em><strong>${game.save.seenTalentIds.length}</strong></span>
+        </div>
+      </div>
+      <div class="achievement-grid">${cards}</div>
+    </section>
+  `;
+}
+
+function renderAchievementCard(achievement: Achievement): string {
+  return `
+    <article class="card achievement-card unlocked">
+      <div class="achievement-heading">
+        <strong>${escapeHtml(achievement.name)}</strong>
+        <span class="achievement-grade">${escapeHtml(achievementGradeName(achievement.grade))}</span>
+      </div>
+      <p>${escapeHtml(achievement.description)}</p>
+      <span class="achievement-status">已解锁</span>
+    </article>
   `;
 }
 
@@ -347,6 +411,7 @@ function renderSummaryLogs(gameState: GameState): string {
 
 function renderAdmission(admission: AdmissionResult): string {
   const admitted = admission.admitted && admission.admittedLine && admission.admittedUniversity;
+  const trackLabel = admission.subjectTrack === 'history' ? '历史组' : '物理组';
   const reach = [
     admission.canReach985 ? '可达 985' : null,
     admission.canReach211 ? '可达 211' : null,
@@ -356,7 +421,7 @@ function renderAdmission(admission: AdmissionResult): string {
       <div class="section-title">
         <div>
           <h2>高考录取</h2>
-          <p class="muted">${escapeHtml(admission.profileName)}</p>
+          <p class="muted">${trackLabel}</p>
         </div>
         <span class="score-badge">${admission.finalScore}</span>
       </div>
@@ -378,25 +443,24 @@ function renderAdmission(admission: AdmissionResult): string {
         </div>
       `}
       <p class="admission-reason">${escapeHtml(admission.reason)}</p>
-      <p class="muted source-note">投档线来源：广西招生考试院，本模拟不是志愿填报建议。</p>
     </div>
   `;
 }
 
 function renderStats(state: GameState): string {
   const props = state.props;
-  const stats = [
-    ['学力', props.INT],
-    ['精力', props.STR],
-    ['资源', props.MNY],
-    ['心态', props.SPR],
-    ['志愿', props.VOL],
-    ['风险', props.RSK],
-    ['潜力', props.SCR],
-    ['最高', props.HSCR],
-    ['总评', props.SUM],
+  const stats: Array<[string, number, 'prop' | 'score']> = [
+    ['学力', props.INT, 'prop'],
+    ['精力', props.STR, 'prop'],
+    ['资源', props.MNY, 'prop'],
+    ['心态', props.SPR, 'prop'],
+    ['志愿', props.VOL, 'prop'],
+    ['风险', props.RSK, 'prop'],
+    ['潜力', props.SCR, 'score'],
+    ['最高', props.HSCR, 'score'],
+    ['总评', props.SUM, 'score'],
   ];
-  return `<div class="stats">${stats.map(([label, value]) => `<span><em>${label}</em><strong>${formatNumber(value)}</strong></span>`).join('')}</div>`;
+  return `<div class="stats">${stats.map(([label, value, kind]) => `<span><em>${label}</em><strong>${formatNumber(value, kind)}</strong></span>`).join('')}</div>`;
 }
 
 function renderLogItem(log: GameState['logs'][number]): string {
@@ -426,6 +490,10 @@ function talentRarityName(grade: number): string {
   return ['普通', '稀有', '史诗', '传说'][grade] ?? '普通';
 }
 
+function achievementGradeName(grade: number): string {
+  return ['普通', '稀有', '史诗', '传说'][grade] ?? '普通';
+}
+
 function renderRoundLabel(state: GameState): string {
   const current = state.currentRound;
   if (!current) return '3 岁 · 第 1 回合';
@@ -446,8 +514,10 @@ function escapeHtml(value: string): string {
   })[char] ?? char);
 }
 
-function formatNumber(value: string | number): string {
-  return typeof value === 'number' ? String(Math.round(value)) : value;
+function formatNumber(value: string | number, kind: string = 'score'): string {
+  if (typeof value !== 'number') return value;
+  if (kind === 'prop') return String(Math.floor(value));
+  return String(Math.round(value));
 }
 
 function admissionTierName(tier: AdmissionResult['admissionTier']): string {
