@@ -47,8 +47,8 @@ describe('LifeEngine', () => {
     expect(retakeState.currentRound?.age).toBe(17);
     expect(retakeState.currentRound?.round).toBe(1);
     expect(retakeState.props.SPR).toBe(Math.max(0, first.state.props.SPR - 1));
-    expect(retakeState.props.RSK).toBe(Math.min(90, first.state.props.RSK + 6));
-    expect(retakeState.props.SCOREMOD).toBe(Math.min(70, first.state.props.SCOREMOD + 24));
+    expect(retakeState.props.RSK).toBe(Math.min(90, first.state.props.RSK + 4));
+    expect(retakeState.props.SCOREMOD).toBe(Math.min(70, first.state.props.SCOREMOD + 32));
     expect(first.state.props.SCR - retakeState.props.SCR).toBeLessThanOrEqual(20);
 
     const second = engine.runToEnd();

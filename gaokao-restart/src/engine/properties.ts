@@ -7,7 +7,7 @@ const phaseBase: Record<PhaseCode, number> = {
   senior1: 385,
   senior2: 410,
   senior3: 425,
-  final: 450,
+  final: 432,
 };
 
 const limits: Partial<Record<CorePropCode, [number, number]>> = {

@@ -27,19 +27,30 @@ export function calculateExamScore(props: Props, random: Random): ExamScoreResul
   const variance = Math.round((random.next() * 2 - 1) * varianceRange);
   const breakthrough = rollBreakthroughBonus(props, potentialScore, random);
   const setback = breakthrough > 0 ? 0 : rollSetbackPenalty(props, potentialScore, random);
-  const finalScore = clamp(Math.round(potentialScore + stabilityBonus + variance + breakthrough - setback), 250, 750);
+  const rawScore = Math.round(potentialScore + stabilityBonus + variance + breakthrough - setback);
+  const bandCalibration = scoreBandCalibration(rawScore, props);
+  const finalScore = clamp(rawScore + bandCalibration, 250, 750);
   const tailText = breakthrough > 0
     ? `，状态爆发 ${formatSigned(breakthrough)}`
     : setback > 0
       ? `，临场失常 ${formatSigned(-setback)}`
       : '';
+  const calibrationText = bandCalibration !== 0 ? `，分段校准 ${formatSigned(bandCalibration)}` : '';
 
   return {
     finalScore,
     potentialScore,
-    variance: variance + breakthrough - setback,
-    explanation: `以当前实力 ${potentialScore} 为基准，稳定性修正 ${formatSigned(stabilityBonus)}，临场波动 ${formatSigned(variance)}${tailText}。`,
+    variance: variance + breakthrough - setback + bandCalibration,
+    explanation: `以当前实力 ${potentialScore} 为基准，稳定性修正 ${formatSigned(stabilityBonus)}，临场波动 ${formatSigned(variance)}${tailText}${calibrationText}。`,
   };
+}
+
+function scoreBandCalibration(rawScore: number, props: Props): number {
+  const elitePrepared = props.INT >= 9 && props.SCOREMOD >= 34 && props.RSK < 68;
+  if (elitePrepared && rawScore >= 588 && rawScore < 602) return 14;
+  if (rawScore >= 555 && rawScore < 602) return elitePrepared ? 7 : -8;
+  if (rawScore >= 602 && rawScore < 640 && elitePrepared) return 4;
+  return 0;
 }
 
 function rollBreakthroughBonus(props: Props, potentialScore: number, random: Random): number {
@@ -88,17 +99,19 @@ export function resolveAdmission(
   const reachable = lines.filter(item => item.margin >= 0);
   const reachable985 = reachable.filter(item => item.university.tags.includes('985'));
   const reachable211Plus = reachable.filter(isAtLeast211Candidate);
+  const reachable211Only = reachable.filter(item => universityAdmissionTier(item.university) === '211');
   const bestReachable985 = pickBestReachable(reachable985)?.line;
   const bestReachable211 = pickBestReachable(reachable211Plus)?.line;
   const lowestReachable985 = pickLowestLine(reachable985);
   const lowestReachable211 = pickLowestLine(reachable211Plus);
   const lowestReachable985Margin = lowestReachable985 ? exam.finalScore - lowestReachable985.line.minScore : undefined;
   const strategyScore = state.props.HVOL - state.props.RSK * 0.35 + routeBonus(content, state);
-  const slide = shouldSlide(content, state, strategyScore, reachable, random);
+  const slide = shouldSlide(content, state, strategyScore, reachable, reachable211Plus.length > 0, random);
   const picked = slide ? null : pickAdmittedLine(
     reachable,
     reachable985,
     reachable211Plus,
+    reachable211Only,
     strategyScore,
     state.props.RSK,
     exam.finalScore,
@@ -186,6 +199,7 @@ function pickAdmittedLine(
   reachable: LineCandidate[],
   reachable985: LineCandidate[],
   reachable211Plus: LineCandidate[],
+  reachable211Only: LineCandidate[],
   strategyScore: number,
   risk: number,
   finalScore: number,
@@ -194,7 +208,7 @@ function pickAdmittedLine(
 ): LineCandidate | null {
   if (reachable.length === 0) return null;
   const lowestReachable985 = pickLowestLine(reachable985);
-  const lowestReachable211 = pickLowestLine(reachable211Plus);
+  const lowestReachable211 = pickLowestLine(reachable211Only.length > 0 ? reachable211Only : reachable211Plus);
 
   if (
     lowestReachable985
@@ -207,7 +221,11 @@ function pickAdmittedLine(
     lowestReachable211
     && random.next() < commit211Chance(finalScore - lowestReachable211.line.minScore, strategyScore, risk)
   ) {
-    return pickFromCandidatePool(reachable211Plus, strategyScore, finalScore, resourceLevel, random);
+    return pickFromCandidatePool(reachable211Only.length > 0 ? reachable211Only : reachable211Plus, strategyScore, finalScore, resourceLevel, random);
+  }
+
+  if (reachable211Only.length > 0) {
+    return pickFromCandidatePool(reachable211Only, strategyScore, finalScore, resourceLevel, random);
   }
 
   return pickFromCandidatePool(reachable, strategyScore, finalScore, resourceLevel, random);
@@ -240,13 +258,13 @@ function pickFromCandidatePool(
 }
 
 function commit985Chance(lowestMargin: number, strategyScore: number, risk: number): number {
-  const base = lowestMargin >= 20 ? 0.76 : lowestMargin >= 8 ? 0.66 : 0.54;
-  return clamp(base + commitChanceAdjustment(strategyScore, risk), 0.38, 0.9);
+  const base = lowestMargin >= 20 ? 0.8 : lowestMargin >= 8 ? 0.7 : 0.58;
+  return clamp(base + commitChanceAdjustment(strategyScore, risk), 0.42, 0.92);
 }
 
 function commit211Chance(lowestMargin: number, strategyScore: number, risk: number): number {
-  const base = lowestMargin >= 25 ? 0.82 : lowestMargin >= 10 ? 0.74 : 0.64;
-  return clamp(base + commitChanceAdjustment(strategyScore, risk), 0.46, 0.92);
+  const base = lowestMargin >= 25 ? 0.9 : lowestMargin >= 10 ? 0.82 : 0.72;
+  return clamp(base + commitChanceAdjustment(strategyScore, risk), 0.54, 0.96);
 }
 
 function commitChanceAdjustment(strategyScore: number, risk: number): number {
@@ -335,7 +353,7 @@ function linePrestigeScore(candidate: LineCandidate): number {
 function admissionTierWeight(university: University, strategyScore: number): number {
   const tags = university.tags;
   if (tags.includes('985')) return strategyScore >= 65 ? 90 : strategyScore >= 35 ? 52 : 14;
-  if (tags.includes('211')) return strategyScore >= 65 ? 58 : strategyScore >= 35 ? 36 : 10;
+  if (tags.includes('211')) return strategyScore >= 65 ? 86 : strategyScore >= 35 ? 62 : 22;
   if (tags.includes('doubleFirstClass')) return strategyScore >= 65 ? 36 : strategyScore >= 35 ? 24 : 6;
   return 0;
 }
@@ -371,6 +389,7 @@ function shouldSlide(
   state: GameState,
   strategyScore: number,
   reachable: LineCandidate[],
+  hasReachable211Plus: boolean,
   random: Random,
 ): boolean {
   if (reachable.length === 0) return false;
@@ -384,6 +403,7 @@ function shouldSlide(
   chance += route.risk * 0.045;
   chance -= route.steady * 0.035;
   if (state.retakeUsed) chance -= 0.025;
+  if (hasReachable211Plus) chance = 0;
   chance = clamp(chance, 0, 0.45);
   return random.next() < chance;
 }

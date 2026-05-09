@@ -5707,5 +5707,4743 @@
       "分科",
       "历史类"
     ]
+  },
+  {
+    "id": 32101,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "周末家里没有安排课，你在地毯上拼了一下午积木，第一次知道耐心能把小块变成大东西。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "家庭陪伴"
+    ]
+  },
+  {
+    "id": 32102,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "父母临时加班，你跟着老人吃完饭，晚上有点想哭但没有说出口。",
+    "effect": {
+      "SPR": -1,
+      "STR": 1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "学前",
+      "家庭忙碌"
+    ]
+  },
+  {
+    "id": 32103,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "睡前故事读到一半，你突然追问主角为什么这样做，大人被问住后认真和你聊了很久。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "亲子阅读"
+    ]
+  },
+  {
+    "id": 32104,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "亲戚夸别人家的孩子识字多，你被催着当场表演，饭桌变得很难熬。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "过度比较"
+    ]
+  },
+  {
+    "id": 32105,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你在小区里追泡泡追到满头汗，晚上睡得很沉。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "户外玩耍"
+    ]
+  },
+  {
+    "id": 32106,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "连续几天下雨，你只能在家里转圈，玩具也变得没什么意思。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "雨天困家"
+    ]
+  },
+  {
+    "id": 32107,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你把墙角画满了奇怪的小人，虽然挨了批评，但后来家里给你买了画本。",
+    "effect": {
+      "INT": 1,
+      "MNY": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "学前",
+      "乱涂乱画"
+    ]
+  },
+  {
+    "id": 32108,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "发烧让你错过幼儿园活动，你在床上昏睡了一天。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "小病请假"
+    ]
+  },
+  {
+    "id": 32109,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你终于自己扣好了扣子，虽然花了很久，但很得意。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "自己穿衣"
+    ]
+  },
+  {
+    "id": 32110,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你和小朋友为了一个玩具吵起来，老师让你们轮流玩。",
+    "effect": {
+      "SPR": -1,
+      "VOL": 8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "学前",
+      "玩具争抢"
+    ]
+  },
+  {
+    "id": 32111,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你蹲在花坛边看蚂蚁搬东西，看得比动画片还认真。",
+    "effect": {
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "观察昆虫"
+    ]
+  },
+  {
+    "id": 32112,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "晚上停电，你抱着被子不敢动，过了很久才睡着。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "害怕黑夜"
+    ]
+  },
+  {
+    "id": 32113,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "一次短途出门让你第一次坐上火车，窗外的城市和田野轮流跑过去。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "家庭小旅行"
+    ]
+  },
+  {
+    "id": 32114,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "商场里你一转身找不到家人，广播响起前那几分钟特别漫长。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "迷路惊慌"
+    ]
+  },
+  {
+    "id": 32115,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你跟着电视里的旋律乱跳，家里人笑着给你鼓掌。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "听音乐"
+    ]
+  },
+  {
+    "id": 32116,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "一天排了两个兴趣课，回家后你连最喜欢的点心都不想吃。",
+    "effect": {
+      "SPR": -1,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "早教疲劳"
+    ]
+  },
+  {
+    "id": 32117,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你把玩具按颜色放回盒子，房间一下子清爽了。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "帮忙收拾"
+    ]
+  },
+  {
+    "id": 32118,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "家里人一直围着更小的孩子转，你故意把积木推倒。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "争宠吃醋"
+    ]
+  },
+  {
+    "id": 32119,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "隔壁小朋友每天来找你玩，你们约定明天继续搭城堡。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "童年好友"
+    ]
+  },
+  {
+    "id": 32120,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你跑太快摔了一跤，膝盖贴着创可贴好几天。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "摔倒破皮"
+    ]
+  },
+  {
+    "id": 32121,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你跟着大人去菜市场，记住了好多蔬菜的名字。",
+    "effect": {
+      "INT": 1,
+      "MNY": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "逛菜市场"
+    ]
+  },
+  {
+    "id": 32122,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你吵着要继续看短视频，被关掉后哭了很久。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "屏幕上瘾"
+    ]
+  },
+  {
+    "id": 32123,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "幼儿园表演时你站错了位置，但还是把动作做完了。",
+    "effect": {
+      "SPR": -1,
+      "VOL": 8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "学前",
+      "小小舞台"
+    ]
+  },
+  {
+    "id": 32124,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "一盒拼图拼到最后，你发现少了一块，还是认真找了半天。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "安静拼图"
+    ]
+  },
+  {
+    "id": 32125,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "玩具不是你弄坏的，但大家一开始都以为是你。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "被误会"
+    ]
+  },
+  {
+    "id": 32126,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你把饼干分给旁边的小朋友，对方把贴纸送给了你。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "第一次分享"
+    ]
+  },
+  {
+    "id": 32127,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "家里开始固定睡前流程，你慢慢不再拖到很晚。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "早睡习惯"
+    ]
+  },
+  {
+    "id": 32128,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "晚上家里突然吵起来，你躲在房间里不知道该怎么办。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "学前",
+      "大声争吵"
+    ]
+  },
+  {
+    "id": 32129,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "你在郊外捡了几片不同形状的叶子，回家夹进书里。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "学前",
+      "亲近自然"
+    ]
+  },
+  {
+    "id": 32130,
+    "stage": "学前期",
+    "phase": "preschool",
+    "text": "蛀牙让你坐上了牙科椅，之后你终于愿意少吃糖。",
+    "effect": {
+      "STR": -1,
+      "VOL": 8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "学前",
+      "牙齿治疗"
+    ]
+  },
+  {
+    "id": 32131,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你举手回答问题时声音发抖，但老师认真听完了。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "课堂表达"
+    ]
+  },
+  {
+    "id": 32132,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你把作业拖到睡前才写，第二天早上书包像没整理过的战场。",
+    "effect": {
+      "VOL": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "作业拖延"
+    ]
+  },
+  {
+    "id": 32133,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "课间十分钟你和同学玩跳格子，回教室时脸还是红的。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "课间游戏"
+    ]
+  },
+  {
+    "id": 32134,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "新款自动铅笔在班里传了一圈，你第一次为没有它而难受。",
+    "effect": {
+      "SPR": -1,
+      "MNY": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "文具攀比"
+    ]
+  },
+  {
+    "id": 32135,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你认真擦完黑板，粉笔灰落在袖子上，却有点成就感。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "班级值日"
+    ]
+  },
+  {
+    "id": 32136,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "作业本落在家里，你一整节课都心神不宁。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "忘带作业"
+    ]
+  },
+  {
+    "id": 32137,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "班级图书角换了一批书，你借走一本关于海洋的百科。",
+    "effect": {
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "图书角"
+    ]
+  },
+  {
+    "id": 32138,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你被同学拉去参加接力，跑完后发现自己没想象中慢。",
+    "effect": {
+      "STR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "运动会报名"
+    ]
+  },
+  {
+    "id": 32139,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "接力棒在你手里掉了，全班安静了一下。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "运动会失误"
+    ]
+  },
+  {
+    "id": 32140,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "家长陪你改错题，声音越来越急，你越改越慌。",
+    "effect": {
+      "SCOREMOD": 7,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "家长辅导"
+    ]
+  },
+  {
+    "id": 32141,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你做的纸桥歪歪扭扭，却真的撑住了几本书。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "手工课"
+    ]
+  },
+  {
+    "id": 32142,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "几个同学给你起了不喜欢的外号，你开始不爱去操场。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "被起外号"
+    ]
+  },
+  {
+    "id": 32143,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你和同桌冷战两天后，用一张便利贴重新说话。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "朋友和好"
+    ]
+  },
+  {
+    "id": 32144,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你把漫画夹在课本里看，被发现后罚站了一会儿。",
+    "effect": {
+      "SPR": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "偷偷看漫画"
+    ]
+  },
+  {
+    "id": 32145,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你在朗读比赛里没拿奖，但第一次把一篇文章读得很完整。",
+    "effect": {
+      "VOL": 8,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "朗读比赛"
+    ]
+  },
+  {
+    "id": 32146,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "一道应用题你想了很久，越想越觉得自己不适合数学。",
+    "effect": {
+      "INT": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "数学卡壳"
+    ]
+  },
+  {
+    "id": 32147,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你帮同学打饭，才发现照顾别人也需要细心。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "午餐分菜"
+    ]
+  },
+  {
+    "id": 32148,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "家里搬到新小区，你熟悉的上学路突然变了。",
+    "effect": {
+      "SPR": -1,
+      "INT": 1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "家庭搬家"
+    ]
+  },
+  {
+    "id": 32149,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "新同桌很爱问问题，你被带着也开始多想一步。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "新同桌"
+    ]
+  },
+  {
+    "id": 32150,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "老师把你的作文贴到后墙，你放学路上忍不住多看了几眼。",
+    "effect": {
+      "SPR": 1,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "被老师表扬"
+    ]
+  },
+  {
+    "id": 32151,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "一张低分试卷需要家长签字，你在书包里藏了一晚。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "试卷签字"
+    ]
+  },
+  {
+    "id": 32152,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你被选去读校园广播稿，第一次知道普通话也要练。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "校园广播"
+    ]
+  },
+  {
+    "id": 32153,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "放学路边的小摊太香，你把零花钱花得一干二净。",
+    "effect": {
+      "SPR": 1,
+      "MNY": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "零食诱惑"
+    ]
+  },
+  {
+    "id": 32154,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你和同学下五子棋，下输之后反而更想研究。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "迷上棋类"
+    ]
+  },
+  {
+    "id": 32155,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "周末上午被补习班占掉，你学到一点东西，也少了半天休息。",
+    "effect": {
+      "SCOREMOD": 7,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "周末补习"
+    ]
+  },
+  {
+    "id": 32156,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "同学邀请你去生日会，你第一次在别人家待到傍晚。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "生日会"
+    ]
+  },
+  {
+    "id": 32157,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "班里有人戴牙套被笑，你帮他说了一句，自己也有点紧张。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "牙套同学"
+    ]
+  },
+  {
+    "id": 32158,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你沉迷电子宠物，连作业都想着它有没有饿。",
+    "effect": {
+      "VOL": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "电子宠物"
+    ]
+  },
+  {
+    "id": 32159,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "大雨天家人来接你，鞋湿透了但心里很暖。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "雨中接送"
+    ]
+  },
+  {
+    "id": 32160,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "书包每天沉得像石头，你的肩膀经常酸。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "书包太重"
+    ]
+  },
+  {
+    "id": 32161,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "小组展示时你负责画图，发现自己也能帮上忙。",
+    "effect": {
+      "VOL": 8,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "小组展示"
+    ]
+  },
+  {
+    "id": 32162,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你当上小组长，收作业这件小事也让你学会提醒别人。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "班干部"
+    ]
+  },
+  {
+    "id": 32163,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你提醒同学交作业，对方觉得你在告状。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "同伴误解"
+    ]
+  },
+  {
+    "id": 32164,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你在家用杯子做浮沉实验，把桌面弄湿了一大片。",
+    "effect": {
+      "INT": 1,
+      "MNY": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "科学小实验"
+    ]
+  },
+  {
+    "id": 32165,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "暑假前半段你玩得很开心，后半段补作业补到头大。",
+    "effect": {
+      "SPR": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "暑假疯玩"
+    ]
+  },
+  {
+    "id": 32166,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "暑假你固定每天读一点书，开学写作文顺手了不少。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "暑假阅读"
+    ]
+  },
+  {
+    "id": 32167,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你帮家里倒垃圾、擦桌子，攒下了第一笔小零花钱。",
+    "effect": {
+      "VOL": 8,
+      "MNY": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "家务奖励"
+    ]
+  },
+  {
+    "id": 32168,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "体检说你视力下降，家里开始限制屏幕时间。",
+    "effect": {
+      "SPR": -1,
+      "VOL": 8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "近视预警"
+    ]
+  },
+  {
+    "id": 32169,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "学校大扫除时你负责擦窗台，才知道灰尘会藏在角落。",
+    "effect": {
+      "VOL": 8,
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "大扫除"
+    ]
+  },
+  {
+    "id": 32170,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你和同桌答案很像，被叫去办公室解释了很久。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "被冤枉抄袭"
+    ]
+  },
+  {
+    "id": 32171,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你试了一节陶艺课，手上全是泥但很开心。",
+    "effect": {
+      "SPR": 1,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "校外兴趣班"
+    ]
+  },
+  {
+    "id": 32172,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "一门兴趣班坚持不下去，退课时你有点轻松也有点失落。",
+    "effect": {
+      "SPR": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "兴趣班放弃"
+    ]
+  },
+  {
+    "id": 32173,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你发现教学楼后面有一小片安静地方，午休时喜欢在那里发呆。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "校园角落"
+    ]
+  },
+  {
+    "id": 32174,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "校车堵在路上，你赶到教室时早读已经开始。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "校车迟到"
+    ]
+  },
+  {
+    "id": 32175,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你用一个旧玩具换到朋友的卡片，回家后又有点后悔。",
+    "effect": {
+      "SPR": -1,
+      "MNY": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "交换玩具"
+    ]
+  },
+  {
+    "id": 32176,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "暑假你终于敢把头埋进水里，游泳课不再像惩罚。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "学会游泳"
+    ]
+  },
+  {
+    "id": 32177,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你在池边打滑，虽然没事，但之后很久都不敢靠近深水。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "水边惊险"
+    ]
+  },
+  {
+    "id": 32178,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你把白天发生的事讲给家里人听，越讲越会抓重点。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "讲故事"
+    ]
+  },
+  {
+    "id": 32179,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "最好的朋友突然转学，你们约好写信，却不知道能坚持多久。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "同学转学"
+    ]
+  },
+  {
+    "id": 32180,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "停课期间你在家上网课，刚开始新鲜，后来很容易走神。",
+    "effect": {
+      "INT": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "第一次网课"
+    ]
+  },
+  {
+    "id": 32181,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "晚饭后你跟着大孩子投篮，十次里终于进了一个。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "小区篮球"
+    ]
+  },
+  {
+    "id": 32182,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "家里让你记录一周零花钱，你发现钱真的会悄悄消失。",
+    "effect": {
+      "MNY": 1,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "家庭账本"
+    ]
+  },
+  {
+    "id": 32183,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "家里来客人，你被要求表演节目，脸烫得不行。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "被迫表演"
+    ]
+  },
+  {
+    "id": 32184,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你负责给班级绿植浇水，叶子新长出来时特别明显。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "校园植物"
+    ]
+  },
+  {
+    "id": 32185,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "小测前一晚你翻来覆去，第二天脑袋像塞了棉花。",
+    "effect": {
+      "SPR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "考前失眠"
+    ]
+  },
+  {
+    "id": 32186,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你给错题本贴了彩色标签，复习时终于能找回原来的坑。",
+    "effect": {
+      "SCOREMOD": 7,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "错题贴纸"
+    ]
+  },
+  {
+    "id": 32187,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "放学路队里你和同学挤来挤去，老师点名批评了你们。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "小学",
+      "路队纠纷"
+    ]
+  },
+  {
+    "id": 32188,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "亲戚临时借住几天，你的书桌被挪到了客厅角落。",
+    "effect": {
+      "SPR": -1,
+      "VOL": 8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "小学",
+      "亲戚借住"
+    ]
+  },
+  {
+    "id": 32189,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "你把旧书拿去义卖，第一次觉得旧东西也能有新去处。",
+    "effect": {
+      "MNY": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "校园义卖"
+    ]
+  },
+  {
+    "id": 32190,
+    "stage": "小学期",
+    "phase": "primary",
+    "text": "拍毕业照时大家笑得很乱，你突然意识到这几年真的要结束了。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "小学",
+      "小学毕业照"
+    ]
+  },
+  {
+    "id": 32191,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "初中第一周课表突然变长，你每天都要重新确认下一节在哪里上。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "入学适应"
+    ]
+  },
+  {
+    "id": 32192,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你和后桌因为同一本小说聊起来，午休终于不再只趴着睡。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "新朋友"
+    ]
+  },
+  {
+    "id": 32193,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你在群聊里发错了表情包，被同学截图笑了一整天。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "社交尴尬"
+    ]
+  },
+  {
+    "id": 32194,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你开始骑车上学，早晨的风让人清醒，也偶尔让人迟到。",
+    "effect": {
+      "STR": 1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "自行车通学"
+    ]
+  },
+  {
+    "id": 32195,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "晚上你说查资料，结果刷了很久短视频。",
+    "effect": {
+      "VOL": -8,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "手机诱惑"
+    ]
+  },
+  {
+    "id": 32196,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "仰卧起坐成绩比预想好，你发现身体也能靠练习进步。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "体育测试"
+    ]
+  },
+  {
+    "id": 32197,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "长跑最后一圈你几乎拖着走，成绩单让你沉默了很久。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "体育挫败"
+    ]
+  },
+  {
+    "id": 32198,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "物理入门比你想象中抽象，听懂一节课都像过关。",
+    "effect": {
+      "INT": 1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "学科分化"
+    ]
+  },
+  {
+    "id": 32199,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你把历史地图贴在墙上，朝代和地名终于连成一条线。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "历史地图"
+    ]
+  },
+  {
+    "id": 32200,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "为了等新歌发布，你熬到很晚，第二天早读差点睡着。",
+    "effect": {
+      "SPR": 1,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "追星熬夜"
+    ]
+  },
+  {
+    "id": 32201,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "合唱比赛训练占了很多午休，但最后站上舞台时很整齐。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "班级合唱"
+    ]
+  },
+  {
+    "id": 32202,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "月考排名贴在后墙，你路过时忍不住看了好几遍。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "试卷排名"
+    ]
+  },
+  {
+    "id": 32203,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你看到自己的名次掉了一截，回家路上一路没说话。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "被排名击中"
+    ]
+  },
+  {
+    "id": 32204,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "同桌每天抽你背单词，刚开始烦，后来真少错了几题。",
+    "effect": {
+      "SCOREMOD": 7,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "同桌互查"
+    ]
+  },
+  {
+    "id": 32205,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你开始在意自己的样子，照镜子的时间变长了。",
+    "effect": {
+      "SPR": -1,
+      "VOL": 8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "青春期别扭"
+    ]
+  },
+  {
+    "id": 32206,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "一次晚饭后谈心，家里终于知道你不是故意拖延。",
+    "effect": {
+      "SPR": 1,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "家庭沟通"
+    ]
+  },
+  {
+    "id": 32207,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "父母把成绩和手机绑在一起，你们吵到很晚。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "家庭冲突"
+    ]
+  },
+  {
+    "id": 32208,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "一句玩笑在班里传歪，你花了好几天才解释清楚。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "校园传言"
+    ]
+  },
+  {
+    "id": 32209,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你给校刊投了一篇短文，虽然只改了半页，还是很认真。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "校刊投稿"
+    ]
+  },
+  {
+    "id": 32210,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "周五社团你玩了一局策略桌游，发现规则背后也有数学。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "桌游社团"
+    ]
+  },
+  {
+    "id": 32211,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "社团活动太多，你周末才发现作业还堆着。",
+    "effect": {
+      "SPR": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "社团过量"
+    ]
+  },
+  {
+    "id": 32212,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你因为某个人开始期待上学，也更容易被一句话影响心情。",
+    "effect": {
+      "SPR": 1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "早恋苗头"
+    ]
+  },
+  {
+    "id": 32213,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你以为很好的朋友有了新的圈子，午餐时突然不知道坐哪。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "关系失落"
+    ]
+  },
+  {
+    "id": 32214,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "化学实验你负责记录，看到颜色变化时大家都小声惊呼。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "小组实验"
+    ]
+  },
+  {
+    "id": 32215,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你把步骤顺序看错，小组实验结果和别人完全不同。",
+    "effect": {
+      "SCOREMOD": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "实验失误"
+    ]
+  },
+  {
+    "id": 32216,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你开始把喜欢的句子抄下来，作文里终于不只会写套话。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "语文摘抄"
+    ]
+  },
+  {
+    "id": 32217,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你连续刷了很多题，正确率却没有上来，手心都是汗。",
+    "effect": {
+      "SPR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "数学刷题疲劳"
+    ]
+  },
+  {
+    "id": 32218,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "晚自习你把手机放到讲台，两个小时竟然很快过去。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "晚自习效率"
+    ]
+  },
+  {
+    "id": 32219,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你把零食藏进抽屉，结果上课时包装响得特别明显。",
+    "effect": {
+      "SPR": 1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "偷带零食"
+    ]
+  },
+  {
+    "id": 32220,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "周末你独自坐公交去图书馆，第一次认真记住换乘路线。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "城市探索"
+    ]
+  },
+  {
+    "id": 32221,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "公交坐反方向，你到家时天已经黑了。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "迷路迟归"
+    ]
+  },
+  {
+    "id": 32222,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "亲戚一句“初中很关键”让饭桌变得像考场。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "亲戚比较"
+    ]
+  },
+  {
+    "id": 32223,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你给每科资料分了文件夹，找卷子不再靠翻书包。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "自主整理"
+    ]
+  },
+  {
+    "id": 32224,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "资料堆满书桌，你常常找不到刚发下来的卷子。",
+    "effect": {
+      "VOL": -8,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "房间混乱"
+    ]
+  },
+  {
+    "id": 32225,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你加入广播站，学会把一段话读得更自然。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "校园广播站"
+    ]
+  },
+  {
+    "id": 32226,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "试读稿子时有人模仿你的声音，你一整天都不想开口。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "声音被笑"
+    ]
+  },
+  {
+    "id": 32227,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你和朋友打了一下午球，回家腿酸但心情很好。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "周末球赛"
+    ]
+  },
+  {
+    "id": 32228,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "球场上落地没站稳，接下来几周体育课只能旁观。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "扭伤脚踝"
+    ]
+  },
+  {
+    "id": 32229,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "老师给你看了一道竞赛题，你没做出来，却第一次觉得题目很漂亮。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "竞赛兴趣"
+    ]
+  },
+  {
+    "id": 32230,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "竞赛班占掉了休息时间，普通作业开始被你往后拖。",
+    "effect": {
+      "INT": 1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "竞赛挤压"
+    ]
+  },
+  {
+    "id": 32231,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "教室后墙贴上倒计时，你开始真切感觉时间在往前推。",
+    "effect": {
+      "VOL": 8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "中考倒计时"
+    ]
+  },
+  {
+    "id": 32232,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "家里装修吵了几周，你在临时桌子上写作业。",
+    "effect": {
+      "SPR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "家里装修"
+    ]
+  },
+  {
+    "id": 32233,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你发现社区自习室很安静，周末在那里写完了一整套卷子。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "安静自习室"
+    ]
+  },
+  {
+    "id": 32234,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你在网上和陌生人吵到很晚，关掉屏幕后还在生气。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "网络争论"
+    ]
+  },
+  {
+    "id": 32235,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "一个科普视频解释了你没听懂的知识点，你顺手找了更多资料。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "短视频科普"
+    ]
+  },
+  {
+    "id": 32236,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "班主任没有骂你，只问你最近最难受的是什么。",
+    "effect": {
+      "SPR": 1,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "班主任谈话"
+    ]
+  },
+  {
+    "id": 32237,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "因为一次考试失误，你被同学开玩笑叫“退步王”。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "被贴标签"
+    ]
+  },
+  {
+    "id": 32238,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你不再喊大口号，只给下一次小测定了一个具体目标。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "小目标"
+    ]
+  },
+  {
+    "id": 32239,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你努力了一阵，小测还是没到目标，心里有点空。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "目标落空"
+    ]
+  },
+  {
+    "id": 32240,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你开始午休睡二十分钟，下午第一节课不再总发飘。",
+    "effect": {
+      "STR": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "午睡恢复"
+    ]
+  },
+  {
+    "id": 32241,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "连续几天用零食顶饭，你上课时胃很不舒服。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "初中",
+      "饮食失衡"
+    ]
+  },
+  {
+    "id": 32242,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "你帮朋友讲题，讲着讲着自己也明白了卡点。",
+    "effect": {
+      "INT": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "同伴互助"
+    ]
+  },
+  {
+    "id": 32243,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "朋友总让你帮忙看作业，你自己的时间被挤掉了。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "被依赖过度"
+    ]
+  },
+  {
+    "id": 32244,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "中考前夜你把文具摆好，突然觉得这三年像一条很长的路。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "初中",
+      "中考前夜"
+    ]
+  },
+  {
+    "id": 32245,
+    "stage": "初中期",
+    "phase": "middle",
+    "text": "中考结束后你睡到中午，醒来时一时不知道该做什么。",
+    "effect": {
+      "SPR": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "初中",
+      "考后放空"
+    ]
+  },
+  {
+    "id": 32246,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "高一报到那天，校园比初中大很多，你一路记教学楼位置。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "新生报到"
+    ]
+  },
+  {
+    "id": 32247,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "第一次住宿舍，你听着室友翻身的声音很久才睡着。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "宿舍适应"
+    ]
+  },
+  {
+    "id": 32248,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "每天往返路上花掉不少时间，你开始在公交上背单词。",
+    "effect": {
+      "VOL": 8,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "通勤疲惫"
+    ]
+  },
+  {
+    "id": 32249,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "军训最后几天太阳很毒，你的脖子晒得发疼。",
+    "effect": {
+      "STR": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "军训晒伤"
+    ]
+  },
+  {
+    "id": 32250,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你们班队列最后一次走得很齐，大家喊口号时都笑了。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "军训队列"
+    ]
+  },
+  {
+    "id": 32251,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "高中数学第一章就比预想难，你开始怀念初中的熟悉感。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "学科陡坡"
+    ]
+  },
+  {
+    "id": 32252,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "数学老师用一张图讲清了函数变化，你突然接上了。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "老师点拨"
+    ]
+  },
+  {
+    "id": 32253,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "社团招新摊位摆满操场，你一口气填了三个报名表。",
+    "effect": {
+      "SPR": 1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "社团招新"
+    ]
+  },
+  {
+    "id": 32254,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你退掉两个社团，只保留真正喜欢的那个。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "精简社团"
+    ]
+  },
+  {
+    "id": 32255,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "物理和历史都有人劝你选，你第一次发现选择也会消耗精力。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "分科焦虑"
+    ]
+  },
+  {
+    "id": 32256,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你把各科成绩、兴趣和专业限制列在一张表上，路线清楚了一点。",
+    "effect": {
+      "VOL": 8,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "分科咨询"
+    ]
+  },
+  {
+    "id": 32257,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "学长讲竞赛经历时眼睛很亮，你被点燃了一点野心。",
+    "effect": {
+      "INT": 1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "竞赛宣讲"
+    ]
+  },
+  {
+    "id": 32258,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你试了几周竞赛题，决定先把课内基础守住。",
+    "effect": {
+      "VOL": 8,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "竞赛退场"
+    ]
+  },
+  {
+    "id": 32259,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "同桌每天计划写得很密，你被影响着也开始列清单。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "同桌卷王"
+    ]
+  },
+  {
+    "id": 32260,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "周围人都在加练，你跟着加码后反而睡不好。",
+    "effect": {
+      "SPR": -1,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "被卷压垮"
+    ]
+  },
+  {
+    "id": 32261,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "周末你去看了一场电影，出来时脑子终于从分数里松开。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "周末电影"
+    ]
+  },
+  {
+    "id": 32262,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你和同学连麦打游戏到很晚，第二天早读眼睛睁不开。",
+    "effect": {
+      "STR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "游戏通宵"
+    ]
+  },
+  {
+    "id": 32263,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "家长会后家里没有立刻批评，而是问你需要什么支持。",
+    "effect": {
+      "SPR": 1,
+      "MNY": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "家长会"
+    ]
+  },
+  {
+    "id": 32264,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "家长会后家里把目标提高了一档，你感觉连晚饭都变紧张了。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "家长期望升级"
+    ]
+  },
+  {
+    "id": 32265,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "食堂新窗口总是排长队，你慢慢摸出错峰吃饭的规律。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "食堂排队"
+    ]
+  },
+  {
+    "id": 32266,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "饭卡丢了，你午饭只好向同学借钱。",
+    "effect": {
+      "MNY": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "饭卡丢失"
+    ]
+  },
+  {
+    "id": 32267,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "晚自习前你绕操场慢跑两圈，回教室反而清醒。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "校园跑步"
+    ]
+  },
+  {
+    "id": 32268,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "身体不舒服让你连续请假，体能慢慢掉了。",
+    "effect": {
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "体育免训"
+    ]
+  },
+  {
+    "id": 32269,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你负责统计作业，才知道提醒别人比自己完成更麻烦。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "班级职务"
+    ]
+  },
+  {
+    "id": 32270,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "有同学向你借笔记，你整理给他时也复习了一遍。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "同学求助"
+    ]
+  },
+  {
+    "id": 32271,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "借出去的笔记迟迟没还，你后面复习很被动。",
+    "effect": {
+      "SCOREMOD": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "笔记外借丢失"
+    ]
+  },
+  {
+    "id": 32272,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "学校办文化节，你第一次在摊位上负责收钱和找零。",
+    "effect": {
+      "MNY": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "校园活动"
+    ]
+  },
+  {
+    "id": 32273,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "文化节准备占掉晚自习，你回家后还要补作业。",
+    "effect": {
+      "SPR": 1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "活动过载"
+    ]
+  },
+  {
+    "id": 32274,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "高一第一次月考把差距摊开，你开始重新估计高中难度。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "第一次月考"
+    ]
+  },
+  {
+    "id": 32275,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "月考有一科超出预期，你对高中多了一点底气。",
+    "effect": {
+      "SPR": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "月考惊喜"
+    ]
+  },
+  {
+    "id": 32276,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "几科成绩差距很大，你意识到不能只靠喜欢的科目。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高一",
+      "月考失衡"
+    ]
+  },
+  {
+    "id": 32277,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "寒假你给每天安排一小段复习，没把假期全交给补课。",
+    "effect": {
+      "VOL": 8,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "寒假计划"
+    ]
+  },
+  {
+    "id": 32278,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "寒假前半段玩得太散，开学前几天你开始疯狂补。",
+    "effect": {
+      "VOL": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "寒假失控"
+    ]
+  },
+  {
+    "id": 32279,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你去看了一次博物馆展览，课本里的名字突然有了实物。",
+    "effect": {
+      "INT": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "城市展览"
+    ]
+  },
+  {
+    "id": 32280,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "家里聊起补课费用时压低了声音，你听见后有点不安。",
+    "effect": {
+      "SPR": -1,
+      "MNY": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "家庭经济压力"
+    ]
+  },
+  {
+    "id": 32281,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "你参加图书馆志愿服务，学会把书按编号归位。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "校园志愿者"
+    ]
+  },
+  {
+    "id": 32282,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "宿舍作息不一致，你们为了关灯时间吵了一次。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高一",
+      "室友矛盾"
+    ]
+  },
+  {
+    "id": 32283,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "宿舍约定了熄灯前的安静时间，晚上终于少了很多摩擦。",
+    "effect": {
+      "SPR": 1,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "室友协商"
+    ]
+  },
+  {
+    "id": 32284,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "一道压轴题你没全做出，但写出了关键步骤。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "学科小胜"
+    ]
+  },
+  {
+    "id": 32285,
+    "stage": "高一期",
+    "phase": "senior1",
+    "text": "期末整理书柜时，你发现高中第一年留下了厚厚一叠卷子。",
+    "effect": {
+      "VOL": 8,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高一",
+      "高一收尾"
+    ]
+  },
+  {
+    "id": 32286,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "分科后的班级重新排座位，熟悉的人少了，节奏也变了。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "分科后重排"
+    ]
+  },
+  {
+    "id": 32287,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "新班主任讲规则很直接，你反而觉得边界清楚。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "新班适应"
+    ]
+  },
+  {
+    "id": 32288,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "选定方向后，你发现每天学的内容更像自己能咬住的东西。",
+    "effect": {
+      "SPR": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "科类自信"
+    ]
+  },
+  {
+    "id": 32289,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你偶尔怀疑自己是不是选错了方向，尤其在弱科考砸时。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "选科后悔"
+    ]
+  },
+  {
+    "id": 32290,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "周末你和家里去近郊走了一圈，回来后心里松了不少。",
+    "effect": {
+      "SPR": 1,
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "周末短途"
+    ]
+  },
+  {
+    "id": 32291,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你说只玩一小时，结果一个下午过去了。",
+    "effect": {
+      "VOL": -8,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "娱乐失衡"
+    ]
+  },
+  {
+    "id": 32292,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你和同学约着晚跑，坚持一个月后爬楼不再喘。",
+    "effect": {
+      "STR": 1,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "锻炼打卡"
+    ]
+  },
+  {
+    "id": 32293,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "小伤拖着没处理，训练和上课都被影响。",
+    "effect": {
+      "STR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "伤病反复"
+    ]
+  },
+  {
+    "id": 32294,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你决定只保留一个竞赛方向，把精力集中起来。",
+    "effect": {
+      "SCOREMOD": 16
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "学科竞赛二选一"
+    ]
+  },
+  {
+    "id": 32295,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "竞赛题越做越深，课内作业开始积压。",
+    "effect": {
+      "INT": 1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "竞赛挤压课内"
+    ]
+  },
+  {
+    "id": 32296,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "班里建了答疑群，真正有用的讨论比闲聊少，但确实能救急。",
+    "effect": {
+      "SCOREMOD": 10
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "班级互助群"
+    ]
+  },
+  {
+    "id": 32297,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "群消息一直弹，你看似在学习，手却总伸向手机。",
+    "effect": {
+      "VOL": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "群聊干扰"
+    ]
+  },
+  {
+    "id": 32298,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "学校心理讲座讲到压力曲线，你第一次把焦虑当成可管理的东西。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "心理讲座"
+    ]
+  },
+  {
+    "id": 32299,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你一到大考前就胃疼，越怕影响考试越紧张。",
+    "effect": {
+      "SPR": -1,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "压力躯体化"
+    ]
+  },
+  {
+    "id": 32300,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你和朋友暗暗比较成绩，这种竞争让你更用力，也更累。",
+    "effect": {
+      "VOL": 8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "同伴竞争"
+    ]
+  },
+  {
+    "id": 32301,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "朋友考好后没有炫耀，而是把复习方法认真讲给你。",
+    "effect": {
+      "SPR": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "同伴支持"
+    ]
+  },
+  {
+    "id": 32302,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "家里让你少做一些杂事，把固定晚自习时间留出来。",
+    "effect": {
+      "MNY": 1,
+      "SCOREMOD": 7
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "家庭分工"
+    ]
+  },
+  {
+    "id": 32303,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "家里临时事情很多，你的周末计划被打散。",
+    "effect": {
+      "SPR": -1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "家务冲突"
+    ]
+  },
+  {
+    "id": 32304,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你扔掉一堆重复资料，只保留真正会用的几本。",
+    "effect": {
+      "SCOREMOD": 10
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "资料筛选"
+    ]
+  },
+  {
+    "id": 32305,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你买了很多教辅，真正做完的却没有几本。",
+    "effect": {
+      "MNY": -1,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "资料囤积"
+    ]
+  },
+  {
+    "id": 32306,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "一门课换了老师，新节奏刚开始让全班都有点不适应。",
+    "effect": {
+      "SPR": -1,
+      "INT": 1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "老师换人"
+    ]
+  },
+  {
+    "id": 32307,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "老师下课后留下十分钟，把你卡住的题拆开讲。",
+    "effect": {
+      "SCOREMOD": 14,
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "老师答疑"
+    ]
+  },
+  {
+    "id": 32308,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你发现自己坐在走廊边容易分心，开始练习隔绝噪音。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "考场座位"
+    ]
+  },
+  {
+    "id": 32309,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "楼上施工持续几天，你晚自习效率明显下降。",
+    "effect": {
+      "SCOREMOD": -8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "噪音困扰"
+    ]
+  },
+  {
+    "id": 32310,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你喜欢上一个人，生活突然变得明亮，也变得更容易波动。",
+    "effect": {
+      "SPR": 1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "校园恋爱"
+    ]
+  },
+  {
+    "id": 32311,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你为了等一条消息反复看手机，错过了整段自习时间。",
+    "effect": {
+      "VOL": -8,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "关系分心"
+    ]
+  },
+  {
+    "id": 32312,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你们约好不在考试周互相打扰，喜欢没有变成拖累。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "关系成熟"
+    ]
+  },
+  {
+    "id": 32313,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "暑期社会实践让你第一次认真观察一个普通岗位的一天。",
+    "effect": {
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "社会实践"
+    ]
+  },
+  {
+    "id": 32314,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "社会实践报告最后一天才赶，内容像拼出来的。",
+    "effect": {
+      "VOL": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "实践敷衍"
+    ]
+  },
+  {
+    "id": 32315,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你在地铁上看到很多通勤的人，突然意识到专业选择会通向真实生活。",
+    "effect": {
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "城市通勤观察"
+    ]
+  },
+  {
+    "id": 32316,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "家里工作变动带来一阵不确定，你开始更在意经济问题。",
+    "effect": {
+      "MNY": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "父母工作变动"
+    ]
+  },
+  {
+    "id": 32317,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "初中朋友来找你聊天，你发现大家的路已经开始分开。",
+    "effect": {
+      "SPR": 1,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "旧友重逢"
+    ]
+  },
+  {
+    "id": 32318,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "同学提到强基、综评和专业组，你发现自己完全没了解过。",
+    "effect": {
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "信息差"
+    ]
+  },
+  {
+    "id": 32319,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你开始关注招生政策和专业限制，志愿这件事不再只靠听说。",
+    "effect": {
+      "VOL": 8,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "信息补课"
+    ]
+  },
+  {
+    "id": 32320,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "期中考让你看到长期积累的效果，也暴露了没处理的漏洞。",
+    "effect": {
+      "SCOREMOD": 14,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高二",
+      "高二期中"
+    ]
+  },
+  {
+    "id": 32321,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "一段时间你怎么学都没起色，连休息都带着内疚。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "高二低谷"
+    ]
+  },
+  {
+    "id": 32322,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你把计划缩小到每天三件事，终于重新开始推进。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "低谷调整"
+    ]
+  },
+  {
+    "id": 32323,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "你把高二试卷按模块归档，发现失分并不是完全随机。",
+    "effect": {
+      "SCOREMOD": 16,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "期末复盘"
+    ]
+  },
+  {
+    "id": 32324,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "高二暑假你提前进入高三节奏，但保留了一点运动和睡眠。",
+    "effect": {
+      "SCOREMOD": 15,
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高二",
+      "暑假预热"
+    ]
+  },
+  {
+    "id": 32325,
+    "stage": "高二期",
+    "phase": "senior2",
+    "text": "暑假补课排得太满，开学前你已经有点耗尽。",
+    "effect": {
+      "SPR": -1,
+      "STR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高二",
+      "暑假透支"
+    ]
+  },
+  {
+    "id": 32326,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "高三开学第一周，你把各科资料重新分层，先处理最容易丢的基础分。",
+    "effect": {
+      "SCOREMOD": 16,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "一轮启动"
+    ]
+  },
+  {
+    "id": 32327,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你把计划写得太满，没完成的项目每天都在增加。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "计划焦虑"
+    ]
+  },
+  {
+    "id": 32328,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你固定早读先背易忘内容，几周后默写错误明显少了。",
+    "effect": {
+      "SCOREMOD": 14
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "早读节奏"
+    ]
+  },
+  {
+    "id": 32329,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你连续牺牲午休刷题，下午反而经常发蒙。",
+    "effect": {
+      "STR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "午休牺牲"
+    ]
+  },
+  {
+    "id": 32330,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "晚饭后你绕操场慢走十分钟，再回教室时脑子清楚些。",
+    "effect": {
+      "SPR": 1,
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "饭后散步"
+    ]
+  },
+  {
+    "id": 32331,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你开始靠咖啡顶晚自习，短期清醒，晚上更难睡。",
+    "effect": {
+      "SCOREMOD": 16,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高三",
+      "咖啡依赖"
+    ]
+  },
+  {
+    "id": 32332,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你不再只看答案，而是把错题遮住重做一遍。",
+    "effect": {
+      "SCOREMOD": 15,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "错题重做"
+    ]
+  },
+  {
+    "id": 32333,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你习惯看解析后觉得自己会了，真正再做还是卡住。",
+    "effect": {
+      "SCOREMOD": -8,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "答案依赖"
+    ]
+  },
+  {
+    "id": 32334,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "模考前一晚你没有加练，而是跑步、洗澡、早睡。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "模考前跑步"
+    ]
+  },
+  {
+    "id": 32335,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "模考前你刷到凌晨，第二天第一科就开始头疼。",
+    "effect": {
+      "STR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "模考前熬夜"
+    ]
+  },
+  {
+    "id": 32336,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你和同学轮流讲一类题，讲错的地方反而最容易记住。",
+    "effect": {
+      "SCOREMOD": 15,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "班级互讲"
+    ]
+  },
+  {
+    "id": 32337,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "看到同桌进步很快，你一边替他高兴一边更慌。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高三",
+      "同伴压力"
+    ]
+  },
+  {
+    "id": 32338,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "家里偶尔送来晚饭，你在走廊吃完又回去自习。",
+    "effect": {
+      "SPR": 1,
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "家庭送饭"
+    ]
+  },
+  {
+    "id": 32339,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "考前家里因为小事吵起来，你坐在书桌前一个字也看不进去。",
+    "effect": {
+      "SPR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "家庭争吵"
+    ]
+  },
+  {
+    "id": 32340,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "老师把你的作文逐段面批，你第一次知道自己哪里空。",
+    "effect": {
+      "SCOREMOD": 15,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "老师面批"
+    ]
+  },
+  {
+    "id": 32341,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你背了很多万能句，却发现真正写起来还是空。",
+    "effect": {
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "作文套话"
+    ]
+  },
+  {
+    "id": 32342,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "连续几天限时训练后，你做选择题的速度稳定了。",
+    "effect": {
+      "SCOREMOD": 16,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "理科手感"
+    ]
+  },
+  {
+    "id": 32343,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你开始按材料关键词拆题，答题不再只靠感觉。",
+    "effect": {
+      "SCOREMOD": 7,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "文科材料"
+    ]
+  },
+  {
+    "id": 32344,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "模考后弱科拉低总分，你不得不把喜欢的科目让出时间。",
+    "effect": {
+      "SCOREMOD": 6,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高三",
+      "偏科警报"
+    ]
+  },
+  {
+    "id": 32345,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你把弱科拆成几个小专题，一个个清掉。",
+    "effect": {
+      "SCOREMOD": 16,
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "短板补洞"
+    ]
+  },
+  {
+    "id": 32346,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你在一道难题上耗掉整晚，基础题反而没复习。",
+    "effect": {
+      "VOL": -8,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "难题上头"
+    ]
+  },
+  {
+    "id": 32347,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你列出考场上可以放弃的题型，分数目标反而更清楚。",
+    "effect": {
+      "VOL": 8,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "舍弃策略"
+    ]
+  },
+  {
+    "id": 32348,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你把手机交给家里保管，前几天难受，后来晚自习清净很多。",
+    "effect": {
+      "SCOREMOD": 16,
+      "SPR": -1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "手机封存"
+    ]
+  },
+  {
+    "id": 32349,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "手机明明放远了，你还是找理由去看消息。",
+    "effect": {
+      "VOL": -8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "偷看手机"
+    ]
+  },
+  {
+    "id": 32350,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "体检指标提醒你睡眠不足，你开始认真调整作息。",
+    "effect": {
+      "STR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "考前体检"
+    ]
+  },
+  {
+    "id": 32351,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "小感冒拖成咳嗽，晚自习总被打断。",
+    "effect": {
+      "STR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "感冒拖延"
+    ]
+  },
+  {
+    "id": 32352,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "老师没有喊口号，只说你最近稳定了很多。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "老师鼓劲"
+    ]
+  },
+  {
+    "id": 32353,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "走廊里到处是标语，你看多了反而有点麻木。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "口号疲劳"
+    ]
+  },
+  {
+    "id": 32354,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "一次模考终于超过长期卡住的线，你把卷子收进最上层文件夹。",
+    "effect": {
+      "SPR": 1,
+      "SCOREMOD": 16
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "模考突破"
+    ]
+  },
+  {
+    "id": 32355,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "几科连续失手，你怀疑前面的努力是不是都白费。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "模考崩盘"
+    ]
+  },
+  {
+    "id": 32356,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你没有立刻加量，而是先找出失手是知识问题还是节奏问题。",
+    "effect": {
+      "VOL": 8,
+      "RSK": -8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "崩盘复盘"
+    ]
+  },
+  {
+    "id": 32357,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "倒计时从三位数变成两位数，教室空气都像紧了一点。",
+    "effect": {
+      "VOL": 8,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高三",
+      "班级倒计时"
+    ]
+  },
+  {
+    "id": 32358,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你给自己留了半天休息，看完一场球后重新坐回书桌。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "周末半日休"
+    ]
+  },
+  {
+    "id": 32359,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你连吃饭都觉得浪费时间，效率却越来越低。",
+    "effect": {
+      "SPR": -1,
+      "SCOREMOD": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "完全不敢休"
+    ]
+  },
+  {
+    "id": 32360,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "高三下你提前查了专业限制，才知道有些组不是想报就能报。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "志愿早查"
+    ]
+  },
+  {
+    "id": 32361,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你听信一句“这个学校稳”，后来发现专业组差别很大。",
+    "effect": {
+      "RSK": 7,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "志愿误听"
+    ]
+  },
+  {
+    "id": 32362,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "家长群里信息很多，你学会先看来源再判断。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "家长信息群"
+    ]
+  },
+  {
+    "id": 32363,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "各种预测线和经验帖刷屏，你越看越乱。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "信息轰炸"
+    ]
+  },
+  {
+    "id": 32364,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你提前准备透明袋、证件和备用笔，最后几天少了一个担心。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "考前物品"
+    ]
+  },
+  {
+    "id": 32365,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "打印准考证时发现信息需要核对，你跑了半天才处理好。",
+    "effect": {
+      "RSK": 7,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "高三",
+      "准考证惊险"
+    ]
+  },
+  {
+    "id": 32366,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "考前一周你按考试时间调整作息，生物钟慢慢靠近。",
+    "effect": {
+      "STR": 1,
+      "SCOREMOD": 15
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "考前睡眠"
+    ]
+  },
+  {
+    "id": 32367,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你梦见迟到和空白卷，醒来后心跳很快。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "考前噩梦"
+    ]
+  },
+  {
+    "id": 32368,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你提前去考点看路线，知道哪个路口早上会堵。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "考场踩点"
+    ]
+  },
+  {
+    "id": 32369,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "你低估了早高峰，踩点那天差点迟到。",
+    "effect": {
+      "RSK": 7,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "高三",
+      "路线误判"
+    ]
+  },
+  {
+    "id": 32370,
+    "stage": "高三期",
+    "phase": "senior3",
+    "text": "最后一晚你没有再翻新资料，只把常错点看了一遍就关灯。",
+    "effect": {
+      "SPR": 1,
+      "SCOREMOD": 15
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "高三",
+      "高三最后一晚"
+    ]
+  },
+  {
+    "id": 32371,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "查分前一晚你不断刷新网页，明知道还没开放也停不下来。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "出分",
+      "查分前夜"
+    ]
+  },
+  {
+    "id": 32372,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "查分前你先把目标院校表放在旁边，提醒自己分数只是第一步。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "出分",
+      "查分冷静"
+    ]
+  },
+  {
+    "id": 32373,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "分数出来比预估高一些，家里短暂安静后爆发出笑声。",
+    "effect": {
+      "SPR": 1,
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "出分",
+      "分数惊喜"
+    ]
+  },
+  {
+    "id": 32374,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "分数低于预估，你盯着屏幕很久，连刷新都没有意义。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "出分",
+      "分数失落"
+    ]
+  },
+  {
+    "id": 32375,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你没有只看总分，而是先把位次和去年投档线逐项对齐。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "位次核对"
+    ]
+  },
+  {
+    "id": 32376,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你被学校名字吸引，差点忽略专业组和选科限制。",
+    "effect": {
+      "RSK": 7,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "只看校名"
+    ]
+  },
+  {
+    "id": 32377,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你找学长学姐问专业日常，发现名字相近的专业差别很大。",
+    "effect": {
+      "INT": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "专业访谈"
+    ]
+  },
+  {
+    "id": 32378,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "亲戚热心推荐“听起来稳定”的专业，但说不清具体学什么。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "志愿",
+      "亲戚建议"
+    ]
+  },
+  {
+    "id": 32379,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你和家里把城市、专业、学校三项权重写下来，争论少了很多。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "家庭协商"
+    ]
+  },
+  {
+    "id": 32380,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "家里人坚持要你去某座城市，你们的讨论变成了消耗战。",
+    "effect": {
+      "SPR": -1,
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "家庭拉扯"
+    ]
+  },
+  {
+    "id": 32381,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你听了一场招生直播，记下几个必须二次确认的问题。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "招生直播"
+    ]
+  },
+  {
+    "id": 32382,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "直播里的宣传很热闹，你差点把“欢迎报考”听成“稳录”。",
+    "effect": {
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "直播误导"
+    ]
+  },
+  {
+    "id": 32383,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你翻章程时发现体检限制，及时删掉一个不合适的专业组。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "专业体检限制"
+    ]
+  },
+  {
+    "id": 32384,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你嫌章程太长没看，后来才发现有单科和身体要求。",
+    "effect": {
+      "RSK": 7,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "忽略章程"
+    ]
+  },
+  {
+    "id": 32385,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你把志愿分成冲、稳、保三层，每层都留了可接受的专业。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "冲稳保分层"
+    ]
+  },
+  {
+    "id": 32386,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你把大多数志愿都填成冲刺，表格看起来漂亮但风险很高。",
+    "effect": {
+      "RSK": 7,
+      "VOL": -8
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "全部冲刺"
+    ]
+  },
+  {
+    "id": 32387,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你认真挑了保底院校，发现保底并不等于随便填。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "保底舒服"
+    ]
+  },
+  {
+    "id": 32388,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你把最后几个志愿随手填上，觉得反正不会用到。",
+    "effect": {
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "保底敷衍"
+    ]
+  },
+  {
+    "id": 32389,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你意识到城市生活成本也会影响四年体验，不再只看排名。",
+    "effect": {
+      "MNY": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "城市偏好"
+    ]
+  },
+  {
+    "id": 32390,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "一想到离家很远，你对原本喜欢的学校犹豫起来。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "志愿",
+      "距离焦虑"
+    ]
+  },
+  {
+    "id": 32391,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你把学费、住宿和生活费列出来，家里压力变得更具体。",
+    "effect": {
+      "MNY": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "学费核算"
+    ]
+  },
+  {
+    "id": 32392,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "某个专业费用超出预期，你不得不重新调整选择。",
+    "effect": {
+      "MNY": -1,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "志愿",
+      "费用压力"
+    ]
+  },
+  {
+    "id": 32393,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你认真看了调剂范围，终于知道“服从”不是一个空按钮。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "调剂理解"
+    ]
+  },
+  {
+    "id": 32394,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "你只听说服从调剂更稳，却没看清可能去哪里。",
+    "effect": {
+      "RSK": 7
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "志愿",
+      "调剂盲区"
+    ]
+  },
+  {
+    "id": 32395,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "提交前你把代码、专业组、顺序逐项读了一遍。",
+    "effect": {
+      "VOL": 8
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "志愿",
+      "提交前复核"
+    ]
+  },
+  {
+    "id": 32396,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "提交前你被一条消息影响，临时调换了几个志愿。",
+    "effect": {
+      "RSK": 7,
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "志愿",
+      "临门改动"
+    ]
+  },
+  {
+    "id": 32397,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "志愿提交后，等待录取的几天像被拉长了。",
+    "effect": {
+      "SPR": -1
+    },
+    "grade": 0,
+    "weight": 75,
+    "tags": [
+      "出分",
+      "等待录取"
+    ]
+  },
+  {
+    "id": 32398,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "录取短信弹出来时，你先愣了一下才敢点开。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "出分",
+      "录取短信"
+    ]
+  },
+  {
+    "id": 32399,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "录取专业不是最熟悉的那个，你开始查课程表和培养方案。",
+    "effect": {
+      "SPR": -1,
+      "INT": 1
+    },
+    "grade": 0,
+    "weight": 70,
+    "tags": [
+      "出分",
+      "专业陌生"
+    ]
+  },
+  {
+    "id": 32400,
+    "stage": "出分填报期",
+    "phase": "final",
+    "text": "所有争论、猜测和等待终于结束，你把准考证和志愿表收进抽屉。",
+    "effect": {
+      "SPR": 1
+    },
+    "grade": 1,
+    "weight": 65,
+    "tags": [
+      "出分",
+      "尘埃落定"
+    ]
   }
 ]

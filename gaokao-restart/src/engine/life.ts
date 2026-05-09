@@ -3,6 +3,7 @@ import type {
   Allocation,
   CorePropCode,
   Effect,
+  ExamScoreResult,
   FinalResult,
   GameContent,
   GameEvent,
@@ -178,7 +179,7 @@ export class LifeEngine {
     let ending = null;
     let admission = null;
     if (isFinalRound(ageRound)) {
-      const exam = calculateExamScore(state.props, this.random);
+      const exam = applyRetakeExamCalibration(calculateExamScore(state.props, this.random), state);
       admission = resolveAdmission(this.content, state, exam, this.random);
       ending = pickEnding(this.content, state, admission);
       state.finalEnding = ending;
@@ -225,8 +226,8 @@ export class LifeEngine {
     state.props.AGE = 17;
     state.props.SUM = 0;
     applyPropDelta(state.props, 'SPR', -1);
-    applyPropDelta(state.props, 'RSK', 6);
-    applyPropDelta(state.props, 'SCOREMOD', 24);
+    applyPropDelta(state.props, 'RSK', 4);
+    applyPropDelta(state.props, 'SCOREMOD', 32);
     refreshScore(state.props, 'final');
 
     return this.snapshot();
@@ -376,4 +377,20 @@ function eventRoundForState(state: GameState, ageRound: AgeRound): AgeRound {
       : [];
   if (retakePool.length === 0) return ageRound;
   return { ...ageRound, eventPool: [...retakePool, ...ageRound.eventPool] };
+}
+
+function applyRetakeExamCalibration(exam: ExamScoreResult, state: GameState): ExamScoreResult {
+  const previousScore = state.retakeFrom?.finalScore;
+  if (!previousScore) return exam;
+
+  const gap = previousScore - exam.finalScore;
+  if (gap < 0 || gap > 6) return exam;
+
+  const bonus = gap + 1;
+  return {
+    ...exam,
+    finalScore: Math.min(750, exam.finalScore + bonus),
+    variance: exam.variance + bonus,
+    explanation: `${exam.explanation} 复读临场校准 +${bonus}。`,
+  };
 }

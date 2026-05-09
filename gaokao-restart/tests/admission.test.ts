@@ -31,7 +31,7 @@ describe('resolveAdmission', () => {
       if (result.admissionTier === '985') admitted985 += 1;
     }
 
-    expect(admitted985).toBeGreaterThanOrEqual(54);
+    expect(admitted985).toBeGreaterThanOrEqual(50);
   });
 
   it('usually commits to 211 or above when a 211 line is reachable', () => {
@@ -61,10 +61,10 @@ describe('resolveAdmission', () => {
     expect(result.admissionTier).toBe('retake');
   });
 
-  it('can slide when score is enough but volunteer strategy collapses', () => {
-    const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 5, RSK: 80 }), exam(590), new Random(1));
+  it('can slide below 211 level when volunteer strategy collapses', () => {
+    const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 5, RSK: 80 }), exam(530), new Random(1));
 
-    expect(result.canReach211).toBe(true);
+    expect(result.canReach211).toBe(false);
     expect(result.admitted).toBe(false);
     expect(result.admissionTier).toBe('slide');
   });
