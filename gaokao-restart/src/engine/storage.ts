@@ -3,6 +3,11 @@ import { evaluateCondition } from './condition';
 
 export const STORAGE_KEY = 'gaokao-restart.save.v1';
 
+export interface SaveStorage {
+  getItem(key: string): string | null;
+  setItem(key: string, value: string): void;
+}
+
 const emptySave: SaveData = {
   times: 0,
   inheritedTalentId: null,
@@ -16,10 +21,10 @@ export function createEmptySave(): SaveData {
   return cloneSave(emptySave);
 }
 
-export function loadSave(): SaveData {
-  if (!hasStorage()) return createEmptySave();
+export function loadSave(storage = getDefaultStorage()): SaveData {
+  if (!storage) return createEmptySave();
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = storage.getItem(STORAGE_KEY);
     if (!raw) return createEmptySave();
     return normalizeSave(JSON.parse(raw));
   } catch {
@@ -27,9 +32,9 @@ export function loadSave(): SaveData {
   }
 }
 
-export function saveData(save: SaveData): void {
-  if (!hasStorage()) return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizeSave(save)));
+export function saveData(save: SaveData, storage = getDefaultStorage()): void {
+  if (!storage) return;
+  storage.setItem(STORAGE_KEY, JSON.stringify(normalizeSave(save)));
 }
 
 export function recordFinalResult(save: SaveData, result: FinalResult, content: GameContent): SaveData {
@@ -92,6 +97,7 @@ function cloneSave(save: SaveData): SaveData {
   };
 }
 
-function hasStorage(): boolean {
-  return typeof window !== 'undefined' && Boolean(window.localStorage);
+function getDefaultStorage(): SaveStorage | null {
+  if (typeof window === 'undefined' || !window.localStorage) return null;
+  return window.localStorage;
 }

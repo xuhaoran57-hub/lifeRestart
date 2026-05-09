@@ -1,5 +1,5 @@
 import { zhCnContent } from '../content/zh-cn';
-import { loadSave, saveData } from '../engine/storage';
+import { loadSave, saveData, type SaveStorage } from '../engine/storage';
 import type { GameContent, SaveData } from './types';
 
 export interface GameApp {
@@ -8,14 +8,18 @@ export interface GameApp {
   persist(save: SaveData): void;
 }
 
-export function createGame(): GameApp {
-  const save = loadSave();
+export interface CreateGameOptions {
+  storage?: SaveStorage;
+}
+
+export function createGame(options: CreateGameOptions = {}): GameApp {
+  const save = loadSave(options.storage);
   return {
     content: zhCnContent,
     save,
     persist(nextSave) {
       this.save = nextSave;
-      saveData(nextSave);
+      saveData(nextSave, options.storage);
     },
   };
 }
