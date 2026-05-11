@@ -160,6 +160,7 @@ export interface AdmissionResult {
   finalScore: number;
   potentialScore: number;
   variance: number;
+  scoreHidden?: boolean;
   canReach985: boolean;
   canReach211: boolean;
   bestReachable985?: AdmissionLine;

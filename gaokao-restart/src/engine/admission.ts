@@ -4,10 +4,12 @@ import type {
   AdmissionResult,
   AdmissionStrategyLabel,
   AdmissionTier,
+  Ending,
   ExamScoreResult,
   GameContent,
   GameState,
   Props,
+  SubjectTrack,
   University,
 } from '../app/types';
 import { clamp } from './properties';
@@ -19,6 +21,16 @@ interface LineCandidate {
   university: University;
   margin: number;
 }
+
+const recommendedUniversityNames = [
+  '北京大学',
+  '清华大学',
+  '中国科学技术大学',
+  '复旦大学',
+  '上海交通大学',
+  '浙江大学',
+  '南京大学',
+];
 
 export function calculateExamScore(props: Props, random: Random): ExamScoreResult {
   const potentialScore = props.SCR;
@@ -179,12 +191,82 @@ export function resolveAdmission(
   };
 }
 
+export function resolveRecommendedAdmission(
+  content: GameContent,
+  state: GameState,
+  ending: Ending,
+  random: Random,
+): AdmissionResult {
+  const track = state.subjectTrack ?? 'physics';
+  const profile = getProfileForSubjectTrack(content, track);
+  const university = pickRecommendedUniversity(content, random);
+  const admissionTier = universityAdmissionTier(university);
+
+  return {
+    profileId: profile.id,
+    profileName: profile.name,
+    subjectTrack: track,
+    subjectTrackName: state.subjectTrack ? subjectTrackName(track) : '保送',
+    finalScore: 0,
+    potentialScore: state.props.SCR,
+    variance: 0,
+    scoreHidden: true,
+    canReach985: admissionTier === '985',
+    canReach211: ['985', '211'].includes(admissionTier),
+    admitted: true,
+    admittedUniversity: university,
+    admissionTier,
+    strategyLabel: '冲刺',
+    highScoreLowAdmission: false,
+    reason: `已通过${ending.name}路线提前锁定 ${university.name} 录取资格，后续流程直接结算。`,
+  };
+}
+
 function getProfileForTrack(content: GameContent, state: GameState): AdmissionProfile {
   if (!state.subjectTrack) throw new Error('缺少分科结果，无法结算录取');
-  const profileId = subjectTrackProfileId(state.subjectTrack);
-  const profile = content.admissionProfiles.find(item => item.id === profileId);
+  return getProfileForSubjectTrack(content, state.subjectTrack);
+}
+
+function getProfileForSubjectTrack(content: GameContent, track: SubjectTrack): AdmissionProfile {
+  const profileId = subjectTrackProfileId(track);
+  const profile = content.admissionProfiles.find(item => item.id === profileId)
+    ?? content.admissionProfiles.find(item => item.default)
+    ?? content.admissionProfiles[0];
   if (!profile) throw new Error(`缺少录取档案 ${profileId}`);
   return profile;
+}
+
+function pickRecommendedUniversity(content: GameContent, random: Random): University {
+  const preferred = recommendedUniversityNames
+    .map(name => content.universities.find(item => item.name === name))
+    .filter((item): item is University => Boolean(item));
+  const top985 = content.universities.filter(item => item.prestigeTier === 'top' && item.tags.includes('985'));
+  const candidates = preferred.length > 0
+    ? preferred
+    : top985.length > 0
+      ? top985
+      : content.universities;
+  const picked = pickWeighted(candidates, recommendedUniversityWeight, random);
+  if (!picked) throw new Error('缺少保送录取院校数据');
+  return picked;
+}
+
+function recommendedUniversityWeight(university: University): number {
+  const prestigeWeight = {
+    top: 20,
+    strong: 12,
+    solid: 8,
+    regional: 4,
+    private: 1,
+  }[university.prestigeTier];
+  const tagWeight = university.tags.includes('985')
+    ? 8
+    : university.tags.includes('211')
+      ? 5
+      : university.tags.includes('doubleFirstClass')
+        ? 3
+        : 0;
+  return prestigeWeight + tagWeight;
 }
 
 function pickBestReachable(candidates: LineCandidate[]): LineCandidate | null {

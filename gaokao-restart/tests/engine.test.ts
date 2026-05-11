@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import type { GameContent } from '../src/app/types';
 import { zhCnContent } from '../src/content/zh-cn';
 import { isEventAvailable } from '../src/engine/events';
 import { LifeEngine } from '../src/engine/life';
@@ -54,6 +55,47 @@ describe('LifeEngine', () => {
     const second = engine.runToEnd();
     expect(second.state.logs).toHaveLength(84);
     expect(() => engine.retake()).toThrow('本局已经复读过一次');
+  });
+
+  it('finishes when the recommendation opportunity event is unlocked', () => {
+    const engine = new LifeEngine(contentWithImmediateRecommendation(17), 20260511);
+    engine.start([21804, 90001, 90002], { INT: 8, STR: 4, MNY: 4, SPR: 4 });
+
+    const result = engine.runToEnd();
+
+    expect(result.ending.id).toBe(41010);
+    expect(result.state.logs).toHaveLength(1);
+    expect(result.state.currentRound?.age).toBe(17);
+    expect(result.state.logs[0].event.tags).toContain('保送专有');
+    expect(result.admission.scoreHidden).toBe(true);
+    expect(result.admission.finalScore).toBe(0);
+    expect(result.admission.admittedUniversity?.name).toBeTruthy();
+    expect(() => engine.retake()).toThrow('保送录取已提前锁定，不能复读');
+  });
+
+  it('uses a recommendation finale event when the round event unlocks the ending', () => {
+    const engine = new LifeEngine(contentWithRoundUnlockedRecommendation(), 20260512);
+    engine.start([21805, 90001, 90002], { INT: 5, STR: 5, MNY: 5, SPR: 5 });
+
+    const result = engine.runToEnd();
+
+    expect(result.ending.id).toBe(41010);
+    expect(result.state.logs).toHaveLength(1);
+    expect(result.state.logs[0].event.tags).toContain('保送专有');
+    expect(result.state.logs[0].branchEvents.map(event => event.id)).toContain(31017);
+    expect(result.state.eventIds).toContain(31017);
+    expect(result.state.eventIds).toContain(result.state.logs[0].event.id);
+  });
+
+  it('does not unlock the recommendation ending before age 17', () => {
+    const engine = new LifeEngine(contentWithImmediateRecommendation(16), 20260511);
+    engine.start([21804, 90001, 90002], { INT: 8, STR: 4, MNY: 4, SPR: 4 });
+
+    const step = engine.next();
+
+    expect(step.ending).toBeNull();
+    expect(step.admission).toBeNull();
+    expect(step.state.isFinished).toBe(false);
   });
 
   it('rejects mutually exclusive talents', () => {
@@ -126,3 +168,108 @@ describe('LifeEngine', () => {
     expect(texts).not.toContain('记进了自己的小本子');
   });
 });
+
+function contentWithImmediateRecommendation(age: 16 | 17): GameContent {
+  const recommendationEnding = zhCnContent.endings.find(item => item.id === 41010);
+  if (!recommendationEnding) throw new Error('Missing recommendation ending');
+
+  return {
+    ...zhCnContent,
+    talents: [
+      {
+        id: 21804,
+        name: '保送机会',
+        grade: 3,
+        description: '测试用保送天赋',
+        effect: { VOL: 50 },
+      },
+      {
+        id: 90001,
+        name: '测试天赋一',
+        grade: 0,
+        description: '占位',
+      },
+      {
+        id: 90002,
+        name: '测试天赋二',
+        grade: 0,
+        description: '占位',
+      },
+    ],
+    events: [
+      ...zhCnContent.events.filter(event => event.id === 32405),
+      ...recommendationFinaleEvents(),
+    ],
+    ages: [
+      {
+        step: 1,
+        age,
+        round: 1,
+        roundName: '保送测试',
+        phase: age === 16 ? 'senior2' : 'senior3',
+        phaseName: age === 16 ? '高二期' : '高三期',
+        eventPool: [{ id: 32405, weight: 1 }],
+        talentPool: [],
+      },
+    ],
+    endings: [recommendationEnding],
+  };
+}
+
+function contentWithRoundUnlockedRecommendation(): GameContent {
+  const recommendationEnding = zhCnContent.endings.find(item => item.id === 41010);
+  if (!recommendationEnding) throw new Error('Missing recommendation ending');
+
+  return {
+    ...zhCnContent,
+    talents: [
+      {
+        id: 21805,
+        name: '竞赛金牌苗子',
+        grade: 3,
+        description: '测试用竞赛天赋',
+        effect: { INT: 3, RSK: 6 },
+      },
+      {
+        id: 90001,
+        name: '测试天赋一',
+        grade: 0,
+        description: '占位',
+      },
+      {
+        id: 90002,
+        name: '测试天赋二',
+        grade: 0,
+        description: '占位',
+      },
+    ],
+    events: [
+      {
+        id: 31017,
+        stage: '高二期',
+        phase: 'senior2',
+        text: '你被选去参加竞赛集训。',
+        effect: {},
+        weight: 1,
+      },
+      ...recommendationFinaleEvents(),
+    ],
+    ages: [
+      {
+        step: 1,
+        age: 17,
+        round: 1,
+        roundName: '保送测试',
+        phase: 'senior3',
+        phaseName: '高三期',
+        eventPool: [{ id: 31017, weight: 1 }],
+        talentPool: [],
+      },
+    ],
+    endings: [recommendationEnding],
+  };
+}
+
+function recommendationFinaleEvents(): GameContent['events'] {
+  return zhCnContent.events.filter(event => event.tags?.includes('保送专有'));
+}

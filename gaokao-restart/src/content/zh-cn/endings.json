@@ -56,7 +56,7 @@
     "name": "保送上岸",
     "tier": "SSS",
     "description": "你在竞赛、材料和长期积累里提前拿到了入场券。",
-    "condition": "((TLT?[21804])&(INT>=8)&(VOL>=50)&(RSK<50))|((TLT?[21805])&(EVT?[31017])&(INT>=8)&(RSK<65))",
+    "condition": "(AGE>16)&(AGE<18)&(((TLT?[21804])&(EVT?[32405])&(INT>=8)&(VOL>=50)&(RSK<50))|((TLT?[21805])&(EVT?[31017])&(INT>=8)&(RSK<65)))",
     "priority": 114,
     "scoreBonus": 80,
     "tags": [

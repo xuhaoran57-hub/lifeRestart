@@ -1,8 +1,10 @@
 import type {
   AgeRound,
   Allocation,
+  AdmissionResult,
   CorePropCode,
   Effect,
+  Ending,
   ExamScoreResult,
   FinalResult,
   GameContent,
@@ -14,12 +16,12 @@ import type {
   Talent,
   WeightedRef,
 } from '../app/types';
-import { calculateExamScore, resolveAdmission } from './admission';
+import { calculateExamScore, resolveAdmission, resolveRecommendedAdmission } from './admission';
 import { evaluateCondition } from './condition';
 import { pickEnding } from './endings';
 import { createConditionContext, getEventMap, isEventAvailable, pickEventForRound } from './events';
 import { applyPropDelta, calculateSummaryScore, createInitialProps, refreshScore } from './properties';
-import { Random } from './random';
+import { pickWeighted, Random } from './random';
 import { forcedSubjectTrackFromTalents, resolveSubjectTrack } from './subjectTrack';
 import { getTalentMap, validateTalentSelection } from './talents';
 
@@ -83,6 +85,13 @@ const retakeSenior3EventPool: WeightedRef[] = [
 
 const retakeVolunteerEventPool: WeightedRef[] = [
   { id: 31839, weight: 140 },
+];
+
+const recommendedEndingEventPool: WeightedRef[] = [
+  { id: 32401, weight: 100 },
+  { id: 32402, weight: 100 },
+  { id: 32403, weight: 100 },
+  { id: 32404, weight: 100 },
 ];
 
 export class LifeEngine {
@@ -153,6 +162,20 @@ export class LifeEngine {
     state.props.AGE = ageRound.age;
 
     const triggeredTalents = this.triggerRoundTalents(state, ageRound);
+    let earlyEnding = pickEarlyRecommendedEnding(this.content, state);
+    if (earlyEnding) {
+      const event = this.pickRecommendedEndingEvent(state);
+      this.applyEvent(state, event, ageRound);
+      refreshScore(state.props, scorePhaseForRound(state, ageRound));
+      state.stepIndex += 1;
+      const log = createRunLog(state, ageRound, event, [], triggeredTalents);
+      state.logs.push(log);
+
+      const admission = resolveRecommendedAdmission(this.content, state, earlyEnding, this.random);
+      applyFinalResult(state, earlyEnding, admission);
+      return { state: this.snapshot(), log, ending: earlyEnding, admission };
+    }
+
     const eventRound = eventRoundForState(state, ageRound);
     const event = pickEventForRound(eventRound, this.eventMap, state, this.random);
     this.applyEvent(state, event, ageRound);
@@ -161,32 +184,29 @@ export class LifeEngine {
     if (subjectTrackEvent) branchEvents.push(subjectTrackEvent);
     refreshScore(state.props, scorePhaseForRound(state, ageRound));
 
-    state.stepIndex += 1;
+    earlyEnding = pickEarlyRecommendedEnding(this.content, state);
+    const displayedEvent = earlyEnding ? this.pickRecommendedEndingEvent(state) : event;
+    const displayedBranchEvents = earlyEnding ? [event, ...branchEvents] : branchEvents;
+    if (earlyEnding) {
+      this.applyEvent(state, displayedEvent, ageRound);
+      refreshScore(state.props, scorePhaseForRound(state, ageRound));
+    }
 
-    const log: RunLog = {
-      step: ageRound.step,
-      age: ageRound.age,
-      round: ageRound.round,
-      roundName: ageRound.roundName,
-      phaseName: ageRound.phaseName,
-      event,
-      branchEvents,
-      triggeredTalents,
-      props: { ...state.props },
-    };
+    state.stepIndex += 1;
+    const log = createRunLog(state, ageRound, displayedEvent, displayedBranchEvents, triggeredTalents);
     state.logs.push(log);
 
-    let ending = null;
-    let admission = null;
-    if (isFinalRound(ageRound)) {
+    let ending: Ending | null = null;
+    let admission: AdmissionResult | null = null;
+    if (earlyEnding) {
+      admission = resolveRecommendedAdmission(this.content, state, earlyEnding, this.random);
+      ending = earlyEnding;
+      applyFinalResult(state, ending, admission);
+    } else if (isFinalRound(ageRound)) {
       const exam = applyRetakeExamCalibration(calculateExamScore(state.props, this.random), state);
       admission = resolveAdmission(this.content, state, exam, this.random);
       ending = pickEnding(this.content, state, admission);
-      state.finalEnding = ending;
-      state.admissionResult = admission;
-      state.endingIds = [ending.id];
-      state.props.SUM = calculateSummaryScore(state.props, ending.scoreBonus);
-      state.isFinished = true;
+      applyFinalResult(state, ending, admission);
     }
 
     return { state: this.snapshot(), log, ending, admission };
@@ -198,6 +218,7 @@ export class LifeEngine {
       throw new Error('只有结局结算后才能选择复读');
     }
     if (state.retakeUsed) throw new Error('本局已经复读过一次');
+    if (state.admissionResult.scoreHidden) throw new Error('保送录取已提前锁定，不能复读');
 
     const senior3StartIndex = this.content.ages.findIndex(item => item.age === 17 && item.round === 1);
     if (senior3StartIndex < 0) throw new Error('缺少高三起始回合');
@@ -307,6 +328,19 @@ export class LifeEngine {
     return event;
   }
 
+  private pickRecommendedEndingEvent(state: GameState): GameEvent {
+    const picked = pickWeighted(
+      recommendedEndingEventPool
+        .map(ref => ({ ref, event: this.eventMap.get(ref.id) }))
+        .filter((item): item is { ref: WeightedRef; event: GameEvent } => Boolean(item.event))
+        .filter(({ event }) => isEventAvailable(event, state)),
+      item => item.ref.weight,
+      this.random,
+    );
+    if (!picked) throw new Error('缺少可用的保送结局事件');
+    return picked.event;
+  }
+
   private applyEffect(
     props: Props,
     effect: Effect = {},
@@ -361,6 +395,49 @@ function positiveEventSoftCap(prop: CorePropCode, delta: number, current: number
 
 function isFinalRound(ageRound: AgeRound): boolean {
   return ageRound.age === 18 && ageRound.round === 4;
+}
+
+function createRunLog(
+  state: GameState,
+  ageRound: AgeRound,
+  event: GameEvent,
+  branchEvents: GameEvent[],
+  triggeredTalents: Talent[],
+): RunLog {
+  return {
+    step: ageRound.step,
+    age: ageRound.age,
+    round: ageRound.round,
+    roundName: ageRound.roundName,
+    phaseName: ageRound.phaseName,
+    event,
+    branchEvents,
+    triggeredTalents,
+    props: { ...state.props },
+  };
+}
+
+function pickEarlyRecommendedEnding(content: GameContent, state: GameState): Ending | null {
+  const eventScope = state.retakeUsed ? 'currentAttempt' : 'all';
+  return [...content.endings]
+    .filter(ending => ending.tags?.includes('保送'))
+    .sort((a, b) => earlyEndingPriority(b) - earlyEndingPriority(a))
+    .find(ending => evaluateCondition(
+      ending.condition,
+      createConditionContext(state, {}, null, { eventScope, candidateEndingId: ending.id }),
+    )) ?? null;
+}
+
+function applyFinalResult(state: GameState, ending: Ending, admission: AdmissionResult): void {
+  state.finalEnding = ending;
+  state.admissionResult = admission;
+  state.endingIds = [ending.id];
+  state.props.SUM = calculateSummaryScore(state.props, ending.scoreBonus);
+  state.isFinished = true;
+}
+
+function earlyEndingPriority(ending: Ending): number {
+  return ending.priority - (ending.tier === 'X' ? 12 : 0);
 }
 
 function scorePhaseForRound(state: GameState, ageRound: AgeRound): AgeRound['phase'] {

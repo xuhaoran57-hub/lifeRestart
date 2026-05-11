@@ -33,8 +33,9 @@ describe('pickEnding', () => {
   });
 
   it('uses the recommendation-based admission ending when the talent condition is met', () => {
-    const state = stateWithProps({ INT: 8, VOL: 50, RSK: 30, HSCR: 620 });
+    const state = stateWithProps({ AGE: 17, INT: 8, VOL: 50, RSK: 30, HSCR: 620 });
     state.selectedTalentIds = [21804];
+    state.eventIds = [32405];
     const admission = admission985WithMargin(20, 20);
 
     const ending = pickEnding(zhCnContent, state, admission);

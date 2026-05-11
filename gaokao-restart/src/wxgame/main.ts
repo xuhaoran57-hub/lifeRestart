@@ -172,7 +172,7 @@ class WxGameApp {
 
   private bindShare(): void {
     this.wxApi?.showShareMenu?.({ withShareTicket: true });
-    this.wxApi?.onShareAppMessage?.(() => ({ title: '高考重开模拟器' }));
+    this.wxApi?.onShareAppMessage?.(() => ({ title: '重回高三人生模拟' }));
   }
 
   private getTouch(event: WxTouchEvent): WxTouchPoint | null {
@@ -424,7 +424,7 @@ class WxGameApp {
     this.ctx.fillRect(0, 0, this.width, this.headerHeight());
     this.setFont(21, 800);
     this.ctx.fillStyle = '#172033';
-    this.ctx.fillText('高考重开模拟器', 20, top + 22);
+    this.ctx.fillText('重回高三人生模拟', 20, top + 22);
     this.setFont(12, 500);
     this.ctx.fillStyle = '#687386';
     this.ctx.fillText(`小游戏 POC · ${screenName(this.state.screen)} · 重开 ${this.game.save.times} 次`, 20, top + 43);
@@ -558,7 +558,7 @@ class WxGameApp {
     });
 
     y = this.drawAdmissionPanel(y + 10, result.admission);
-    y = this.drawStatsPanel(y + 10, result.state);
+    if (!result.admission.scoreHidden) y = this.drawStatsPanel(y + 10, result.state);
     y = this.drawInheritancePanel(y + 10, result);
     y = this.drawSectionHeader(y + 6, '本局事件', `${result.state.logs.length} 回合`);
     y = this.drawVirtualLogList(y, result.state.logs);
@@ -633,7 +633,12 @@ class WxGameApp {
       return;
     }
 
-    const canRetake = Boolean(this.state.result && !this.state.result.state.retakeUsed && !this.state.persistedResult);
+    const canRetake = Boolean(
+      this.state.result
+      && !this.state.result.admission.scoreHidden
+      && !this.state.result.state.retakeUsed
+      && !this.state.persistedResult,
+    );
     if (canRetake) {
       const gap = 10;
       const leftWidth = Math.round((this.width - 40 - gap) * 0.58);
@@ -758,6 +763,17 @@ class WxGameApp {
   private drawAdmissionPanel(y: number, admission: AdmissionResult): number {
     return this.drawPanel(y, () => {
       let cursor = y + 26;
+      if (admission.scoreHidden) {
+        this.drawSectionTitle('保送录取', '提前锁定录取资格', 36, cursor);
+        cursor += 58;
+        cursor = this.drawFactRow(cursor, '录取院校', admission.admittedUniversity?.name ?? '已锁定录取资格');
+        cursor = this.drawFactRow(cursor, '录取层级', admissionTierName(admission.admissionTier));
+        this.setFont(14, 400);
+        this.ctx.fillStyle = '#343a40';
+        cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
+        return cursor + 4;
+      }
+
       this.drawSectionTitle('高考录取', `${admission.subjectTrackName} · ${admission.strategyLabel}`, 36, cursor);
       this.drawScoreBadge(String(admission.finalScore), this.width - 98, cursor - 12);
       cursor += 58;
@@ -775,8 +791,7 @@ class WxGameApp {
   private drawInheritancePanel(y: number, result: FinalResult): number {
     const talents = result.state.selectedTalentIds
       .map(id => this.game.content.talents.find(item => item.id === id))
-      .filter((item): item is Talent => Boolean(item))
-      .filter(item => item.inheritAllowed !== false);
+      .filter((item): item is Talent => Boolean(item));
 
     return this.drawPanel(y, () => {
       let cursor = y + 26;

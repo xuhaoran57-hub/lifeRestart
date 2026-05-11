@@ -1,6 +1,6 @@
 # 标准版扩充内容包
 
-本内容包基于 `design/gaokao-mvp-content.md` 中《高考重开模拟器》标准版 MVP 扩充，目标规模约为试玩版 10 倍。
+本内容包基于 `design/gaokao-mvp-content.md` 中《重回高三人生模拟》标准版 MVP 扩充，目标规模约为试玩版 10 倍。
 
 ## 规模
 
@@ -46,4 +46,3 @@
 - `src/content/zh-cn/endings.json`
 - `src/content/zh-cn/achievements.json`
 - `src/content/zh-cn/characters.json`
-

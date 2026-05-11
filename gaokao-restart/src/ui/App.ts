@@ -209,17 +209,23 @@ function renderScreen(state: UiState, game: GameApp): string {
     summary: renderSummary(state, game),
     achievements: renderAchievements(game),
   }[state.screen];
+  const topbarAction = state.screen === 'achievements'
+    ? '<button class="ghost" data-action="close-achievements">返回</button>'
+    : '<button class="ghost" data-action="view-achievements">成就</button>';
 
   return `
-    <div class="shell">
+    <div class="shell screen-${state.screen}">
       <header class="topbar">
-        <div>
-          <h1>高考重开模拟器</h1>
-          <p>${game.save.times} 次重开 · ${game.save.unlockedEndingIds.length} 个结局 · ${game.save.achievedIds.length} 个成就</p>
+        <div class="topbar-copy">
+          <h1>重回高三人生模拟</h1>
+          <div class="topbar-stats" aria-label="存档进度">
+            <span><strong>${game.save.times}</strong><em>次重开</em></span>
+            <span><strong>${game.save.unlockedEndingIds.length}</strong><em>个结局</em></span>
+            <span><strong>${game.save.achievedIds.length}</strong><em>个成就</em></span>
+          </div>
         </div>
         <div class="topbar-actions">
-          <button class="ghost" data-action="view-achievements">成就</button>
-          <button class="ghost" data-action="restart">首页</button>
+          ${topbarAction}
         </div>
       </header>
       ${message}
@@ -234,9 +240,17 @@ function renderHome(game: GameApp): string {
     : null;
   return `
     <section class="panel home-panel">
-      <div>
+      <div class="home-copy">
+        <span class="eyebrow">人生阶段</span>
         <h2>新一轮人生志愿表</h2>
         <p class="muted">从 3 岁到高考收官季推进，高三扩展为 10 个冲刺回合。</p>
+      </div>
+      <div class="home-stage-track" aria-label="人生阶段轨迹">
+        <span><strong>童年</strong><em>3-6岁</em></span>
+        <span><strong>小学</strong><em>7-12岁</em></span>
+        <span><strong>初中</strong><em>13-15岁</em></span>
+        <span><strong>高中</strong><em>16-18岁</em></span>
+        <span><strong>高考</strong><em>18岁</em></span>
       </div>
       ${inherited ? `<p class="pill">继承天赋：${escapeHtml(inherited.name)}</p>` : ''}
       <div class="home-actions">
@@ -314,10 +328,13 @@ function renderTalents(state: UiState, game: GameApp): string {
   }).join('');
 
   return `
-    <section class="stack">
+    <section class="stack talent-screen">
       <div class="section-title">
-        <h2>选择天赋</h2>
-        <p>${state.selectedTalentIds.length}/3</p>
+        <div>
+          <h2>选择天赋</h2>
+          <p class="muted">选择 3 个天赋，开启你的高三人生。</p>
+        </div>
+        <p class="selection-count">${state.selectedTalentIds.length}/3</p>
       </div>
       <div class="grid">${cards}</div>
       <button class="primary wide" data-action="to-properties" ${state.selectedTalentIds.length === 3 ? '' : 'disabled'}>确认天赋</button>
@@ -333,7 +350,7 @@ function renderProperties(state: UiState): string {
     ['SPR', '心态'],
   ] as const;
   return `
-    <section class="panel">
+    <section class="panel property-panel">
       <div class="section-title">
         <h2>分配属性</h2>
         <p>剩余 ${remainingPoints(state.allocation)}</p>
@@ -363,7 +380,7 @@ function renderTrajectory(state: UiState, game: GameApp): string {
   const totalRounds = game.content.ages.length + retakeRounds;
   return `
     <section class="stack">
-      <div class="panel">
+      <div class="panel run-panel">
         <div class="section-title">
           <h2>${renderRoundLabel(gameState)}</h2>
           <p>${gameState.logs.length}/${totalRounds}</p>
@@ -385,18 +402,18 @@ function renderTrajectory(state: UiState, game: GameApp): string {
 function renderSummary(state: UiState, game: GameApp): string {
   if (!state.result) return '';
   const { ending } = state.result;
-  const canRetake = !state.result.state.retakeUsed && !state.persistedResult;
+  const hidesScoreDetails = state.result.admission.scoreHidden === true;
+  const canRetake = !hidesScoreDetails && !state.result.state.retakeUsed && !state.persistedResult;
   const talents = state.result.state.selectedTalentIds
     .map(id => game.content.talents.find(item => item.id === id))
     .filter((item): item is Talent => Boolean(item));
-  const inheritable = talents.filter(item => item.inheritAllowed !== false);
   return `
     <section class="stack">
       <div class="panel summary">
         <span class="tier">${escapeHtml(ending.tier)}</span>
         <h2>${escapeHtml(ending.name)}</h2>
         <p>${escapeHtml(ending.description)}</p>
-        ${renderStats(state.result.state)}
+        ${hidesScoreDetails ? '' : renderStats(state.result.state)}
       </div>
       ${renderRetakeFrom(state.result.state)}
       ${renderAdmission(state.result.admission)}
@@ -407,7 +424,7 @@ function renderSummary(state: UiState, game: GameApp): string {
           <button class="ghost" data-action="clear-inherit">清空</button>
         </div>
         <div class="inherit-list">
-          ${inheritable.map(talent => `
+          ${talents.map(talent => `
             <button class="inherit ${game.save.inheritedTalentId === talent.id ? 'selected' : ''}" data-action="inherit" data-id="${talent.id}">
               ${escapeHtml(talent.name)}
             </button>
@@ -453,6 +470,28 @@ function renderSummaryLogs(gameState: GameState): string {
 }
 
 function renderAdmission(admission: AdmissionResult): string {
+  if (admission.scoreHidden) {
+    const admittedUniversityName = admission.admittedUniversity?.name ?? '已锁定录取资格';
+    return `
+      <div class="panel admission-panel">
+        <div class="section-title">
+          <div>
+            <h2>保送录取</h2>
+            <p class="muted">提前锁定录取资格</p>
+          </div>
+        </div>
+        <div class="admission-school">
+          <strong>${escapeHtml(admittedUniversityName)}</strong>
+          <span>保送录取</span>
+        </div>
+        <div class="admission-facts">
+          <span><em>层级</em><strong>${escapeHtml(admissionTierName(admission.admissionTier))}</strong></span>
+        </div>
+        <p class="admission-reason">${escapeHtml(admission.reason)}</p>
+      </div>
+    `;
+  }
+
   const admitted = admission.admitted && admission.admittedLine && admission.admittedUniversity;
   const trackLabel = admission.subjectTrack === 'history' ? '历史组' : '物理组';
   const cooperationFact = admitted && admission.isSinoForeign
