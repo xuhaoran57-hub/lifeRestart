@@ -67,18 +67,41 @@ interface UiState {
   message: string | null;
 }
 
+const theme = {
+  ink: '#172033',
+  title: '#111b2b',
+  heroTitle: '#0f2235',
+  subtle: '#687386',
+  paper: '#fffdf8',
+  paperStrong: '#ffffff',
+  line: '#e5ded3',
+  warm: '#f6efe4',
+  sky: '#dff2ff',
+  blue: '#3a86e8',
+  blueDeep: '#153f63',
+  blueMid: '#2e78b7',
+  teal: '#2f7c80',
+  gold: '#f6a623',
+  purple: '#8758d8',
+  green: '#45b37d',
+  danger: '#d9480f',
+  ghostBorder: 'rgba(157, 148, 134, 0.32)',
+  shadow: 'rgba(40, 54, 78, 0.11)',
+  shadowSoft: 'rgba(40, 54, 78, 0.08)',
+} as const;
+
 const propRows: Array<{ key: PropKey; label: string; color: string }> = [
-  { key: 'INT', label: '学力', color: '#1971c2' },
-  { key: 'STR', label: '精力', color: '#2f9e44' },
-  { key: 'MNY', label: '资源', color: '#f08c00' },
-  { key: 'SPR', label: '心态', color: '#d9480f' },
+  { key: 'INT', label: '学力', color: theme.blue },
+  { key: 'STR', label: '精力', color: theme.green },
+  { key: 'MNY', label: '资源', color: theme.gold },
+  { key: 'SPR', label: '心态', color: theme.teal },
 ];
 
 const rarityColors: Record<TalentRarity, { bg: string; fg: string; border: string }> = {
-  common: { bg: '#f8f9fa', fg: '#495057', border: '#ced4da' },
-  rare: { bg: '#e7f5ff', fg: '#1864ab', border: '#74c0fc' },
-  epic: { bg: '#f3f0ff', fg: '#5f3dc4', border: '#b197fc' },
-  legendary: { bg: '#fff4e6', fg: '#d9480f', border: '#ffa94d' },
+  common: { bg: '#f3f0e8', fg: '#514d46', border: '#d8d0c2' },
+  rare: { bg: '#e5f1ff', fg: '#155996', border: '#5aa7ff' },
+  epic: { bg: '#f0e8ff', fg: '#6840b6', border: '#a56cff' },
+  legendary: { bg: '#fff1d8', fg: '#8a4d00', border: '#f0a23a' },
 };
 
 class WxGameApp {
@@ -428,8 +451,7 @@ class WxGameApp {
     this.buttons = [];
     this.ctx.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.ctx.fillStyle = '#edf3ea';
-    this.ctx.fillRect(0, 0, this.width, this.height);
+    this.drawBackground();
 
     this.drawHeader();
 
@@ -446,34 +468,149 @@ class WxGameApp {
     this.drawFooter();
   }
 
+  private drawBackground(): void {
+    const bg = this.ctx.createLinearGradient(0, 0, 0, this.height);
+    bg.addColorStop(0, 'rgba(214, 235, 250, 0.72)');
+    bg.addColorStop(0.34, 'rgba(255, 250, 240, 0.94)');
+    bg.addColorStop(1, theme.warm);
+    this.ctx.fillStyle = bg;
+    this.ctx.fillRect(0, 0, this.width, this.height);
+
+    this.ctx.save();
+    this.ctx.strokeStyle = 'rgba(47, 124, 128, 0.04)';
+    this.ctx.lineWidth = 1;
+    for (let x = 0.5; x < this.width; x += 32) {
+      this.ctx.beginPath();
+      this.ctx.moveTo(x, 0);
+      this.ctx.lineTo(x, this.height);
+      this.ctx.stroke();
+    }
+    this.ctx.restore();
+  }
+
   private drawHeader(): void {
     const top = Math.max(10, this.safeTop + 7);
-    this.ctx.fillStyle = '#edf3ea';
-    this.ctx.fillRect(0, 0, this.width, this.headerHeight());
-    this.ctx.fillStyle = '#ffffff';
-    this.roundRect(12, top - 2, this.width - 24, 68, 8);
+    const compact = this.state.screen === 'talents';
+    const cardHeight = compact ? 58 : Math.max(96, this.headerHeight() - top - 10);
+    const outerX = 20;
+    const outerWidth = this.width - 40;
+    const innerX = 36;
+    const innerWidth = this.width - 72;
+    const compactButtonWidth = 64;
+    const compactButtonX = outerX + outerWidth - 14 - compactButtonWidth;
+    this.drawHeroHeaderCard(outerX, top - 2, outerWidth, cardHeight, compact);
+
+    this.setFont(compact ? 19 : 26, 800);
+    this.ctx.fillStyle = theme.heroTitle;
+    this.ctx.fillText(
+      this.fitText('重回高三人生模拟', compact ? compactButtonX - innerX - 10 : innerWidth),
+      innerX,
+      top + (compact ? 24 : 27),
+    );
+
+    if (compact) {
+      this.setFont(11, 600);
+      this.ctx.fillStyle = theme.subtle;
+      this.ctx.fillText(this.fitText(this.talentHeaderMeta(), compactButtonX - innerX - 10), innerX, top + 43);
+      const action = this.state.screen === 'achievements'
+        ? { type: 'closeAchievements' as const }
+        : { type: 'viewAchievements' as const };
+      const label = this.state.screen === 'achievements' ? '返回' : '成就';
+      this.drawButton(action, label, compactButtonX, top + 14, compactButtonWidth, 34, 'secondary');
+    } else {
+      this.drawHeaderStats(top + 46);
+      const action = this.state.screen === 'achievements'
+        ? { type: 'closeAchievements' as const }
+        : { type: 'viewAchievements' as const };
+      const label = this.state.screen === 'achievements' ? '返回' : '成就';
+      this.drawButton(action, label, innerX, top + 104, innerWidth, 38, 'secondary');
+    }
+  }
+
+  private drawHeroHeaderCard(x: number, y: number, width: number, height: number, compact: boolean): void {
+    const bg = this.ctx.createLinearGradient(x, y, x + width, y + height);
+    bg.addColorStop(0, 'rgba(255, 255, 255, 0.96)');
+    bg.addColorStop(0.56, compact ? 'rgba(255, 252, 246, 0.94)' : 'rgba(255, 255, 255, 0.72)');
+    bg.addColorStop(1, compact ? 'rgba(255, 250, 241, 0.94)' : 'rgba(223, 242, 255, 0.42)');
+
+    this.ctx.save();
+    this.ctx.shadowColor = theme.shadow;
+    this.ctx.shadowBlur = compact ? 12 : 22;
+    this.ctx.shadowOffsetY = compact ? 5 : 10;
+    this.ctx.fillStyle = bg;
+    this.roundRect(x, y, width, height, 8);
     this.ctx.fill();
-    this.ctx.strokeStyle = '#dfe7dd';
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.strokeStyle = 'rgba(110, 139, 160, 0.22)';
     this.ctx.stroke();
-    this.setFont(21, 800);
-    this.ctx.fillStyle = '#172033';
-    this.ctx.fillText(this.fitText('重回高三人生模拟', this.width - 128), 24, top + 22);
-    this.setFont(11, 500);
-    this.ctx.fillStyle = '#687386';
-    this.ctx.fillText(`${screenName(this.state.screen)} · ${this.game.save.times} 次重开 · ${this.game.save.unlockedEndingIds.length} 结局 · ${this.game.save.achievedIds.length} 成就`, 24, top + 43);
+    this.ctx.restore();
 
-    this.ctx.fillStyle = '#2f9e44';
-    this.ctx.fillRect(24, top + 55, 46, 3);
-    this.ctx.fillStyle = '#f08c00';
-    this.ctx.fillRect(70, top + 55, 46, 3);
-    this.ctx.fillStyle = '#1971c2';
-    this.ctx.fillRect(116, top + 55, 46, 3);
+    if (compact) return;
 
-    const action = this.state.screen === 'achievements'
-      ? { type: 'closeAchievements' as const }
-      : { type: 'viewAchievements' as const };
-    const label = this.state.screen === 'achievements' ? '返回' : '成就';
-    this.drawButton(action, label, this.width - 90, top + 14, 64, 34, 'secondary');
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.9;
+    this.ctx.fillStyle = 'rgba(47, 124, 128, 0.18)';
+    this.ctx.beginPath();
+    this.ctx.moveTo(x + width - 174, y + height - 12);
+    this.ctx.lineTo(x + width - 22, y + height - 12);
+    this.ctx.lineTo(x + width - 42, y + height - 34);
+    this.ctx.lineTo(x + width - 136, y + height - 34);
+    this.ctx.closePath();
+    this.ctx.fill();
+
+    const windowX = x + width - 148;
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.42)';
+    for (let index = 0; index < 4; index += 1) {
+      this.ctx.fillRect(windowX + index * 22, y + height - 29, 12, 10);
+    }
+
+    this.ctx.fillStyle = 'rgba(58, 134, 232, 0.24)';
+    this.ctx.beginPath();
+    this.ctx.moveTo(x + width - 74, y + 22);
+    this.ctx.lineTo(x + width - 18, y + 8);
+    this.ctx.lineTo(x + width - 41, y + 47);
+    this.ctx.lineTo(x + width - 52, y + 31);
+    this.ctx.lineTo(x + width - 78, y + 42);
+    this.ctx.closePath();
+    this.ctx.fill();
+    this.ctx.restore();
+  }
+
+  private drawHeaderStats(y: number): void {
+    const stats = [
+      [String(this.game.save.times), '次重开'],
+      [String(this.game.save.unlockedEndingIds.length), '个结局'],
+      [String(this.game.save.achievedIds.length), '个成就'],
+    ] as const;
+    const x = 36;
+    const gap = 6;
+    const maxWidth = this.width - 72;
+    const chipWidth = (maxWidth - gap * 2) / 3;
+
+    stats.forEach(([value, label], index) => {
+      const chipX = x + index * (chipWidth + gap);
+      this.ctx.fillStyle = 'rgba(255, 255, 255, 0.68)';
+      this.roundRect(chipX, y, chipWidth, 48, 8);
+      this.ctx.fill();
+      this.ctx.strokeStyle = 'rgba(255, 255, 255, 0.86)';
+      this.ctx.stroke();
+      this.setFont(15, 800);
+      this.ctx.fillStyle = theme.teal;
+      const valueText = this.fitText(value, chipWidth - 12);
+      const valueWidth = this.ctx.measureText(valueText).width;
+      this.ctx.fillText(valueText, chipX + (chipWidth - valueWidth) / 2, y + 19);
+      this.setFont(10, 700);
+      this.ctx.fillStyle = '#405064';
+      const labelText = this.fitText(label, chipWidth - 10);
+      const labelWidth = this.ctx.measureText(labelText).width;
+      this.ctx.fillText(labelText, chipX + (chipWidth - labelWidth) / 2, y + 36);
+    });
+  }
+
+  private talentHeaderMeta(): string {
+    const inherited = this.inheritedCandidateTalent();
+    if (!inherited) return `${screenName(this.state.screen)} · ${this.state.selectedTalentIds.length}/3`;
+    return `继承 ${inherited.name} · ${this.state.selectedTalentIds.length}/3`;
   }
 
   private drawScrollableContent(viewport: Rect): number {
@@ -500,19 +637,19 @@ class WxGameApp {
   }
 
   private drawHome(y: number): number {
+    const inherited = this.savedInheritedTalent();
     y = this.drawPanel(y, () => {
-      let cursor = y + 26;
+      let cursor = y + 28;
+      this.drawPill('人生阶段', 36, cursor - 18, '#fff2d0', '#9a5b00');
+      cursor += 20;
       this.drawSectionTitle('新一轮人生志愿表', '从 3 岁到高考收官季推进，高三扩展为 10 个冲刺回合。', 36, cursor);
       cursor += 58;
       cursor = this.drawStageTrack(cursor);
       cursor += 18;
+      if (inherited) cursor = this.drawInheritedTalentBanner(cursor, inherited, '继承天赋');
       cursor = this.drawFactRow(cursor, '内容数据', `${this.game.content.talents.length} 天赋 / ${this.game.content.events.length} 事件`);
       cursor = this.drawFactRow(cursor, '结局进度', `${this.game.save.unlockedEndingIds.length}/${this.game.content.endings.length}`);
       cursor = this.drawFactRow(cursor, '成就进度', `${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`);
-      if (this.game.save.inheritedTalentId !== null) {
-        const inherited = this.game.content.talents.find(item => item.id === this.game.save.inheritedTalentId);
-        cursor = this.drawFactRow(cursor, '继承天赋', inherited?.name ?? '已设置');
-      }
       this.drawButton(
         { type: 'viewAchievements' },
         `查看成就 ${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`,
@@ -550,7 +687,7 @@ class WxGameApp {
       y = this.drawPanel(y, () => {
         let cursor = y + 28;
         this.setFont(14, 500);
-        this.ctx.fillStyle = '#687386';
+        this.ctx.fillStyle = theme.subtle;
         cursor = this.drawWrappedText('还没有解锁成就，先完成一局看看。', 36, cursor, this.width - 72, 22, 3);
         return cursor + 8;
       });
@@ -563,6 +700,8 @@ class WxGameApp {
 
   private drawTalents(y: number): number {
     y = this.drawSectionHeader(y, '选择天赋', `${this.state.selectedTalentIds.length}/3`);
+    const inherited = this.inheritedCandidateTalent();
+    if (inherited) y = this.drawInheritedTalentBanner(y, inherited, '已继承');
     const selected = new Set(this.state.selectedTalentIds);
     const gap = 8;
     const cardWidth = (this.width - 40 - gap) / 2;
@@ -570,7 +709,7 @@ class WxGameApp {
     this.state.candidates.forEach((talent, index) => {
       const active = selected.has(talent.id);
       const inherited = this.state.inheritedCandidateId === talent.id;
-      const cardX = 16 + (index % 2) * (cardWidth + gap);
+      const cardX = 20 + (index % 2) * (cardWidth + gap);
       const cardY = y + Math.floor(index / 2) * (cardHeight + gap);
       this.drawTalentCard(cardX, cardY, cardWidth, talent, active, inherited);
     });
@@ -578,6 +717,22 @@ class WxGameApp {
     y += rows * cardHeight + Math.max(0, rows - 1) * gap + 10;
     if (this.state.message) y = this.drawMessage(y, this.state.message);
     return y;
+  }
+
+  private drawInheritedTalentBanner(y: number, talent: Talent, label: string): number {
+    const x = 20;
+    const width = this.width - 40;
+    const height = 44;
+    this.ctx.fillStyle = '#f4fffb';
+    this.roundRect(x, y, width, height, 8);
+    this.ctx.fill();
+    this.ctx.strokeStyle = 'rgba(47, 124, 128, 0.42)';
+    this.ctx.stroke();
+    this.drawMiniPill(label, x + 12, y + 13, '#f3ecdf', '#665335');
+    this.setFont(14, 800);
+    this.ctx.fillStyle = theme.teal;
+    this.ctx.fillText(this.fitText(talent.name, width - 116), x + 94, y + 28);
+    return y + height + 10;
   }
 
   private drawProperties(y: number): number {
@@ -590,7 +745,7 @@ class WxGameApp {
       this.drawSectionTitle('初始分配', '这些属性会影响事件触发、分数波动和志愿结果。', 36, cursor);
       cursor += 62;
       this.setFont(14, 400);
-      this.ctx.fillStyle = '#495057';
+      this.ctx.fillStyle = '#5d5a54';
       return this.drawWrappedText('把 20 点分配到四项基础属性上，之后会影响事件触发、分数波动和志愿结果。', 36, cursor, this.width - 72, 23, 3) + 8;
     });
     if (this.state.message) y = this.drawMessage(y + 4, this.state.message);
@@ -611,7 +766,7 @@ class WxGameApp {
       y = this.drawPanel(y, () => {
         let cursor = y + 28;
         this.setFont(15, 500);
-        this.ctx.fillStyle = '#495057';
+        this.ctx.fillStyle = '#5d5a54';
         cursor = this.drawWrappedText('点击“下一回合”开始推进。', 36, cursor, this.width - 72, 24, 2);
         return cursor + 10;
       });
@@ -626,13 +781,13 @@ class WxGameApp {
     if (!result) return y;
     y = this.drawPanel(y, () => {
       let cursor = y + 26;
-      this.drawPill(result.ending.tier, 36, cursor - 18, '#fff4e6', '#d9480f');
+      this.drawPill(result.ending.tier, 36, cursor - 18, '#f3ecdf', '#665335');
       cursor += 16;
       this.setFont(22, 800);
-      this.ctx.fillStyle = '#172033';
+      this.ctx.fillStyle = theme.title;
       cursor = this.drawWrappedText(result.ending.name, 36, cursor, this.width - 72, 29, 2);
       this.setFont(15, 400);
-      this.ctx.fillStyle = '#343a40';
+      this.ctx.fillStyle = '#5d5a54';
       cursor = this.drawWrappedText(result.ending.description, 36, cursor + 8, this.width - 72, 24, 5);
       return cursor + 10;
     });
@@ -650,9 +805,12 @@ class WxGameApp {
   private drawFooter(): void {
     const buttonHeight = 46;
     const footerY = this.height - this.footerHeight() + 9;
-    this.ctx.fillStyle = '#f6f7f9';
+    const bg = this.ctx.createLinearGradient(0, footerY - 10, 0, this.height);
+    bg.addColorStop(0, 'rgba(255, 253, 248, 0.88)');
+    bg.addColorStop(1, 'rgba(246, 239, 228, 0.98)');
+    this.ctx.fillStyle = bg;
     this.ctx.fillRect(0, footerY - 10, this.width, this.footerHeight());
-    this.ctx.strokeStyle = '#e9ecef';
+    this.ctx.strokeStyle = theme.line;
     this.ctx.beginPath();
     this.ctx.moveTo(0, footerY - 10);
     this.ctx.lineTo(this.width, footerY - 10);
@@ -739,25 +897,46 @@ class WxGameApp {
     const colors = rarityColors[rarity];
     const height = this.talentCardHeight();
 
-    this.ctx.fillStyle = active ? '#e7f5ff' : '#ffffff';
+    const bg = this.ctx.createLinearGradient(x, y, x, y + height);
+    if (active) {
+      bg.addColorStop(0, '#f4fffb');
+      bg.addColorStop(1, '#e8f6f3');
+    } else {
+      bg.addColorStop(0, 'rgba(255, 255, 255, 0.92)');
+      bg.addColorStop(1, 'rgba(255, 253, 248, 0.92)');
+    }
+
+    this.ctx.save();
+    this.ctx.shadowColor = active ? 'rgba(47, 124, 128, 0.14)' : theme.shadowSoft;
+    this.ctx.shadowBlur = active ? 16 : 10;
+    this.ctx.shadowOffsetY = active ? 6 : 4;
+    this.ctx.fillStyle = bg;
     this.roundRect(x, y, width, height, 8);
     this.ctx.fill();
-    this.ctx.strokeStyle = active ? '#1971c2' : colors.border;
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.strokeStyle = active ? theme.teal : colors.border;
     this.ctx.lineWidth = active ? 2 : 1;
     this.ctx.stroke();
     this.ctx.lineWidth = 1;
+    this.ctx.restore();
 
     const rarityLabel = talent.rarityName ?? talentRarityLabel(rarity);
     const rarityWidth = this.miniPillWidth(rarityLabel);
     this.drawMiniPill(rarityLabel, x + width - 10 - rarityWidth, y + 7, colors.bg, colors.fg);
 
     this.setFont(14, 800);
-    this.ctx.fillStyle = '#172033';
-    const titleSuffix = inherited ? ' · 继承' : '';
-    this.ctx.fillText(this.fitText(`${talent.name}${titleSuffix}`, width - rarityWidth - 28), x + 10, y + 21);
+    this.ctx.fillStyle = theme.title;
+    this.ctx.fillText(this.fitText(talent.name, width - rarityWidth - 28), x + 10, y + 21);
+
+    this.setFont(10, 700);
+    const categoryLabel = this.fitText(talent.categoryName ?? '天赋', Math.max(36, width - 24));
+    let metaX = x + 10;
+    const categoryWidth = this.drawMiniPill(categoryLabel, metaX, y + 32, '#eef4f1', '#4d625b');
+    metaX += categoryWidth + 5;
+    if (inherited && metaX + 42 < x + width - 8) this.drawMiniPill('继承', metaX, y + 32, '#f3ecdf', '#665335');
 
     if (active) {
-      this.ctx.fillStyle = '#1971c2';
+      this.ctx.fillStyle = theme.teal;
       this.ctx.beginPath();
       this.ctx.arc(x + width - 18, y + height - 17, 10, 0, Math.PI * 2);
       this.ctx.fill();
@@ -767,8 +946,8 @@ class WxGameApp {
     }
 
     this.setFont(12, 400);
-    this.ctx.fillStyle = '#495057';
-    this.drawWrappedText(talent.description, x + 10, y + 43, width - (active ? 44 : 20), 15, 2);
+    this.ctx.fillStyle = '#5d5a54';
+    this.drawWrappedText(talent.description, x + 10, y + 63, width - (active ? 44 : 20), 16, 2);
 
     this.registerButton({ type: 'toggleTalent', talentId: talent.id }, x, y, width, height);
   }
@@ -777,20 +956,20 @@ class WxGameApp {
     const x = 20;
     const width = this.width - 40;
     const height = 74;
-    this.ctx.fillStyle = '#ffffff';
+    this.ctx.fillStyle = theme.paper;
     this.roundRect(x, y, width, height, 8);
     this.ctx.fill();
-    this.ctx.strokeStyle = '#e9ecef';
+    this.ctx.strokeStyle = '#ece6dc';
     this.ctx.stroke();
 
     this.ctx.fillStyle = color;
     this.roundRect(x + 14, y + 18, 4, 38, 2);
     this.ctx.fill();
     this.setFont(17, 800);
-    this.ctx.fillStyle = '#172033';
+    this.ctx.fillStyle = theme.title;
     this.ctx.fillText(label, x + 30, y + 30);
     this.setFont(13, 500);
-    this.ctx.fillStyle = '#687386';
+    this.ctx.fillStyle = theme.subtle;
     this.ctx.fillText(prop, x + 30, y + 52);
 
     const value = this.state.allocation[prop];
@@ -800,7 +979,7 @@ class WxGameApp {
     const minusX = valueX - 52;
     this.drawButton({ type: 'adjustProp', prop, delta: -1 }, '-', minusX, y + 18, buttonSize, buttonSize, 'secondary', value <= 0);
     this.setFont(20, 800);
-    this.ctx.fillStyle = '#172033';
+    this.ctx.fillStyle = theme.ink;
     this.ctx.fillText(String(value), valueX + 17 - this.ctx.measureText(String(value)).width / 2, y + 44);
     this.drawButton({ type: 'adjustProp', prop, delta: 1 }, '+', plusX, y + 18, buttonSize, buttonSize, 'secondary', this.remainingPoints() <= 0);
     return y + height + 10;
@@ -820,23 +999,30 @@ class WxGameApp {
     const cellWidth = (width - gap * (stages.length - 1)) / stages.length;
     stages.forEach(([title, meta], index) => {
       const cellX = x + index * (cellWidth + gap);
-      this.ctx.fillStyle = '#f1f6ef';
+      const cellBg = this.ctx.createLinearGradient(cellX, y, cellX, y + 50);
+      cellBg.addColorStop(0, '#ffffff');
+      cellBg.addColorStop(1, '#f7fbff');
+      this.ctx.fillStyle = cellBg;
       this.roundRect(cellX, y, cellWidth, 50, 8);
       this.ctx.fill();
-      this.ctx.strokeStyle = '#d8e5d5';
+      this.ctx.strokeStyle = '#e5edf5';
       this.ctx.stroke();
-      this.ctx.fillStyle = '#2f9e44';
+      this.ctx.fillStyle = '#edf7ff';
       this.ctx.beginPath();
-      this.ctx.arc(cellX + cellWidth / 2, y + 11, 3, 0, Math.PI * 2);
+      this.ctx.arc(cellX + cellWidth / 2, y + 12, 9, 0, Math.PI * 2);
+      this.ctx.fill();
+      this.ctx.fillStyle = theme.blue;
+      this.ctx.beginPath();
+      this.ctx.arc(cellX + cellWidth / 2, y + 12, 3, 0, Math.PI * 2);
       this.ctx.fill();
       this.setFont(12, 800);
-      this.ctx.fillStyle = '#172033';
+      this.ctx.fillStyle = theme.ink;
       const titleWidth = this.ctx.measureText(title).width;
-      this.ctx.fillText(title, cellX + (cellWidth - titleWidth) / 2, y + 29);
+      this.ctx.fillText(title, cellX + (cellWidth - titleWidth) / 2, y + 31);
       this.setFont(10, 500);
-      this.ctx.fillStyle = '#687386';
+      this.ctx.fillStyle = theme.subtle;
       const metaWidth = this.ctx.measureText(meta).width;
-      this.ctx.fillText(meta, cellX + (cellWidth - metaWidth) / 2, y + 43);
+      this.ctx.fillText(meta, cellX + (cellWidth - metaWidth) / 2, y + 44);
     });
     return y + 50;
   }
@@ -846,15 +1032,23 @@ class WxGameApp {
     const cellWidth = (this.width - 72 - gap * (stats.length - 1)) / stats.length;
     stats.forEach(([label, value], index) => {
       const cellX = 36 + index * (cellWidth + gap);
-      this.ctx.fillStyle = '#f1f3f5';
+      this.ctx.fillStyle = theme.paperStrong;
       this.roundRect(cellX, y, cellWidth, 48, 6);
       this.ctx.fill();
+      this.ctx.strokeStyle = '#e7edf4';
+      this.ctx.stroke();
       this.setFont(12, 500);
-      this.ctx.fillStyle = '#687386';
+      this.ctx.fillStyle = theme.subtle;
       this.ctx.fillText(label, cellX + 9, y + 17);
       this.setFont(16, 800);
-      this.ctx.fillStyle = '#172033';
+      this.ctx.fillStyle = theme.ink;
       this.ctx.fillText(String(value), cellX + 9, y + 38);
+      const accent = this.ctx.createLinearGradient(cellX + 8, y + 45, cellX + cellWidth - 8, y + 45);
+      accent.addColorStop(0, theme.blue);
+      accent.addColorStop(1, theme.green);
+      this.ctx.fillStyle = accent;
+      this.roundRect(cellX + 8, y + 44, cellWidth - 16, 4, 2);
+      this.ctx.fill();
     });
     return y + 58;
   }
@@ -865,14 +1059,14 @@ class WxGameApp {
       const grade = achievementGradeName(achievement.grade);
       const gradeWidth = this.miniPillWidth(grade);
       this.setFont(16, 800);
-      this.ctx.fillStyle = '#172033';
+      this.ctx.fillStyle = theme.ink;
       this.ctx.fillText(this.fitText(achievement.name, this.width - 92 - gradeWidth), 36, cursor);
-      this.drawMiniPill(grade, this.width - 36 - gradeWidth, cursor - 15, '#e7f5ff', '#1864ab');
+      this.drawMiniPill(grade, this.width - 36 - gradeWidth, cursor - 15, '#ece3cf', '#5c4c2d');
       this.setFont(13, 400);
-      this.ctx.fillStyle = '#495057';
+      this.ctx.fillStyle = '#5d5a54';
       cursor = this.drawWrappedText(achievement.description, 36, cursor + 24, this.width - 72, 19, 3);
       this.setFont(12, 700);
-      this.ctx.fillStyle = '#2f9e44';
+      this.ctx.fillStyle = theme.teal;
       this.ctx.fillText('已解锁', 36, cursor + 8);
       return cursor + 14;
     });
@@ -901,15 +1095,24 @@ class WxGameApp {
       stats.forEach(([label, value], index) => {
         const cellX = 36 + (index % columns) * (cellWidth + gap);
         const cellY = cursor + Math.floor(index / columns) * (cellHeight + gap);
-        this.ctx.fillStyle = '#f1f3f5';
+        this.ctx.fillStyle = theme.paperStrong;
         this.roundRect(cellX, cellY, cellWidth, cellHeight, 6);
         this.ctx.fill();
+        this.ctx.strokeStyle = '#e7edf4';
+        this.ctx.stroke();
         this.setFont(12, 500);
-        this.ctx.fillStyle = '#687386';
+        this.ctx.fillStyle = theme.subtle;
         this.ctx.fillText(label, cellX + 9, cellY + 16);
         this.setFont(16, 800);
-        this.ctx.fillStyle = '#172033';
-        this.ctx.fillText(String(Math.round(value)), cellX + 9, cellY + 35);
+        this.ctx.fillStyle = theme.ink;
+        const displayValue = index < 6 ? Math.floor(value) : Math.round(value);
+        this.ctx.fillText(String(displayValue), cellX + 9, cellY + 35);
+        const accent = this.ctx.createLinearGradient(cellX + 8, cellY + 41, cellX + cellWidth - 8, cellY + 41);
+        accent.addColorStop(0, theme.blue);
+        accent.addColorStop(1, theme.green);
+        this.ctx.fillStyle = accent;
+        this.roundRect(cellX + 8, cellY + 40, cellWidth - 16, 4, 2);
+        this.ctx.fill();
       });
       const rows = Math.ceil(stats.length / columns);
       return cursor + rows * (cellHeight + gap) + 2;
@@ -938,7 +1141,7 @@ class WxGameApp {
         cursor = this.drawFactRow(cursor, '录取院校', admission.admittedUniversity?.name ?? '已锁定录取资格');
         cursor = this.drawFactRow(cursor, '录取层级', admissionTierName(admission.admissionTier));
         this.setFont(14, 400);
-        this.ctx.fillStyle = '#343a40';
+        this.ctx.fillStyle = '#5d5a54';
         cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
         return cursor + 4;
       }
@@ -951,7 +1154,7 @@ class WxGameApp {
       if (admission.admittedLine) cursor = this.drawFactRow(cursor, '投档线', String(admission.admittedLine.minScore));
       if (admission.margin !== undefined) cursor = this.drawFactRow(cursor, '超线', `+${admission.margin}`);
       this.setFont(14, 400);
-      this.ctx.fillStyle = '#343a40';
+      this.ctx.fillStyle = '#5d5a54';
       cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
       return cursor + 4;
     });
@@ -960,16 +1163,21 @@ class WxGameApp {
   private drawInheritancePanel(y: number, result: FinalResult): number {
     const talents = result.state.selectedTalentIds
       .map(id => this.game.content.talents.find(item => item.id === id))
-      .filter((item): item is Talent => Boolean(item));
+      .filter((item): item is Talent => item !== undefined && item.inheritAllowed !== false);
+    const inherited = this.savedInheritedTalent();
 
     return this.drawPanel(y, () => {
       let cursor = y + 26;
-      this.drawSectionTitle('继承天赋', '选择一个天赋，下局优先出现。', 36, cursor);
+      this.drawSectionTitle('继承天赋', inherited ? `当前：${inherited.name}` : '选择一个天赋，下局优先出现。', 36, cursor);
       cursor += 58;
       if (talents.length === 0) {
         this.setFont(14, 400);
-        this.ctx.fillStyle = '#687386';
+        this.ctx.fillStyle = theme.subtle;
         cursor = this.drawWrappedText('本局没有可继承天赋。', 36, cursor, this.width - 72, 22, 2);
+        if (inherited) {
+          this.drawButton({ type: 'clearInherit' }, '清空继承', 36, cursor + 8, this.width - 72, 38, 'secondary');
+          return cursor + 54;
+        }
         return cursor + 6;
       }
       const gap = 8;
@@ -978,7 +1186,15 @@ class WxGameApp {
         const buttonX = 36 + (index % 2) * (buttonWidth + gap);
         const buttonY = cursor + Math.floor(index / 2) * 46;
         const active = this.game.save.inheritedTalentId === talent.id;
-        this.drawButton({ type: 'inherit', talentId: talent.id }, talent.name, buttonX, buttonY, buttonWidth, 38, active ? 'primary' : 'secondary');
+        this.drawButton(
+          { type: 'inherit', talentId: talent.id },
+          active ? `已选 ${talent.name}` : talent.name,
+          buttonX,
+          buttonY,
+          buttonWidth,
+          38,
+          active ? 'primary' : 'secondary',
+        );
       });
       cursor += Math.ceil(talents.length / 2) * 46;
       this.drawButton({ type: 'clearInherit' }, '清空继承', 36, cursor + 4, this.width - 72, 38, 'secondary');
@@ -1012,41 +1228,57 @@ class WxGameApp {
   private drawFixedLogCard(y: number, log: RunLog, height: number): void {
     const x = 20;
     const width = this.width - 40;
-    this.ctx.fillStyle = '#ffffff';
+    this.ctx.save();
+    this.ctx.shadowColor = theme.shadowSoft;
+    this.ctx.shadowBlur = 14;
+    this.ctx.shadowOffsetY = 5;
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
     this.roundRect(x, y, width, height, 8);
     this.ctx.fill();
-    this.ctx.strokeStyle = '#e9ecef';
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.strokeStyle = theme.line;
     this.ctx.stroke();
+    this.ctx.restore();
+
+    this.ctx.fillStyle = '#eef7ff';
+    this.roundRect(x + 12, y + 14, 24, 24, 8);
+    this.ctx.fill();
+    this.ctx.strokeStyle = 'rgba(58, 134, 232, 0.14)';
+    this.ctx.stroke();
+    this.ctx.fillStyle = theme.blue;
+    this.ctx.beginPath();
+    this.ctx.arc(x + 24, y + 26, 3, 0, Math.PI * 2);
+    this.ctx.fill();
 
     let cursor = y + 21;
     this.setFont(13, 800);
-    this.ctx.fillStyle = '#172033';
-    this.ctx.fillText(this.fitText(`${ageStageName(log.age)} · 第 ${log.round} 回合 · ${log.roundName}`, width - 28), x + 14, cursor);
+    this.ctx.fillStyle = theme.ink;
+    this.ctx.fillText(this.fitText(`${ageStageName(log.age)} · 第 ${log.round} 回合 · ${log.roundName}`, width - 58), x + 48, cursor);
 
     cursor += 23;
     this.setFont(13, 400);
-    this.ctx.fillStyle = '#343a40';
-    cursor = this.drawWrappedText(log.event.text, x + 14, cursor, width - 28, 18, 2);
+    this.ctx.fillStyle = '#5d5a54';
+    cursor = this.drawWrappedText(log.event.text, x + 48, cursor, width - 62, 18, 2);
 
     if (log.triggeredTalents.length > 0) {
       this.setFont(12, 600);
-      this.ctx.fillStyle = '#1971c2';
-      cursor = this.drawWrappedText(`天赋：${log.triggeredTalents.map(item => item.name).join(' / ')}`, x + 14, cursor + 2, width - 28, 16, 1);
+      this.ctx.fillStyle = theme.teal;
+      cursor = this.drawWrappedText(`天赋：${log.triggeredTalents.map(item => item.name).join(' / ')}`, x + 48, cursor + 2, width - 62, 16, 1);
     }
 
     if (log.branchEvents.length > 0 && cursor < y + height - 12) {
       this.setFont(12, 600);
-      this.ctx.fillStyle = '#2f9e44';
-      this.drawWrappedText(`连锁：${log.branchEvents.map(item => item.text).join(' / ')}`, x + 14, cursor + 1, width - 28, 16, 1);
+      this.ctx.fillStyle = theme.teal;
+      this.drawWrappedText(`连锁：${log.branchEvents.map(item => item.text).join(' / ')}`, x + 48, cursor + 1, width - 62, 16, 1);
     }
   }
 
   private drawSectionHeader(y: number, title: string, meta: string): number {
     this.setFont(19, 800);
-    this.ctx.fillStyle = '#172033';
+    this.ctx.fillStyle = theme.title;
     this.ctx.fillText(title, 20, y + 22);
     this.setFont(13, 600);
-    this.ctx.fillStyle = '#687386';
+    this.ctx.fillStyle = theme.subtle;
     const metaWidth = this.ctx.measureText(meta).width;
     this.ctx.fillText(meta, this.width - 20 - metaWidth, y + 22);
     return y + 36;
@@ -1061,10 +1293,14 @@ class WxGameApp {
 
     this.ctx.save();
     this.ctx.globalCompositeOperation = 'destination-over';
-    this.ctx.fillStyle = '#ffffff';
+    this.ctx.shadowColor = theme.shadowSoft;
+    this.ctx.shadowBlur = 18;
+    this.ctx.shadowOffsetY = 8;
+    this.ctx.fillStyle = 'rgba(255, 255, 255, 0.88)';
     this.roundRect(x, startY, width, height, 8);
     this.ctx.fill();
-    this.ctx.strokeStyle = '#e9ecef';
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.strokeStyle = theme.line;
     this.ctx.stroke();
     this.ctx.restore();
 
@@ -1073,19 +1309,19 @@ class WxGameApp {
 
   private drawSectionTitle(title: string, subtitle: string, x: number, y: number): void {
     this.setFont(18, 800);
-    this.ctx.fillStyle = '#172033';
+    this.ctx.fillStyle = theme.title;
     this.ctx.fillText(title, x, y);
     this.setFont(13, 500);
-    this.ctx.fillStyle = '#687386';
+    this.ctx.fillStyle = theme.subtle;
     this.drawWrappedText(subtitle, x, y + 22, this.width - x * 2, 19, 2);
   }
 
   private drawFactRow(y: number, label: string, value: string): number {
     this.setFont(13, 600);
-    this.ctx.fillStyle = '#687386';
+    this.ctx.fillStyle = theme.subtle;
     this.ctx.fillText(label, 36, y);
     this.setFont(15, 800);
-    this.ctx.fillStyle = '#172033';
+    this.ctx.fillStyle = theme.ink;
     this.drawWrappedText(value, 116, y, this.width - 152, 21, 2);
     return y + 34;
   }
@@ -1093,13 +1329,13 @@ class WxGameApp {
   private drawMessage(y: number, message: string): number {
     const x = 20;
     const width = this.width - 40;
-    this.ctx.fillStyle = '#fff5f5';
+    this.ctx.fillStyle = '#fff6e6';
     this.roundRect(x, y, width, 54, 8);
     this.ctx.fill();
-    this.ctx.strokeStyle = '#ffc9c9';
+    this.ctx.strokeStyle = '#f5d095';
     this.ctx.stroke();
     this.setFont(14, 600);
-    this.ctx.fillStyle = '#c92a2a';
+    this.ctx.fillStyle = '#8a5200';
     this.drawWrappedText(message, x + 14, y + 23, width - 28, 20, 2);
     return y + 64;
   }
@@ -1114,31 +1350,42 @@ class WxGameApp {
     variant: 'primary' | 'secondary' | 'danger',
     disabled = false,
   ): void {
+    const primaryBg = this.ctx.createLinearGradient(x, y, x + width, y + height);
+    primaryBg.addColorStop(0, '#5062df');
+    primaryBg.addColorStop(0.52, '#3a91e8');
+    primaryBg.addColorStop(1, '#35a7a1');
     const bg = disabled
-      ? '#e9ecef'
+      ? '#f3f0e8'
       : variant === 'primary'
-        ? '#1971c2'
+        ? primaryBg
         : variant === 'danger'
           ? '#fff5f5'
-          : '#ffffff';
+          : 'rgba(255, 255, 255, 0.72)';
     const fg = disabled
-      ? '#adb5bd'
+      ? '#9aa0a6'
       : variant === 'primary'
         ? '#ffffff'
-        : variant === 'danger'
+      : variant === 'danger'
           ? '#c92a2a'
-          : '#172033';
+          : theme.ink;
     const border = disabled
-      ? '#dee2e6'
+      ? theme.line
       : variant === 'primary'
-        ? '#1971c2'
+        ? 'rgba(32, 95, 99, 0.7)'
         : variant === 'danger'
           ? '#ffc9c9'
-          : '#ced4da';
+          : theme.ghostBorder;
 
+    this.ctx.save();
+    if (!disabled) {
+      this.ctx.shadowColor = variant === 'primary' ? 'rgba(58, 134, 232, 0.22)' : 'rgba(40, 54, 78, 0.06)';
+      this.ctx.shadowBlur = variant === 'primary' ? 16 : 10;
+      this.ctx.shadowOffsetY = variant === 'primary' ? 6 : 4;
+    }
     this.ctx.fillStyle = bg;
     this.roundRect(x, y, width, height, 8);
     this.ctx.fill();
+    this.ctx.shadowColor = 'transparent';
     this.ctx.strokeStyle = border;
     this.ctx.stroke();
     this.setFont(width < 58 ? 19 : 15, 800);
@@ -1146,6 +1393,7 @@ class WxGameApp {
     const displayLabel = this.fitText(label, Math.max(20, width - 18));
     const textWidth = this.ctx.measureText(displayLabel).width;
     this.ctx.fillText(displayLabel, x + (width - textWidth) / 2, y + height / 2 + 6);
+    this.ctx.restore();
     this.registerButton(action, x, y, width, height, disabled);
   }
 
@@ -1183,7 +1431,10 @@ class WxGameApp {
   }
 
   private drawScoreBadge(score: string, x: number, y: number): void {
-    this.ctx.fillStyle = '#1971c2';
+    const bg = this.ctx.createLinearGradient(x, y, x + 62, y + 40);
+    bg.addColorStop(0, theme.blueDeep);
+    bg.addColorStop(1, theme.blueMid);
+    this.ctx.fillStyle = bg;
     this.roundRect(x, y, 62, 40, 8);
     this.ctx.fill();
     this.setFont(20, 800);
@@ -1248,12 +1499,24 @@ class WxGameApp {
   }
 
   private setFont(size: number, weight = 400): void {
-    this.ctx.font = `${weight} ${size}px "PingFang SC", "Microsoft YaHei", sans-serif`;
+    this.ctx.font = `${weight} ${size}px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif`;
   }
 
   private remainingPoints(): number {
     const allocation = this.state.allocation;
     return 20 - allocation.INT - allocation.STR - allocation.MNY - allocation.SPR;
+  }
+
+  private savedInheritedTalent(): Talent | null {
+    const inheritedTalentId = this.game.save.inheritedTalentId;
+    if (inheritedTalentId === null) return null;
+    return this.game.content.talents.find(item => item.id === inheritedTalentId) ?? null;
+  }
+
+  private inheritedCandidateTalent(): Talent | null {
+    const inheritedTalentId = this.state.inheritedCandidateId;
+    if (inheritedTalentId === null) return null;
+    return this.state.candidates.find(item => item.id === inheritedTalentId) ?? null;
   }
 
   private totalRounds(gameState: GameState): number {
@@ -1262,7 +1525,7 @@ class WxGameApp {
   }
 
   private talentCardHeight(): number {
-    return this.height <= 640 ? 76 : 80;
+    return this.height <= 640 ? 100 : 108;
   }
 
   private logCardHeight(): number {
@@ -1270,7 +1533,8 @@ class WxGameApp {
   }
 
   private headerHeight(): number {
-    return Math.max(82, this.safeTop + 74);
+    if (this.state.screen === 'talents') return Math.max(82, this.safeTop + 74);
+    return Math.max(172, this.safeTop + 164);
   }
 
   private footerHeight(): number {
