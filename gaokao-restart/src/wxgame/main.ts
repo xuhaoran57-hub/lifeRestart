@@ -17,6 +17,8 @@ import { createWxSaveStorage } from './storage';
 type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements';
 type PropKey = keyof Allocation;
 
+const AUTO_RUN_INTERVAL_MS = 500;
+
 type Action =
   | { type: 'start' }
   | { type: 'viewAchievements' }
@@ -63,6 +65,7 @@ interface UiState {
   gameState: GameState | null;
   result: FinalResult | null;
   persistedResult: boolean;
+  autoRunning: boolean;
   confirmingRestart: boolean;
   message: string | null;
 }
@@ -118,11 +121,13 @@ class WxGameApp {
     gameState: null,
     result: null,
     persistedResult: false,
+    autoRunning: false,
     confirmingRestart: false,
     message: null,
   };
 
   private buttons: Button[] = [];
+  private autoRunTimer: ReturnType<typeof setTimeout> | null = null;
   private width = 375;
   private height = 667;
   private pixelRatio = 1;
@@ -252,6 +257,8 @@ class WxGameApp {
   }
 
   private handleAction(action: Action): void {
+    if (this.state.autoRunning && action.type !== 'autoRun') this.stopAutoRun();
+
     if (action.type !== 'requestRestart' && action.type !== 'cancelRestart' && action.type !== 'confirmRestart') {
       this.state.confirmingRestart = false;
     }
@@ -307,6 +314,7 @@ class WxGameApp {
       this.state.gameState = gameState;
       this.state.result = null;
       this.state.persistedResult = false;
+      this.state.autoRunning = false;
       this.switchScreen('trajectory');
       return;
     }
@@ -317,7 +325,11 @@ class WxGameApp {
     }
 
     if (action.type === 'autoRun') {
-      while (!this.state.gameState?.isFinished) this.runOneRound();
+      if (this.state.autoRunning) {
+        this.stopAutoRun('已停止自动推进。');
+      } else {
+        this.startAutoRun();
+      }
       return;
     }
 
@@ -326,6 +338,7 @@ class WxGameApp {
       if (this.state.persistedResult) throw new Error('本局结局已经确认，不能再复读');
       this.state.gameState = this.state.engine.retake();
       this.state.result = null;
+      this.state.autoRunning = false;
       this.state.message = '已选择复读一年，心态下降，风险上升。';
       this.switchScreen('trajectory');
       return;
@@ -379,6 +392,7 @@ class WxGameApp {
     this.state.gameState = null;
     this.state.result = null;
     this.state.persistedResult = false;
+    this.state.autoRunning = false;
     this.state.confirmingRestart = false;
     this.resetScroll('home');
   }
@@ -415,6 +429,45 @@ class WxGameApp {
     this.state.allocation = { ...this.state.allocation, [prop]: current + delta };
   }
 
+  private startAutoRun(): void {
+    if (!this.state.gameState || this.state.gameState.isFinished) return;
+    this.state.autoRunning = true;
+    this.scheduleAutoRun();
+  }
+
+  private stopAutoRun(message?: string): void {
+    if (this.autoRunTimer !== null) {
+      clearTimeout(this.autoRunTimer);
+      this.autoRunTimer = null;
+    }
+    this.state.autoRunning = false;
+    if (message) this.state.message = message;
+  }
+
+  private scheduleAutoRun(): void {
+    if (!this.state.autoRunning || this.autoRunTimer !== null) return;
+    this.autoRunTimer = setTimeout(() => this.advanceAutoRun(), AUTO_RUN_INTERVAL_MS);
+  }
+
+  private advanceAutoRun(): void {
+    this.autoRunTimer = null;
+    if (!this.state.autoRunning) return;
+
+    try {
+      if (this.state.screen !== 'trajectory' || !this.state.gameState || this.state.gameState.isFinished) {
+        this.stopAutoRun();
+      } else {
+        this.runOneRound();
+        if (this.state.screen !== 'trajectory' || this.state.gameState?.isFinished) this.stopAutoRun();
+      }
+    } catch (error) {
+      this.stopAutoRun(error instanceof Error ? error.message : '操作失败');
+    }
+
+    this.render();
+    this.scheduleAutoRun();
+  }
+
   private runOneRound(): void {
     const engine = this.state.engine;
     if (!engine) throw new Error('本局还未开始');
@@ -435,6 +488,7 @@ class WxGameApp {
   }
 
   private switchScreen(screen: Screen): void {
+    if (screen !== 'trajectory') this.stopAutoRun();
     this.state.screen = screen;
     this.state.confirmingRestart = false;
     this.resetScroll(screen);
@@ -856,8 +910,27 @@ class WxGameApp {
     if (this.state.screen === 'trajectory') {
       const gap = 10;
       const buttonWidth = (this.width - 40 - gap) / 2;
-      this.drawButton({ type: 'nextRound' }, '下一回合', 20, footerY, buttonWidth, buttonHeight, 'primary', Boolean(this.state.gameState?.isFinished));
-      this.drawButton({ type: 'autoRun' }, '跑完', 20 + buttonWidth + gap, footerY, buttonWidth, buttonHeight, 'secondary', Boolean(this.state.gameState?.isFinished));
+      const isAutoRunning = this.state.autoRunning && !this.state.gameState?.isFinished;
+      this.drawButton(
+        { type: 'nextRound' },
+        '下一回合',
+        20,
+        footerY,
+        buttonWidth,
+        buttonHeight,
+        'primary',
+        Boolean(this.state.gameState?.isFinished || isAutoRunning),
+      );
+      this.drawButton(
+        { type: 'autoRun' },
+        isAutoRunning ? '终止' : '跑完',
+        20 + buttonWidth + gap,
+        footerY,
+        buttonWidth,
+        buttonHeight,
+        isAutoRunning ? 'danger' : 'secondary',
+        Boolean(this.state.gameState?.isFinished),
+      );
       return;
     }
 

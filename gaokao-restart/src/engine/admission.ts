@@ -291,6 +291,8 @@ function pickAdmittedLine(
   if (reachable.length === 0) return null;
   const lowestReachable985 = pickLowestLine(reachable985);
   const lowestReachable211 = pickLowestLine(reachable211Only.length > 0 ? reachable211Only : reachable211Plus);
+  const preferred211Pool = reachable211Only.length > 0 ? reachable211Only : reachable211Plus;
+  const competitive211Pool = build211CompetitivePool(reachable, preferred211Pool, lowestReachable211);
 
   if (
     lowestReachable985
@@ -303,14 +305,47 @@ function pickAdmittedLine(
     lowestReachable211
     && random.next() < commit211Chance(finalScore - lowestReachable211.line.minScore, strategyScore, risk)
   ) {
-    return pickFromCandidatePool(reachable211Only.length > 0 ? reachable211Only : reachable211Plus, strategyScore, finalScore, resourceLevel, random);
+    const exploresPeerAlternatives = competitive211Pool.length > preferred211Pool.length
+      && random.next() < peerAlternativeChance(strategyScore);
+    return pickFromCandidatePool(
+      exploresPeerAlternatives ? competitive211Pool : preferred211Pool,
+      strategyScore,
+      finalScore,
+      resourceLevel,
+      random,
+    );
   }
 
-  if (reachable211Only.length > 0) {
-    return pickFromCandidatePool(reachable211Only, strategyScore, finalScore, resourceLevel, random);
+  if (preferred211Pool.length > 0) {
+    return pickFromCandidatePool(competitive211Pool, strategyScore, finalScore, resourceLevel, random);
   }
 
   return pickFromCandidatePool(reachable, strategyScore, finalScore, resourceLevel, random);
+}
+
+function build211CompetitivePool(
+  reachable: LineCandidate[],
+  preferred211Pool: LineCandidate[],
+  lowestReachable211: LineCandidate | null,
+): LineCandidate[] {
+  if (preferred211Pool.length === 0 || !lowestReachable211) return preferred211Pool;
+  const lowest211Score = lowestReachable211.line.minScore;
+  const alternatives = reachable.filter(candidate => is211PeerAlternative(candidate, lowest211Score));
+  return [...preferred211Pool, ...alternatives];
+}
+
+function is211PeerAlternative(candidate: LineCandidate, lowest211Score: number): boolean {
+  const tier = universityAdmissionTier(candidate.university);
+  if (tier === '985' || tier === '211') return false;
+  return candidate.line.minScore >= lowest211Score
+    || candidate.university.tags.includes('doubleFirstClass')
+    || candidate.university.prestigeTier === 'strong';
+}
+
+function peerAlternativeChance(strategyScore: number): number {
+  if (strategyScore >= 65) return 0.18;
+  if (strategyScore >= 35) return 0.12;
+  return 0.08;
 }
 
 function pickFromCandidatePool(

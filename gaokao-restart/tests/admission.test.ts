@@ -44,6 +44,18 @@ describe('resolveAdmission', () => {
     expect(admitted211Plus).toBeGreaterThanOrEqual(50);
   });
 
+  it('lets high-line non-211 schools compete with reachable low-line 211 schools', () => {
+    const content = highLinePeerFixtureContent();
+    let highLinePeerAdmissions = 0;
+
+    for (let seed = 1; seed <= 80; seed += 1) {
+      const result = resolveAdmission(content, stateWithScoreProps({ HVOL: 80, RSK: 10 }), exam(620), new Random(seed));
+      if (result.admittedUniversity?.code === 'industry-u') highLinePeerAdmissions += 1;
+    }
+
+    expect(highLinePeerAdmissions).toBeGreaterThan(0);
+  });
+
   it('uses history admission lines for history track', () => {
     const result = resolveAdmission(zhCnContent, stateWithScoreProps({ HVOL: 60, RSK: 25 }, 'history'), exam(590), new Random(2));
 
@@ -201,6 +213,101 @@ function cooperationFixtureContent(): GameContent {
         sourcePublishedAt: '2025-07-24',
         lineType: 'sinoForeign',
         resourceNeed: 7,
+      },
+    ],
+  };
+}
+
+function highLinePeerFixtureContent(): GameContent {
+  return {
+    talents: [],
+    events: [],
+    ages: [],
+    endings: [],
+    achievements: [],
+    characters: [],
+    admissionProfiles: [
+      {
+        id: 'ah-2025-physics',
+        name: '安徽 2025 物理类',
+        year: 2025,
+        sourceProvince: '安徽',
+        subjectTrack: '物理类',
+        scoreScale: 750,
+        batch: '本科普通批',
+      },
+    ],
+    universities: [
+      {
+        code: 'low-211',
+        name: '低线 211 大学',
+        province: '新疆',
+        city: '石河子',
+        tags: ['211', 'doubleFirstClass'],
+        prestigeTier: 'strong',
+      },
+      {
+        code: 'industry-u',
+        name: '高线行业大学',
+        province: '上海',
+        city: '上海',
+        tags: [],
+        prestigeTier: 'regional',
+      },
+      {
+        code: 'ordinary-u',
+        name: '低线普通本科',
+        province: '安徽',
+        city: '合肥',
+        tags: [],
+        prestigeTier: 'regional',
+      },
+    ],
+    admissionLines: [
+      {
+        profileId: 'ah-2025-physics',
+        universityCode: 'low-211',
+        universityName: '低线 211 大学',
+        groupCode: '001',
+        groupName: '低线 211 大学 001专业组（不限）',
+        batch: '本科普通批',
+        minScore: 555,
+        minRank: 72000,
+        subjectRequirement: '不限',
+        sourceName: 'test',
+        sourceUrl: 'https://example.com/low-211',
+        sourcePublishedAt: '2025-07-24',
+        lineType: 'normal',
+      },
+      {
+        profileId: 'ah-2025-physics',
+        universityCode: 'industry-u',
+        universityName: '高线行业大学',
+        groupCode: '002',
+        groupName: '高线行业大学 002专业组（化学）',
+        batch: '本科普通批',
+        minScore: 600,
+        minRank: 30000,
+        subjectRequirement: '化学',
+        sourceName: 'test',
+        sourceUrl: 'https://example.com/industry',
+        sourcePublishedAt: '2025-07-24',
+        lineType: 'normal',
+      },
+      {
+        profileId: 'ah-2025-physics',
+        universityCode: 'ordinary-u',
+        universityName: '低线普通本科',
+        groupCode: '003',
+        groupName: '低线普通本科 003专业组（不限）',
+        batch: '本科普通批',
+        minScore: 520,
+        minRank: 110000,
+        subjectRequirement: '不限',
+        sourceName: 'test',
+        sourceUrl: 'https://example.com/ordinary',
+        sourcePublishedAt: '2025-07-24',
+        lineType: 'normal',
       },
     ],
   };

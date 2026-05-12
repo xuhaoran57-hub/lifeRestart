@@ -6,6 +6,8 @@ import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine
 
 type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements';
 
+const AUTO_RUN_INTERVAL_MS = 500;
+
 interface UiState {
   screen: Screen;
   previousScreen: Screen | null;
@@ -17,7 +19,13 @@ interface UiState {
   gameState: GameState | null;
   result: FinalResult | null;
   persistedResult: boolean;
+  autoRunning: boolean;
   message: string | null;
+}
+
+interface AutoRunControls {
+  start: () => void;
+  stop: (message?: string) => void;
 }
 
 export function createApp(root: HTMLElement, game: GameApp): void {
@@ -32,11 +40,51 @@ export function createApp(root: HTMLElement, game: GameApp): void {
     gameState: null,
     result: null,
     persistedResult: false,
+    autoRunning: false,
     message: null,
   };
 
+  let autoRunTimer: ReturnType<typeof setTimeout> | null = null;
+
   const render = () => {
     root.innerHTML = renderScreen(state, game);
+  };
+
+  const stopAutoRun = (message?: string) => {
+    if (autoRunTimer !== null) {
+      clearTimeout(autoRunTimer);
+      autoRunTimer = null;
+    }
+    state.autoRunning = false;
+    if (message) state.message = message;
+  };
+
+  const scheduleAutoRun = () => {
+    if (!state.autoRunning || autoRunTimer !== null) return;
+    autoRunTimer = setTimeout(() => {
+      autoRunTimer = null;
+      if (!state.autoRunning) return;
+
+      try {
+        if (state.screen !== 'trajectory' || !state.gameState || state.gameState.isFinished) {
+          stopAutoRun();
+        } else {
+          runOneRound(state, game);
+          if (state.screen !== 'trajectory' || state.gameState?.isFinished) stopAutoRun();
+        }
+      } catch (error) {
+        stopAutoRun(error instanceof Error ? error.message : '操作失败');
+      }
+
+      render();
+      scheduleAutoRun();
+    }, AUTO_RUN_INTERVAL_MS);
+  };
+
+  const startAutoRun = () => {
+    if (!state.gameState || state.gameState.isFinished) return;
+    state.autoRunning = true;
+    scheduleAutoRun();
   };
 
   root.addEventListener('click', event => {
@@ -46,9 +94,11 @@ export function createApp(root: HTMLElement, game: GameApp): void {
 
     try {
       const messageBeforeAction = state.message;
-      handleAction(action, target, state, game);
+      if (state.autoRunning && action !== 'auto-run') stopAutoRun();
+      handleAction(action, target, state, game, { start: startAutoRun, stop: stopAutoRun });
       if (state.message === messageBeforeAction) state.message = null;
     } catch (error) {
+      stopAutoRun();
       state.message = error instanceof Error ? error.message : '操作失败';
     }
     render();
@@ -57,7 +107,13 @@ export function createApp(root: HTMLElement, game: GameApp): void {
   render();
 }
 
-function handleAction(action: string, target: HTMLElement, state: UiState, game: GameApp): void {
+function handleAction(
+  action: string,
+  target: HTMLElement,
+  state: UiState,
+  game: GameApp,
+  autoRun: AutoRunControls,
+): void {
   if (action === 'start') {
     const inheritedTalentId = game.save.inheritedTalentId;
     state.candidates = drawTalentCandidates(game.content, 10, inheritedTalentId, Date.now(), game.save.achievedIds);
@@ -109,6 +165,7 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
     state.gameState = gameState;
     state.result = null;
     state.persistedResult = false;
+    state.autoRunning = false;
     state.screen = 'trajectory';
     return;
   }
@@ -119,7 +176,11 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
   }
 
   if (action === 'auto-run') {
-    while (!state.gameState?.isFinished) runOneRound(state, game);
+    if (state.autoRunning) {
+      autoRun.stop('已停止自动推进。');
+    } else {
+      autoRun.start();
+    }
     return;
   }
 
@@ -141,6 +202,7 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
     if (state.persistedResult) throw new Error('本局结局已经确认，不能再复读');
     state.gameState = state.engine.retake();
     state.result = null;
+    state.autoRunning = false;
     state.screen = 'trajectory';
     state.message = '你选择复读一年，保留当前属性，但心态下降、风险上升。';
     return;
@@ -155,6 +217,7 @@ function handleAction(action: string, target: HTMLElement, state: UiState, game:
     state.result = null;
     state.inheritedCandidateId = null;
     state.persistedResult = false;
+    state.autoRunning = false;
     return;
   }
 }
@@ -183,6 +246,7 @@ function adjustAllocation(prop: keyof Allocation, delta: number, state: UiState)
 
 function runOneRound(state: UiState, game: GameApp): void {
   if (!state.engine) throw new Error('本局还未开始');
+  if (state.gameState?.isFinished) return;
   const step = state.engine.next();
   state.gameState = step.state;
   if (step.ending && step.admission) {
@@ -378,6 +442,7 @@ function renderTrajectory(state: UiState, game: GameApp): string {
   const latest = gameState.logs.at(-1);
   const retakeRounds = gameState.retakeUsed ? game.content.ages.filter(round => round.age >= 17).length : 0;
   const totalRounds = game.content.ages.length + retakeRounds;
+  const isAutoRunning = state.autoRunning && !gameState.isFinished;
   return `
     <section class="stack">
       <div class="panel run-panel">
@@ -387,8 +452,8 @@ function renderTrajectory(state: UiState, game: GameApp): string {
         </div>
         ${renderStats(gameState)}
         <div class="actions">
-          <button class="primary" data-action="next-round" ${gameState.isFinished ? 'disabled' : ''}>下一回合</button>
-          <button data-action="auto-run" ${gameState.isFinished ? 'disabled' : ''}>自动跑完</button>
+          <button class="primary" data-action="next-round" ${gameState.isFinished || isAutoRunning ? 'disabled' : ''}>下一回合</button>
+          <button data-action="auto-run" ${gameState.isFinished ? 'disabled' : ''}>${isAutoRunning ? '终止自动' : '自动跑完'}</button>
         </div>
       </div>
       <div class="log-list">

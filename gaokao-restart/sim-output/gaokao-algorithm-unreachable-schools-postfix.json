@@ -1,0 +1,18 @@
+{
+  "note": "After the 211 peer-pool fix, every university with admission-line data can enter a final candidate pool. This list only contains schools missing admission-line data.",
+  "totalUniversityEntries": 1182,
+  "algorithmReachable": 1180,
+  "algorithmUnreachable": 2,
+  "unreachable": [
+    {
+      "code": "2404",
+      "name": "沈阳体育学院",
+      "reason": "No admission line data; regular admission cannot add this school to the candidate pool."
+    },
+    {
+      "code": "2521",
+      "name": "天津传媒学院",
+      "reason": "No admission line data; regular admission cannot add this school to the candidate pool."
+    }
+  ]
+}

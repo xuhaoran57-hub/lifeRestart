@@ -1,0 +1,166 @@
+{
+  "runs": 10000,
+  "seed": 20260512,
+  "retaken": 9897,
+  "blocked": 103,
+  "totalUniversityEntries": 1182,
+  "firstCovered": 1108,
+  "secondCovered": 1137,
+  "combinedCovered": 1152,
+  "combinedCoveragePct": 97.46,
+  "missingCount": 30,
+  "missingWithAdmissionLine": 28,
+  "missingWithoutAdmissionLine": 2,
+  "missing": [
+    {
+      "code": "1035",
+      "name": "北京电影学院",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1038",
+      "name": "北京工商大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1039",
+      "name": "北京工业大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1043",
+      "name": "北京建筑大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1067",
+      "name": "北京协和医学院",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1068",
+      "name": "北京信息科技大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1072",
+      "name": "北京语言大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1206",
+      "name": "重庆医科大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1488",
+      "name": "海军军医大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1604",
+      "name": "黑龙江大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1912",
+      "name": "空军军医大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "1916",
+      "name": "昆明理工大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2080",
+      "name": "南京医科大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2082",
+      "name": "南京邮电大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2331",
+      "name": "上海对外经贸大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2344",
+      "name": "上海交通大学医学院",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2347",
+      "name": "上海科技大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2367",
+      "name": "上海戏剧学院",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2394",
+      "name": "沈阳工程学院",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2404",
+      "name": "沈阳体育学院",
+      "hasAdmissionLine": false
+    },
+    {
+      "code": "2422",
+      "name": "首都师范大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2424",
+      "name": "首都医科大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2521",
+      "name": "天津传媒学院",
+      "hasAdmissionLine": false
+    },
+    {
+      "code": "2664",
+      "name": "西安科技大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2708",
+      "name": "西南政法大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2783",
+      "name": "徐州医科大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2953",
+      "name": "中国计量大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2966",
+      "name": "中国社会科学院大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "2974",
+      "name": "中国医科大学",
+      "hasAdmissionLine": true
+    },
+    {
+      "code": "9003",
+      "name": "安徽工程大学",
+      "hasAdmissionLine": true
+    }
+  ]
+}

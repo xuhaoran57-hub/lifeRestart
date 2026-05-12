@@ -1,0 +1,1853 @@
+{
+  "runs": 10000,
+  "seed": 20260512,
+  "retaken": 9897,
+  "blocked": 103,
+  "totalUniversityEntries": 1182,
+  "totalUniqueNames": 1167,
+  "codeCoverage": {
+    "first": 1040,
+    "second": 1050,
+    "combined": 1061,
+    "combinedPct": 89.76
+  },
+  "nameCoverage": {
+    "first": 1028,
+    "second": 1040,
+    "combined": 1049,
+    "combinedPct": 89.89
+  },
+  "missing": {
+    "total": 121,
+    "noAdmissionLine": 2,
+    "hasAdmissionLineButUnseen": 119,
+    "minScoreBuckets": {
+      "550-579": 67,
+      "580-609": 44,
+      "610-649": 5,
+      "无投档线": 2,
+      "650+": 2,
+      "<500": 1
+    },
+    "items": [
+      {
+        "code": "2404",
+        "name": "沈阳体育学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": false,
+        "lineCount": 0,
+        "profileIds": [],
+        "minScore": null,
+        "maxScore": null,
+        "reason": "无投档线数据，普通录取不会进入候选池"
+      },
+      {
+        "code": "2521",
+        "name": "天津传媒学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": false,
+        "lineCount": 0,
+        "profileIds": [],
+        "minScore": null,
+        "maxScore": null,
+        "reason": "无投档线数据，普通录取不会进入候选池"
+      },
+      {
+        "code": "2344",
+        "name": "上海交通大学医学院",
+        "tags": [
+          "985",
+          "211",
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "top",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 661,
+        "maxScore": 661,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2347",
+        "name": "上海科技大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 654,
+        "maxScore": 654,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2424",
+        "name": "首都医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 639,
+        "maxScore": 639,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1912",
+        "name": "空军军医大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 622,
+        "maxScore": 622,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2082",
+        "name": "南京邮电大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 620,
+        "maxScore": 620,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2966",
+        "name": "中国社会科学院大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 616,
+        "maxScore": 622,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2974",
+        "name": "中国医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 615,
+        "maxScore": 615,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1488",
+        "name": "海军军医大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 608,
+        "maxScore": 608,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1206",
+        "name": "重庆医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 605,
+        "maxScore": 605,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1068",
+        "name": "北京信息科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 602,
+        "maxScore": 602,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2386",
+        "name": "深圳大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 602,
+        "maxScore": 616,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2422",
+        "name": "首都师范大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 600,
+        "maxScore": 618,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1035",
+        "name": "北京电影学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 599,
+        "maxScore": 607,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1730",
+        "name": "华东政法大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 598,
+        "maxScore": 607,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2689",
+        "name": "西北政法大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 598,
+        "maxScore": 606,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1067",
+        "name": "北京协和医学院",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 597,
+        "maxScore": 597,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2071",
+        "name": "南京审计大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 596,
+        "maxScore": 601,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2708",
+        "name": "西南政法大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 595,
+        "maxScore": 614,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "6006",
+        "name": "安徽医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 593,
+        "maxScore": 593,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2080",
+        "name": "南京医科大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 593,
+        "maxScore": 617,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2336",
+        "name": "上海海关学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 593,
+        "maxScore": 593,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1253",
+        "name": "东北财经大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 590,
+        "maxScore": 594,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2331",
+        "name": "上海对外经贸大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 588,
+        "maxScore": 592,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2783",
+        "name": "徐州医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 587,
+        "maxScore": 587,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2989",
+        "name": "中央戏剧学院",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-history"
+        ],
+        "minScore": 587,
+        "maxScore": 587,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1808",
+        "name": "江苏大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 586,
+        "maxScore": 593,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2116",
+        "name": "宁波大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 586,
+        "maxScore": 600,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2302",
+        "name": "陕西科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 586,
+        "maxScore": 586,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2421",
+        "name": "首都经济贸易大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 586,
+        "maxScore": 594,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2060",
+        "name": "南京工业大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 585,
+        "maxScore": 597,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2068",
+        "name": "南京林业大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 585,
+        "maxScore": 588,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2078",
+        "name": "南京信息工程大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 585,
+        "maxScore": 602,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2337",
+        "name": "上海海事大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 585,
+        "maxScore": 593,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2054",
+        "name": "南京财经大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 584,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2888",
+        "name": "浙江工业大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 584,
+        "maxScore": 615,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2338",
+        "name": "上海海洋大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 583,
+        "maxScore": 587,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2886",
+        "name": "浙江工商大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 582,
+        "maxScore": 583,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1038",
+        "name": "北京工商大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 581,
+        "maxScore": 590,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1072",
+        "name": "北京语言大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 581,
+        "maxScore": 591,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2706",
+        "name": "西南石油大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 581,
+        "maxScore": 585,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2731",
+        "name": "湘潭大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 581,
+        "maxScore": 588,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1144",
+        "name": "成都理工大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1399",
+        "name": "广州大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 596,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1512",
+        "name": "杭州电子科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 613,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1732",
+        "name": "华南农业大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1825",
+        "name": "江苏师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1830",
+        "name": "江西财经大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2052",
+        "name": "南方医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 596,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2367",
+        "name": "上海戏剧学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-history"
+        ],
+        "minScore": 580,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2524",
+        "name": "天津工业大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 603,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2953",
+        "name": "中国计量大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 580,
+        "maxScore": 597,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1634",
+        "name": "湖北大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 579,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2376",
+        "name": "上海中医药大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 579,
+        "maxScore": 601,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2902",
+        "name": "浙江理工大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 579,
+        "maxScore": 594,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2907",
+        "name": "浙江师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 579,
+        "maxScore": 593,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1025",
+        "name": "北方工业大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 578,
+        "maxScore": 597,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1567",
+        "name": "河南大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 578,
+        "maxScore": 592,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2362",
+        "name": "上海师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 578,
+        "maxScore": 582,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1363",
+        "name": "广东医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 577,
+        "maxScore": 577,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2083",
+        "name": "南京中医药大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 577,
+        "maxScore": 583,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2312",
+        "name": "汕头大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 577,
+        "maxScore": 587,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2371",
+        "name": "上海音乐学院",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-history"
+        ],
+        "minScore": 577,
+        "maxScore": 577,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2089",
+        "name": "南通大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 576,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2582",
+        "name": "温州大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 576,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2959",
+        "name": "中国民航大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 576,
+        "maxScore": 595,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1043",
+        "name": "北京建筑大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 575,
+        "maxScore": 575,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2235",
+        "name": "山东科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 575,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2803",
+        "name": "扬州大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 575,
+        "maxScore": 581,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1426",
+        "name": "广州中医药大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 574,
+        "maxScore": 580,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1777",
+        "name": "集美大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 574,
+        "maxScore": 581,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2477",
+        "name": "苏州科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 574,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2879",
+        "name": "浙江财经大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 574,
+        "maxScore": 581,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1034",
+        "name": "北京第二外国语学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 573,
+        "maxScore": 581,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1286",
+        "name": "福建师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 573,
+        "maxScore": 583,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2349",
+        "name": "上海理工大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 573,
+        "maxScore": 605,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2628",
+        "name": "武汉科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 573,
+        "maxScore": 594,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1451",
+        "name": "贵州医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 572,
+        "maxScore": 572,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1916",
+        "name": "昆明理工大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 572,
+        "maxScore": 572,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2158",
+        "name": "青岛大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 572,
+        "maxScore": 597,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2374",
+        "name": "上海政法学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 572,
+        "maxScore": 582,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1116",
+        "name": "长沙理工大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 572,
+        "maxScore": 587,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1477",
+        "name": "哈尔滨理工大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 571,
+        "maxScore": 571,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1734",
+        "name": "华侨大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 571,
+        "maxScore": 576,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2008",
+        "name": "陆军军医大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 571,
+        "maxScore": 571,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2387",
+        "name": "深圳技术大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 571,
+        "maxScore": 606,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2517",
+        "name": "天津财经大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 571,
+        "maxScore": 574,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2165",
+        "name": "香岛科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 571,
+        "maxScore": 571,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2327",
+        "name": "上海电力大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 570,
+        "maxScore": 600,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2385",
+        "name": "深圳北理莫斯科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 569,
+        "maxScore": 569,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2707",
+        "name": "西南医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 569,
+        "maxScore": 569,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1130",
+        "name": "常州大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 568,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1819",
+        "name": "江苏科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 568,
+        "maxScore": 584,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2397",
+        "name": "沈阳航空航天大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 568,
+        "maxScore": 568,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2618",
+        "name": "武汉工程大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 568,
+        "maxScore": 578,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1326",
+        "name": "广东财经大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 567,
+        "maxScore": 579,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1334",
+        "name": "广东工业大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 567,
+        "maxScore": 601,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2275",
+        "name": "山西大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 567,
+        "maxScore": 575,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1234",
+        "name": "大连医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 566,
+        "maxScore": 571,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2981",
+        "name": "中南民族大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 566,
+        "maxScore": 576,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1424",
+        "name": "广州医科大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 564,
+        "maxScore": 564,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2394",
+        "name": "沈阳工程学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 564,
+        "maxScore": 564,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "8006",
+        "name": "安徽师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 563,
+        "maxScore": 567,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1463",
+        "name": "桂林医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 563,
+        "maxScore": 563,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1514",
+        "name": "杭州师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 563,
+        "maxScore": 563,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1516",
+        "name": "杭州医学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 563,
+        "maxScore": 563,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2587",
+        "name": "温州医科大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 563,
+        "maxScore": 563,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2965",
+        "name": "中国人民警察大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 563,
+        "maxScore": 563,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1261",
+        "name": "东莞理工学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 561,
+        "maxScore": 561,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1357",
+        "name": "广东外语外贸大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 561,
+        "maxScore": 577,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2904",
+        "name": "浙江农林大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 560,
+        "maxScore": 578,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "1216",
+        "name": "川北医学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 559,
+        "maxScore": 559,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2251",
+        "name": "山东师范大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 559,
+        "maxScore": 569,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2664",
+        "name": "西安科技大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 559,
+        "maxScore": 559,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2453",
+        "name": "四川外国语大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 558,
+        "maxScore": 567,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2920",
+        "name": "浙江中医药大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 556,
+        "maxScore": 568,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2326",
+        "name": "上海电机学院",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 555,
+        "maxScore": 555,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2365",
+        "name": "上海体育大学",
+        "tags": [
+          "doubleFirstClass"
+        ],
+        "prestigeTier": "strong",
+        "hasAdmissionLine": true,
+        "lineCount": 2,
+        "profileIds": [
+          "ah-2025-history",
+          "ah-2025-physics"
+        ],
+        "minScore": 555,
+        "maxScore": 569,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "9003",
+        "name": "安徽工程大学",
+        "tags": [],
+        "prestigeTier": "regional",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 553,
+        "maxScore": 553,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      },
+      {
+        "code": "2591",
+        "name": "乌鲁木齐职业大学",
+        "tags": [],
+        "prestigeTier": "private",
+        "hasAdmissionLine": true,
+        "lineCount": 1,
+        "profileIds": [
+          "ah-2025-physics"
+        ],
+        "minScore": 485,
+        "maxScore": 485,
+        "reason": "10000 局未抽中；有投档线且分数上限可达，规则上不是绝对不可录取"
+      }
+    ]
+  }
+}
