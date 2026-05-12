@@ -3,8 +3,15 @@ import type { Achievement, AdmissionResult, Allocation, FinalResult, GameState, 
 import { LifeEngine } from '../engine/life';
 import { recordFinalResult, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
+import {
+  getUniversityCollectionStats,
+  is211PlusUniversity,
+  is985University,
+  isDoubleFirstClassUniversity,
+  universityGroupLabels,
+} from '../engine/universities';
 
-type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements';
+type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements' | 'universities';
 
 const AUTO_RUN_INTERVAL_MS = 500;
 
@@ -132,8 +139,21 @@ function handleAction(
     return;
   }
 
+  if (action === 'view-universities') {
+    commitFinalResult(state, game);
+    if (state.screen !== 'universities') state.previousScreen = state.screen;
+    state.screen = 'universities';
+    return;
+  }
+
   if (action === 'close-achievements') {
     state.screen = state.previousScreen && state.previousScreen !== 'achievements' ? state.previousScreen : 'home';
+    state.previousScreen = null;
+    return;
+  }
+
+  if (action === 'close-universities') {
+    state.screen = state.previousScreen && state.previousScreen !== 'universities' ? state.previousScreen : 'home';
     state.previousScreen = null;
     return;
   }
@@ -272,10 +292,13 @@ function renderScreen(state: UiState, game: GameApp): string {
     trajectory: renderTrajectory(state, game),
     summary: renderSummary(state, game),
     achievements: renderAchievements(game),
+    universities: renderUniversities(game),
   }[state.screen];
   const topbarAction = state.screen === 'achievements'
     ? '<button class="ghost" data-action="close-achievements">返回</button>'
-    : '<button class="ghost" data-action="view-achievements">成就</button>';
+    : state.screen === 'universities'
+      ? '<button class="ghost" data-action="close-universities">返回</button>'
+      : '<button class="ghost" data-action="view-universities">院校</button><button class="ghost" data-action="view-achievements">成就</button>';
 
   return `
     <div class="shell screen-${state.screen}">
@@ -285,6 +308,7 @@ function renderScreen(state: UiState, game: GameApp): string {
           <div class="topbar-stats" aria-label="存档进度">
             <span><strong>${game.save.times}</strong><em>次重开</em></span>
             <span><strong>${game.save.unlockedEndingIds.length}</strong><em>个结局</em></span>
+            <span><strong>${game.save.unlockedUniversityCodes.length}</strong><em>所院校</em></span>
             <span><strong>${game.save.achievedIds.length}</strong><em>个成就</em></span>
           </div>
         </div>
@@ -318,6 +342,7 @@ function renderHome(game: GameApp): string {
       </div>
       ${inherited ? `<p class="pill">继承天赋：${escapeHtml(inherited.name)}</p>` : ''}
       <div class="home-actions">
+        <button data-action="view-universities">查看院校 ${game.save.unlockedUniversityCodes.length}/${game.content.universities.length}</button>
         <button data-action="view-achievements">查看成就 ${game.save.achievedIds.length}/${game.content.achievements.length}</button>
       </div>
       <button class="primary wide" data-action="start">开始重开</button>
@@ -328,6 +353,7 @@ function renderHome(game: GameApp): string {
 function renderAchievements(game: GameApp): string {
   const unlocked = new Set(game.save.achievedIds);
   const unlockedAchievements = game.content.achievements.filter(item => unlocked.has(item.id));
+  const universityStats = getUniversityCollectionStats(game.content, game.save.unlockedUniversityCodes);
   const cards = unlockedAchievements.length
     ? unlockedAchievements.map(renderAchievementCard).join('')
     : '<div class="panel empty-state">还没有解锁成就，先完成一局看看。</div>';
@@ -345,6 +371,7 @@ function renderAchievements(game: GameApp): string {
         <div class="achievement-stats">
           <span><em>重开</em><strong>${game.save.times}</strong></span>
           <span><em>结局</em><strong>${game.save.unlockedEndingIds.length}</strong></span>
+          <span><em>院校</em><strong>${universityStats.unlocked}</strong></span>
           <span><em>事件</em><strong>${game.save.seenEventIds.length}</strong></span>
           <span><em>天赋</em><strong>${game.save.seenTalentIds.length}</strong></span>
         </div>
@@ -352,6 +379,64 @@ function renderAchievements(game: GameApp): string {
       <div class="achievement-grid">${cards}</div>
     </section>
   `;
+}
+
+function renderUniversities(game: GameApp): string {
+  const unlockedCodes = new Set(game.save.unlockedUniversityCodes);
+  const stats = getUniversityCollectionStats(game.content, game.save.unlockedUniversityCodes);
+  const unlocked = game.content.universities.filter(item => unlockedCodes.has(item.code));
+  const locked = game.content.universities.filter(item => !unlockedCodes.has(item.code));
+  const cards = [...unlocked, ...locked].map(university => renderUniversityCard(university, unlockedCodes.has(university.code))).join('');
+
+  return `
+    <section class="stack">
+      <div class="panel">
+        <div class="section-title">
+          <div>
+            <h2>院校图鉴</h2>
+            <p class="muted">已点亮 ${stats.unlocked}/${stats.total}</p>
+          </div>
+          <button class="ghost" data-action="close-universities">返回</button>
+        </div>
+        <div class="achievement-stats">
+          <span><em>院校</em><strong>${stats.unlocked}</strong></span>
+          <span><em>985</em><strong>${stats.unlocked985}</strong></span>
+          <span><em>211+</em><strong>${stats.unlocked211Plus}</strong></span>
+          <span><em>双一流</em><strong>${stats.unlockedDoubleFirstClass}</strong></span>
+          <span><em>清北</em><strong>${stats.unlockedQingbei}/2</strong></span>
+          <span><em>华五</em><strong>${stats.unlockedHuaWu}/5</strong></span>
+          <span><em>C9</em><strong>${stats.unlockedC9}/9</strong></span>
+        </div>
+      </div>
+      <div class="university-grid">${cards}</div>
+    </section>
+  `;
+}
+
+function renderUniversityCard(university: GameApp['content']['universities'][number], unlocked: boolean): string {
+  const labels = universityLabels(university);
+  return `
+    <article class="card university-card ${unlocked ? 'unlocked' : 'locked'}">
+      <div class="achievement-heading">
+        <strong>${escapeHtml(university.name)}</strong>
+        <span class="achievement-status">${unlocked ? '已点亮' : '未点亮'}</span>
+      </div>
+      <p>${escapeHtml(`${university.province} · ${university.city}`)}</p>
+      <div class="university-tags">
+        ${labels.map(label => `<span>${escapeHtml(label)}</span>`).join('')}
+      </div>
+    </article>
+  `;
+}
+
+function universityLabels(university: GameApp['content']['universities'][number]): string[] {
+  return [
+    ...universityGroupLabels(university),
+    ...(is985University(university) ? ['985'] : []),
+    ...(university.tags.includes('211') ? ['211'] : []),
+    ...(isDoubleFirstClassUniversity(university) ? ['双一流'] : []),
+    ...(is211PlusUniversity(university) ? [] : [universityTierLabel(university.prestigeTier)]),
+  ];
 }
 
 function renderAchievementCard(achievement: Achievement): string {
@@ -654,6 +739,16 @@ function talentRarityName(grade: number): string {
 
 function achievementGradeName(grade: number): string {
   return ['普通', '稀有', '史诗', '传说'][grade] ?? '普通';
+}
+
+function universityTierLabel(tier: GameApp['content']['universities'][number]['prestigeTier']): string {
+  return {
+    top: '顶尖',
+    strong: '强校',
+    solid: '稳健',
+    regional: '区域',
+    private: '民办',
+  }[tier];
 }
 
 function renderRoundLabel(state: GameState): string {

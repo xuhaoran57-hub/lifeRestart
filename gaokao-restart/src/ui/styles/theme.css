@@ -620,7 +620,8 @@
 }
 
 .achievement-stats,
-.achievement-grid {
+.achievement-grid,
+.university-grid {
   display: grid;
   gap: 10px;
 }
@@ -646,6 +647,10 @@
 
 .achievement-grid {
   grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+
+.university-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
 }
 
 .achievement-card {
@@ -688,6 +693,47 @@
 .achievement-card p {
   color: #5d5a54;
   line-height: 1.45;
+}
+
+.university-card {
+  display: grid;
+  min-height: 120px;
+  align-content: start;
+  gap: 8px;
+  padding: 14px;
+}
+
+.university-card.locked {
+  background: #f8f6f1;
+  opacity: 0.66;
+}
+
+.university-card.unlocked {
+  border-color: rgba(58, 134, 232, 0.34);
+  background: #f8fbff;
+}
+
+.university-card p {
+  color: #686157;
+  font-size: 0.9rem;
+}
+
+.university-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.university-tags span {
+  display: inline-flex;
+  min-height: 22px;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #eef4f1;
+  color: #4d625b;
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
 .empty-state {

@@ -282,5 +282,6 @@ export interface SaveData {
   seenTalentIds: number[];
   seenEventIds: number[];
   unlockedEndingIds: number[];
+  unlockedUniversityCodes: string[];
   achievedIds: number[];
 }

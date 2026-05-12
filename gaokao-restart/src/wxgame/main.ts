@@ -8,13 +8,21 @@ import type {
   RunLog,
   Talent,
   TalentRarity,
+  University,
 } from '../app/types';
 import { LifeEngine } from '../engine/life';
 import { recordFinalResult, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
+import {
+  getUniversityCollectionStats,
+  is211PlusUniversity,
+  is985University,
+  isDoubleFirstClassUniversity,
+  universityGroupLabels,
+} from '../engine/universities';
 import { createWxSaveStorage } from './storage';
 
-type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements';
+type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements' | 'universities';
 type PropKey = keyof Allocation;
 
 const AUTO_RUN_INTERVAL_MS = 500;
@@ -23,6 +31,8 @@ type Action =
   | { type: 'start' }
   | { type: 'viewAchievements' }
   | { type: 'closeAchievements' }
+  | { type: 'viewUniversities' }
+  | { type: 'closeUniversities' }
   | { type: 'toggleTalent'; talentId: number }
   | { type: 'toProperties' }
   | { type: 'backToTalents' }
@@ -275,8 +285,24 @@ class WxGameApp {
       return;
     }
 
+    if (action.type === 'viewUniversities') {
+      this.commitFinalResult();
+      if (this.state.screen !== 'universities') this.state.previousScreen = this.state.screen;
+      this.switchScreen('universities');
+      return;
+    }
+
     if (action.type === 'closeAchievements') {
       const target = this.state.previousScreen && this.state.previousScreen !== 'achievements'
+        ? this.state.previousScreen
+        : 'home';
+      this.state.previousScreen = null;
+      this.switchScreen(target);
+      return;
+    }
+
+    if (action.type === 'closeUniversities') {
+      const target = this.state.previousScreen && this.state.previousScreen !== 'universities'
         ? this.state.previousScreen
         : 'home';
       this.state.previousScreen = null;

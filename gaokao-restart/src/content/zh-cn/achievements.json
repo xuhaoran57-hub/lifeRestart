@@ -318,5 +318,117 @@
     "grade": 1,
     "condition": "(SPR<2)&(RSK>=70)",
     "timing": "summary"
+  },
+  {
+    "id": 42201,
+    "name": "初见校门",
+    "description": "点亮 5 所院校",
+    "grade": 0,
+    "condition": "CSCH>=5",
+    "timing": "summary"
+  },
+  {
+    "id": 42202,
+    "name": "校园地图",
+    "description": "点亮 20 所院校",
+    "grade": 1,
+    "condition": "CSCH>=20",
+    "timing": "summary"
+  },
+  {
+    "id": 42203,
+    "name": "百校巡礼",
+    "description": "点亮 100 所院校",
+    "grade": 2,
+    "condition": "CSCH>=100",
+    "timing": "summary"
+  },
+  {
+    "id": 42204,
+    "name": "半部图鉴",
+    "description": "点亮 500 所院校",
+    "grade": 3,
+    "condition": "CSCH>=500",
+    "timing": "summary"
+  },
+  {
+    "id": 42205,
+    "name": "千校收藏",
+    "description": "点亮 1000 所院校",
+    "grade": 3,
+    "condition": "CSCH>=1000",
+    "timing": "summary"
+  },
+  {
+    "id": 42206,
+    "name": "清北一角",
+    "description": "点亮任意清北院校",
+    "grade": 3,
+    "condition": "CQB>=1",
+    "timing": "summary"
+  },
+  {
+    "id": 42207,
+    "name": "清北双星",
+    "description": "点亮清北两校",
+    "grade": 3,
+    "condition": "CQB>=2",
+    "timing": "summary"
+  },
+  {
+    "id": 42208,
+    "name": "华五入册",
+    "description": "点亮任意华五院校",
+    "grade": 3,
+    "condition": "CHW>=1",
+    "timing": "summary"
+  },
+  {
+    "id": 42209,
+    "name": "华五巡礼",
+    "description": "点亮全部华五院校",
+    "grade": 3,
+    "condition": "CHW>=5",
+    "timing": "summary"
+  },
+  {
+    "id": 42210,
+    "name": "C9 见证者",
+    "description": "点亮任意 C9 院校",
+    "grade": 3,
+    "condition": "CC9>=1",
+    "timing": "summary"
+  },
+  {
+    "id": 42211,
+    "name": "C9 集邮",
+    "description": "点亮全部 C9 院校",
+    "grade": 3,
+    "condition": "CC9>=9",
+    "timing": "summary"
+  },
+  {
+    "id": 42212,
+    "name": "985 入门",
+    "description": "点亮任意 985 院校",
+    "grade": 2,
+    "condition": "C985>=1",
+    "timing": "summary"
+  },
+  {
+    "id": 42213,
+    "name": "985 收藏家",
+    "description": "点亮 20 所 985 院校",
+    "grade": 3,
+    "condition": "C985>=20",
+    "timing": "summary"
+  },
+  {
+    "id": 42214,
+    "name": "211 版图",
+    "description": "点亮 50 所 211 及以上院校",
+    "grade": 3,
+    "condition": "C211>=50",
+    "timing": "summary"
   }
 ]
