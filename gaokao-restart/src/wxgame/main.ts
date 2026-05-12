@@ -64,6 +64,22 @@ interface Rect {
   height: number;
 }
 
+interface LogLayoutItem {
+  log: RunLog;
+  offsetY: number;
+  height: number;
+}
+
+interface LogLayoutCache {
+  logs: RunLog[];
+  width: number;
+  length: number;
+  firstLog: RunLog | null;
+  lastLog: RunLog | null;
+  items: LogLayoutItem[];
+  totalHeight: number;
+}
+
 interface UiState {
   screen: Screen;
   previousScreen: Screen | null;
@@ -153,6 +169,7 @@ class WxGameApp {
   private isTouchMoved = false;
   private currentOffsetY = 0;
   private currentButtonViewport: Rect | null = null;
+  private logLayoutCache: LogLayoutCache | null = null;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
@@ -592,19 +609,31 @@ class WxGameApp {
       this.setFont(11, 600);
       this.ctx.fillStyle = theme.subtle;
       this.ctx.fillText(this.fitText(this.talentHeaderMeta(), compactButtonX - innerX - 10), innerX, top + 43);
-      const action = this.state.screen === 'achievements'
-        ? { type: 'closeAchievements' as const }
-        : { type: 'viewAchievements' as const };
-      const label = this.state.screen === 'achievements' ? '返回' : '成就';
+      const action = this.headerPrimaryAction();
+      const label = this.headerPrimaryLabel();
       this.drawButton(action, label, compactButtonX, top + 14, compactButtonWidth, 34, 'secondary');
     } else {
       this.drawHeaderStats(top + 46);
-      const action = this.state.screen === 'achievements'
-        ? { type: 'closeAchievements' as const }
-        : { type: 'viewAchievements' as const };
-      const label = this.state.screen === 'achievements' ? '返回' : '成就';
-      this.drawButton(action, label, innerX, top + 104, innerWidth, 38, 'secondary');
+      if (this.state.screen === 'achievements' || this.state.screen === 'universities') {
+        this.drawButton(this.headerPrimaryAction(), '返回', innerX, top + 104, innerWidth, 38, 'secondary');
+      } else {
+        const gap = 8;
+        const buttonWidth = (innerWidth - gap) / 2;
+        this.drawButton({ type: 'viewUniversities' }, '院校', innerX, top + 104, buttonWidth, 38, 'secondary');
+        this.drawButton({ type: 'viewAchievements' }, '成就', innerX + buttonWidth + gap, top + 104, buttonWidth, 38, 'secondary');
+      }
     }
+  }
+
+  private headerPrimaryAction(): Action {
+    if (this.state.screen === 'achievements') return { type: 'closeAchievements' };
+    if (this.state.screen === 'universities') return { type: 'closeUniversities' };
+    return { type: 'viewAchievements' };
+  }
+
+  private headerPrimaryLabel(): string {
+    if (this.state.screen === 'achievements' || this.state.screen === 'universities') return '返回';
+    return '成就';
   }
 
   private drawHeroHeaderCard(x: number, y: number, width: number, height: number, compact: boolean): void {
@@ -660,12 +689,13 @@ class WxGameApp {
     const stats = [
       [String(this.game.save.times), '次重开'],
       [String(this.game.save.unlockedEndingIds.length), '个结局'],
+      [String(this.game.save.unlockedUniversityCodes.length), '所院校'],
       [String(this.game.save.achievedIds.length), '个成就'],
     ] as const;
     const x = 36;
     const gap = 6;
     const maxWidth = this.width - 72;
-    const chipWidth = (maxWidth - gap * 2) / 3;
+    const chipWidth = (maxWidth - gap * (stats.length - 1)) / stats.length;
 
     stats.forEach(([value, label], index) => {
       const chipX = x + index * (chipWidth + gap);
@@ -708,7 +738,8 @@ class WxGameApp {
     else if (this.state.screen === 'properties') cursor = this.drawProperties(cursor);
     else if (this.state.screen === 'trajectory') cursor = this.drawTrajectory(cursor);
     else if (this.state.screen === 'summary') cursor = this.drawSummary(cursor);
-    else cursor = this.drawAchievements(cursor);
+    else if (this.state.screen === 'achievements') cursor = this.drawAchievements(cursor);
+    else cursor = this.drawUniversities(cursor);
 
     this.ctx.restore();
     this.currentOffsetY = 0;
@@ -729,7 +760,18 @@ class WxGameApp {
       if (inherited) cursor = this.drawInheritedTalentBanner(cursor, inherited, '继承天赋');
       cursor = this.drawFactRow(cursor, '内容数据', `${this.game.content.talents.length} 天赋 / ${this.game.content.events.length} 事件`);
       cursor = this.drawFactRow(cursor, '结局进度', `${this.game.save.unlockedEndingIds.length}/${this.game.content.endings.length}`);
+      cursor = this.drawFactRow(cursor, '院校进度', `${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`);
       cursor = this.drawFactRow(cursor, '成就进度', `${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`);
+      this.drawButton(
+        { type: 'viewUniversities' },
+        `查看院校 ${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`,
+        36,
+        cursor + 2,
+        this.width - 72,
+        38,
+        'secondary',
+      );
+      cursor += 46;
       this.drawButton(
         { type: 'viewAchievements' },
         `查看成就 ${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`,
@@ -749,6 +791,7 @@ class WxGameApp {
   private drawAchievements(y: number): number {
     const unlockedIds = new Set(this.game.save.achievedIds);
     const unlocked = this.game.content.achievements.filter(item => unlockedIds.has(item.id));
+    const universityStats = getUniversityCollectionStats(this.game.content, this.game.save.unlockedUniversityCodes);
     y = this.drawPanel(y, () => {
       let cursor = y + 26;
       this.drawSectionTitle('成就', `已解锁 ${unlocked.length}/${this.game.content.achievements.length}`, 36, cursor);
@@ -756,6 +799,7 @@ class WxGameApp {
       const stats = [
         ['重开', this.game.save.times],
         ['结局', this.game.save.unlockedEndingIds.length],
+        ['院校', universityStats.unlocked],
         ['事件', this.game.save.seenEventIds.length],
         ['天赋', this.game.save.seenTalentIds.length],
       ] as const;
@@ -776,6 +820,43 @@ class WxGameApp {
 
     for (const achievement of unlocked) y = this.drawAchievementCard(y, achievement);
     return y;
+  }
+
+  private drawUniversities(y: number): number {
+    const unlockedCodes = new Set(this.game.save.unlockedUniversityCodes);
+    const stats = getUniversityCollectionStats(this.game.content, this.game.save.unlockedUniversityCodes);
+    const unlocked = this.game.content.universities.filter(item => unlockedCodes.has(item.code));
+
+    y = this.drawPanel(y, () => {
+      let cursor = y + 26;
+      this.drawSectionTitle('院校图鉴', `已点亮 ${stats.unlocked}/${stats.total}`, 36, cursor);
+      cursor += 58;
+      cursor = this.drawMiniStats(cursor, [
+        ['院校', stats.unlocked],
+        ['985', stats.unlocked985],
+        ['211+', stats.unlocked211Plus],
+        ['双一流', stats.unlockedDoubleFirstClass],
+      ]);
+      cursor = this.drawMiniStats(cursor + 4, [
+        ['清北', stats.unlockedQingbei],
+        ['华五', stats.unlockedHuaWu],
+        ['C9', stats.unlockedC9],
+      ]);
+      return cursor + 6;
+    });
+
+    if (unlocked.length === 0) {
+      y = this.drawPanel(y, () => {
+        let cursor = y + 28;
+        this.setFont(14, 500);
+        this.ctx.fillStyle = theme.subtle;
+        cursor = this.drawWrappedText('还没有点亮院校，完成录取后会出现在这里。', 36, cursor, this.width - 72, 22, 3);
+        return cursor + 8;
+      });
+      return y;
+    }
+
+    return this.drawVirtualUniversityList(y, unlocked, unlockedCodes);
   }
 
   private drawTalents(y: number): number {
@@ -962,6 +1043,11 @@ class WxGameApp {
 
     if (this.state.screen === 'achievements') {
       this.drawButton({ type: 'closeAchievements' }, '返回', 20, footerY, this.width - 40, buttonHeight, 'primary');
+      return;
+    }
+
+    if (this.state.screen === 'universities') {
+      this.drawButton({ type: 'closeUniversities' }, '返回', 20, footerY, this.width - 40, buttonHeight, 'primary');
       return;
     }
 
@@ -1171,6 +1257,81 @@ class WxGameApp {
     });
   }
 
+  private drawVirtualUniversityList(y: number, universities: University[], unlockedCodes: Set<string>): number {
+    const cardHeight = this.universityCardHeight();
+    const gap = 8;
+    const viewport = this.currentButtonViewport;
+    let cursor = y;
+
+    for (const university of universities) {
+      const screenRect = {
+        x: 20,
+        y: cursor + this.currentOffsetY,
+        width: this.width - 40,
+        height: cardHeight,
+      };
+      if (!viewport || this.rectIntersects(screenRect, viewport)) {
+        this.drawUniversityCard(cursor, university, unlockedCodes.has(university.code), cardHeight);
+      }
+      cursor += cardHeight + gap;
+    }
+
+    return cursor;
+  }
+
+  private drawUniversityCard(y: number, university: University, unlocked: boolean, height: number): void {
+    const x = 20;
+    const width = this.width - 40;
+    this.ctx.save();
+    this.ctx.shadowColor = unlocked ? 'rgba(47, 124, 128, 0.13)' : theme.shadowSoft;
+    this.ctx.shadowBlur = 14;
+    this.ctx.shadowOffsetY = 5;
+    this.ctx.fillStyle = unlocked ? 'rgba(244, 255, 251, 0.94)' : 'rgba(255, 255, 255, 0.82)';
+    this.roundRect(x, y, width, height, 8);
+    this.ctx.fill();
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.strokeStyle = unlocked ? 'rgba(47, 124, 128, 0.42)' : theme.line;
+    this.ctx.stroke();
+    this.ctx.restore();
+
+    let cursor = y + 25;
+    const status = unlocked ? '已点亮' : '未点亮';
+    const statusWidth = this.miniPillWidth(status);
+    this.setFont(16, 800);
+    this.ctx.fillStyle = unlocked ? theme.ink : '#6b7280';
+    this.ctx.fillText(this.fitText(university.name, width - 48 - statusWidth), x + 16, cursor);
+    this.drawMiniPill(status, x + width - 16 - statusWidth, cursor - 16, unlocked ? '#e5f8f3' : '#f0ede7', unlocked ? theme.teal : theme.subtle);
+
+    cursor += 24;
+    this.setFont(12, 500);
+    this.ctx.fillStyle = theme.subtle;
+    this.ctx.fillText(this.fitText(`${university.province} · ${university.city}`, width - 32), x + 16, cursor);
+
+    const labels = this.universityLabels(university);
+    let tagX = x + 16;
+    let tagY = cursor + 16;
+    for (const label of labels.slice(0, 5)) {
+      const tagWidth = this.miniPillWidth(label);
+      if (tagX + tagWidth > x + width - 16) {
+        tagX = x + 16;
+        tagY += 22;
+      }
+      if (tagY > y + height - 18) break;
+      this.drawMiniPill(label, tagX, tagY, unlocked ? '#eef7ff' : '#f5f2ec', unlocked ? theme.blueDeep : theme.subtle);
+      tagX += tagWidth + 6;
+    }
+  }
+
+  private universityLabels(university: University): string[] {
+    return [
+      ...universityGroupLabels(university),
+      ...(is985University(university) ? ['985'] : []),
+      ...(university.tags.includes('211') ? ['211'] : []),
+      ...(isDoubleFirstClassUniversity(university) ? ['双一流'] : []),
+      ...(is211PlusUniversity(university) ? [] : [universityTierLabel(university.prestigeTier)]),
+    ];
+  }
+
   private drawStatsPanel(y: number, gameState: GameState): number {
     return this.drawPanel(y, () => {
       let cursor = y + 26;
@@ -1302,26 +1463,63 @@ class WxGameApp {
   }
 
   private drawVirtualLogList(y: number, logs: RunLog[]): number {
-    const items = [...logs].reverse();
-    const cardHeight = this.logCardHeight();
-    const gap = 8;
+    const layout = this.getLogListLayout(logs);
     const viewport = this.currentButtonViewport;
-    let cursor = y;
+    const visibleTop = viewport ? viewport.y - this.currentOffsetY - y : Number.NEGATIVE_INFINITY;
+    const visibleBottom = viewport ? viewport.y + viewport.height - this.currentOffsetY - y : Number.POSITIVE_INFINITY;
 
-    for (const log of items) {
+    for (const item of layout.items) {
+      if (item.offsetY + item.height < visibleTop) continue;
+      if (item.offsetY > visibleBottom) break;
+      const cursor = y + item.offsetY;
       const screenRect = {
         x: 20,
         y: cursor + this.currentOffsetY,
         width: this.width - 40,
-        height: cardHeight,
+        height: item.height,
       };
       if (!viewport || this.rectIntersects(screenRect, viewport)) {
-        this.drawFixedLogCard(cursor, log, cardHeight);
+        this.drawFixedLogCard(cursor, item.log, item.height);
       }
-      cursor += cardHeight + gap;
     }
 
-    return cursor;
+    return y + layout.totalHeight;
+  }
+
+  private getLogListLayout(logs: RunLog[]): LogLayoutCache {
+    const firstLog = logs[0] ?? null;
+    const lastLog = logs.at(-1) ?? null;
+    const cached = this.logLayoutCache;
+    if (
+      cached
+      && cached.logs === logs
+      && cached.width === this.width
+      && cached.length === logs.length
+      && cached.firstLog === firstLog
+      && cached.lastLog === lastLog
+    ) {
+      return cached;
+    }
+
+    const gap = 8;
+    let offsetY = 0;
+    const items = [...logs].reverse().map(log => {
+      const height = this.logCardHeight(log);
+      const item = { log, offsetY, height };
+      offsetY += height + gap;
+      return item;
+    });
+    const layout: LogLayoutCache = {
+      logs,
+      width: this.width,
+      length: logs.length,
+      firstLog,
+      lastLog,
+      items,
+      totalHeight: offsetY,
+    };
+    this.logLayoutCache = layout;
+    return layout;
   }
 
   private drawFixedLogCard(y: number, log: RunLog, height: number): void {
@@ -1357,18 +1555,32 @@ class WxGameApp {
     cursor += 23;
     this.setFont(13, 400);
     this.ctx.fillStyle = '#5d5a54';
-    cursor = this.drawWrappedText(log.event.text, x + 48, cursor, width - 62, 18, 2);
+    cursor = this.drawWrappedText(log.event.text, x + 48, cursor, width - 62, 18, Number.MAX_SAFE_INTEGER);
 
     if (log.triggeredTalents.length > 0) {
       this.setFont(12, 600);
       this.ctx.fillStyle = theme.teal;
-      cursor = this.drawWrappedText(`天赋：${log.triggeredTalents.map(item => item.name).join(' / ')}`, x + 48, cursor + 2, width - 62, 16, 1);
+      cursor = this.drawWrappedText(
+        `天赋：${log.triggeredTalents.map(item => item.name).join(' / ')}`,
+        x + 48,
+        cursor + 2,
+        width - 62,
+        16,
+        Number.MAX_SAFE_INTEGER,
+      );
     }
 
-    if (log.branchEvents.length > 0 && cursor < y + height - 12) {
+    if (log.branchEvents.length > 0) {
       this.setFont(12, 600);
       this.ctx.fillStyle = theme.teal;
-      this.drawWrappedText(`连锁：${log.branchEvents.map(item => item.text).join(' / ')}`, x + 48, cursor + 1, width - 62, 16, 1);
+      this.drawWrappedText(
+        `连锁：${log.branchEvents.map(item => item.text).join(' / ')}`,
+        x + 48,
+        cursor + 1,
+        width - 62,
+        16,
+        Number.MAX_SAFE_INTEGER,
+      );
     }
   }
 
@@ -1627,8 +1839,32 @@ class WxGameApp {
     return this.height <= 640 ? 100 : 108;
   }
 
-  private logCardHeight(): number {
-    return this.height <= 640 ? 98 : 106;
+  private logCardHeight(log: RunLog): number {
+    const width = this.width - 40;
+    const textWidth = width - 62;
+    const minHeight = this.height <= 640 ? 98 : 106;
+
+    this.setFont(13, 400);
+    const eventLines = Math.max(1, this.wrapText(log.event.text, textWidth, Number.MAX_SAFE_INTEGER).length);
+    let height = 44 + eventLines * 18 + 16;
+
+    if (log.triggeredTalents.length > 0) {
+      this.setFont(12, 600);
+      const text = `天赋：${log.triggeredTalents.map(item => item.name).join(' / ')}`;
+      height += 2 + Math.max(1, this.wrapText(text, textWidth, Number.MAX_SAFE_INTEGER).length) * 16;
+    }
+
+    if (log.branchEvents.length > 0) {
+      this.setFont(12, 600);
+      const text = `连锁：${log.branchEvents.map(item => item.text).join(' / ')}`;
+      height += 1 + Math.max(1, this.wrapText(text, textWidth, Number.MAX_SAFE_INTEGER).length) * 16;
+    }
+
+    return Math.max(minHeight, height);
+  }
+
+  private universityCardHeight(): number {
+    return this.height <= 640 ? 92 : 100;
   }
 
   private headerHeight(): number {
@@ -1675,6 +1911,16 @@ function achievementGradeName(grade: number): string {
   return ['普通', '稀有', '史诗', '传说'][grade] ?? '普通';
 }
 
+function universityTierLabel(tier: University['prestigeTier']): string {
+  return {
+    top: '顶尖',
+    strong: '强校',
+    solid: '稳健',
+    regional: '区域',
+    private: '民办',
+  }[tier];
+}
+
 function admissionTierName(tier: AdmissionResult['admissionTier']): string {
   return {
     '985': '985',
@@ -1714,6 +1960,7 @@ function screenName(screen: Screen): string {
     trajectory: '轨迹',
     summary: '结局',
     achievements: '成就',
+    universities: '院校',
   }[screen];
 }
 
