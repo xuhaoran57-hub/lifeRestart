@@ -26,6 +26,7 @@ interface UiState {
   gameState: GameState | null;
   result: FinalResult | null;
   persistedResult: boolean;
+  retakeLocked: boolean;
   autoRunning: boolean;
   message: string | null;
 }
@@ -47,6 +48,7 @@ export function createApp(root: HTMLElement, game: GameApp): void {
     gameState: null,
     result: null,
     persistedResult: false,
+    retakeLocked: false,
     autoRunning: false,
     message: null,
   };
@@ -133,14 +135,14 @@ function handleAction(
   }
 
   if (action === 'view-achievements') {
-    commitFinalResult(state, game);
+    commitFinalResult(state, game, { lockRetake: false });
     if (state.screen !== 'achievements') state.previousScreen = state.screen;
     state.screen = 'achievements';
     return;
   }
 
   if (action === 'view-universities') {
-    commitFinalResult(state, game);
+    commitFinalResult(state, game, { lockRetake: false });
     if (state.screen !== 'universities') state.previousScreen = state.screen;
     state.screen = 'universities';
     return;
@@ -185,6 +187,7 @@ function handleAction(
     state.gameState = gameState;
     state.result = null;
     state.persistedResult = false;
+    state.retakeLocked = false;
     state.autoRunning = false;
     state.screen = 'trajectory';
     return;
@@ -205,23 +208,25 @@ function handleAction(
   }
 
   if (action === 'inherit') {
-    commitFinalResult(state, game);
+    commitFinalResult(state, game, { lockRetake: false });
     const id = Number(target.closest<HTMLElement>('[data-id]')?.dataset.id);
     game.persist(setInheritedTalent(game.save, id));
     return;
   }
 
   if (action === 'clear-inherit') {
-    commitFinalResult(state, game);
+    commitFinalResult(state, game, { lockRetake: false });
     game.persist(setInheritedTalent(game.save, null));
     return;
   }
 
   if (action === 'retake') {
     if (!state.engine) throw new Error('本局还未开始');
-    if (state.persistedResult) throw new Error('本局结局已经确认，不能再复读');
+    if (state.retakeLocked) throw new Error('本局结局已经确认，不能再复读');
     state.gameState = state.engine.retake();
     state.result = null;
+    state.persistedResult = false;
+    state.retakeLocked = false;
     state.autoRunning = false;
     state.screen = 'trajectory';
     state.message = '你选择复读一年，保留当前属性，但心态下降、风险上升。';
@@ -237,6 +242,7 @@ function handleAction(
     state.result = null;
     state.inheritedCandidateId = null;
     state.persistedResult = false;
+    state.retakeLocked = false;
     state.autoRunning = false;
     return;
   }
@@ -272,15 +278,24 @@ function runOneRound(state: UiState, game: GameApp): void {
   if (step.ending && step.admission) {
     const result: FinalResult = { state: step.state, ending: step.ending, admission: step.admission };
     state.result = result;
+    state.persistedResult = false;
+    state.retakeLocked = false;
     state.screen = 'summary';
     if (result.state.retakeUsed) commitFinalResult(state, game);
   }
 }
 
-function commitFinalResult(state: UiState, game: GameApp): void {
-  if (!state.result || state.persistedResult) return;
-  game.persist(recordFinalResult(game.save, state.result, game.content));
-  state.persistedResult = true;
+function commitFinalResult(
+  state: UiState,
+  game: GameApp,
+  options: { lockRetake?: boolean } = {},
+): void {
+  if (!state.result) return;
+  if (!state.persistedResult) {
+    game.persist(recordFinalResult(game.save, state.result, game.content));
+    state.persistedResult = true;
+  }
+  if (options.lockRetake ?? true) state.retakeLocked = true;
 }
 
 function renderScreen(state: UiState, game: GameApp): string {
@@ -553,7 +568,7 @@ function renderSummary(state: UiState, game: GameApp): string {
   if (!state.result) return '';
   const { ending } = state.result;
   const hidesScoreDetails = state.result.admission.scoreHidden === true;
-  const canRetake = !hidesScoreDetails && !state.result.state.retakeUsed && !state.persistedResult;
+  const canRetake = !hidesScoreDetails && !state.result.state.retakeUsed && !state.retakeLocked;
   const talents = state.result.state.selectedTalentIds
     .map(id => game.content.talents.find(item => item.id === id))
     .filter((item): item is Talent => Boolean(item));

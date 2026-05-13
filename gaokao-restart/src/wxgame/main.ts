@@ -91,6 +91,7 @@ interface UiState {
   gameState: GameState | null;
   result: FinalResult | null;
   persistedResult: boolean;
+  retakeLocked: boolean;
   autoRunning: boolean;
   confirmingRestart: boolean;
   message: string | null;
@@ -147,6 +148,7 @@ class WxGameApp {
     gameState: null,
     result: null,
     persistedResult: false,
+    retakeLocked: false,
     autoRunning: false,
     confirmingRestart: false,
     message: null,
@@ -296,14 +298,14 @@ class WxGameApp {
     }
 
     if (action.type === 'viewAchievements') {
-      this.commitFinalResult();
+      this.commitFinalResult({ lockRetake: false });
       if (this.state.screen !== 'achievements') this.state.previousScreen = this.state.screen;
       this.switchScreen('achievements');
       return;
     }
 
     if (action.type === 'viewUniversities') {
-      this.commitFinalResult();
+      this.commitFinalResult({ lockRetake: false });
       if (this.state.screen !== 'universities') this.state.previousScreen = this.state.screen;
       this.switchScreen('universities');
       return;
@@ -357,6 +359,7 @@ class WxGameApp {
       this.state.gameState = gameState;
       this.state.result = null;
       this.state.persistedResult = false;
+      this.state.retakeLocked = false;
       this.state.autoRunning = false;
       this.switchScreen('trajectory');
       return;
@@ -378,9 +381,11 @@ class WxGameApp {
 
     if (action.type === 'retake') {
       if (!this.state.engine) throw new Error('本局还未开始');
-      if (this.state.persistedResult) throw new Error('本局结局已经确认，不能再复读');
+      if (this.state.retakeLocked) throw new Error('本局结局已经确认，不能再复读');
       this.state.gameState = this.state.engine.retake();
       this.state.result = null;
+      this.state.persistedResult = false;
+      this.state.retakeLocked = false;
       this.state.autoRunning = false;
       this.state.message = '已选择复读一年，心态下降，风险上升。';
       this.switchScreen('trajectory');
@@ -388,14 +393,14 @@ class WxGameApp {
     }
 
     if (action.type === 'inherit') {
-      this.commitFinalResult();
+      this.commitFinalResult({ lockRetake: false });
       this.game.persist(setInheritedTalent(this.game.save, action.talentId));
       this.state.message = '已继承该天赋，下局会优先出现。';
       return;
     }
 
     if (action.type === 'clearInherit') {
-      this.commitFinalResult();
+      this.commitFinalResult({ lockRetake: false });
       this.game.persist(setInheritedTalent(this.game.save, null));
       this.state.message = '已清空继承天赋。';
       return;
@@ -435,6 +440,7 @@ class WxGameApp {
     this.state.gameState = null;
     this.state.result = null;
     this.state.persistedResult = false;
+    this.state.retakeLocked = false;
     this.state.autoRunning = false;
     this.state.confirmingRestart = false;
     this.resetScroll('home');
@@ -519,15 +525,20 @@ class WxGameApp {
     this.state.gameState = step.state;
     if (step.ending && step.admission) {
       this.state.result = { state: step.state, ending: step.ending, admission: step.admission };
+      this.state.persistedResult = false;
+      this.state.retakeLocked = false;
       this.switchScreen('summary');
       if (step.state.retakeUsed) this.commitFinalResult();
     }
   }
 
-  private commitFinalResult(): void {
-    if (!this.state.result || this.state.persistedResult) return;
-    this.game.persist(recordFinalResult(this.game.save, this.state.result, this.game.content));
-    this.state.persistedResult = true;
+  private commitFinalResult(options: { lockRetake?: boolean } = {}): void {
+    if (!this.state.result) return;
+    if (!this.state.persistedResult) {
+      this.game.persist(recordFinalResult(this.game.save, this.state.result, this.game.content));
+      this.state.persistedResult = true;
+    }
+    if (options.lockRetake ?? true) this.state.retakeLocked = true;
   }
 
   private switchScreen(screen: Screen): void {
@@ -750,42 +761,69 @@ class WxGameApp {
   private drawHome(y: number): number {
     const inherited = this.savedInheritedTalent();
     y = this.drawPanel(y, () => {
-      let cursor = y + 28;
-      this.drawPill('人生阶段', 36, cursor - 18, '#fff2d0', '#9a5b00');
+      let cursor = y + 30;
+      const pillWidth = this.drawMiniPill('人生阶段', 36, cursor - 15, '#fff2d0', '#9a5b00');
+      this.setFont(19, 800);
+      this.ctx.fillStyle = theme.title;
+      this.ctx.fillText(this.fitText('新一轮人生志愿表', this.width - 82 - pillWidth), 36 + pillWidth + 10, cursor);
       cursor += 20;
-      this.drawSectionTitle('新一轮人生志愿表', '从 3 岁到高考收官季推进，高三扩展为 10 个冲刺回合。', 36, cursor);
-      cursor += 58;
       cursor = this.drawStageTrack(cursor);
-      cursor += 18;
+      cursor += 12;
       if (inherited) cursor = this.drawInheritedTalentBanner(cursor, inherited, '继承天赋');
-      cursor = this.drawFactRow(cursor, '内容数据', `${this.game.content.talents.length} 天赋 / ${this.game.content.events.length} 事件`);
-      cursor = this.drawFactRow(cursor, '结局进度', `${this.game.save.unlockedEndingIds.length}/${this.game.content.endings.length}`);
-      cursor = this.drawFactRow(cursor, '院校进度', `${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`);
-      cursor = this.drawFactRow(cursor, '成就进度', `${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`);
+      cursor = this.drawHomeProgressGrid(cursor);
+      const gap = 8;
+      const buttonWidth = (this.width - 72 - gap) / 2;
       this.drawButton(
         { type: 'viewUniversities' },
-        `查看院校 ${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`,
+        `院校 ${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`,
         36,
-        cursor + 2,
-        this.width - 72,
-        38,
+        cursor + 4,
+        buttonWidth,
+        40,
         'secondary',
       );
-      cursor += 46;
       this.drawButton(
         { type: 'viewAchievements' },
-        `查看成就 ${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`,
-        36,
-        cursor + 2,
-        this.width - 72,
-        38,
+        `成就 ${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`,
+        36 + buttonWidth + gap,
+        cursor + 4,
+        buttonWidth,
+        40,
         'secondary',
       );
-      cursor += 50;
+      cursor += 52;
       if (this.state.message) cursor = this.drawMessage(cursor + 10, this.state.message);
       return cursor + 8;
     });
     return y + 16;
+  }
+
+  private drawHomeProgressGrid(y: number): number {
+    const stats = [
+      ['结局', `${this.game.save.unlockedEndingIds.length}/${this.game.content.endings.length}`],
+      ['院校', `${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`],
+      ['成就', `${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`],
+      ['内容', `${this.game.content.talents.length} 天赋 / ${this.game.content.events.length} 事件`],
+    ] as const;
+    const gap = 8;
+    const cellWidth = (this.width - 72 - gap) / 2;
+    const cellHeight = 46;
+    stats.forEach(([label, value], index) => {
+      const cellX = 36 + (index % 2) * (cellWidth + gap);
+      const cellY = y + Math.floor(index / 2) * (cellHeight + gap);
+      this.ctx.fillStyle = theme.paperStrong;
+      this.roundRect(cellX, cellY, cellWidth, cellHeight, 6);
+      this.ctx.fill();
+      this.ctx.strokeStyle = '#e7edf4';
+      this.ctx.stroke();
+      this.setFont(11, 600);
+      this.ctx.fillStyle = theme.subtle;
+      this.ctx.fillText(label, cellX + 10, cellY + 17);
+      this.setFont(14, 800);
+      this.ctx.fillStyle = theme.ink;
+      this.ctx.fillText(this.fitText(value, cellWidth - 20), cellX + 10, cellY + 36);
+    });
+    return y + cellHeight * 2 + gap + 12;
   }
 
   private drawAchievements(y: number): number {
@@ -942,8 +980,8 @@ class WxGameApp {
     if (!result) return y;
     y = this.drawPanel(y, () => {
       let cursor = y + 26;
-      this.drawPill(result.ending.tier, 36, cursor - 18, '#f3ecdf', '#665335');
-      cursor += 16;
+      this.drawMiniPill(`等级 ${result.ending.tier}`, 36, cursor - 12, '#f3ecdf', '#665335');
+      cursor += 30;
       this.setFont(22, 800);
       this.ctx.fillStyle = theme.title;
       cursor = this.drawWrappedText(result.ending.name, 36, cursor, this.width - 72, 29, 2);
@@ -953,8 +991,8 @@ class WxGameApp {
       return cursor + 10;
     });
 
-    y = this.drawRetakeFromPanel(y + 10, result.state);
     y = this.drawAdmissionPanel(y + 10, result.admission);
+    y = this.drawRetakeFromPanel(y + 10, result.state);
     if (!result.admission.scoreHidden) y = this.drawStatsPanel(y + 10, result.state);
     y = this.drawInheritancePanel(y + 10, result);
     y = this.drawSectionHeader(y + 6, '本局事件', `${result.state.logs.length} 回合`);
@@ -1060,21 +1098,7 @@ class WxGameApp {
       return;
     }
 
-    const canRetake = Boolean(
-      this.state.result
-      && !this.state.result.admission.scoreHidden
-      && !this.state.result.state.retakeUsed
-      && !this.state.persistedResult,
-    );
-    if (canRetake) {
-      const gap = 10;
-      const leftWidth = Math.round((this.width - 40 - gap) * 0.58);
-      const rightWidth = this.width - 40 - gap - leftWidth;
-      this.drawButton({ type: 'retake' }, '复读一年', 20, footerY, leftWidth, buttonHeight, 'primary');
-      this.drawButton({ type: 'requestRestart' }, '看完后重开', 20 + leftWidth + gap, footerY, rightWidth, buttonHeight, 'secondary');
-    } else {
-      this.drawButton({ type: 'requestRestart' }, '看完后重开', 20, footerY, this.width - 40, buttonHeight, 'secondary');
-    }
+    this.drawButton({ type: 'requestRestart' }, '看完后重开', 20, footerY, this.width - 40, buttonHeight, 'secondary');
   }
 
   private drawTalentCard(x: number, y: number, width: number, talent: Talent, active: boolean, inherited: boolean): void {
@@ -1345,7 +1369,6 @@ class WxGameApp {
         ['志愿', gameState.props.VOL],
         ['风险', gameState.props.RSK],
         ['潜力', gameState.props.SCR],
-        ['最高', gameState.props.HSCR],
         ['总评', gameState.props.SUM],
       ] as const;
       const columns = this.width < 360 ? 3 : 4;
@@ -1416,8 +1439,21 @@ class WxGameApp {
       this.setFont(14, 400);
       this.ctx.fillStyle = '#5d5a54';
       cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
+      if (this.canRetakeCurrentResult()) {
+        this.drawButton({ type: 'retake' }, '复读一年', 36, cursor + 10, this.width - 72, 42, 'primary');
+        cursor += 62;
+      }
       return cursor + 4;
     });
+  }
+
+  private canRetakeCurrentResult(): boolean {
+    return Boolean(
+      this.state.result
+      && !this.state.result.admission.scoreHidden
+      && !this.state.result.state.retakeUsed
+      && !this.state.retakeLocked,
+    );
   }
 
   private drawInheritancePanel(y: number, result: FinalResult): number {
