@@ -115,6 +115,52 @@ function idsFromCondition(condition = '', type) {
   return results;
 }
 
+function splitSentences(text = '') {
+  return String(text).split(/(?<=[\u3002\uff01\uff1f!?])/u).map(item => item.trim()).filter(Boolean);
+}
+
+function normalizeCopy(text = '') {
+  return String(text).replace(/[\s\u3000\uff0c\u3002\uff01\uff1f\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019\uff08\uff09()<>《》,.!?;:"'`·]/g, '');
+}
+
+function pushGroup(map, key, id) {
+  if (!key) return;
+  const group = map.get(key) ?? [];
+  group.push(id);
+  map.set(key, group);
+}
+
+function duplicateGroups(map) {
+  return [...map.entries()].filter(([, ids]) => ids.length > 1);
+}
+
+function failDuplicateCopy(kind, groups) {
+  const sample = groups.slice(0, 8)
+    .map(([text, ids]) => `${ids.join(', ')}: ${text}`)
+    .join('\n');
+  fail(`${kind} duplicate event copy (${groups.length} groups):\n${sample}`);
+}
+
+function checkEventCopyUniqueness(items) {
+  const fullTexts = new Map();
+  const firstSentences = new Map();
+  const followupSentences = new Map();
+
+  for (const event of items) {
+    const sentences = splitSentences(event.text);
+    pushGroup(fullTexts, normalizeCopy(event.text), event.id);
+    pushGroup(firstSentences, sentences[0], event.id);
+    for (const sentence of sentences.slice(1)) pushGroup(followupSentences, sentence, event.id);
+  }
+
+  const duplicateFullTexts = duplicateGroups(fullTexts);
+  const duplicateFirstSentences = duplicateGroups(firstSentences);
+  const duplicateFollowupSentences = duplicateGroups(followupSentences);
+  if (duplicateFullTexts.length) failDuplicateCopy('Full-text', duplicateFullTexts);
+  if (duplicateFirstSentences.length) failDuplicateCopy('First-sentence', duplicateFirstSentences);
+  if (duplicateFollowupSentences.length) failDuplicateCopy('Follow-up sentence', duplicateFollowupSentences);
+}
+
 for (const talent of talents) {
   checkEffect(`talent ${talent.id}`, talent.effect);
   const rarity = rarityConfig[talent.rarity];
@@ -157,6 +203,8 @@ for (const event of events) {
     if (!eventIds.has(branch.next)) fail(`event ${event.id} branch references missing event ${branch.next}`);
   }
 }
+
+checkEventCopyUniqueness(events);
 
 for (const [id, expectation] of subjectTrackEvents) {
   const event = eventById.get(id);
