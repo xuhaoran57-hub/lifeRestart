@@ -766,18 +766,24 @@ class WxGameApp {
       this.setFont(19, 800);
       this.ctx.fillStyle = theme.title;
       this.ctx.fillText(this.fitText('新一轮人生志愿表', this.width - 82 - pillWidth), 36 + pillWidth + 10, cursor);
-      cursor += 20;
+      cursor += 28;
+      this.setFont(13, 500);
+      this.ctx.fillStyle = theme.subtle;
+      cursor = this.drawWrappedText('从童年到高考收官季，重新填一份人生志愿。', 36, cursor, this.width - 72, 19, 2);
+      cursor += 14;
       cursor = this.drawStageTrack(cursor);
-      cursor += 12;
-      if (inherited) cursor = this.drawInheritedTalentBanner(cursor, inherited, '继承天赋');
-      cursor = this.drawHomeProgressGrid(cursor);
+      cursor += inherited ? 14 : 22;
+      if (inherited) {
+        cursor = this.drawInheritedTalentBanner(cursor, inherited, '继承天赋');
+        cursor += 2;
+      }
       const gap = 8;
       const buttonWidth = (this.width - 72 - gap) / 2;
       this.drawButton(
         { type: 'viewUniversities' },
         `院校 ${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`,
         36,
-        cursor + 4,
+        cursor + 6,
         buttonWidth,
         40,
         'secondary',
@@ -786,44 +792,16 @@ class WxGameApp {
         { type: 'viewAchievements' },
         `成就 ${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`,
         36 + buttonWidth + gap,
-        cursor + 4,
+        cursor + 6,
         buttonWidth,
         40,
         'secondary',
       );
-      cursor += 52;
+      cursor += 58;
       if (this.state.message) cursor = this.drawMessage(cursor + 10, this.state.message);
-      return cursor + 8;
+      return cursor + 14;
     });
     return y + 16;
-  }
-
-  private drawHomeProgressGrid(y: number): number {
-    const stats = [
-      ['结局', `${this.game.save.unlockedEndingIds.length}/${this.game.content.endings.length}`],
-      ['院校', `${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`],
-      ['成就', `${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`],
-      ['内容', `${this.game.content.talents.length} 天赋 / ${this.game.content.events.length} 事件`],
-    ] as const;
-    const gap = 8;
-    const cellWidth = (this.width - 72 - gap) / 2;
-    const cellHeight = 46;
-    stats.forEach(([label, value], index) => {
-      const cellX = 36 + (index % 2) * (cellWidth + gap);
-      const cellY = y + Math.floor(index / 2) * (cellHeight + gap);
-      this.ctx.fillStyle = theme.paperStrong;
-      this.roundRect(cellX, cellY, cellWidth, cellHeight, 6);
-      this.ctx.fill();
-      this.ctx.strokeStyle = '#e7edf4';
-      this.ctx.stroke();
-      this.setFont(11, 600);
-      this.ctx.fillStyle = theme.subtle;
-      this.ctx.fillText(label, cellX + 10, cellY + 17);
-      this.setFont(14, 800);
-      this.ctx.fillStyle = theme.ink;
-      this.ctx.fillText(this.fitText(value, cellWidth - 20), cellX + 10, cellY + 36);
-    });
-    return y + cellHeight * 2 + gap + 12;
   }
 
   private drawAchievements(y: number): number {
@@ -1878,11 +1856,12 @@ class WxGameApp {
   private logCardHeight(log: RunLog): number {
     const width = this.width - 40;
     const textWidth = width - 62;
-    const minHeight = this.height <= 640 ? 98 : 106;
+    const minHeight = 72;
+    const bottomPadding = 10;
 
     this.setFont(13, 400);
     const eventLines = Math.max(1, this.wrapText(log.event.text, textWidth, Number.MAX_SAFE_INTEGER).length);
-    let height = 44 + eventLines * 18 + 16;
+    let height = 44 + eventLines * 18 + bottomPadding;
 
     if (log.triggeredTalents.length > 0) {
       this.setFont(12, 600);
