@@ -72,18 +72,54 @@ const subjectTrackEventIds = {
   history: 32004,
 } as const;
 
-const retakeSenior3EventPool: WeightedRef[] = [
-  { id: 31831, weight: 130 },
-  { id: 31832, weight: 120 },
-  { id: 31833, weight: 120 },
-  { id: 31834, weight: 70 },
-  { id: 31835, weight: 120 },
-  { id: 31836, weight: 70 },
-  { id: 31837, weight: 110 },
-  { id: 31838, weight: 110 },
-];
+const retakeSenior3EventPools: Partial<Record<number, WeightedRef[]>> = {
+  1: [
+    { id: 31831, weight: 150 },
+    { id: 31832, weight: 100 },
+    { id: 31834, weight: 55 },
+  ],
+  2: [
+    { id: 31832, weight: 120 },
+    { id: 31833, weight: 90 },
+    { id: 31836, weight: 55 },
+  ],
+  3: [
+    { id: 31833, weight: 105 },
+    { id: 31834, weight: 60 },
+    { id: 31836, weight: 50 },
+  ],
+  4: [
+    { id: 31832, weight: 90 },
+    { id: 31833, weight: 105 },
+    { id: 31836, weight: 55 },
+  ],
+  5: [
+    { id: 31835, weight: 120 },
+    { id: 31838, weight: 85 },
+  ],
+  6: [
+    { id: 31833, weight: 95 },
+    { id: 31835, weight: 95 },
+    { id: 31836, weight: 60 },
+  ],
+  7: [
+    { id: 31835, weight: 95 },
+    { id: 31838, weight: 95 },
+  ],
+  8: [
+    { id: 31835, weight: 95 },
+    { id: 31838, weight: 110 },
+  ],
+  9: [
+    { id: 31837, weight: 125 },
+    { id: 31838, weight: 80 },
+  ],
+  10: [
+    { id: 31837, weight: 150 },
+  ],
+};
 
-const retakeVolunteerEventPool: WeightedRef[] = [
+const retakeFinalEventPool: WeightedRef[] = [
   { id: 31839, weight: 140 },
 ];
 
@@ -309,7 +345,7 @@ export class LifeEngine {
   }
 
   private resolveSubjectTrackForRound(state: GameState, ageRound: AgeRound): GameEvent | null {
-    if (state.subjectTrack || ageRound.age !== 15 || ageRound.round !== 2) return null;
+    if (state.subjectTrack || ageRound.age !== 15 || ageRound.round !== 4) return null;
 
     const forcedTrack = forcedSubjectTrackFromTalents(state);
     const track = resolveSubjectTrack(state, this.random);
@@ -448,9 +484,9 @@ function scorePhaseForRound(state: GameState, ageRound: AgeRound): AgeRound['pha
 function eventRoundForState(state: GameState, ageRound: AgeRound): AgeRound {
   if (state.attempt !== 2) return ageRound;
   const retakePool = ageRound.phase === 'senior3'
-    ? retakeSenior3EventPool
-    : ageRound.age === 18 && ageRound.round === 3
-      ? retakeVolunteerEventPool
+    ? retakeSenior3EventPools[ageRound.round] ?? []
+    : ageRound.age === 18 && ageRound.round === 4
+      ? retakeFinalEventPool
       : [];
   if (retakePool.length === 0) return ageRound;
   return { ...ageRound, eventPool: [...retakePool, ...ageRound.eventPool] };

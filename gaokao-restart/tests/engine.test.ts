@@ -29,6 +29,48 @@ describe('LifeEngine', () => {
     expect(senior3Rounds.every(round => round.eventPool.some(ref => ref.id >= 31801 && ref.id <= 31830))).toBe(true);
   });
 
+  it('keeps timeline-specific events in their matching rounds', () => {
+    expect(roundKeysForEvent(31023)).toEqual(['17-7']);
+    expect(roundKeysForEvent(31024)).toEqual(['17-9', '17-10']);
+    expect(roundKeysForEvent(31404)).toEqual(['15-1']);
+    expect(roundKeysForEvent(31416)).toEqual(['15-1']);
+    expect(roundKeysForEvent(31601)).toEqual(['17-4']);
+    expect(roundKeysForEvent(31602)).toEqual(['17-4']);
+    expect(roundKeysForEvent(31608)).toEqual(['17-6']);
+    expect(roundKeysForEvent(31609)).toEqual(['17-7']);
+    expect(roundKeysForEvent(31611)).toEqual(['17-9', '17-10']);
+    expect(roundKeysForEvent(31612)).toEqual(['17-9', '17-10']);
+    expect(roundKeysForEvent(32326)).toEqual(['17-1']);
+    expect(roundKeysForEvent(32357)).toEqual(['17-7']);
+    expect(roundKeysForEvent(32659)).toEqual(['15-1']);
+    expect(roundKeysForEvent(32698)).toEqual(['15-2']);
+    expect(roundKeysForEvent(32706)).toEqual(['15-4']);
+    expect(roundKeysForEvent(32765)).toEqual(['17-4']);
+    expect(roundKeysForEvent(32766)).toEqual(['17-6']);
+    expect(roundKeysForEvent(32818)).toEqual(['17-10']);
+  });
+
+  it('resolves subject track on senior 1 round 4', () => {
+    const engine = new LifeEngine(zhCnContent, 20260518);
+    engine.start([21003, 21004, 21013], { INT: 6, STR: 5, MNY: 4, SPR: 5 });
+
+    let step = engine.next();
+    while (step.state.currentRound?.age !== 15 || step.state.currentRound.round < 3) {
+      if (step.state.currentRound?.age === 15) expect(step.state.subjectTrack).toBeNull();
+      step = engine.next();
+    }
+
+    expect(step.state.currentRound).toMatchObject({ age: 15, round: 3 });
+    expect(step.state.subjectTrack).toBeNull();
+    expect(step.log.branchEvents.some(event => event.tags?.includes('分科'))).toBe(false);
+
+    const subjectStep = engine.next();
+    expect(subjectStep.state.currentRound).toMatchObject({ age: 15, round: 4 });
+    expect(subjectStep.state.subjectTrack).toMatch(/^(history|physics)$/);
+    expect(subjectStep.log.branchEvents.some(event => event.tags?.includes('分科'))).toBe(true);
+    expect(subjectStep.state.eventIds.some(id => [32001, 32002, 32003, 32004].includes(id))).toBe(true);
+  });
+
   it('allows one retake from the senior 3 start while keeping punished end-state props', () => {
     const engine = new LifeEngine(zhCnContent, 20260430);
     engine.start([21003, 21004, 21013], { INT: 6, STR: 5, MNY: 4, SPR: 5 });
@@ -272,4 +314,10 @@ function contentWithRoundUnlockedRecommendation(): GameContent {
 
 function recommendationFinaleEvents(): GameContent['events'] {
   return zhCnContent.events.filter(event => event.tags?.includes('保送专有'));
+}
+
+function roundKeysForEvent(eventId: number): string[] {
+  return zhCnContent.ages
+    .filter(round => round.eventPool.some(ref => ref.id === eventId))
+    .map(round => `${round.age}-${round.round}`);
 }
