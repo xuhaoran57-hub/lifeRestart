@@ -25,6 +25,18 @@ declare global {
     changedTouches?: WxTouchPoint[];
   }
 
+  interface WxSharePayload {
+    title: string;
+    imageUrl?: string;
+    query?: string;
+  }
+
+  interface WxShowOptions {
+    scene?: number;
+    query?: Record<string, string>;
+    shareTicket?: string;
+  }
+
   interface WxMiniGameAPI {
     createCanvas(): HTMLCanvasElement;
     getSystemInfoSync(): WxSystemInfo;
@@ -33,8 +45,11 @@ declare global {
     onTouchStart(callback: (event: WxTouchEvent) => void): void;
     onTouchMove(callback: (event: WxTouchEvent) => void): void;
     onTouchEnd(callback: (event: WxTouchEvent) => void): void;
+    onShow?(callback: (options: WxShowOptions) => void): void;
+    onHide?(callback: () => void): void;
     showShareMenu?(options?: { withShareTicket?: boolean }): void;
-    onShareAppMessage?(callback: () => { title: string }): void;
+    onShareAppMessage?(callback: () => WxSharePayload): void;
+    shareAppMessage?(options: WxSharePayload): void;
     showToast?(options: { title: string; icon?: 'success' | 'error' | 'loading' | 'none'; duration?: number }): void;
   }
 

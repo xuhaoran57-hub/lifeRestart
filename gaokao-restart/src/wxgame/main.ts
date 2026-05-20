@@ -41,6 +41,7 @@ type Action =
   | { type: 'nextRound' }
   | { type: 'autoRun' }
   | { type: 'retake' }
+  | { type: 'shareResult' }
   | { type: 'inherit'; talentId: number }
   | { type: 'clearInherit' }
   | { type: 'restart' }
@@ -156,6 +157,8 @@ class WxGameApp {
 
   private buttons: Button[] = [];
   private autoRunTimer: ReturnType<typeof setTimeout> | null = null;
+  private lifecycleRenderTimer: ReturnType<typeof setTimeout> | null = null;
+  private isAppVisible = true;
   private width = 375;
   private height = 667;
   private pixelRatio = 1;
@@ -184,6 +187,7 @@ class WxGameApp {
     this.resize();
     this.bindInput();
     this.bindShare();
+    this.bindLifecycle();
   }
 
   start(): void {
@@ -235,7 +239,46 @@ class WxGameApp {
 
   private bindShare(): void {
     this.wxApi?.showShareMenu?.({ withShareTicket: true });
-    this.wxApi?.onShareAppMessage?.(() => ({ title: '重回高三人生模拟' }));
+    this.wxApi?.onShareAppMessage?.(() => ({ title: this.resultShareTitle() }));
+  }
+
+  private bindLifecycle(): void {
+    this.wxApi?.onHide?.(() => {
+      this.isAppVisible = false;
+      this.stopAutoRun();
+      this.clearLifecycleRenderTimer();
+      this.resetTouchState();
+    });
+
+    this.wxApi?.onShow?.(() => {
+      this.isAppVisible = true;
+      this.resetTouchState();
+      this.renderAfterLifecycleRestore();
+    });
+  }
+
+  private renderAfterLifecycleRestore(): void {
+    if (!this.isAppVisible) return;
+    this.resize();
+    this.render();
+    this.clearLifecycleRenderTimer();
+    this.lifecycleRenderTimer = setTimeout(() => {
+      this.lifecycleRenderTimer = null;
+      if (!this.isAppVisible) return;
+      this.resize();
+      this.render();
+    }, 80);
+  }
+
+  private clearLifecycleRenderTimer(): void {
+    if (this.lifecycleRenderTimer === null) return;
+    clearTimeout(this.lifecycleRenderTimer);
+    this.lifecycleRenderTimer = null;
+  }
+
+  private resetTouchState(): void {
+    this.isTouchScrolling = false;
+    this.isTouchMoved = false;
   }
 
   private getTouch(event: WxTouchEvent): WxTouchPoint | null {
@@ -392,6 +435,11 @@ class WxGameApp {
       return;
     }
 
+    if (action.type === 'shareResult') {
+      this.shareCurrentResult();
+      return;
+    }
+
     if (action.type === 'inherit') {
       this.commitFinalResult({ lockRetake: false });
       this.game.persist(setInheritedTalent(this.game.save, action.talentId));
@@ -539,6 +587,25 @@ class WxGameApp {
       this.state.persistedResult = true;
     }
     if (options.lockRetake ?? true) this.state.retakeLocked = true;
+  }
+
+  private shareCurrentResult(): void {
+    if (!this.state.result) throw new Error('还没有结局可分享');
+    this.commitFinalResult({ lockRetake: false });
+    const title = this.resultShareTitle(this.state.result);
+    if (this.wxApi?.shareAppMessage) {
+      this.wxApi.shareAppMessage({ title });
+      return;
+    }
+    this.state.message = title;
+  }
+
+  private resultShareTitle(result: FinalResult | null = this.state.result): string {
+    if (!result) return '重回高三人生模拟';
+    const universityName = result.admission.admittedUniversity?.name
+      ?? result.admission.admittedLine?.universityName
+      ?? '大学';
+    return `这次重开我考上了${universityName}，你也来试试吧`;
   }
 
   private switchScreen(screen: Screen): void {
@@ -1404,6 +1471,8 @@ class WxGameApp {
         this.setFont(14, 400);
         this.ctx.fillStyle = '#5d5a54';
         cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
+        this.drawButton({ type: 'shareResult' }, '分享录取结果', 36, cursor + 10, this.width - 72, 42, 'primary');
+        cursor += 62;
         return cursor + 4;
       }
 
@@ -1417,10 +1486,17 @@ class WxGameApp {
       this.setFont(14, 400);
       this.ctx.fillStyle = '#5d5a54';
       cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
-      if (this.canRetakeCurrentResult()) {
-        this.drawButton({ type: 'retake' }, '复读一年', 36, cursor + 10, this.width - 72, 42, 'primary');
+      const canRetake = this.canRetakeCurrentResult();
+      if (canRetake) {
+        const gap = 8;
+        const buttonWidth = (this.width - 72 - gap) / 2;
+        this.drawButton({ type: 'shareResult' }, '分享录取', 36, cursor + 10, buttonWidth, 42, 'primary');
+        this.drawButton({ type: 'retake' }, '复读一年', 36 + buttonWidth + gap, cursor + 10, buttonWidth, 42, 'secondary');
         cursor += 62;
+        return cursor + 4;
       }
+      this.drawButton({ type: 'shareResult' }, '分享录取结果', 36, cursor + 10, this.width - 72, 42, 'primary');
+      cursor += 62;
       return cursor + 4;
     });
   }
