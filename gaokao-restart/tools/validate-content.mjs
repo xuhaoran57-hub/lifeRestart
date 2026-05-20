@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const contentDir = join(root, 'src', 'content', 'zh-cn');
-const allowedProps = new Set(['AGE', 'INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCR', 'HSCR', 'HVOL', 'SCOREMOD', 'SUM']);
+const allowedProps = new Set(['AGE', 'INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCR', 'HSCR', 'HVOL', 'SCOREMOD', 'BASEMOD', 'SUM']);
 const rarityConfig = {
   common: { grade: 0, name: '普通', target: 64 },
   rare: { grade: 1, name: '稀有', target: 58 },
@@ -90,6 +90,7 @@ function effectBudgetWeight(prop) {
   if (['INT', 'STR', 'MNY', 'SPR'].includes(prop)) return 1;
   if (['VOL', 'RSK'].includes(prop)) return 0.08;
   if (prop === 'SCOREMOD') return 0.12;
+  if (prop === 'BASEMOD') return 0.2;
   return 0;
 }
 

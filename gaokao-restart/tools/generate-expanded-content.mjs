@@ -16,7 +16,7 @@ const PHASES = {
   final: { stage: '出分填报期', phaseName: '出分填报期', ages: [18] },
 };
 
-const allowedProps = ['AGE', 'INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCR', 'HSCR', 'HVOL', 'SCOREMOD', 'SUM'];
+const allowedProps = ['AGE', 'INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCR', 'HSCR', 'HVOL', 'SCOREMOD', 'BASEMOD', 'SUM'];
 
 const RARITY_CONFIG = {
   common: { grade: 0, name: '普通' },
@@ -418,6 +418,7 @@ function effectBudgetWeight(prop) {
   if (['INT', 'STR', 'MNY', 'SPR'].includes(prop)) return 1;
   if (['VOL', 'RSK'].includes(prop)) return 0.08;
   if (prop === 'SCOREMOD') return 0.12;
+  if (prop === 'BASEMOD') return 0.2;
   return 0;
 }
 

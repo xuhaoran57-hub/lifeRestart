@@ -21,6 +21,7 @@ export type PropCode =
   | 'HSCR'
   | 'HVOL'
   | 'SCOREMOD'
+  | 'BASEMOD'
   | 'SUM'
   | 'CEND'
   | 'CEVT'

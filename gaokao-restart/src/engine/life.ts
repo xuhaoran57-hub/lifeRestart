@@ -284,7 +284,8 @@ export class LifeEngine {
     state.props.SUM = 0;
     applyPropDelta(state.props, 'SPR', -1);
     applyPropDelta(state.props, 'RSK', 2);
-    applyPropDelta(state.props, 'SCOREMOD', 32);
+    applyPropDelta(state.props, 'SCOREMOD', 24);
+    applyPropDelta(state.props, 'BASEMOD', 5);
     refreshScore(state.props, 'final');
 
     return this.snapshot();

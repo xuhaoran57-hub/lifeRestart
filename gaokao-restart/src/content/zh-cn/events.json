@@ -5458,7 +5458,8 @@
     "phase": "senior3",
     "text": "复读第一周，你把首考卷和模拟卷摊开，先找真正反复失分的几类题。",
     "effect": {
-      "SCOREMOD": 16,
+      "SCOREMOD": 10,
+      "BASEMOD": 4,
       "VOL": 12,
       "RSK": -5
     },
@@ -5478,7 +5479,8 @@
     "phase": "senior3",
     "text": "过去做烂的题这次没有直接跳过，你按知识点重新做了一遍，手感慢慢回来。",
     "effect": {
-      "SCOREMOD": 20,
+      "SCOREMOD": 12,
+      "BASEMOD": 5,
       "INT": 1,
       "VOL": 6
     },
@@ -5498,7 +5500,8 @@
     "phase": "senior3",
     "text": "你开始按考试时间整套训练，放弃几道缠人的题后，整张卷子的节奏稳了很多。",
     "effect": {
-      "SCOREMOD": 16,
+      "SCOREMOD": 10,
+      "BASEMOD": 4,
       "STR": 1,
       "VOL": 8,
       "RSK": -6
@@ -5539,7 +5542,8 @@
     "phase": "senior3",
     "text": "班主任让你重新估分定位，冲稳保的边界比去年清楚得多。",
     "effect": {
-      "SCOREMOD": 12,
+      "SCOREMOD": 8,
+      "BASEMOD": 3,
       "VOL": 20,
       "RSK": -10
     },
@@ -5580,7 +5584,8 @@
     "phase": "senior3",
     "text": "第二次走到考前，你知道哪些焦虑不用理会，哪些检查必须提前完成。",
     "effect": {
-      "SCOREMOD": 14,
+      "SCOREMOD": 8,
+      "BASEMOD": 4,
       "SPR": 2,
       "RSK": -8
     },
@@ -5600,7 +5605,8 @@
     "phase": "senior3",
     "text": "你把去年的志愿表和实际录取结果对照了一遍，不再只盯着学校名字做判断。",
     "effect": {
-      "SCOREMOD": 8,
+      "SCOREMOD": 6,
+      "BASEMOD": 2,
       "VOL": 20,
       "RSK": -10
     },
@@ -5620,7 +5626,8 @@
     "phase": "final",
     "text": "出分后，你先按位次和专业组筛掉不稳定选项，再决定少量冲刺目标。",
     "effect": {
-      "SCOREMOD": 5,
+      "SCOREMOD": 3,
+      "BASEMOD": 2,
       "VOL": 18,
       "RSK": -10
     },

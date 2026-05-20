@@ -29,15 +29,22 @@ const baseRarityRates = {
   legendary: 2,
 };
 
-const phaseBase = {
-  preschool: 245,
-  primary: 305,
-  middle: 360,
-  senior1: 385,
-  senior2: 410,
-  senior3: 425,
-  final: 432,
+const initialPhaseBase = 245;
+const phaseOrder = ['preschool', 'primary', 'middle', 'senior1', 'senior2', 'senior3', 'final'];
+const phaseBaseGain = {
+  preschool: 0,
+  primary: 60,
+  middle: 55,
+  senior1: 25,
+  senior2: 25,
+  senior3: 15,
+  final: 7,
 };
+const phaseBase = phaseOrder.reduce((result, phase, index) => {
+  const previousBase = index === 0 ? initialPhaseBase : result[phaseOrder[index - 1]];
+  result[phase] = previousBase + phaseBaseGain[phase];
+  return result;
+}, {});
 
 const positiveEventEffectScale = {
   INT: 0.19,
@@ -112,6 +119,7 @@ function simulate(runs = 1000, options = {}) {
   let totalVOL = 0;
   let totalRSK = 0;
   let totalSCOREMOD = 0;
+  let totalBASEMOD = 0;
   let totalFinalScore = 0;
   let canReach985 = 0;
   let canReach211 = 0;
@@ -136,7 +144,7 @@ function simulate(runs = 1000, options = {}) {
   };
   const scoreBuckets = new Map();
   const finalScoreValues = [];
-  const propertyNames = ['INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCOREMOD'];
+  const propertyNames = ['INT', 'STR', 'MNY', 'SPR', 'VOL', 'RSK', 'SCOREMOD', 'BASEMOD'];
   const propertyBuckets = Object.fromEntries(propertyNames.map(prop => [prop, new Map()]));
   const propertyValues = Object.fromEntries(propertyNames.map(prop => [prop, []]));
   const admittedLineScoreBuckets = new Map();
@@ -168,6 +176,7 @@ function simulate(runs = 1000, options = {}) {
       totalVOL += result.props.VOL;
       totalRSK += result.props.RSK;
       totalSCOREMOD += result.props.SCOREMOD;
+      totalBASEMOD += result.props.BASEMOD;
       totalFinalScore += result.admission.finalScore;
       addCount(subjectTrackDistribution, result.subjectTrack);
       const trackStats = subjectTrackAdmission[result.subjectTrack];
@@ -248,6 +257,7 @@ function simulate(runs = 1000, options = {}) {
   console.log(`Average VOL: ${(totalVOL / completed).toFixed(1)}`);
   console.log(`Average RSK: ${(totalRSK / completed).toFixed(1)}`);
   console.log(`Average SCOREMOD: ${(totalSCOREMOD / completed).toFixed(1)}`);
+  console.log(`Average BASEMOD: ${(totalBASEMOD / completed).toFixed(1)}`);
   console.log(`Average final score: ${(totalFinalScore / completed).toFixed(1)}`);
   console.log(`985 reachable: ${canReach985} (${(canReach985 / completed * 100).toFixed(1)}%)`);
   console.log(`211 reachable: ${canReach211} (${(canReach211 / completed * 100).toFixed(1)}%)`);
@@ -280,7 +290,7 @@ function simulate(runs = 1000, options = {}) {
   printNumericSummary('Final score summary', finalScoreValues, 0);
   console.log('Property buckets:');
   for (const prop of propertyNames) {
-    printNumericSummary(`- ${prop} summary`, propertyValues[prop], prop === 'VOL' || prop === 'RSK' || prop === 'SCOREMOD' ? 0 : 1);
+    printNumericSummary(`- ${prop} summary`, propertyValues[prop], ['VOL', 'RSK', 'SCOREMOD', 'BASEMOD'].includes(prop) ? 0 : 1);
     printBucketDistribution(`  ${prop}`, propertyBuckets[prop], propertyBucketOrder(prop), completed);
   }
   console.log(`Admitted line score samples: ${admittedLineScoreValues.length} (${(admittedLineScoreValues.length / completed * 100).toFixed(1)}% of runs)`);
@@ -339,6 +349,7 @@ function runOne(random, options = {}) {
     HSCR: 0,
     HVOL: 0,
     SCOREMOD: 0,
+    BASEMOD: 0,
     SUM: 0,
     ATTEMPT: 1,
     RETAKE: 0,
@@ -863,6 +874,7 @@ function applyEffect(props, effect = {}, scaled = false, phase = null) {
     if (['VOL', 'HVOL'].includes(key)) props[key] = clamp(props[key], 0, 85);
     if (key === 'RSK') props[key] = clamp(props[key], 0, 90);
     if (key === 'SCOREMOD') props[key] = clamp(props[key], -60, 70);
+    if (key === 'BASEMOD') props[key] = clamp(props[key], -60, 80);
   }
 }
 
@@ -907,7 +919,7 @@ function positiveEventSoftCap(prop, delta, current) {
 
 function refreshScore(props, phase) {
   const base = phaseBase[phase];
-  props.SCR = clamp(Math.round(base + props.INT * 8.5 + props.STR * 4.8 + props.MNY * 3 + props.SPR * 5.2 + props.VOL * 0.2 - props.RSK * 1.35 + props.SCOREMOD * 0.6), 250, 750);
+  props.SCR = clamp(Math.round(base + props.INT * 8.5 + props.STR * 4.8 + props.MNY * 3 + props.SPR * 5.2 + props.VOL * 0.2 - props.RSK * 1.35 + props.SCOREMOD * 0.6 + (props.BASEMOD ?? 0)), 250, 750);
   props.HSCR = Math.max(props.HSCR, props.SCR);
   props.HVOL = Math.max(props.HVOL, props.VOL);
 }

@@ -1,14 +1,22 @@
 import type { CorePropCode, PhaseCode, Props } from '../app/types';
 
-const phaseBase: Record<PhaseCode, number> = {
-  preschool: 245,
-  primary: 305,
-  middle: 360,
-  senior1: 385,
-  senior2: 410,
-  senior3: 425,
-  final: 432,
+const initialPhaseBase = 245;
+const phaseOrder: PhaseCode[] = ['preschool', 'primary', 'middle', 'senior1', 'senior2', 'senior3', 'final'];
+const phaseBaseGain: Record<PhaseCode, number> = {
+  preschool: 0,
+  primary: 60,
+  middle: 55,
+  senior1: 25,
+  senior2: 25,
+  senior3: 15,
+  final: 7,
 };
+
+const phaseBase = phaseOrder.reduce<Record<PhaseCode, number>>((result, phase, index) => {
+  const previousBase = index === 0 ? initialPhaseBase : result[phaseOrder[index - 1]];
+  result[phase] = previousBase + phaseBaseGain[phase];
+  return result;
+}, {} as Record<PhaseCode, number>);
 
 const limits: Partial<Record<CorePropCode, [number, number]>> = {
   AGE: [0, 18],
@@ -22,6 +30,7 @@ const limits: Partial<Record<CorePropCode, [number, number]>> = {
   HSCR: [0, 750],
   HVOL: [0, 85],
   SCOREMOD: [-60, 70],
+  BASEMOD: [-60, 80],
 };
 
 export function createInitialProps(): Props {
@@ -37,6 +46,7 @@ export function createInitialProps(): Props {
     HSCR: 0,
     HVOL: 0,
     SCOREMOD: 0,
+    BASEMOD: 0,
     SUM: 0,
   };
 }
@@ -60,7 +70,8 @@ export function refreshScore(props: Props, phase: PhaseCode): void {
       + props.SPR * 5.2
       + props.VOL * 0.2
       - props.RSK * 1.35
-      + props.SCOREMOD * 0.6,
+      + props.SCOREMOD * 0.6
+      + (props.BASEMOD ?? 0),
   );
   props.SCR = clamp(score, 250, 750);
   props.HSCR = Math.max(props.HSCR, props.SCR);
