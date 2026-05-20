@@ -283,7 +283,7 @@ export class LifeEngine {
     state.props.AGE = 17;
     state.props.SUM = 0;
     applyPropDelta(state.props, 'SPR', -1);
-    applyPropDelta(state.props, 'RSK', 4);
+    applyPropDelta(state.props, 'RSK', 2);
     applyPropDelta(state.props, 'SCOREMOD', 32);
     refreshScore(state.props, 'final');
 
@@ -497,9 +497,9 @@ function applyRetakeExamCalibration(exam: ExamScoreResult, state: GameState): Ex
   if (!previousScore) return exam;
 
   const gap = previousScore - exam.finalScore;
-  if (gap < 0 || gap > 6) return exam;
+  if (gap < 0 || gap > 15) return exam;
 
-  const bonus = gap + 1;
+  const bonus = Math.min(12, Math.round(gap * 0.6 + 3));
   return {
     ...exam,
     finalScore: Math.min(750, exam.finalScore + bonus),

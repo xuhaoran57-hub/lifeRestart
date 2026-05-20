@@ -519,7 +519,7 @@ function shouldSlide(
   if (state.props.RSK >= 75) chance += 0.05;
   chance += route.risk * 0.045;
   chance -= route.steady * 0.035;
-  if (state.retakeUsed) chance -= 0.025;
+  if (state.retakeUsed) chance -= 0.04;
   if (hasReachable211Plus) chance = 0;
   chance = clamp(chance, 0, 0.45);
   return random.next() < chance;
@@ -559,7 +559,7 @@ function routeBonus(content: GameContent, state: GameState): number {
       return sum;
     }, 0);
   const eventBonus = state.eventIds.some(id => [31027, 31708, 31720, 31732, 31838, 31839].includes(id)) ? 8 : 0;
-  const retakeBonus = state.retakeUsed ? 6 : 0;
+  const retakeBonus = state.retakeUsed ? 10 : 0;
   return Math.min(22, talentBonus + eventBonus + retakeBonus);
 }
 
