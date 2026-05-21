@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:wxgame": "vite build --config vite.wx.config.ts",
+    "build:wxgame": "node tools/generate_wx_content.mjs && vite build --config vite.wx.config.ts",
     "preview": "vite preview",
     "test": "vitest run",
     "validate:content": "node tools/validate-content.mjs",

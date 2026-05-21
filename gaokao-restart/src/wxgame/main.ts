@@ -1,17 +1,18 @@
-import { createGame, type GameApp } from '../app/createGame';
 import type {
   Achievement,
   AdmissionResult,
   Allocation,
   FinalResult,
+  GameContent,
   GameState,
   RunLog,
+  SaveData,
   Talent,
   TalentRarity,
   University,
 } from '../app/types';
 import { LifeEngine } from '../engine/life';
-import { recordFinalResult, setInheritedTalent } from '../engine/storage';
+import { loadSave, recordFinalResult, saveData, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
 import {
   getUniversityCollectionStats,
@@ -20,12 +21,15 @@ import {
   isDoubleFirstClassUniversity,
   universityGroupLabels,
 } from '../engine/universities';
+import { createWxContentLoader, type WxContentLoader } from './contentLoader';
 import { createWxSaveStorage } from './storage';
 
 type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements' | 'universities';
 type PropKey = keyof Allocation;
 
 const AUTO_RUN_INTERVAL_MS = 500;
+const HOME_CONTENT_PRELOAD_DELAY_MS = 1200;
+const ADMISSION_LINES_PRELOAD_DELAY_MS = 1500;
 
 type Action =
   | { type: 'start' }
@@ -79,6 +83,12 @@ interface LogLayoutCache {
   lastLog: RunLog | null;
   items: LogLayoutItem[];
   totalHeight: number;
+}
+
+interface WxGameModel {
+  content: GameContent;
+  save: SaveData;
+  persist(save: SaveData): void;
 }
 
 interface UiState {
@@ -137,7 +147,8 @@ const rarityColors: Record<TalentRarity, { bg: string; fg: string; border: strin
 
 class WxGameApp {
   private readonly ctx: CanvasRenderingContext2D;
-  private readonly game: GameApp;
+  private readonly contentLoader: WxContentLoader;
+  private readonly game: WxGameModel;
   private readonly state: UiState = {
     screen: 'home',
     previousScreen: null,
@@ -175,6 +186,7 @@ class WxGameApp {
   private currentOffsetY = 0;
   private currentButtonViewport: Rect | null = null;
   private logLayoutCache: LogLayoutCache | null = null;
+  private renderFrameHandle: number | null = null;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
@@ -183,7 +195,16 @@ class WxGameApp {
     const context = canvas.getContext('2d');
     if (!context) throw new Error('Canvas 2D context is unavailable');
     this.ctx = context;
-    this.game = createGame({ storage: createWxSaveStorage(wxApi) });
+    const storage = createWxSaveStorage(wxApi);
+    this.contentLoader = createWxContentLoader(wxApi);
+    this.game = {
+      content: this.contentLoader.content,
+      save: loadSave(storage),
+      persist(nextSave) {
+        this.save = nextSave;
+        saveData(nextSave, storage);
+      },
+    };
     this.resize();
     this.bindInput();
     this.bindShare();
@@ -192,6 +213,20 @@ class WxGameApp {
 
   start(): void {
     this.render();
+    this.preloadHomeContent();
+  }
+
+  private preloadHomeContent(): void {
+    setTimeout(() => {
+      if (!this.isAppVisible || this.state.screen !== 'home') return;
+      void this.contentLoader.loadTalentContent()
+        .then(() => {
+          if (this.isAppVisible && this.state.screen === 'home') this.requestRender();
+        })
+        .catch(() => {
+          // Loading errors are surfaced when the player opens a content-dependent screen.
+        });
+    }, HOME_CONTENT_PRELOAD_DELAY_MS);
   }
 
   private resize(): void {
@@ -299,7 +334,7 @@ class WxGameApp {
     if (Math.abs(deltaY) > 4 || Math.abs(this.touchStartX - x) > 4) this.isTouchMoved = true;
     if (this.maxScrollY <= 0) return;
     this.scrollY = this.clamp(this.touchStartScrollY + deltaY, 0, this.maxScrollY);
-    this.render();
+    this.requestRender();
   }
 
   private handleTouchEnd(x: number, y: number): void {
@@ -318,9 +353,13 @@ class WxGameApp {
     );
     if (!button) return;
 
+    void this.runAction(button.action);
+  }
+
+  private async runAction(action: Action): Promise<void> {
     try {
       this.state.message = null;
-      this.handleAction(button.action);
+      await this.handleAction(action);
     } catch (error) {
       this.state.message = error instanceof Error ? error.message : '操作失败';
       this.wxApi?.showToast?.({ title: this.state.message.slice(0, 12), icon: 'none' });
@@ -328,7 +367,7 @@ class WxGameApp {
     this.render();
   }
 
-  private handleAction(action: Action): void {
+  private async handleAction(action: Action): Promise<void> {
     if (this.state.autoRunning && action.type !== 'autoRun') this.stopAutoRun();
 
     if (action.type !== 'requestRestart' && action.type !== 'cancelRestart' && action.type !== 'confirmRestart') {
@@ -336,11 +375,13 @@ class WxGameApp {
     }
 
     if (action.type === 'start') {
+      await this.ensureTalentContent();
       this.prepareTalentScreen();
       return;
     }
 
     if (action.type === 'viewAchievements') {
+      await this.ensureTalentContent();
       this.commitFinalResult({ lockRetake: false });
       if (this.state.screen !== 'achievements') this.state.previousScreen = this.state.screen;
       this.switchScreen('achievements');
@@ -348,6 +389,7 @@ class WxGameApp {
     }
 
     if (action.type === 'viewUniversities') {
+      await this.ensureAdmissionBasics();
       this.commitFinalResult({ lockRetake: false });
       if (this.state.screen !== 'universities') this.state.previousScreen = this.state.screen;
       this.switchScreen('universities');
@@ -395,6 +437,7 @@ class WxGameApp {
 
     if (action.type === 'beginRun') {
       if (this.remainingPoints() !== 0) throw new Error('属性点需要全部分配完');
+      await this.ensureRunContent();
       const engine = new LifeEngine(this.game.content);
       const gameState = engine.start(this.state.selectedTalentIds, this.state.allocation);
       if (this.game.save.inheritedTalentId !== null) this.game.persist(setInheritedTalent(this.game.save, null));
@@ -405,11 +448,12 @@ class WxGameApp {
       this.state.retakeLocked = false;
       this.state.autoRunning = false;
       this.switchScreen('trajectory');
+      this.preloadAdmissionLines();
       return;
     }
 
     if (action.type === 'nextRound') {
-      this.runOneRound();
+      await this.runOneRound();
       return;
     }
 
@@ -474,6 +518,60 @@ class WxGameApp {
     if (action.type === 'restart') {
       this.restartToHome();
     }
+  }
+
+  private async ensureTalentContent(): Promise<void> {
+    await this.loadContent(
+      this.contentLoader.hasTalentContent(),
+      '正在加载天赋',
+      () => this.contentLoader.loadTalentContent(),
+    );
+  }
+
+  private async ensureAdmissionBasics(): Promise<void> {
+    await this.loadContent(
+      this.contentLoader.hasAdmissionBasics(),
+      '正在加载院校',
+      () => this.contentLoader.loadAdmissionBasics(),
+    );
+  }
+
+  private async ensureRunContent(): Promise<void> {
+    await this.loadContent(
+      this.contentLoader.hasSimulationContent() && this.contentLoader.hasAdmissionBasics(),
+      '正在加载人生事件',
+      async () => {
+        await Promise.all([
+          this.contentLoader.loadSimulationContent(),
+          this.contentLoader.loadAdmissionBasics(),
+        ]);
+      },
+    );
+  }
+
+  private async ensureAdmissionLines(): Promise<void> {
+    await this.loadContent(
+      this.contentLoader.hasAdmissionLines(),
+      '正在加载录取线',
+      () => this.contentLoader.loadAdmissionLines(),
+    );
+  }
+
+  private preloadAdmissionLines(): void {
+    setTimeout(() => {
+      if (!this.isAppVisible || !this.state.engine) return;
+      void this.contentLoader.loadAdmissionLines().catch(() => {
+        // The final round will surface the error if the preload did not finish.
+      });
+    }, ADMISSION_LINES_PRELOAD_DELAY_MS);
+  }
+
+  private async loadContent(isLoaded: boolean, message: string, load: () => Promise<void>): Promise<void> {
+    if (isLoaded) return;
+    this.state.message = message;
+    this.render();
+    await load();
+    if (this.state.message === message) this.state.message = null;
   }
 
   private restartToHome(): void {
@@ -543,10 +641,12 @@ class WxGameApp {
 
   private scheduleAutoRun(): void {
     if (!this.state.autoRunning || this.autoRunTimer !== null) return;
-    this.autoRunTimer = setTimeout(() => this.advanceAutoRun(), AUTO_RUN_INTERVAL_MS);
+    this.autoRunTimer = setTimeout(() => {
+      void this.advanceAutoRun();
+    }, AUTO_RUN_INTERVAL_MS);
   }
 
-  private advanceAutoRun(): void {
+  private async advanceAutoRun(): Promise<void> {
     this.autoRunTimer = null;
     if (!this.state.autoRunning) return;
 
@@ -554,7 +654,7 @@ class WxGameApp {
       if (this.state.screen !== 'trajectory' || !this.state.gameState || this.state.gameState.isFinished) {
         this.stopAutoRun();
       } else {
-        this.runOneRound();
+        await this.runOneRound();
         if (this.state.screen !== 'trajectory' || this.state.gameState?.isFinished) this.stopAutoRun();
       }
     } catch (error) {
@@ -565,10 +665,12 @@ class WxGameApp {
     this.scheduleAutoRun();
   }
 
-  private runOneRound(): void {
+  private async runOneRound(): Promise<void> {
     const engine = this.state.engine;
     if (!engine) throw new Error('本局还未开始');
     if (this.state.gameState?.isFinished) return;
+    const nextRound = this.game.content.ages[this.state.gameState.stepIndex];
+    if (nextRound?.age === 18 && nextRound.round === 4) await this.ensureAdmissionLines();
     const step = engine.next();
     this.state.gameState = step.state;
     if (step.ending && step.admission) {
@@ -622,6 +724,7 @@ class WxGameApp {
   }
 
   private render(): void {
+    this.renderFrameHandle = null;
     if (this.activeScrollScreen !== this.state.screen) this.resetScroll(this.state.screen);
     this.buttons = [];
     this.ctx.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
@@ -641,6 +744,16 @@ class WxGameApp {
     }
 
     this.drawFooter();
+  }
+
+  private requestRender(): void {
+    if (this.renderFrameHandle !== null) return;
+    let handle = 0;
+    handle = requestNextFrame(() => {
+      if (this.renderFrameHandle !== handle) return;
+      this.render();
+    });
+    this.renderFrameHandle = handle;
   }
 
   private drawBackground(): void {
@@ -848,7 +961,7 @@ class WxGameApp {
       const buttonWidth = (this.width - 72 - gap) / 2;
       this.drawButton(
         { type: 'viewUniversities' },
-        `院校 ${this.game.save.unlockedUniversityCodes.length}/${this.game.content.universities.length}`,
+        `院校 ${this.game.save.unlockedUniversityCodes.length}/${this.contentLoader.summary.universities}`,
         36,
         cursor + 6,
         buttonWidth,
@@ -857,7 +970,7 @@ class WxGameApp {
       );
       this.drawButton(
         { type: 'viewAchievements' },
-        `成就 ${this.game.save.achievedIds.length}/${this.game.content.achievements.length}`,
+        `成就 ${this.game.save.achievedIds.length}/${this.contentLoader.summary.achievements}`,
         36 + buttonWidth + gap,
         cursor + 6,
         buttonWidth,
@@ -1909,6 +2022,7 @@ class WxGameApp {
   }
 
   private savedInheritedTalent(): Talent | null {
+    if (!this.contentLoader.hasTalentContent()) return null;
     const inheritedTalentId = this.game.save.inheritedTalentId;
     if (inheritedTalentId === null) return null;
     return this.game.content.talents.find(item => item.id === inheritedTalentId) ?? null;
@@ -2068,6 +2182,13 @@ function createRuntimeCanvas(wxApi: WxMiniGameAPI | undefined): HTMLCanvasElemen
 
 function getWxApi(): WxMiniGameAPI | undefined {
   return typeof wx === 'undefined' ? undefined : wx;
+}
+
+function requestNextFrame(callback: FrameRequestCallback): number {
+  if (typeof globalThis.requestAnimationFrame === 'function') {
+    return globalThis.requestAnimationFrame(callback);
+  }
+  return Number(setTimeout(() => callback(Date.now()), 16));
 }
 
 const wxApi = getWxApi();
