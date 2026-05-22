@@ -9,7 +9,7 @@ const rarityConfig = {
   common: { grade: 0, name: '普通', target: 64 },
   rare: { grade: 1, name: '稀有', target: 58 },
   epic: { grade: 2, name: '史诗', target: 32 },
-  legendary: { grade: 3, name: '传说', target: 12 },
+  legendary: { grade: 3, name: '传说', target: 13 },
 };
 const subjectTracks = new Set(['history', 'physics']);
 const admissionLineTypes = new Set(['normal', 'sinoForeign']);
@@ -273,8 +273,37 @@ for (const ending of endings) {
   for (const id of idsFromCondition(ending.condition, 'EVT')) if (!eventIds.has(id)) fail(`ending ${ending.id} references missing event ${id}`);
 }
 
+const achievementMaxValues = {
+  CEND: endings.length,
+  CEVT: events.length,
+  CTLT: talents.length,
+  TMS: Number.POSITIVE_INFINITY,
+  CSCH: universities.length,
+  C985: universities.filter(item => item.tags.includes('985')).length,
+  C211: universities.filter(item => item.tags.includes('985') || item.tags.includes('211')).length,
+  CDFC: universities.filter(item => item.tags.includes('doubleFirstClass')).length,
+  CQB: countUniversityGroup(['北京大学', '清华大学']),
+  CHW: countUniversityGroup(['复旦大学', '上海交通大学', '浙江大学', '南京大学', '中国科学技术大学']),
+  CC9: countUniversityGroup(['北京大学', '清华大学', '复旦大学', '上海交通大学', '浙江大学', '南京大学', '中国科学技术大学', '哈尔滨工业大学', '西安交通大学']),
+  HSCR: 750,
+  HVOL: 85,
+  MNY: 10,
+  RSK: 90,
+  SPR: 10,
+};
+const achievementMinValues = {
+  HSCR: 0,
+  HVOL: 0,
+  MNY: 0,
+  RSK: 0,
+  SPR: 0,
+};
+
 for (const achievement of achievements) {
   for (const id of idsFromCondition(achievement.condition, 'END')) if (!endingIds.has(id)) fail(`achievement ${achievement.id} references missing ending ${id}`);
+  for (const id of idsFromCondition(achievement.condition, 'EVT')) if (!eventIds.has(id)) fail(`achievement ${achievement.id} references missing event ${id}`);
+  for (const id of idsFromCondition(achievement.condition, 'TLT')) if (!talentIds.has(id)) fail(`achievement ${achievement.id} references missing talent ${id}`);
+  checkAchievementBounds(achievement);
 }
 
 for (const character of characters) {
@@ -306,6 +335,33 @@ for (const university of universities) {
   }
   if (university.prestigeTier === 'private' && university.tags?.some(tag => ['985', '211', 'doubleFirstClass'].includes(tag))) {
     fail(`private university ${university.name} should not have project tags`);
+  }
+}
+
+function countUniversityGroup(names) {
+  const matched = new Set();
+  for (const university of universities) {
+    const name = names.find(item => university.name === item || university.name.startsWith(item));
+    if (name) matched.add(name);
+  }
+  return matched.size;
+}
+
+function checkAchievementBounds(achievement) {
+  const re = /\b([A-Z][A-Z0-9_]*)\s*(>=|>|<=|<|=)\s*(-?\d+(?:\.\d+)?)/g;
+  for (const match of achievement.condition.matchAll(re)) {
+    const [, prop, operator, rawValue] = match;
+    const value = Number(rawValue);
+    if (['>=', '>'].includes(operator) && Object.prototype.hasOwnProperty.call(achievementMaxValues, prop)) {
+      const max = achievementMaxValues[prop];
+      const impossible = operator === '>=' ? value > max : value >= max;
+      if (impossible) fail(`achievement ${achievement.id} requires ${prop}${operator}${value}, but max is ${max}`);
+    }
+    if (['<=', '<'].includes(operator) && Object.prototype.hasOwnProperty.call(achievementMinValues, prop)) {
+      const min = achievementMinValues[prop];
+      const impossible = operator === '<=' ? value < min : value <= min;
+      if (impossible) fail(`achievement ${achievement.id} requires ${prop}${operator}${value}, but min is ${min}`);
+    }
   }
 }
 

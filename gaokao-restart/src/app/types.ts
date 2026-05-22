@@ -259,8 +259,9 @@ export interface GameState {
   finalEnding: Ending | null;
   admissionResult: AdmissionResult | null;
   retakeUsed: boolean;
+  retakeCount: number;
   retakeFrom: RetakeSnapshot | null;
-  attempt: 1 | 2;
+  attempt: number;
   isFinished: boolean;
 }
 

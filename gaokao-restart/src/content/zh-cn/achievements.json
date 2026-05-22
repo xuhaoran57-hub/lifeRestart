@@ -274,9 +274,9 @@
   {
     "id": 42135,
     "name": "志愿专家",
-    "description": "达成条件：HVOL>=90",
+    "description": "达成条件：HVOL>=80",
     "grade": 2,
-    "condition": "HVOL>=90",
+    "condition": "HVOL>=80",
     "timing": "summary"
   },
   {

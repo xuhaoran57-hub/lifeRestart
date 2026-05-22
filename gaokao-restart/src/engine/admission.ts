@@ -559,7 +559,7 @@ function routeBonus(content: GameContent, state: GameState): number {
       return sum;
     }, 0);
   const eventBonus = state.eventIds.some(id => [31027, 31708, 31720, 31732, 31838, 31839].includes(id)) ? 8 : 0;
-  const retakeBonus = state.retakeUsed ? 10 : 0;
+  const retakeBonus = state.retakeUsed ? 5 : 0;
   return Math.min(22, talentBonus + eventBonus + retakeBonus);
 }
 

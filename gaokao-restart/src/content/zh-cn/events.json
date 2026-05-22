@@ -88,8 +88,7 @@
     "phase": "primary",
     "text": "你某一科明显跟不上节奏。",
     "effect": {
-      "INT": -1,
-      "SPR": -1
+      "INT": -1
     },
     "grade": 0,
     "weight": 90,
@@ -157,8 +156,8 @@
     "phase": "middle",
     "text": "排名开始公开，你第一次感到窒息。",
     "effect": {
-      "SPR": -2,
-      "RSK": 10
+      "SPR": -1,
+      "RSK": 6
     },
     "grade": 0,
     "weight": 100,
@@ -225,8 +224,7 @@
     "text": "你跟风选科，后来越学越别扭。",
     "effect": {
       "INT": -1,
-      "SPR": -1,
-      "RSK": 5
+      "RSK": 4
     },
     "grade": 0,
     "weight": 80,
@@ -363,8 +361,8 @@
     "phase": "senior3",
     "text": "二轮开始后，你反而越来越焦虑。",
     "effect": {
-      "SPR": -2,
-      "RSK": 10
+      "SPR": -1,
+      "RSK": 6
     },
     "grade": 0,
     "weight": 90,
@@ -442,9 +440,9 @@
     "phase": "final",
     "text": "高考当天你连续失误，整个人都懵了。",
     "effect": {
-      "SPR": -2,
-      "SCOREMOD": -30,
-      "RSK": 15
+      "SPR": -1,
+      "SCOREMOD": -20,
+      "RSK": 10
     },
     "grade": 1,
     "weight": 60,
@@ -1811,8 +1809,8 @@
     "phase": "middle",
     "text": "你第一次因为排名下滑失眠。",
     "effect": {
-      "SPR": -2,
-      "RSK": 8
+      "SPR": -1,
+      "RSK": 6
     },
     "grade": 1,
     "weight": 80,
@@ -2018,8 +2016,8 @@
     "phase": "middle",
     "text": "排名下滑后的那个晚上，你第一次翻来覆去睡不着。那几天的状态，给后面的选择埋了伏笔。",
     "effect": {
-      "SPR": -2,
-      "RSK": 10
+      "SPR": -1,
+      "RSK": 6
     },
     "grade": 0,
     "weight": 90,
@@ -2230,8 +2228,8 @@
     "phase": "middle",
     "text": "失眠后的清晨，你把错题按原因重新分了一遍。你想知道自己到底输在哪里，而不是只盯着名次。",
     "effect": {
-      "SPR": -2,
-      "RSK": 8,
+      "SPR": -1,
+      "RSK": 6,
       "STR": 1
     },
     "grade": 0,
@@ -4905,9 +4903,9 @@
     "phase": "senior3",
     "text": "你给自己排了过满的任务表，几天后就开始拖延和补债。",
     "effect": {
-      "SCOREMOD": -8,
+      "SCOREMOD": -6,
       "SPR": -1,
-      "RSK": 12,
+      "RSK": 8,
       "STR": -1
     },
     "grade": 0,
@@ -4963,9 +4961,9 @@
     "phase": "senior3",
     "text": "基础小测暴露出很多低级错误，你意识到前面的轻松有一部分是假象。",
     "effect": {
-      "SCOREMOD": -12,
+      "SCOREMOD": -9,
       "SPR": -1,
-      "RSK": 10
+      "RSK": 8
     },
     "grade": 0,
     "weight": 75,
@@ -5020,10 +5018,10 @@
     "phase": "senior3",
     "text": "你连续熬夜刷卷，第二天连会做的题都看得发飘。",
     "effect": {
-      "SCOREMOD": -10,
-      "SPR": -2,
+      "SCOREMOD": -7,
+      "SPR": -1,
       "STR": -1,
-      "RSK": 16
+      "RSK": 9
     },
     "grade": 0,
     "weight": 70,
@@ -5078,9 +5076,9 @@
     "phase": "senior3",
     "text": "一模排名掉得很明显，你不得不承认最近的复习方式需要重做。",
     "effect": {
-      "SCOREMOD": -18,
-      "SPR": -2,
-      "RSK": 14
+      "SCOREMOD": -10,
+      "SPR": -1,
+      "RSK": 8
     },
     "grade": 0,
     "weight": 75,
@@ -5135,9 +5133,9 @@
     "phase": "senior3",
     "text": "偏科问题在套卷里被放大，你发现单靠强科已经很难补回来。",
     "effect": {
-      "SCOREMOD": -14,
+      "SCOREMOD": -10,
       "SPR": -1,
-      "RSK": 10
+      "RSK": 8
     },
     "grade": 0,
     "weight": 75,
@@ -5192,9 +5190,9 @@
     "phase": "senior3",
     "text": "二模几科一起失手，你第一次认真想过是不是目标定高了。",
     "effect": {
-      "SCOREMOD": -20,
-      "SPR": -2,
-      "RSK": 18
+      "SCOREMOD": -10,
+      "SPR": -1,
+      "RSK": 10
     },
     "grade": 0,
     "weight": 70,
@@ -5249,10 +5247,10 @@
     "phase": "senior3",
     "text": "长时间高强度复习让身体报警，你被迫停下来补觉和调整。",
     "effect": {
-      "SCOREMOD": -12,
-      "STR": -2,
+      "SCOREMOD": -7,
+      "STR": -1,
       "SPR": -1,
-      "RSK": 16
+      "RSK": 9
     },
     "grade": 0,
     "weight": 70,
@@ -5306,9 +5304,9 @@
     "phase": "senior3",
     "text": "你盲目加练难题，基础题的手感反而被挤掉了。",
     "effect": {
-      "SCOREMOD": -8,
+      "SCOREMOD": -7,
       "SPR": -1,
-      "RSK": 14
+      "RSK": 10
     },
     "grade": 0,
     "weight": 70,
@@ -5362,9 +5360,9 @@
     "phase": "senior3",
     "text": "越临近考试，你越忍不住反复翻旧题，心里越翻越乱。",
     "effect": {
-      "SCOREMOD": -10,
-      "SPR": -2,
-      "RSK": 18
+      "SCOREMOD": -7,
+      "SPR": -1,
+      "RSK": 10
     },
     "grade": 0,
     "weight": 70,
@@ -5419,10 +5417,10 @@
     "phase": "senior3",
     "text": "考前突然发烧打乱了节奏，你只能一边恢复一边减少复习量。",
     "effect": {
-      "SCOREMOD": -16,
-      "STR": -2,
+      "SCOREMOD": -9,
+      "STR": -1,
       "SPR": -1,
-      "RSK": 18
+      "RSK": 8
     },
     "grade": 0,
     "weight": 60,
@@ -5458,12 +5456,12 @@
     "phase": "senior3",
     "text": "复读第一周，你把首考卷和模拟卷摊开，先找真正反复失分的几类题。",
     "effect": {
-      "SCOREMOD": 10,
-      "BASEMOD": 4,
+      "SCOREMOD": 8,
+      "BASEMOD": 3,
       "VOL": 12,
       "RSK": -5
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 90,
     "flag": "复读复盘",
@@ -5479,12 +5477,12 @@
     "phase": "senior3",
     "text": "过去做烂的题这次没有直接跳过，你按知识点重新做了一遍，手感慢慢回来。",
     "effect": {
-      "SCOREMOD": 12,
-      "BASEMOD": 5,
+      "SCOREMOD": 10,
+      "BASEMOD": 4,
       "INT": 1,
       "VOL": 6
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 85,
     "flag": "旧题重做",
@@ -5500,13 +5498,13 @@
     "phase": "senior3",
     "text": "你开始按考试时间整套训练，放弃几道缠人的题后，整张卷子的节奏稳了很多。",
     "effect": {
-      "SCOREMOD": 10,
-      "BASEMOD": 4,
+      "SCOREMOD": 8,
+      "BASEMOD": 3,
       "STR": 1,
       "VOL": 8,
       "RSK": -6
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 85,
     "flag": "节奏校准",
@@ -5526,7 +5524,7 @@
       "SPR": -1,
       "RSK": 10
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 0,
     "weight": 55,
     "flag": "复读波动",
@@ -5542,12 +5540,12 @@
     "phase": "senior3",
     "text": "班主任让你重新估分定位，冲稳保的边界比去年清楚得多。",
     "effect": {
-      "SCOREMOD": 8,
-      "BASEMOD": 3,
+      "SCOREMOD": 6,
+      "BASEMOD": 2,
       "VOL": 20,
       "RSK": -10
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 85,
     "flag": "复读定位",
@@ -5568,7 +5566,7 @@
       "SPR": -1,
       "RSK": 9
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 0,
     "weight": 55,
     "flag": "复读透支",
@@ -5584,12 +5582,12 @@
     "phase": "senior3",
     "text": "第二次走到考前，你知道哪些焦虑不用理会，哪些检查必须提前完成。",
     "effect": {
-      "SCOREMOD": 8,
-      "BASEMOD": 4,
-      "SPR": 2,
+      "SCOREMOD": 6,
+      "BASEMOD": 3,
+      "SPR": 1,
       "RSK": -8
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 80,
     "flag": "二战稳定",
@@ -5605,12 +5603,12 @@
     "phase": "senior3",
     "text": "你把去年的志愿表和实际录取结果对照了一遍，不再只盯着学校名字做判断。",
     "effect": {
-      "SCOREMOD": 6,
-      "BASEMOD": 2,
+      "SCOREMOD": 5,
+      "BASEMOD": 1,
       "VOL": 20,
       "RSK": -10
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 80,
     "flag": "复读志愿稳健",
@@ -5627,11 +5625,11 @@
     "text": "出分后，你先按位次和专业组筛掉不稳定选项，再决定少量冲刺目标。",
     "effect": {
       "SCOREMOD": 3,
-      "BASEMOD": 2,
+      "BASEMOD": 1,
       "VOL": 18,
       "RSK": -10
     },
-    "include": "ATTEMPT=2",
+    "include": "RETAKE=1",
     "grade": 1,
     "weight": 80,
     "flag": "复读志愿稳健",

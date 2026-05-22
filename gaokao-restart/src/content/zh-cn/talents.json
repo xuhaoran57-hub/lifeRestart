@@ -3704,5 +3704,25 @@
     "polarity": "benefit",
     "rarity": "legendary",
     "rarityName": "传说"
+  },
+  {
+    "id": 21807,
+    "name": "复读圣体",
+    "grade": 3,
+    "description": "你拥有异于常人的重来韧性，本局可以额外复读两次",
+    "effect": {},
+    "inheritAllowed": true,
+    "tags": [
+      "赛道机会",
+      "传说",
+      "复读",
+      "再战"
+    ],
+    "category": "route",
+    "categoryName": "赛道机会",
+    "effectBudget": 0,
+    "polarity": "benefit",
+    "rarity": "legendary",
+    "rarityName": "传说"
   }
 ]

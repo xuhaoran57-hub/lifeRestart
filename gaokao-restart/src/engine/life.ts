@@ -25,6 +25,16 @@ import { pickWeighted, Random } from './random';
 import { forcedSubjectTrackFromTalents, resolveSubjectTrack } from './subjectTrack';
 import { getTalentMap, validateTalentSelection } from './talents';
 
+export const RETAKE_SAINT_TALENT_ID = 21807;
+
+export function maxRetakesForState(state: Pick<GameState, 'selectedTalentIds'>): number {
+  return state.selectedTalentIds.includes(RETAKE_SAINT_TALENT_ID) ? 3 : 1;
+}
+
+export function remainingRetakesForState(state: Pick<GameState, 'selectedTalentIds' | 'retakeCount'>): number {
+  return Math.max(0, maxRetakesForState(state) - state.retakeCount);
+}
+
 const positiveEventEffectScale: Partial<Record<CorePropCode, number>> = {
   INT: 0.19,
   STR: 0.28,
@@ -130,6 +140,16 @@ const recommendedEndingEventPool: WeightedRef[] = [
   { id: 32404, weight: 100 },
 ];
 
+const keyVolunteerEventFlags = new Set([
+  '志愿稳健',
+  '章程避坑',
+  '三角比较',
+  '志愿预案',
+  '保专业',
+  '复读志愿稳健',
+  '复读定位',
+]);
+
 export class LifeEngine {
   private readonly random: Random;
   private readonly eventMap: Map<number, GameEvent>;
@@ -173,6 +193,7 @@ export class LifeEngine {
       finalEnding: null,
       admissionResult: null,
       retakeUsed: false,
+      retakeCount: 0,
       retakeFrom: null,
       attempt: 1,
       isFinished: false,
@@ -239,7 +260,10 @@ export class LifeEngine {
       ending = earlyEnding;
       applyFinalResult(state, ending, admission);
     } else if (isFinalRound(ageRound)) {
-      const exam = applyRetakeExamCalibration(calculateExamScore(state.props, this.random), state);
+      const exam = applyRetakeGainSoftCap(
+        applyRetakeExamCalibration(calculateExamScore(state.props, this.random), state),
+        state,
+      );
       admission = resolveAdmission(this.content, state, exam, this.random);
       ending = pickEnding(this.content, state, admission);
       applyFinalResult(state, ending, admission);
@@ -253,7 +277,9 @@ export class LifeEngine {
     if (!state.isFinished || !state.finalEnding || !state.admissionResult) {
       throw new Error('只有结局结算后才能选择复读');
     }
-    if (state.retakeUsed) throw new Error('本局已经复读过一次');
+    if (remainingRetakesForState(state) <= 0) {
+      throw new Error(maxRetakesForState(state) === 1 ? '本局已经复读过一次' : '本局复读次数已经用完');
+    }
     if (state.admissionResult.scoreHidden) throw new Error('保送录取已提前锁定，不能复读');
 
     const senior3StartIndex = this.content.ages.findIndex(item => item.age === 17 && item.round === 1);
@@ -271,8 +297,9 @@ export class LifeEngine {
       canReach211: state.admissionResult.canReach211,
       props: { ...state.props },
     };
+    state.retakeCount += 1;
     state.retakeUsed = true;
-    state.attempt = 2;
+    state.attempt = state.retakeCount + 1;
     state.isFinished = false;
     state.finalEnding = null;
     state.admissionResult = null;
@@ -284,8 +311,8 @@ export class LifeEngine {
     state.props.SUM = 0;
     applyPropDelta(state.props, 'SPR', -1);
     applyPropDelta(state.props, 'RSK', 2);
-    applyPropDelta(state.props, 'SCOREMOD', 24);
-    applyPropDelta(state.props, 'BASEMOD', 5);
+    applyPropDelta(state.props, 'SCOREMOD', retakeScoreModBoost(state.retakeFrom.finalScore));
+    applyPropDelta(state.props, 'BASEMOD', retakeBaseModBoost(state.retakeFrom.finalScore));
     refreshScore(state.props, 'final');
 
     return this.snapshot();
@@ -328,7 +355,7 @@ export class LifeEngine {
   }
 
   private applyEvent(state: GameState, event: GameEvent, ageRound: AgeRound): void {
-    this.applyEffect(state.props, event.effect, (prop, delta, current) => scaledEventDelta(prop, delta, current, ageRound.phase));
+    this.applyEffect(state.props, event.effect, (prop, delta, current) => scaledEventDelta(prop, delta, current, ageRound.phase, event));
     if (!state.eventIds.includes(event.id)) state.eventIds.push(event.id);
     if (!state.currentAttemptEventIds.includes(event.id)) state.currentAttemptEventIds.push(event.id);
   }
@@ -414,11 +441,11 @@ export class LifeEngine {
   }
 }
 
-function scaledEventDelta(prop: CorePropCode, delta: number, current: number, phase: AgeRound['phase']): number {
+function scaledEventDelta(prop: CorePropCode, delta: number, current: number, phase: AgeRound['phase'], event: GameEvent): number {
   const positiveScale = phase === 'senior3' ? senior3PositiveEventEffectScale : positiveEventEffectScale;
   const negativeScale = phase === 'senior3' ? senior3NegativeEventEffectScale : negativeEventEffectScale;
   const scale = delta >= 0 ? positiveScale[prop] ?? 1 : negativeScale[prop] ?? 1;
-  return delta * scale * positiveEventSoftCap(prop, delta, current);
+  return delta * scale * positiveEventSoftCap(prop, delta, current) * positiveVolunteerEventScale(prop, delta, event);
 }
 
 function positiveEventSoftCap(prop: CorePropCode, delta: number, current: number): number {
@@ -428,6 +455,13 @@ function positiveEventSoftCap(prop: CorePropCode, delta: number, current: number
   if (current >= 8) return 0.65;
   if (current >= 7) return 0.85;
   return 1;
+}
+
+function positiveVolunteerEventScale(prop: CorePropCode, delta: number, event: GameEvent): number {
+  if (prop !== 'VOL' || delta <= 0) return 1;
+  if (event.flag && keyVolunteerEventFlags.has(event.flag)) return 1;
+  if (event.tags?.includes('志愿')) return 0.85;
+  return 0.7;
 }
 
 function isFinalRound(ageRound: AgeRound): boolean {
@@ -478,12 +512,12 @@ function earlyEndingPriority(ending: Ending): number {
 }
 
 function scorePhaseForRound(state: GameState, ageRound: AgeRound): AgeRound['phase'] {
-  if (state.attempt === 2 && ageRound.phase === 'senior3') return 'final';
+  if (state.retakeUsed && ageRound.phase === 'senior3') return 'final';
   return ageRound.phase;
 }
 
 function eventRoundForState(state: GameState, ageRound: AgeRound): AgeRound {
-  if (state.attempt !== 2) return ageRound;
+  if (!state.retakeUsed) return ageRound;
   const retakePool = ageRound.phase === 'senior3'
     ? retakeSenior3EventPools[ageRound.round] ?? []
     : ageRound.age === 18 && ageRound.round === 4
@@ -506,5 +540,49 @@ function applyRetakeExamCalibration(exam: ExamScoreResult, state: GameState): Ex
     finalScore: Math.min(750, exam.finalScore + bonus),
     variance: exam.variance + bonus,
     explanation: `${exam.explanation} 复读临场校准 +${bonus}。`,
+  };
+}
+
+function retakeScoreModBoost(previousScore: number): number {
+  if (previousScore < 550) return 24;
+  if (previousScore < 570) return 22;
+  return 20;
+}
+
+function retakeBaseModBoost(previousScore: number): number {
+  return previousScore < 550 ? 5 : 4;
+}
+
+function applyRetakeGainSoftCap(exam: ExamScoreResult, state: GameState): ExamScoreResult {
+  const previousScore = state.retakeFrom?.finalScore;
+  if (!previousScore) return exam;
+
+  const delta = exam.finalScore - previousScore;
+  if (delta <= 0) return exam;
+
+  const cap = previousScore >= 630
+    ? 12
+    : previousScore >= 610
+      ? 16
+      : previousScore >= 590
+        ? 22
+        : previousScore >= 570
+          ? 32
+          : Number.POSITIVE_INFINITY;
+  if (delta <= cap) return exam;
+
+  const compression = previousScore >= 610
+    ? 0.5
+    : previousScore >= 590
+      ? 0.35
+      : previousScore >= 570
+        ? 0.2
+        : 0;
+  const adjustment = Math.round((delta - cap) * compression);
+  return {
+    ...exam,
+    finalScore: Math.max(250, exam.finalScore - adjustment),
+    variance: exam.variance - adjustment,
+    explanation: `${exam.explanation} 复读高分段回归 -${adjustment}。`,
   };
 }

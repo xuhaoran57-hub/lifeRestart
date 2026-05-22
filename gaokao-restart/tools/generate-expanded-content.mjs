@@ -469,15 +469,15 @@ const events = [
   event(31003, 'preschool', '家里咬牙给你报了早教班。', { INT: 1, MNY: -1 }, { include: 'MNY>4', grade: 1, weight: 60, tags: tags('学前', '资源') }),
   event(31004, 'preschool', '家里搬家，你换了一个新环境。', { SPR: -1, VOL: 5 }, { weight: 50, tags: tags('家庭', '变化') }),
   event(31005, 'primary', '你第一次拿到班级前几名。', { INT: 1, SPR: 1 }, { include: 'INT>4', weight: 100, tags: tags('小学', '成绩') }),
-  event(31006, 'primary', '你某一科明显跟不上节奏。', { INT: -1, SPR: -1 }, { weight: 90, tags: tags('小学', '偏科') }),
+  event(31006, 'primary', '你某一科明显跟不上节奏。', { INT: -1 }, { weight: 90, tags: tags('小学', '偏科') }),
   event(31007, 'primary', '一位负责的老师很欣赏你。', { INT: 1, SPR: 1, VOL: 5 }, { include: 'SPR>4', grade: 1, weight: 70, tags: tags('小学', '老师') }),
   event(31008, 'primary', '你开始沉迷游戏，作业也越拖越久。', { SPR: 1, STR: -1, RSK: 5 }, { weight: 80, tags: tags('小学', '风险') }),
   event(31009, 'middle', '你被分进了重点班。', { INT: 1, SPR: -1 }, { include: 'INT>5', grade: 1, weight: 90, flag: '重点班', tags: tags('初中', '分流') }),
-  event(31010, 'middle', '排名开始公开，你第一次感到窒息。', { SPR: -2, RSK: 10 }, { weight: 100, tags: tags('初中', '压力') }),
+  event(31010, 'middle', '排名开始公开，你第一次感到窒息。', { SPR: -1, RSK: 6 }, { weight: 100, tags: tags('初中', '压力') }),
   event(31011, 'middle', '你在竞赛课上第一次找到天赋感。', { INT: 2 }, { include: '(INT>6)|(TLT?[21010])', grade: 1, weight: 60, flag: '竞赛苗子', tags: tags('初中', '竞赛') }),
   event(31012, 'middle', '你开始对同学产生朦胧好感，注意力有点飘。', { SPR: 1, INT: -1 }, { weight: 70, tags: tags('初中', '青春期') }),
   event(31013, 'senior1', '你选到了适合自己的科目组合。', { INT: 1, SPR: 1 }, { include: 'INT>5', grade: 1, weight: 80, flag: '选科成功', tags: tags('高一', '选科') }),
-  event(31014, 'senior1', '你跟风选科，后来越学越别扭。', { INT: -1, SPR: -1, RSK: 5 }, { exclude: 'EVT?[31013]', weight: 80, flag: '选科失误', tags: tags('高一', '选科') }),
+  event(31014, 'senior1', '你跟风选科，后来越学越别扭。', { INT: -1, RSK: 4 }, { exclude: 'EVT?[31013]', weight: 80, flag: '选科失误', tags: tags('高一', '选科') }),
   event(31015, 'senior1', '住校后你慢慢适应了集体节奏。', { STR: 1, SPR: 1 }, { include: 'STR>4', weight: 70, tags: tags('高一', '住校') }),
   event(31016, 'senior1', '住校后你总睡不好，白天也难集中。', { STR: -1, SPR: -1 }, { weight: 70, tags: tags('高一', '住校') }),
   event(31017, 'senior2', '你被选去参加竞赛集训。', { INT: 2, SPR: -1 }, { include: 'EVT?[31011]', grade: 2, weight: 20, flag: '竞赛集训', tags: tags('高二', '竞赛') }),
@@ -485,11 +485,11 @@ const events = [
   event(31019, 'senior2', '一次模考把你彻底点醒。', { INT: 1, SPR: 1, RSK: -5 }, { grade: 1, weight: 90, flag: '觉醒时刻', tags: tags('高二', '模考') }),
   event(31020, 'senior2', '你进入了成绩平台期，怎么学都像原地踏步。', { SPR: -1, RSK: 5 }, { weight: 100, flag: '平台期', tags: tags('高二', '瓶颈') }),
   event(31021, 'senior3', '一轮复习开始见效，你的基础明显扎实起来。', { INT: 2, STR: -1 }, { include: 'STR>3', grade: 1, weight: 90, flag: '冲刺见效', tags: tags('高三', '复习') }),
-  event(31022, 'senior3', '二轮开始后，你反而越来越焦虑。', { SPR: -2, RSK: 10 }, { weight: 90, branch: [{ condition: 'SPR<2', next: 31026 }], flag: '心态波动', tags: tags('高三', '焦虑') }),
+  event(31022, 'senior3', '二轮开始后，你反而越来越焦虑。', { SPR: -1, RSK: 6 }, { weight: 90, branch: [{ condition: 'SPR<2', next: 31026 }], flag: '心态波动', tags: tags('高三', '焦虑') }),
   event(31023, 'senior3', '百日冲刺后，你的节奏终于稳定下来了。', { INT: 1, SPR: 1, RSK: -5 }, { include: '(EVT?[31021])|(TLT?[21016])', grade: 1, weight: 80, flag: '百日冲刺', tags: tags('高三', '逆袭') }),
   event(31024, 'senior3', '一套押题卷刚好覆盖了你最担心的内容。', { INT: 1, SPR: 1 }, { include: 'TLT?[21016,21013]', grade: 1, weight: 50, flag: '押题成功', tags: tags('高三', '整活') }),
   event(31025, 'final', '高考当天你异常冷静，几乎发挥出了全部水平。', { SPR: 1, SCOREMOD: 20 }, { include: '(SPR>6)&(INT>7)', exclude: 'EVT?[31026]', grade: 2, weight: 50, flag: '高考超常', tags: tags('高考', '发挥') }),
-  event(31026, 'final', '高考当天你连续失误，整个人都懵了。', { SPR: -2, SCOREMOD: -30, RSK: 15 }, { include: '(SPR<4)|(EVT?[31022])|(TLT?[21015])', grade: 1, weight: 60, flag: '临场失常', tags: tags('高考', '发挥') }),
+  event(31026, 'final', '高考当天你连续失误，整个人都懵了。', { SPR: -1, SCOREMOD: -20, RSK: 10 }, { include: '(SPR<4)|(EVT?[31022])|(TLT?[21015])', grade: 1, weight: 60, flag: '临场失常', tags: tags('高考', '发挥') }),
   event(31027, 'final', '你在志愿填报上做足了功课，避开了大部分坑。', { VOL: 20 }, { include: '(VOL>30)|(TLT?[21013])', grade: 1, weight: 70, flag: '志愿稳健', tags: tags('志愿', '策略') }),
   event(31028, 'final', '你一味往上冲，最后滑到了完全不想去的专业。', { VOL: -20, RSK: 10 }, { include: '(VOL<20)|(TLT?[21012])', grade: 1, weight: 70, flag: '志愿翻车', tags: tags('志愿', '风险') }),
 ];
@@ -689,6 +689,17 @@ events.push(...expandPhase(31401, 'senior1'));
 events.push(...expandPhase(31501, 'senior2'));
 events.push(...expandPhase(31601, 'senior3'));
 events.push(...expandPhase(31701, 'final'));
+
+const generatedEventEffectOverrides = new Map([
+  [31305, { SPR: -1, RSK: 6 }],
+  [31317, { SPR: -1, RSK: 6 }],
+  [31329, { SPR: -1, RSK: 6, STR: 1 }],
+]);
+
+for (const [id, effect] of generatedEventEffectOverrides) {
+  const item = events.find(event => event.id === id);
+  if (item) item.effect = effect;
+}
 
 const baseAgePools = {
   3: [[31001, 80], [31002, 60], [31004, 30]],
@@ -915,7 +926,7 @@ const achievements = [
     ['十次重开', 'TMS>=10', 0],
     ['高分选手', 'HSCR>=650', 1],
     ['极限高分', 'HSCR>=700', 3],
-    ['志愿专家', 'HVOL>=90', 2],
+    ['志愿专家', 'HVOL>=80', 2],
     ['风险管理', '(RSK<20)&(HSCR>=580)', 1],
     ['压力爆表', 'RSK>=80', 1],
     ['心态守住', '(SPR>=9)&(HSCR>=580)', 1],

@@ -9,6 +9,11 @@ export interface SaveStorage {
   setItem(key: string, value: string): void;
 }
 
+export interface RecordedFinalResult {
+  save: SaveData;
+  unlockedAchievements: Achievement[];
+}
+
 const emptySave: SaveData = {
   times: 0,
   inheritedTalentId: null,
@@ -40,6 +45,14 @@ export function saveData(save: SaveData, storage = getDefaultStorage()): void {
 }
 
 export function recordFinalResult(save: SaveData, result: FinalResult, content: GameContent): SaveData {
+  return recordFinalResultWithUnlocks(save, result, content).save;
+}
+
+export function recordFinalResultWithUnlocks(
+  save: SaveData,
+  result: FinalResult,
+  content: GameContent,
+): RecordedFinalResult {
   const next = normalizeSave(save);
   next.times += 1;
   next.seenTalentIds = unique([...next.seenTalentIds, ...result.state.selectedTalentIds, ...result.state.triggeredTalentIds]);
@@ -49,8 +62,9 @@ export function recordFinalResult(save: SaveData, result: FinalResult, content: 
     ...next.unlockedUniversityCodes,
     ...admittedUniversityCodes(result),
   ]);
-  next.achievedIds = unique([...next.achievedIds, ...findUnlockedAchievements(next, result, content).map(item => item.id)]);
-  return next;
+  const unlockedAchievements = findUnlockedAchievements(next, result, content);
+  next.achievedIds = unique([...next.achievedIds, ...unlockedAchievements.map(item => item.id)]);
+  return { save: next, unlockedAchievements };
 }
 
 export function setInheritedTalent(save: SaveData, talentId: number | null): SaveData {

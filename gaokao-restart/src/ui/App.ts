@@ -1,7 +1,7 @@
 import type { GameApp } from '../app/createGame';
 import type { Achievement, AdmissionResult, Allocation, FinalResult, GameState, Talent } from '../app/types';
-import { LifeEngine } from '../engine/life';
-import { recordFinalResult, setInheritedTalent } from '../engine/storage';
+import { LifeEngine, remainingRetakesForState } from '../engine/life';
+import { recordFinalResultWithUnlocks, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
 import {
   getUniversityCollectionStats,
@@ -29,6 +29,8 @@ interface UiState {
   retakeLocked: boolean;
   autoRunning: boolean;
   message: string | null;
+  recentAchievements: Achievement[];
+  achievementToasts: Achievement[];
 }
 
 interface AutoRunControls {
@@ -51,12 +53,33 @@ export function createApp(root: HTMLElement, game: GameApp): void {
     retakeLocked: false,
     autoRunning: false,
     message: null,
+    recentAchievements: [],
+    achievementToasts: [],
   };
 
   let autoRunTimer: ReturnType<typeof setTimeout> | null = null;
+  let achievementToastTimer: ReturnType<typeof setTimeout> | null = null;
+  let achievementToastKey: string | null = null;
 
   const render = () => {
     root.innerHTML = renderScreen(state, game);
+    const nextToastKey = state.achievementToasts.map(item => item.id).join(',');
+    if (!nextToastKey) {
+      if (achievementToastTimer !== null) clearTimeout(achievementToastTimer);
+      achievementToastTimer = null;
+      achievementToastKey = null;
+      return;
+    }
+    if (achievementToastTimer !== null && achievementToastKey === nextToastKey) return;
+    if (achievementToastTimer !== null) clearTimeout(achievementToastTimer);
+    achievementToastKey = nextToastKey;
+    achievementToastTimer = setTimeout(() => {
+      if (achievementToastKey !== nextToastKey) return;
+      achievementToastTimer = null;
+      achievementToastKey = null;
+      state.achievementToasts = [];
+      render();
+    }, 4200);
   };
 
   const stopAutoRun = (message?: string) => {
@@ -189,6 +212,8 @@ function handleAction(
     state.persistedResult = false;
     state.retakeLocked = false;
     state.autoRunning = false;
+    state.recentAchievements = [];
+    state.achievementToasts = [];
     state.screen = 'trajectory';
     return;
   }
@@ -228,8 +253,13 @@ function handleAction(
     state.persistedResult = false;
     state.retakeLocked = false;
     state.autoRunning = false;
+    state.recentAchievements = [];
+    state.achievementToasts = [];
     state.screen = 'trajectory';
-    state.message = '你选择复读一年，保留当前属性，但心态下降、风险上升。';
+    const remaining = remainingRetakesForState(state.gameState);
+    state.message = remaining > 0
+      ? `你选择复读一年，保留当前属性，但心态下降、风险上升。剩余 ${remaining} 次复读机会。`
+      : '你选择复读一年，保留当前属性，但心态下降、风险上升。';
     return;
   }
 
@@ -244,6 +274,8 @@ function handleAction(
     state.persistedResult = false;
     state.retakeLocked = false;
     state.autoRunning = false;
+    state.recentAchievements = [];
+    state.achievementToasts = [];
     return;
   }
 }
@@ -280,8 +312,9 @@ function runOneRound(state: UiState, game: GameApp): void {
     state.result = result;
     state.persistedResult = false;
     state.retakeLocked = false;
+    state.recentAchievements = [];
     state.screen = 'summary';
-    if (result.state.retakeUsed) commitFinalResult(state, game);
+    commitFinalResult(state, game, { lockRetake: false });
   }
 }
 
@@ -292,8 +325,11 @@ function commitFinalResult(
 ): void {
   if (!state.result) return;
   if (!state.persistedResult) {
-    game.persist(recordFinalResult(game.save, state.result, game.content));
+    const recorded = recordFinalResultWithUnlocks(game.save, state.result, game.content);
+    game.persist(recorded.save);
     state.persistedResult = true;
+    state.recentAchievements = recorded.unlockedAchievements;
+    if (recorded.unlockedAchievements.length > 0) state.achievementToasts = recorded.unlockedAchievements;
   }
   if (options.lockRetake ?? true) state.retakeLocked = true;
 }
@@ -331,6 +367,7 @@ function renderScreen(state: UiState, game: GameApp): string {
           ${topbarAction}
         </div>
       </header>
+      ${renderAchievementToast(state.achievementToasts)}
       ${message}
       ${body}
     </div>
@@ -540,7 +577,7 @@ function renderTrajectory(state: UiState, game: GameApp): string {
   const gameState = state.gameState;
   if (!gameState) return '';
   const latest = gameState.logs.at(-1);
-  const retakeRounds = gameState.retakeUsed ? game.content.ages.filter(round => round.age >= 17).length : 0;
+  const retakeRounds = game.content.ages.filter(round => round.age >= 17).length * gameState.retakeCount;
   const totalRounds = game.content.ages.length + retakeRounds;
   const isAutoRunning = state.autoRunning && !gameState.isFinished;
   return `
@@ -568,7 +605,8 @@ function renderSummary(state: UiState, game: GameApp): string {
   if (!state.result) return '';
   const { ending } = state.result;
   const hidesScoreDetails = state.result.admission.scoreHidden === true;
-  const canRetake = !hidesScoreDetails && !state.result.state.retakeUsed && !state.retakeLocked;
+  const remainingRetakes = remainingRetakesForState(state.result.state);
+  const canRetake = !hidesScoreDetails && remainingRetakes > 0 && !state.retakeLocked;
   const talents = state.result.state.selectedTalentIds
     .map(id => game.content.talents.find(item => item.id === id))
     .filter((item): item is Talent => Boolean(item));
@@ -580,6 +618,7 @@ function renderSummary(state: UiState, game: GameApp): string {
         <p>${escapeHtml(ending.description)}</p>
         ${hidesScoreDetails ? '' : renderStats(state.result.state)}
       </div>
+      ${renderRecentAchievements(state.recentAchievements)}
       ${renderRetakeFrom(state.result.state)}
       ${renderAdmission(state.result.admission)}
       ${renderSummaryLogs(state.result.state)}
@@ -596,25 +635,67 @@ function renderSummary(state: UiState, game: GameApp): string {
           `).join('')}
         </div>
       </div>
-      ${canRetake ? '<button class="wide" data-action="retake">复读一年</button>' : ''}
+      ${canRetake ? `<button class="wide" data-action="retake">${remainingRetakes > 1 ? `复读一年（剩余 ${remainingRetakes} 次）` : '复读一年'}</button>` : ''}
       <button class="primary wide" data-action="restart">再来一局</button>
     </section>
+  `;
+}
+
+function renderAchievementToast(achievements: Achievement[]): string {
+  if (achievements.length === 0) return '';
+  const title = achievements.length > 1 ? `本次解锁 ${achievements.length} 个成就` : '成就解锁';
+  const body = achievements.length > 1
+    ? achievements.slice(0, 3).map(item => item.name).join('、')
+    : achievements[0].name;
+  const detail = achievements.length > 1 && achievements.length > 3
+    ? `等 ${achievements.length} 个成就`
+    : achievements.length === 1
+      ? achievements[0].description
+      : achievements.map(item => achievementGradeName(item.grade)).join('、');
+  return `
+    <div class="achievement-toast" role="status" aria-live="polite">
+      <strong>${escapeHtml(title)}</strong>
+      <span>${escapeHtml(body)}</span>
+      <em>${escapeHtml(detail)}</em>
+    </div>
+  `;
+}
+
+function renderRecentAchievements(achievements: Achievement[]): string {
+  if (achievements.length === 0) return '';
+  return `
+    <div class="panel recent-achievements">
+      <div class="section-title">
+        <h2>本次解锁</h2>
+        <p>${achievements.length} 个成就</p>
+      </div>
+      <div class="recent-achievement-list">
+        ${achievements.map(achievement => `
+          <span>
+            <strong>${escapeHtml(achievement.name)}</strong>
+            <em>${escapeHtml(achievementGradeName(achievement.grade))}</em>
+          </span>
+        `).join('')}
+      </div>
+    </div>
   `;
 }
 
 function renderRetakeFrom(gameState: GameState): string {
   if (!gameState.retakeFrom) return '';
   const admittedUniversityName = gameState.retakeFrom.admittedUniversityName ?? '未录取到样本院校';
+  const title = gameState.retakeCount > 1 ? '上次结果' : '首考结果';
+  const label = gameState.retakeCount > 1 ? '上次' : '首考';
   return `
     <div class="panel retake-panel">
       <div class="section-title">
-        <h2>首考结果</h2>
+        <h2>${title}</h2>
         <span class="pill">${escapeHtml(gameState.retakeFrom.endingName)}</span>
       </div>
       <div class="admission-facts">
-        <span><em>首考分数</em><strong>${gameState.retakeFrom.finalScore}</strong></span>
-        <span><em>首考院校</em><strong>${escapeHtml(admittedUniversityName)}</strong></span>
-        <span><em>首考层级</em><strong>${escapeHtml(admissionTierName(gameState.retakeFrom.admissionTier))}</strong></span>
+        <span><em>${label}分数</em><strong>${gameState.retakeFrom.finalScore}</strong></span>
+        <span><em>${label}院校</em><strong>${escapeHtml(admittedUniversityName)}</strong></span>
+        <span><em>${label}层级</em><strong>${escapeHtml(admissionTierName(gameState.retakeFrom.admissionTier))}</strong></span>
       </div>
     </div>
   `;

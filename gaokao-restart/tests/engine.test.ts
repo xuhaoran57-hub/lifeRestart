@@ -84,20 +84,47 @@ describe('LifeEngine', () => {
     expect(isEventAvailable(retakeOnlyEvent!, retakeState)).toBe(true);
     expect(retakeState.isFinished).toBe(false);
     expect(retakeState.retakeUsed).toBe(true);
+    expect(retakeState.retakeCount).toBe(1);
     expect(retakeState.attempt).toBe(2);
     expect(retakeState.retakeFrom?.endingId).toBe(first.ending.id);
     expect(retakeState.retakeFrom?.admittedUniversityName).toBe(first.admission.admittedUniversity?.name);
     expect(retakeState.currentRound?.age).toBe(17);
     expect(retakeState.currentRound?.round).toBe(1);
+    const expectedScoreModBoost = first.admission.finalScore < 550 ? 24 : first.admission.finalScore < 570 ? 22 : 20;
+    const expectedBaseModBoost = first.admission.finalScore < 550 ? 5 : 4;
     expect(retakeState.props.SPR).toBe(Math.max(0, first.state.props.SPR - 1));
     expect(retakeState.props.RSK).toBe(Math.min(90, first.state.props.RSK + 2));
-    expect(retakeState.props.SCOREMOD).toBe(Math.min(70, first.state.props.SCOREMOD + 24));
-    expect(retakeState.props.BASEMOD).toBe(Math.min(80, first.state.props.BASEMOD + 5));
+    expect(retakeState.props.SCOREMOD).toBe(Math.min(70, first.state.props.SCOREMOD + expectedScoreModBoost));
+    expect(retakeState.props.BASEMOD).toBe(Math.min(80, first.state.props.BASEMOD + expectedBaseModBoost));
     expect(first.state.props.SCR - retakeState.props.SCR).toBeLessThanOrEqual(20);
 
     const second = engine.runToEnd();
     expect(second.state.logs).toHaveLength(84);
     expect(() => engine.retake()).toThrow('本局已经复读过一次');
+  });
+
+  it('lets the retake saint talent consume three retake chances', () => {
+    const engine = new LifeEngine(zhCnContent, 20260522);
+    engine.start([21807, 21003, 21013], { INT: 6, STR: 5, MNY: 4, SPR: 5 });
+    engine.runToEnd();
+
+    const firstRetake = engine.retake();
+    expect(firstRetake.retakeCount).toBe(1);
+    expect(firstRetake.attempt).toBe(2);
+    engine.runToEnd();
+
+    const secondRetake = engine.retake();
+    expect(secondRetake.retakeCount).toBe(2);
+    expect(secondRetake.attempt).toBe(3);
+    engine.runToEnd();
+
+    const thirdRetake = engine.retake();
+    expect(thirdRetake.retakeCount).toBe(3);
+    expect(thirdRetake.attempt).toBe(4);
+    const final = engine.runToEnd();
+
+    expect(final.state.logs).toHaveLength(112);
+    expect(() => engine.retake()).toThrow('本局复读次数已经用完');
   });
 
   it('finishes when the recommendation opportunity event is unlocked', () => {

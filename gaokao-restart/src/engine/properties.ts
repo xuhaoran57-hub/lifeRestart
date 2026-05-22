@@ -4,12 +4,12 @@ const initialPhaseBase = 245;
 const phaseOrder: PhaseCode[] = ['preschool', 'primary', 'middle', 'senior1', 'senior2', 'senior3', 'final'];
 const phaseBaseGain: Record<PhaseCode, number> = {
   preschool: 0,
-  primary: 60,
-  middle: 55,
-  senior1: 25,
-  senior2: 25,
-  senior3: 15,
-  final: 7,
+  primary: 58,
+  middle: 52,
+  senior1: 22,
+  senior2: 22,
+  senior3: 14,
+  final: 6,
 };
 
 const phaseBase = phaseOrder.reduce<Record<PhaseCode, number>>((result, phase, index) => {

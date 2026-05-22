@@ -139,8 +139,9 @@ function stateWithScoreProps(values: Partial<GameState['props']>, subjectTrack: 
     finalEnding: null,
     admissionResult: null,
     retakeUsed,
+    retakeCount: retakeUsed ? 1 : 0,
     retakeFrom: null,
-    attempt: 1,
+    attempt: retakeUsed ? 2 : 1,
     isFinished: false,
   };
 }

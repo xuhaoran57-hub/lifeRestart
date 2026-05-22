@@ -118,6 +118,7 @@ function stateWithProps(values: Partial<GameState['props']>): GameState {
     finalEnding: null,
     admissionResult: null,
     retakeUsed: false,
+    retakeCount: 0,
     retakeFrom: null,
     attempt: 1,
     isFinished: false,
@@ -128,6 +129,7 @@ function retakeStateWithProps(values: Partial<GameState['props']>, retakeFrom: G
   return {
     ...stateWithProps(values),
     retakeUsed: true,
+    retakeCount: 1,
     retakeFrom,
     attempt: 2,
   };

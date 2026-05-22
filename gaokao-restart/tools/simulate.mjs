@@ -33,12 +33,12 @@ const initialPhaseBase = 245;
 const phaseOrder = ['preschool', 'primary', 'middle', 'senior1', 'senior2', 'senior3', 'final'];
 const phaseBaseGain = {
   preschool: 0,
-  primary: 60,
-  middle: 55,
-  senior1: 25,
-  senior2: 25,
-  senior3: 15,
-  final: 7,
+  primary: 58,
+  middle: 52,
+  senior1: 22,
+  senior2: 22,
+  senior3: 14,
+  final: 6,
 };
 const phaseBase = phaseOrder.reduce((result, phase, index) => {
   const previousBase = index === 0 ? initialPhaseBase : result[phaseOrder[index - 1]];
@@ -90,6 +90,15 @@ const subjectTrackEventIds = {
   physics: 32003,
   history: 32004,
 };
+const keyVolunteerEventFlags = new Set([
+  '志愿稳健',
+  '章程避坑',
+  '三角比较',
+  '志愿预案',
+  '保专业',
+  '复读志愿稳健',
+  '复读定位',
+]);
 
 class Random {
   constructor(seed = Date.now()) {
@@ -395,13 +404,13 @@ function runOne(random, options = {}) {
     const unseen = candidates.filter(({ event }) => !eventIds.includes(event.id));
     const picked = pickWeighted(unseen.length ? unseen : candidates, item => eventPickWeight(item.ref, item.event, props), random);
     if (!picked) throw new Error('no event');
-    applyEffect(props, picked.event.effect, true, ageRound.phase);
+    applyEffect(props, picked.event.effect, true, ageRound.phase, picked.event);
     eventIds.push(picked.event.id);
     for (const branch of picked.event.branch ?? []) {
       if (!evaluate(branch.condition, props, selectedTalentIds, eventIds, null, subjectTrack)) continue;
       const branchEvent = eventMap.get(branch.next);
       if (!branchEvent) continue;
-      applyEffect(props, branchEvent.effect, true, ageRound.phase);
+      applyEffect(props, branchEvent.effect, true, ageRound.phase, branchEvent);
       eventIds.push(branchEvent.id);
     }
     if (!subjectTrack && ageRound.age === 15 && ageRound.round === 2) {
@@ -416,7 +425,7 @@ function runOne(random, options = {}) {
             : subjectTrackEventIds.history;
       const trackEvent = eventMap.get(eventId);
       if (!trackEvent) throw new Error(`missing subject track event ${eventId}`);
-      applyEffect(props, trackEvent.effect, true, ageRound.phase);
+      applyEffect(props, trackEvent.effect, true, ageRound.phase, trackEvent);
       eventIds.push(trackEvent.id);
     }
     refreshScore(props, ageRound.phase);
@@ -866,9 +875,9 @@ function hasConflict(talent, selectedIds) {
   return selectedIds.some(id => content.talents.find(item => item.id === id)?.exclude?.includes(talent.id));
 }
 
-function applyEffect(props, effect = {}, scaled = false, phase = null) {
+function applyEffect(props, effect = {}, scaled = false, phase = null, event = null) {
   for (const [key, value] of Object.entries(effect)) {
-    const delta = scaled ? scaledEventDelta(key, value, props[key] ?? 0, phase) : value;
+    const delta = scaled ? scaledEventDelta(key, value, props[key] ?? 0, phase, event) : value;
     props[key] = (props[key] ?? 0) + delta;
     if (['INT', 'STR', 'MNY', 'SPR'].includes(key)) props[key] = clamp(props[key], 0, 10);
     if (['VOL', 'HVOL'].includes(key)) props[key] = clamp(props[key], 0, 85);
@@ -901,11 +910,11 @@ function eventPickWeight(ref, event, props) {
   return Math.max(1, baseWeight * multiplier);
 }
 
-function scaledEventDelta(prop, delta, current, phase = null) {
+function scaledEventDelta(prop, delta, current, phase = null, event = null) {
   const positiveScale = phase === 'senior3' ? senior3PositiveEventEffectScale : positiveEventEffectScale;
   const negativeScale = phase === 'senior3' ? senior3NegativeEventEffectScale : negativeEventEffectScale;
   const scale = delta >= 0 ? positiveScale[prop] ?? 1 : negativeScale[prop] ?? 1;
-  return delta * scale * positiveEventSoftCap(prop, delta, current);
+  return delta * scale * positiveEventSoftCap(prop, delta, current) * positiveVolunteerEventScale(prop, delta, event);
 }
 
 function positiveEventSoftCap(prop, delta, current) {
@@ -915,6 +924,13 @@ function positiveEventSoftCap(prop, delta, current) {
   if (current >= 8) return 0.65;
   if (current >= 7) return 0.85;
   return 1;
+}
+
+function positiveVolunteerEventScale(prop, delta, event) {
+  if (prop !== 'VOL' || delta <= 0) return 1;
+  if (event?.flag && keyVolunteerEventFlags.has(event.flag)) return 1;
+  if (event?.tags?.includes('志愿')) return 0.85;
+  return 0.7;
 }
 
 function refreshScore(props, phase) {

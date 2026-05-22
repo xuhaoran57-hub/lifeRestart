@@ -11,8 +11,8 @@ import type {
   TalentRarity,
   University,
 } from '../app/types';
-import { LifeEngine } from '../engine/life';
-import { loadSave, recordFinalResult, saveData, setInheritedTalent } from '../engine/storage';
+import { LifeEngine, remainingRetakesForState } from '../engine/life';
+import { loadSave, recordFinalResultWithUnlocks, saveData, setInheritedTalent } from '../engine/storage';
 import { drawTalentCandidates, getTalentMap, hasTalentConflict } from '../engine/talents';
 import {
   getUniversityCollectionStats,
@@ -106,6 +106,8 @@ interface UiState {
   autoRunning: boolean;
   confirmingRestart: boolean;
   message: string | null;
+  recentAchievements: Achievement[];
+  achievementToasts: Achievement[];
 }
 
 const theme = {
@@ -164,10 +166,13 @@ class WxGameApp {
     autoRunning: false,
     confirmingRestart: false,
     message: null,
+    recentAchievements: [],
+    achievementToasts: [],
   };
 
   private buttons: Button[] = [];
   private autoRunTimer: ReturnType<typeof setTimeout> | null = null;
+  private achievementToastTimer: ReturnType<typeof setTimeout> | null = null;
   private lifecycleRenderTimer: ReturnType<typeof setTimeout> | null = null;
   private isAppVisible = true;
   private width = 375;
@@ -447,6 +452,8 @@ class WxGameApp {
       this.state.persistedResult = false;
       this.state.retakeLocked = false;
       this.state.autoRunning = false;
+      this.state.recentAchievements = [];
+      this.clearAchievementToasts();
       this.switchScreen('trajectory');
       this.preloadAdmissionLines();
       return;
@@ -474,7 +481,12 @@ class WxGameApp {
       this.state.persistedResult = false;
       this.state.retakeLocked = false;
       this.state.autoRunning = false;
-      this.state.message = '已选择复读一年，心态下降，风险上升。';
+      this.state.recentAchievements = [];
+      this.clearAchievementToasts();
+      const remaining = remainingRetakesForState(this.state.gameState);
+      this.state.message = remaining > 0
+        ? `已选择复读一年，心态下降，风险上升。剩余 ${remaining} 次复读机会。`
+        : '已选择复读一年，心态下降，风险上升。';
       this.switchScreen('trajectory');
       return;
     }
@@ -589,6 +601,8 @@ class WxGameApp {
     this.state.retakeLocked = false;
     this.state.autoRunning = false;
     this.state.confirmingRestart = false;
+    this.state.recentAchievements = [];
+    this.clearAchievementToasts();
     this.resetScroll('home');
   }
 
@@ -677,18 +691,38 @@ class WxGameApp {
       this.state.result = { state: step.state, ending: step.ending, admission: step.admission };
       this.state.persistedResult = false;
       this.state.retakeLocked = false;
+      this.state.recentAchievements = [];
       this.switchScreen('summary');
-      if (step.state.retakeUsed) this.commitFinalResult();
+      this.commitFinalResult({ lockRetake: false });
     }
   }
 
   private commitFinalResult(options: { lockRetake?: boolean } = {}): void {
     if (!this.state.result) return;
     if (!this.state.persistedResult) {
-      this.game.persist(recordFinalResult(this.game.save, this.state.result, this.game.content));
+      const recorded = recordFinalResultWithUnlocks(this.game.save, this.state.result, this.game.content);
+      this.game.persist(recorded.save);
       this.state.persistedResult = true;
+      this.state.recentAchievements = recorded.unlockedAchievements;
+      if (recorded.unlockedAchievements.length > 0) this.showAchievementToasts(recorded.unlockedAchievements);
     }
     if (options.lockRetake ?? true) this.state.retakeLocked = true;
+  }
+
+  private showAchievementToasts(achievements: Achievement[]): void {
+    this.state.achievementToasts = achievements;
+    if (this.achievementToastTimer !== null) clearTimeout(this.achievementToastTimer);
+    this.achievementToastTimer = setTimeout(() => {
+      this.achievementToastTimer = null;
+      this.state.achievementToasts = [];
+      this.requestRender();
+    }, 4200);
+  }
+
+  private clearAchievementToasts(): void {
+    if (this.achievementToastTimer !== null) clearTimeout(this.achievementToastTimer);
+    this.achievementToastTimer = null;
+    this.state.achievementToasts = [];
   }
 
   private shareCurrentResult(): void {
@@ -744,6 +778,7 @@ class WxGameApp {
     }
 
     this.drawFooter();
+    this.drawAchievementToast();
   }
 
   private requestRender(): void {
@@ -1149,6 +1184,7 @@ class WxGameApp {
       return cursor + 10;
     });
 
+    y = this.drawRecentAchievementsPanel(y + 10, this.state.recentAchievements);
     y = this.drawAdmissionPanel(y + 10, result.admission);
     y = this.drawRetakeFromPanel(y + 10, result.state);
     if (!result.admission.scoreHidden) y = this.drawStatsPanel(y + 10, result.state);
@@ -1560,15 +1596,46 @@ class WxGameApp {
     });
   }
 
+  private drawRecentAchievementsPanel(y: number, achievements: Achievement[]): number {
+    if (achievements.length === 0) return y;
+    return this.drawPanel(y, () => {
+      let cursor = y + 26;
+      this.drawSectionTitle('本次解锁', `${achievements.length} 个成就`, 36, cursor);
+      cursor += 58;
+      const columns = this.width < 360 ? 1 : 2;
+      const gap = 8;
+      const cellWidth = (this.width - 72 - gap * (columns - 1)) / columns;
+      const cellHeight = 52;
+      achievements.forEach((achievement, index) => {
+        const cellX = 36 + (index % columns) * (cellWidth + gap);
+        const cellY = cursor + Math.floor(index / columns) * (cellHeight + gap);
+        this.ctx.fillStyle = '#fffdf8';
+        this.roundRect(cellX, cellY, cellWidth, cellHeight, 8);
+        this.ctx.fill();
+        this.ctx.strokeStyle = '#f3dfb9';
+        this.ctx.stroke();
+        this.setFont(14, 800);
+        this.ctx.fillStyle = theme.title;
+        this.ctx.fillText(this.fitText(achievement.name, cellWidth - 18), cellX + 9, cellY + 21);
+        this.setFont(12, 800);
+        this.ctx.fillStyle = '#8a4d00';
+        this.ctx.fillText(achievementGradeName(achievement.grade), cellX + 9, cellY + 41);
+      });
+      return cursor + Math.ceil(achievements.length / columns) * (cellHeight + gap) + 2;
+    });
+  }
+
   private drawRetakeFromPanel(y: number, gameState: GameState): number {
     if (!gameState.retakeFrom) return y;
     return this.drawPanel(y, () => {
       let cursor = y + 26;
-      this.drawSectionTitle('首考结果', gameState.retakeFrom!.endingName, 36, cursor);
+      const title = gameState.retakeCount > 1 ? '上次结果' : '首考结果';
+      const label = gameState.retakeCount > 1 ? '上次' : '首考';
+      this.drawSectionTitle(title, gameState.retakeFrom!.endingName, 36, cursor);
       cursor += 58;
-      cursor = this.drawFactRow(cursor, '首考分数', String(gameState.retakeFrom!.finalScore));
-      cursor = this.drawFactRow(cursor, '首考院校', gameState.retakeFrom!.admittedUniversityName ?? '未录取到样本院校');
-      cursor = this.drawFactRow(cursor, '首考层级', admissionTierName(gameState.retakeFrom!.admissionTier));
+      cursor = this.drawFactRow(cursor, `${label}分数`, String(gameState.retakeFrom!.finalScore));
+      cursor = this.drawFactRow(cursor, `${label}院校`, gameState.retakeFrom!.admittedUniversityName ?? '未录取到样本院校');
+      cursor = this.drawFactRow(cursor, `${label}层级`, admissionTierName(gameState.retakeFrom!.admissionTier));
       return cursor + 4;
     });
   }
@@ -1603,8 +1670,10 @@ class WxGameApp {
       if (canRetake) {
         const gap = 8;
         const buttonWidth = (this.width - 72 - gap) / 2;
+        const remaining = this.state.result ? remainingRetakesForState(this.state.result.state) : 0;
+        const retakeLabel = remaining > 1 ? `复读一年(${remaining})` : '复读一年';
         this.drawButton({ type: 'shareResult' }, '分享录取', 36, cursor + 10, buttonWidth, 42, 'primary');
-        this.drawButton({ type: 'retake' }, '复读一年', 36 + buttonWidth + gap, cursor + 10, buttonWidth, 42, 'secondary');
+        this.drawButton({ type: 'retake' }, retakeLabel, 36 + buttonWidth + gap, cursor + 10, buttonWidth, 42, 'secondary');
         cursor += 62;
         return cursor + 4;
       }
@@ -1618,7 +1687,7 @@ class WxGameApp {
     return Boolean(
       this.state.result
       && !this.state.result.admission.scoreHidden
-      && !this.state.result.state.retakeUsed
+      && remainingRetakesForState(this.state.result.state) > 0
       && !this.state.retakeLocked,
     );
   }
@@ -1854,6 +1923,46 @@ class WxGameApp {
     return y + 64;
   }
 
+  private drawAchievementToast(): void {
+    const achievements = this.state.achievementToasts;
+    if (achievements.length === 0) return;
+
+    const x = 20;
+    const y = Math.max(12, this.safeTop + 10);
+    const width = this.width - 40;
+    const height = achievements.length > 1 ? 92 : 104;
+    const title = achievements.length > 1 ? `本次解锁 ${achievements.length} 个成就` : '成就解锁';
+    const body = achievements.length > 1
+      ? achievements.slice(0, 3).map(item => item.name).join('、')
+      : achievements[0].name;
+    const detail = achievements.length > 1 && achievements.length > 3
+      ? `等 ${achievements.length} 个成就`
+      : achievements.length === 1
+        ? achievements[0].description
+        : achievements.map(item => achievementGradeName(item.grade)).join('、');
+
+    this.ctx.save();
+    this.ctx.shadowColor = 'rgba(40, 54, 78, 0.18)';
+    this.ctx.shadowBlur = 24;
+    this.ctx.shadowOffsetY = 12;
+    this.ctx.fillStyle = 'rgba(255, 250, 240, 0.98)';
+    this.roundRect(x, y, width, height, 8);
+    this.ctx.fill();
+    this.ctx.shadowColor = 'transparent';
+    this.ctx.strokeStyle = 'rgba(240, 162, 58, 0.58)';
+    this.ctx.stroke();
+    this.setFont(13, 800);
+    this.ctx.fillStyle = '#8a4d00';
+    this.ctx.fillText(title, x + 14, y + 25);
+    this.setFont(17, 800);
+    this.ctx.fillStyle = theme.title;
+    const detailY = this.drawWrappedText(body, x + 14, y + 52, width - 28, 21, 2);
+    this.setFont(12, 500);
+    this.ctx.fillStyle = '#686157';
+    this.drawWrappedText(detail, x + 14, Math.min(detailY + 4, y + height - 14), width - 28, 16, 1);
+    this.ctx.restore();
+  }
+
   private drawButton(
     action: Action,
     label: string,
@@ -2035,7 +2144,7 @@ class WxGameApp {
   }
 
   private totalRounds(gameState: GameState): number {
-    const retakeRounds = gameState.retakeUsed ? this.game.content.ages.filter(round => round.age >= 17).length : 0;
+    const retakeRounds = this.game.content.ages.filter(round => round.age >= 17).length * gameState.retakeCount;
     return this.game.content.ages.length + retakeRounds;
   }
 
