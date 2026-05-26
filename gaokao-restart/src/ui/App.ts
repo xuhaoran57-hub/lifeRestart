@@ -13,7 +13,12 @@ import {
 
 type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements' | 'universities';
 
-const AUTO_RUN_INTERVAL_MS = 500;
+const AUTO_RUN_SPEEDS: { label: string; ms: number }[] = [
+  { label: '×1', ms: 500 },
+  { label: '×2', ms: 250 },
+  { label: '×5', ms: 100 },
+  { label: '跳过', ms: 0 },
+];
 
 interface UiState {
   screen: Screen;
@@ -28,6 +33,9 @@ interface UiState {
   persistedResult: boolean;
   retakeLocked: boolean;
   autoRunning: boolean;
+  autoRunSpeedIndex: number;
+  seed: number;
+  seedInput: string;
   message: string | null;
   recentAchievements: Achievement[];
   achievementToasts: Achievement[];
@@ -52,6 +60,9 @@ export function createApp(root: HTMLElement, game: GameApp): void {
     persistedResult: false,
     retakeLocked: false,
     autoRunning: false,
+    autoRunSpeedIndex: 0,
+    seed: Date.now(),
+    seedInput: '',
     message: null,
     recentAchievements: [],
     achievementToasts: [],
@@ -93,6 +104,20 @@ export function createApp(root: HTMLElement, game: GameApp): void {
 
   const scheduleAutoRun = () => {
     if (!state.autoRunning || autoRunTimer !== null) return;
+    const speed = AUTO_RUN_SPEEDS[state.autoRunSpeedIndex];
+    if (speed.ms === 0) {
+      // "跳过" mode: run all remaining rounds synchronously
+      try {
+        while (state.screen === 'trajectory' && state.gameState && !state.gameState.isFinished) {
+          runOneRound(state, game);
+        }
+        stopAutoRun();
+      } catch (error) {
+        stopAutoRun(error instanceof Error ? error.message : '操作失败');
+      }
+      render();
+      return;
+    }
     autoRunTimer = setTimeout(() => {
       autoRunTimer = null;
       if (!state.autoRunning) return;
@@ -110,7 +135,7 @@ export function createApp(root: HTMLElement, game: GameApp): void {
 
       render();
       scheduleAutoRun();
-    }, AUTO_RUN_INTERVAL_MS);
+    }, speed.ms);
   };
 
   const startAutoRun = () => {
@@ -126,7 +151,7 @@ export function createApp(root: HTMLElement, game: GameApp): void {
 
     try {
       const messageBeforeAction = state.message;
-      if (state.autoRunning && action !== 'auto-run') stopAutoRun();
+      if (state.autoRunning && action !== 'auto-run' && action !== 'speed-change') stopAutoRun();
       handleAction(action, target, state, game, { start: startAutoRun, stop: stopAutoRun });
       if (state.message === messageBeforeAction) state.message = null;
     } catch (error) {
@@ -134,6 +159,13 @@ export function createApp(root: HTMLElement, game: GameApp): void {
       state.message = error instanceof Error ? error.message : '操作失败';
     }
     render();
+  });
+
+  root.addEventListener('input', event => {
+    const target = event.target as HTMLInputElement;
+    if (target.dataset.input === 'seed') {
+      state.seedInput = target.value;
+    }
   });
 
   render();
@@ -147,8 +179,9 @@ function handleAction(
   autoRun: AutoRunControls,
 ): void {
   if (action === 'start') {
+    state.seed = state.seedInput ? parseInt(state.seedInput, 10) || Date.now() : Date.now();
     const inheritedTalentId = game.save.inheritedTalentId;
-    state.candidates = drawTalentCandidates(game.content, 10, inheritedTalentId, Date.now(), game.save.achievedIds);
+    state.candidates = drawTalentCandidates(game.content, 10, inheritedTalentId, state.seed, game.save.achievedIds);
     const inheritedCandidateId = state.candidates.some(item => item.id === inheritedTalentId) ? inheritedTalentId : null;
     state.inheritedCandidateId = inheritedCandidateId;
     state.selectedTalentIds = inheritedCandidateId !== null ? [inheritedCandidateId] : [];
@@ -203,7 +236,7 @@ function handleAction(
   }
 
   if (action === 'begin-run') {
-    const engine = new LifeEngine(game.content);
+    const engine = new LifeEngine(game.content, state.seed);
     const gameState = engine.start(state.selectedTalentIds, state.allocation);
     if (game.save.inheritedTalentId !== null) game.persist(setInheritedTalent(game.save, null));
     state.engine = engine;
@@ -212,6 +245,7 @@ function handleAction(
     state.persistedResult = false;
     state.retakeLocked = false;
     state.autoRunning = false;
+    state.autoRunSpeedIndex = 0;
     state.recentAchievements = [];
     state.achievementToasts = [];
     state.screen = 'trajectory';
@@ -228,6 +262,31 @@ function handleAction(
       autoRun.stop('已停止自动推进。');
     } else {
       autoRun.start();
+    }
+    return;
+  }
+
+  if (action === 'speed-change') {
+    state.autoRunSpeedIndex = (state.autoRunSpeedIndex + 1) % AUTO_RUN_SPEEDS.length;
+    return;
+  }
+
+  if (action === 'copy-seed') {
+    const seed = state.engine?.seed ?? state.seed;
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(String(seed));
+      state.message = `种子已复制：${seed}`;
+    }
+    return;
+  }
+
+  if (action === 'apply-seed') {
+    const parsed = parseInt(state.seedInput, 10);
+    if (Number.isFinite(parsed) && parsed > 0) {
+      state.seed = parsed;
+      state.message = `种子已设为 ${parsed}`;
+    } else {
+      state.message = '请输入有效数字种子';
     }
     return;
   }
@@ -274,6 +333,9 @@ function handleAction(
     state.persistedResult = false;
     state.retakeLocked = false;
     state.autoRunning = false;
+    state.autoRunSpeedIndex = 0;
+    state.seed = Date.now();
+    state.seedInput = '';
     state.recentAchievements = [];
     state.achievementToasts = [];
     return;
@@ -561,12 +623,17 @@ function renderProperties(state: UiState): string {
           <div class="prop-row">
             <span>${label}</span>
             <div class="stepper">
-              <button data-action="adjust-prop" data-prop="${prop}" data-delta="-1">-</button>
+              <button data-action="adjust-prop" data-prop="${prop}" data-delta="-1" aria-label="${label}减1">-</button>
               <strong>${state.allocation[prop]}</strong>
-              <button data-action="adjust-prop" data-prop="${prop}" data-delta="1">+</button>
+              <button data-action="adjust-prop" data-prop="${prop}" data-delta="1" aria-label="${label}加1">+</button>
             </div>
           </div>
         `).join('')}
+      </div>
+      <div class="seed-row">
+        <span class="muted">种子：${state.seed}</span>
+        <input type="text" data-input="seed" placeholder="输入种子" value="${escapeHtml(state.seedInput)}" />
+        <button class="ghost" data-action="apply-seed">设定</button>
       </div>
       <button class="primary wide" data-action="begin-run" ${remainingPoints(state.allocation) === 0 ? '' : 'disabled'}>进入考场人生</button>
     </section>
@@ -580,6 +647,7 @@ function renderTrajectory(state: UiState, game: GameApp): string {
   const retakeRounds = game.content.ages.filter(round => round.age >= 17).length * gameState.retakeCount;
   const totalRounds = game.content.ages.length + retakeRounds;
   const isAutoRunning = state.autoRunning && !gameState.isFinished;
+  const speedLabel = AUTO_RUN_SPEEDS[state.autoRunSpeedIndex].label;
   return `
     <section class="stack">
       <div class="panel run-panel">
@@ -591,6 +659,7 @@ function renderTrajectory(state: UiState, game: GameApp): string {
         <div class="actions">
           <button class="primary" data-action="next-round" ${gameState.isFinished || isAutoRunning ? 'disabled' : ''}>下一回合</button>
           <button data-action="auto-run" ${gameState.isFinished ? 'disabled' : ''}>${isAutoRunning ? '终止自动' : '自动跑完'}</button>
+          <button class="ghost speed-btn" data-action="speed-change">${escapeHtml(speedLabel)}</button>
         </div>
       </div>
       <div class="log-list">
@@ -636,6 +705,10 @@ function renderSummary(state: UiState, game: GameApp): string {
         </div>
       </div>
       ${canRetake ? `<button class="wide" data-action="retake">${remainingRetakes > 1 ? `复读一年（剩余 ${remainingRetakes} 次）` : '复读一年'}</button>` : ''}
+      <div class="seed-display">
+        <span class="muted">种子：${state.engine?.seed ?? ''}</span>
+        <button class="ghost" data-action="copy-seed">复制种子</button>
+      </div>
       <button class="primary wide" data-action="restart">再来一局</button>
     </section>
   `;

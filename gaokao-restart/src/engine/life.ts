@@ -24,6 +24,7 @@ import { applyPropDelta, calculateSummaryScore, createInitialProps, refreshScore
 import { pickWeighted, Random } from './random';
 import { forcedSubjectTrackFromTalents, resolveSubjectTrack } from './subjectTrack';
 import { getTalentMap, validateTalentSelection } from './talents';
+import balanceData from '../content/zh-cn/balance.json';
 
 export const RETAKE_SAINT_TALENT_ID = 21807;
 
@@ -35,45 +36,10 @@ export function remainingRetakesForState(state: Pick<GameState, 'selectedTalentI
   return Math.max(0, maxRetakesForState(state) - state.retakeCount);
 }
 
-const positiveEventEffectScale: Partial<Record<CorePropCode, number>> = {
-  INT: 0.19,
-  STR: 0.28,
-  MNY: 0.5,
-  SPR: 0.42,
-  VOL: 0.5,
-  RSK: 0.35,
-  SCOREMOD: 0.65,
-};
-
-const negativeEventEffectScale: Partial<Record<CorePropCode, number>> = {
-  INT: 0.3,
-  STR: 0.35,
-  MNY: 0.5,
-  SPR: 0.42,
-  VOL: 0.5,
-  RSK: 0.35,
-  SCOREMOD: 0.65,
-};
-
-const senior3PositiveEventEffectScale: Partial<Record<CorePropCode, number>> = {
-  INT: 0.35,
-  STR: 0.45,
-  MNY: 0.5,
-  SPR: 0.6,
-  VOL: 0.8,
-  RSK: 0.7,
-  SCOREMOD: 1,
-};
-
-const senior3NegativeEventEffectScale: Partial<Record<CorePropCode, number>> = {
-  INT: 0.45,
-  STR: 0.55,
-  MNY: 0.5,
-  SPR: 0.7,
-  VOL: 0.85,
-  RSK: 0.6,
-  SCOREMOD: 1,
-};
+const positiveEventEffectScale: Partial<Record<CorePropCode, number>> = balanceData.positiveEventEffectScale as Partial<Record<CorePropCode, number>>;
+const negativeEventEffectScale: Partial<Record<CorePropCode, number>> = balanceData.negativeEventEffectScale as Partial<Record<CorePropCode, number>>;
+const senior3PositiveEventEffectScale: Partial<Record<CorePropCode, number>> = balanceData.senior3PositiveEventEffectScale as Partial<Record<CorePropCode, number>>;
+const senior3NegativeEventEffectScale: Partial<Record<CorePropCode, number>> = balanceData.senior3NegativeEventEffectScale as Partial<Record<CorePropCode, number>>;
 
 const subjectTrackEventIds = {
   forcedPhysics: 32001,
@@ -155,11 +121,13 @@ export class LifeEngine {
   private readonly eventMap: Map<number, GameEvent>;
   private readonly talentMap: Map<number, Talent>;
   private state: GameState | null = null;
+  readonly seed: number;
 
   constructor(
     private readonly content: GameContent,
     seed = Date.now(),
   ) {
+    this.seed = seed;
     this.random = new Random(seed);
     this.eventMap = getEventMap(content);
     this.talentMap = getTalentMap(content);

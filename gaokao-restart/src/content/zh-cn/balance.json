@@ -1,0 +1,38 @@
+{
+  "positiveEventEffectScale": {
+    "INT": 0.19,
+    "STR": 0.28,
+    "MNY": 0.5,
+    "SPR": 0.42,
+    "VOL": 0.5,
+    "RSK": 0.35,
+    "SCOREMOD": 0.65
+  },
+  "negativeEventEffectScale": {
+    "INT": 0.3,
+    "STR": 0.35,
+    "MNY": 0.5,
+    "SPR": 0.42,
+    "VOL": 0.5,
+    "RSK": 0.35,
+    "SCOREMOD": 0.65
+  },
+  "senior3PositiveEventEffectScale": {
+    "INT": 0.35,
+    "STR": 0.45,
+    "MNY": 0.5,
+    "SPR": 0.6,
+    "VOL": 0.8,
+    "RSK": 0.7,
+    "SCOREMOD": 1
+  },
+  "senior3NegativeEventEffectScale": {
+    "INT": 0.45,
+    "STR": 0.55,
+    "MNY": 0.5,
+    "SPR": 0.7,
+    "VOL": 0.85,
+    "RSK": 0.6,
+    "SCOREMOD": 1
+  }
+}

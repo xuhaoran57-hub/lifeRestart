@@ -1,0 +1,404 @@
+{
+  "runs": 10000,
+  "seed": 20260525,
+  "completed": 10000,
+  "errors": 0,
+  "errorSamples": [],
+  "retaken": 9942,
+  "firstAll": {
+    "physics": {
+      "total": 4437,
+      "visibleScores": 4406,
+      "hiddenScores": 31,
+      "scoreSummary": {
+        "count": 4406,
+        "min": 340,
+        "p25": 481,
+        "median": 515,
+        "p75": 547,
+        "p90": 574,
+        "max": 708,
+        "avg": 513.49
+      },
+      "scoreBuckets": [
+        {
+          "name": "<450",
+          "count": 415,
+          "pct": 9.42
+        },
+        {
+          "name": "450-499",
+          "count": 1237,
+          "pct": 28.08
+        },
+        {
+          "name": "500-549",
+          "count": 1775,
+          "pct": 40.29
+        },
+        {
+          "name": "550-579",
+          "count": 614,
+          "pct": 13.94
+        },
+        {
+          "name": "580-609",
+          "count": 266,
+          "pct": 6.04
+        },
+        {
+          "name": "610-649",
+          "count": 95,
+          "pct": 2.16
+        },
+        {
+          "name": "650+",
+          "count": 4,
+          "pct": 0.09
+        }
+      ],
+      "admissionTiers": {
+        "211": 531,
+        "985": 108,
+        "college": 604,
+        "undergraduate": 3039,
+        "doubleFirstClass": 13,
+        "slide": 142
+      },
+      "realAdmissionRates": {
+        "admitted985": 2.43,
+        "admitted211Only": 11.97,
+        "admitted211Plus": 14.4
+      }
+    },
+    "history": {
+      "total": 5563,
+      "visibleScores": 5536,
+      "hiddenScores": 27,
+      "scoreSummary": {
+        "count": 5536,
+        "min": 345,
+        "p25": 501,
+        "median": 533,
+        "p75": 558,
+        "p90": 586,
+        "max": 711,
+        "avg": 530.13
+      },
+      "scoreBuckets": [
+        {
+          "name": "<450",
+          "count": 287,
+          "pct": 5.18
+        },
+        {
+          "name": "450-499",
+          "count": 1046,
+          "pct": 18.89
+        },
+        {
+          "name": "500-549",
+          "count": 2283,
+          "pct": 41.24
+        },
+        {
+          "name": "550-579",
+          "count": 1213,
+          "pct": 21.91
+        },
+        {
+          "name": "580-609",
+          "count": 440,
+          "pct": 7.95
+        },
+        {
+          "name": "610-649",
+          "count": 228,
+          "pct": 4.12
+        },
+        {
+          "name": "650+",
+          "count": 39,
+          "pct": 0.7
+        }
+      ],
+      "admissionTiers": {
+        "211": 637,
+        "985": 307,
+        "undergraduate": 3758,
+        "college": 693,
+        "doubleFirstClass": 55,
+        "slide": 113
+      },
+      "realAdmissionRates": {
+        "admitted985": 5.52,
+        "admitted211Only": 11.45,
+        "admitted211Plus": 16.97
+      }
+    }
+  },
+  "firstRetaken": {
+    "physics": {
+      "total": 4406,
+      "visibleScores": 4406,
+      "hiddenScores": 0,
+      "scoreSummary": {
+        "count": 4406,
+        "min": 340,
+        "p25": 481,
+        "median": 515,
+        "p75": 547,
+        "p90": 574,
+        "max": 708,
+        "avg": 513.49
+      },
+      "scoreBuckets": [
+        {
+          "name": "<450",
+          "count": 415,
+          "pct": 9.42
+        },
+        {
+          "name": "450-499",
+          "count": 1237,
+          "pct": 28.08
+        },
+        {
+          "name": "500-549",
+          "count": 1775,
+          "pct": 40.29
+        },
+        {
+          "name": "550-579",
+          "count": 614,
+          "pct": 13.94
+        },
+        {
+          "name": "580-609",
+          "count": 266,
+          "pct": 6.04
+        },
+        {
+          "name": "610-649",
+          "count": 95,
+          "pct": 2.16
+        },
+        {
+          "name": "650+",
+          "count": 4,
+          "pct": 0.09
+        }
+      ],
+      "admissionTiers": {
+        "211": 531,
+        "985": 77,
+        "college": 604,
+        "undergraduate": 3039,
+        "doubleFirstClass": 13,
+        "slide": 142
+      },
+      "realAdmissionRates": {
+        "admitted985": 1.75,
+        "admitted211Only": 12.05,
+        "admitted211Plus": 13.8
+      }
+    },
+    "history": {
+      "total": 5536,
+      "visibleScores": 5536,
+      "hiddenScores": 0,
+      "scoreSummary": {
+        "count": 5536,
+        "min": 345,
+        "p25": 501,
+        "median": 533,
+        "p75": 558,
+        "p90": 586,
+        "max": 711,
+        "avg": 530.13
+      },
+      "scoreBuckets": [
+        {
+          "name": "<450",
+          "count": 287,
+          "pct": 5.18
+        },
+        {
+          "name": "450-499",
+          "count": 1046,
+          "pct": 18.89
+        },
+        {
+          "name": "500-549",
+          "count": 2283,
+          "pct": 41.24
+        },
+        {
+          "name": "550-579",
+          "count": 1213,
+          "pct": 21.91
+        },
+        {
+          "name": "580-609",
+          "count": 440,
+          "pct": 7.95
+        },
+        {
+          "name": "610-649",
+          "count": 228,
+          "pct": 4.12
+        },
+        {
+          "name": "650+",
+          "count": 39,
+          "pct": 0.7
+        }
+      ],
+      "admissionTiers": {
+        "211": 637,
+        "985": 280,
+        "undergraduate": 3758,
+        "college": 693,
+        "doubleFirstClass": 55,
+        "slide": 113
+      },
+      "realAdmissionRates": {
+        "admitted985": 5.06,
+        "admitted211Only": 11.51,
+        "admitted211Plus": 16.56
+      }
+    }
+  },
+  "retake": {
+    "physics": {
+      "total": 4406,
+      "visibleScores": 4404,
+      "hiddenScores": 2,
+      "scoreSummary": {
+        "count": 4404,
+        "min": 343,
+        "p25": 490,
+        "median": 527,
+        "p75": 562,
+        "p90": 591,
+        "max": 694,
+        "avg": 525.39
+      },
+      "scoreBuckets": [
+        {
+          "name": "<450",
+          "count": 338,
+          "pct": 7.67
+        },
+        {
+          "name": "450-499",
+          "count": 1008,
+          "pct": 22.89
+        },
+        {
+          "name": "500-549",
+          "count": 1672,
+          "pct": 37.97
+        },
+        {
+          "name": "550-579",
+          "count": 716,
+          "pct": 16.26
+        },
+        {
+          "name": "580-609",
+          "count": 416,
+          "pct": 9.45
+        },
+        {
+          "name": "610-649",
+          "count": 236,
+          "pct": 5.36
+        },
+        {
+          "name": "650+",
+          "count": 18,
+          "pct": 0.41
+        }
+      ],
+      "admissionTiers": {
+        "211": 765,
+        "985": 210,
+        "undergraduate": 2888,
+        "college": 470,
+        "doubleFirstClass": 36,
+        "slide": 37
+      },
+      "realAdmissionRates": {
+        "admitted985": 4.77,
+        "admitted211Only": 17.36,
+        "admitted211Plus": 22.13
+      }
+    },
+    "history": {
+      "total": 5536,
+      "visibleScores": 5533,
+      "hiddenScores": 3,
+      "scoreSummary": {
+        "count": 5533,
+        "min": 342,
+        "p25": 507,
+        "median": 543,
+        "p75": 575,
+        "p90": 610,
+        "max": 708,
+        "avg": 539.88
+      },
+      "scoreBuckets": [
+        {
+          "name": "<450",
+          "count": 279,
+          "pct": 5.04
+        },
+        {
+          "name": "450-499",
+          "count": 899,
+          "pct": 16.25
+        },
+        {
+          "name": "500-549",
+          "count": 1956,
+          "pct": 35.35
+        },
+        {
+          "name": "550-579",
+          "count": 1163,
+          "pct": 21.02
+        },
+        {
+          "name": "580-609",
+          "count": 673,
+          "pct": 12.16
+        },
+        {
+          "name": "610-649",
+          "count": 505,
+          "pct": 9.13
+        },
+        {
+          "name": "650+",
+          "count": 58,
+          "pct": 1.05
+        }
+      ],
+      "admissionTiers": {
+        "211": 866,
+        "985": 609,
+        "undergraduate": 3273,
+        "college": 677,
+        "doubleFirstClass": 72,
+        "slide": 39
+      },
+      "realAdmissionRates": {
+        "admitted985": 11,
+        "admitted211Only": 15.64,
+        "admitted211Plus": 26.64
+      }
+    }
+  }
+}

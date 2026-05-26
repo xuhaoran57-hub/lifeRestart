@@ -3,6 +3,7 @@ import { evaluateCondition } from './condition';
 import { getUniversityCollectionStats } from './universities';
 
 export const STORAGE_KEY = 'gaokao-restart.save.v1';
+export const CURRENT_SCHEMA_VERSION = 1;
 
 export interface SaveStorage {
   getItem(key: string): string | null;
@@ -15,6 +16,7 @@ export interface RecordedFinalResult {
 }
 
 const emptySave: SaveData = {
+  schemaVersion: CURRENT_SCHEMA_VERSION,
   times: 0,
   inheritedTalentId: null,
   seenTalentIds: [],
@@ -33,7 +35,8 @@ export function loadSave(storage = getDefaultStorage()): SaveData {
   try {
     const raw = storage.getItem(STORAGE_KEY);
     if (!raw) return createEmptySave();
-    return normalizeSave(JSON.parse(raw));
+    const parsed = JSON.parse(raw);
+    return migrateSave(normalizeSave(parsed));
   } catch {
     return createEmptySave();
   }
@@ -98,6 +101,7 @@ function findUnlockedAchievements(save: SaveData, result: FinalResult, content: 
 
 function normalizeSave(value: Partial<SaveData>): SaveData {
   return {
+    schemaVersion: typeof value.schemaVersion === 'number' ? value.schemaVersion : 0,
     times: Number.isFinite(value.times) ? Number(value.times) : 0,
     inheritedTalentId: typeof value.inheritedTalentId === 'number' ? value.inheritedTalentId : null,
     seenTalentIds: uniqueNumbers(value.seenTalentIds),
@@ -106,6 +110,14 @@ function normalizeSave(value: Partial<SaveData>): SaveData {
     unlockedUniversityCodes: uniqueStrings(value.unlockedUniversityCodes),
     achievedIds: uniqueNumbers(value.achievedIds),
   };
+}
+
+function migrateSave(save: SaveData): SaveData {
+  // Migration from schema 0 (no version) to 1: just stamp the version
+  if (save.schemaVersion < CURRENT_SCHEMA_VERSION) {
+    save.schemaVersion = CURRENT_SCHEMA_VERSION;
+  }
+  return save;
 }
 
 function admittedUniversityCodes(result: FinalResult): string[] {

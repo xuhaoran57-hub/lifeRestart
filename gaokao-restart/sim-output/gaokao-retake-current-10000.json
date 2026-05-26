@@ -1,0 +1,888 @@
+{
+  "runs": 10000,
+  "seed": 20260525,
+  "completed": 10000,
+  "errors": 0,
+  "errorSamples": [],
+  "retaken": 9942,
+  "retakeRate": 99.42,
+  "comparableRetakes": 9937,
+  "hiddenScores": {
+    "firstAll": 58,
+    "firstRetaken": 0,
+    "retake": 5
+  },
+  "nonRetakeReasons": {
+    "保送录取已提前锁定，不能复读": 58
+  },
+  "scoreSummary": {
+    "firstAllVisible": {
+      "count": 9942,
+      "min": 340,
+      "p10": 460,
+      "p25": 492,
+      "median": 525,
+      "p75": 553,
+      "p90": 582,
+      "max": 711,
+      "avg": 522.76
+    },
+    "firstRetakenVisible": {
+      "count": 9942,
+      "min": 340,
+      "p10": 460,
+      "p25": 492,
+      "median": 525,
+      "p75": 553,
+      "p90": 582,
+      "max": 711,
+      "avg": 522.76
+    },
+    "retakeVisible": {
+      "count": 9937,
+      "min": 342,
+      "p10": 464,
+      "p25": 499,
+      "median": 536,
+      "p75": 569,
+      "p90": 606,
+      "max": 708,
+      "avg": 533.45
+    },
+    "firstComparableVisible": {
+      "count": 9937,
+      "min": 340,
+      "p10": 460,
+      "p25": 492,
+      "median": 525,
+      "p75": 553,
+      "p90": 582,
+      "max": 711,
+      "avg": 522.74
+    },
+    "retakeComparableVisible": {
+      "count": 9937,
+      "min": 342,
+      "p10": 464,
+      "p25": 499,
+      "median": 536,
+      "p75": 569,
+      "p90": 606,
+      "max": 708,
+      "avg": 533.45
+    },
+    "retakeMinusFirstVisible": {
+      "count": 9937,
+      "min": -199,
+      "p10": -56,
+      "p25": -24,
+      "median": 10,
+      "p75": 44,
+      "p90": 76,
+      "max": 199,
+      "avg": 10.72
+    }
+  },
+  "scoreExtrema": {
+    "firstAllVisible": {
+      "min": {
+        "index": 7737,
+        "seed": 151930339,
+        "attempt": "first",
+        "finalScore": 340,
+        "visibleScore": 340,
+        "scoreHidden": false,
+        "endingName": "状态崩盘出局",
+        "admissionTier": "college",
+        "universityName": "未录取",
+        "universityCode": null
+      },
+      "max": {
+        "index": 1822,
+        "seed": 648154483,
+        "attempt": "first",
+        "finalScore": 711,
+        "visibleScore": 711,
+        "scoreHidden": false,
+        "endingName": "211 王牌专业",
+        "admissionTier": "211",
+        "universityName": "上海外国语大学",
+        "universityCode": "2366"
+      }
+    },
+    "firstRetakenVisible": {
+      "min": {
+        "index": 7737,
+        "seed": 151930339,
+        "attempt": "first",
+        "finalScore": 340,
+        "visibleScore": 340,
+        "scoreHidden": false,
+        "endingName": "状态崩盘出局",
+        "admissionTier": "college",
+        "universityName": "未录取",
+        "universityCode": null
+      },
+      "max": {
+        "index": 1822,
+        "seed": 648154483,
+        "attempt": "first",
+        "finalScore": 711,
+        "visibleScore": 711,
+        "scoreHidden": false,
+        "endingName": "211 王牌专业",
+        "admissionTier": "211",
+        "universityName": "上海外国语大学",
+        "universityCode": "2366"
+      }
+    },
+    "retakeVisible": {
+      "min": {
+        "index": 6149,
+        "seed": 2094589347,
+        "attempt": "retake",
+        "finalScore": 342,
+        "visibleScore": 342,
+        "scoreHidden": false,
+        "endingName": "盲冲滑档",
+        "admissionTier": "college",
+        "universityName": "未录取",
+        "universityCode": null
+      },
+      "max": {
+        "index": 7850,
+        "seed": 2118277427,
+        "attempt": "retake",
+        "finalScore": 708,
+        "visibleScore": 708,
+        "scoreHidden": false,
+        "endingName": "复读冲进 985",
+        "admissionTier": "985",
+        "universityName": "清华大学",
+        "universityCode": "2176"
+      }
+    },
+    "deltaVisible": {
+      "min": {
+        "index": 8299,
+        "first": {
+          "index": 8299,
+          "seed": 1550269827,
+          "attempt": "first",
+          "finalScore": 588,
+          "visibleScore": 588,
+          "scoreHidden": false,
+          "endingName": "卷面分救命",
+          "admissionTier": "211",
+          "universityName": "海南大学",
+          "universityCode": "1491"
+        },
+        "retake": {
+          "index": 8299,
+          "seed": 1550269827,
+          "attempt": "retake",
+          "finalScore": 389,
+          "visibleScore": 389,
+          "scoreHidden": false,
+          "endingName": "二战失手",
+          "admissionTier": "college",
+          "universityName": "未录取",
+          "universityCode": null
+        },
+        "delta": -199
+      },
+      "max": {
+        "index": 4260,
+        "first": {
+          "index": 4260,
+          "seed": 286699347,
+          "attempt": "first",
+          "finalScore": 437,
+          "visibleScore": 437,
+          "scoreHidden": false,
+          "endingName": "选科信息优势",
+          "admissionTier": "college",
+          "universityName": "未录取",
+          "universityCode": null
+        },
+        "retake": {
+          "index": 4260,
+          "seed": 286699347,
+          "attempt": "retake",
+          "finalScore": 636,
+          "visibleScore": 636,
+          "scoreHidden": false,
+          "endingName": "复读冲进 985",
+          "admissionTier": "985",
+          "universityName": "东北大学秦皇岛分校",
+          "universityCode": "1255"
+        },
+        "delta": 199
+      }
+    }
+  },
+  "scoreBucketsComparable": [
+    {
+      "name": "<450",
+      "firstCount": 702,
+      "firstPct": 7.06,
+      "retakeCount": 617,
+      "retakePct": 6.21,
+      "pctPointChange": -0.85
+    },
+    {
+      "name": "450-499",
+      "firstCount": 2283,
+      "firstPct": 22.97,
+      "retakeCount": 1907,
+      "retakePct": 19.19,
+      "pctPointChange": -3.78
+    },
+    {
+      "name": "500-549",
+      "firstCount": 4055,
+      "firstPct": 40.81,
+      "retakeCount": 3628,
+      "retakePct": 36.51,
+      "pctPointChange": -4.3
+    },
+    {
+      "name": "550-579",
+      "firstCount": 1827,
+      "firstPct": 18.39,
+      "retakeCount": 1879,
+      "retakePct": 18.91,
+      "pctPointChange": 0.52
+    },
+    {
+      "name": "580-609",
+      "firstCount": 705,
+      "firstPct": 7.09,
+      "retakeCount": 1089,
+      "retakePct": 10.96,
+      "pctPointChange": 3.87
+    },
+    {
+      "name": "610-649",
+      "firstCount": 322,
+      "firstPct": 3.24,
+      "retakeCount": 741,
+      "retakePct": 7.46,
+      "pctPointChange": 4.22
+    },
+    {
+      "name": "650+",
+      "firstCount": 43,
+      "firstPct": 0.43,
+      "retakeCount": 76,
+      "retakePct": 0.76,
+      "pctPointChange": 0.33
+    }
+  ],
+  "deltaBuckets": [
+    {
+      "name": "<=-80",
+      "count": 439,
+      "pct": 4.42
+    },
+    {
+      "name": "-79~-51",
+      "count": 759,
+      "pct": 7.64
+    },
+    {
+      "name": "-50~-21",
+      "count": 1481,
+      "pct": 14.9
+    },
+    {
+      "name": "-20~-1",
+      "count": 831,
+      "pct": 8.36
+    },
+    {
+      "name": "0",
+      "count": 142,
+      "pct": 1.43
+    },
+    {
+      "name": "+1~+20",
+      "count": 2093,
+      "pct": 21.06
+    },
+    {
+      "name": "+21~+40",
+      "count": 1488,
+      "pct": 14.97
+    },
+    {
+      "name": "+41~+60",
+      "count": 1138,
+      "pct": 11.45
+    },
+    {
+      "name": "+61~+80",
+      "count": 748,
+      "pct": 7.53
+    },
+    {
+      "name": ">=+81",
+      "count": 818,
+      "pct": 8.23
+    }
+  ],
+  "deltaDirection": {
+    "improved": 6285,
+    "same": 142,
+    "declined": 3510,
+    "improvedPct": 63.25,
+    "samePct": 1.43,
+    "declinedPct": 35.32
+  },
+  "tierDistribution": {
+    "firstAll": {
+      "211": 1168,
+      "985": 415,
+      "undergraduate": 6797,
+      "college": 1297,
+      "slide": 255,
+      "doubleFirstClass": 68
+    },
+    "firstRetaken": {
+      "211": 1168,
+      "985": 357,
+      "undergraduate": 6797,
+      "college": 1297,
+      "slide": 255,
+      "doubleFirstClass": 68
+    },
+    "retake": {
+      "211": 1631,
+      "985": 819,
+      "undergraduate": 6161,
+      "college": 1147,
+      "doubleFirstClass": 108,
+      "slide": 76
+    }
+  },
+  "tierFlow": {
+    "211": {
+      "211": 368,
+      "985": 215,
+      "undergraduate": 526,
+      "doubleFirstClass": 22,
+      "college": 35,
+      "slide": 2
+    },
+    "985": {
+      "211": 96,
+      "985": 123,
+      "undergraduate": 129,
+      "doubleFirstClass": 6,
+      "college": 3
+    },
+    "college": {
+      "211": 45,
+      "985": 12,
+      "undergraduate": 853,
+      "college": 373,
+      "slide": 12,
+      "doubleFirstClass": 2
+    },
+    "undergraduate": {
+      "211": 1065,
+      "985": 443,
+      "undergraduate": 4448,
+      "college": 710,
+      "doubleFirstClass": 73,
+      "slide": 58
+    },
+    "doubleFirstClass": {
+      "211": 20,
+      "985": 17,
+      "undergraduate": 28,
+      "doubleFirstClass": 2,
+      "college": 1
+    },
+    "slide": {
+      "211": 37,
+      "985": 9,
+      "undergraduate": 177,
+      "college": 25,
+      "slide": 4,
+      "doubleFirstClass": 3
+    }
+  },
+  "universityDistribution": {
+    "firstAllTop20": [
+      {
+        "name": "未录取",
+        "count": 1552,
+        "pct": 15.52
+      },
+      {
+        "name": "石河子大学",
+        "count": 257,
+        "pct": 2.57
+      },
+      {
+        "name": "西藏大学",
+        "count": 129,
+        "pct": 1.29
+      },
+      {
+        "name": "青海大学",
+        "count": 111,
+        "pct": 1.11
+      },
+      {
+        "name": "中国农业大学",
+        "count": 72,
+        "pct": 0.72
+      },
+      {
+        "name": "延边大学",
+        "count": 71,
+        "pct": 0.71
+      },
+      {
+        "name": "宁夏大学",
+        "count": 63,
+        "pct": 0.63
+      },
+      {
+        "name": "中国石油大学（北京）克拉玛依校区",
+        "count": 55,
+        "pct": 0.55
+      },
+      {
+        "name": "内蒙古大学",
+        "count": 46,
+        "pct": 0.46
+      },
+      {
+        "name": "新疆大学",
+        "count": 43,
+        "pct": 0.43
+      },
+      {
+        "name": "合肥大学",
+        "count": 42,
+        "pct": 0.42
+      },
+      {
+        "name": "中国矿业大学",
+        "count": 42,
+        "pct": 0.42
+      },
+      {
+        "name": "重庆大学",
+        "count": 38,
+        "pct": 0.38
+      },
+      {
+        "name": "西北农林科技大学",
+        "count": 35,
+        "pct": 0.35
+      },
+      {
+        "name": "东北大学秦皇岛分校",
+        "count": 30,
+        "pct": 0.3
+      },
+      {
+        "name": "阜阳师范大学",
+        "count": 25,
+        "pct": 0.25
+      },
+      {
+        "name": "东北农业大学",
+        "count": 24,
+        "pct": 0.24
+      },
+      {
+        "name": "温州肯恩大学",
+        "count": 22,
+        "pct": 0.22
+      },
+      {
+        "name": "中国海洋大学",
+        "count": 22,
+        "pct": 0.22
+      },
+      {
+        "name": "上海交通大学",
+        "count": 21,
+        "pct": 0.21
+      }
+    ],
+    "firstRetakenTop20": [
+      {
+        "name": "未录取",
+        "count": 1552,
+        "pct": 15.61
+      },
+      {
+        "name": "石河子大学",
+        "count": 257,
+        "pct": 2.58
+      },
+      {
+        "name": "西藏大学",
+        "count": 129,
+        "pct": 1.3
+      },
+      {
+        "name": "青海大学",
+        "count": 111,
+        "pct": 1.12
+      },
+      {
+        "name": "中国农业大学",
+        "count": 72,
+        "pct": 0.72
+      },
+      {
+        "name": "延边大学",
+        "count": 71,
+        "pct": 0.71
+      },
+      {
+        "name": "宁夏大学",
+        "count": 63,
+        "pct": 0.63
+      },
+      {
+        "name": "中国石油大学（北京）克拉玛依校区",
+        "count": 55,
+        "pct": 0.55
+      },
+      {
+        "name": "内蒙古大学",
+        "count": 46,
+        "pct": 0.46
+      },
+      {
+        "name": "新疆大学",
+        "count": 43,
+        "pct": 0.43
+      },
+      {
+        "name": "合肥大学",
+        "count": 42,
+        "pct": 0.42
+      },
+      {
+        "name": "中国矿业大学",
+        "count": 42,
+        "pct": 0.42
+      },
+      {
+        "name": "重庆大学",
+        "count": 38,
+        "pct": 0.38
+      },
+      {
+        "name": "西北农林科技大学",
+        "count": 35,
+        "pct": 0.35
+      },
+      {
+        "name": "东北大学秦皇岛分校",
+        "count": 30,
+        "pct": 0.3
+      },
+      {
+        "name": "阜阳师范大学",
+        "count": 25,
+        "pct": 0.25
+      },
+      {
+        "name": "东北农业大学",
+        "count": 24,
+        "pct": 0.24
+      },
+      {
+        "name": "温州肯恩大学",
+        "count": 22,
+        "pct": 0.22
+      },
+      {
+        "name": "中国海洋大学",
+        "count": 22,
+        "pct": 0.22
+      },
+      {
+        "name": "北京中医药大学",
+        "count": 20,
+        "pct": 0.2
+      }
+    ],
+    "retakeTop20": [
+      {
+        "name": "未录取",
+        "count": 1223,
+        "pct": 12.3
+      },
+      {
+        "name": "石河子大学",
+        "count": 295,
+        "pct": 2.97
+      },
+      {
+        "name": "西藏大学",
+        "count": 163,
+        "pct": 1.64
+      },
+      {
+        "name": "青海大学",
+        "count": 151,
+        "pct": 1.52
+      },
+      {
+        "name": "中国农业大学",
+        "count": 135,
+        "pct": 1.36
+      },
+      {
+        "name": "宁夏大学",
+        "count": 104,
+        "pct": 1.05
+      },
+      {
+        "name": "西北农林科技大学",
+        "count": 104,
+        "pct": 1.05
+      },
+      {
+        "name": "重庆大学",
+        "count": 101,
+        "pct": 1.02
+      },
+      {
+        "name": "中国石油大学（北京）克拉玛依校区",
+        "count": 79,
+        "pct": 0.79
+      },
+      {
+        "name": "延边大学",
+        "count": 77,
+        "pct": 0.77
+      },
+      {
+        "name": "新疆大学",
+        "count": 69,
+        "pct": 0.69
+      },
+      {
+        "name": "内蒙古大学",
+        "count": 62,
+        "pct": 0.62
+      },
+      {
+        "name": "中国矿业大学",
+        "count": 59,
+        "pct": 0.59
+      },
+      {
+        "name": "厦门大学",
+        "count": 54,
+        "pct": 0.54
+      },
+      {
+        "name": "合肥大学",
+        "count": 51,
+        "pct": 0.51
+      },
+      {
+        "name": "东北农业大学",
+        "count": 44,
+        "pct": 0.44
+      },
+      {
+        "name": "东北大学秦皇岛分校",
+        "count": 41,
+        "pct": 0.41
+      },
+      {
+        "name": "中国海洋大学",
+        "count": 41,
+        "pct": 0.41
+      },
+      {
+        "name": "武汉大学",
+        "count": 36,
+        "pct": 0.36
+      },
+      {
+        "name": "兰州大学",
+        "count": 35,
+        "pct": 0.35
+      }
+    ],
+    "gainTop10": [
+      {
+        "name": "西北农林科技大学",
+        "beforeCount": 35,
+        "beforePct": 0.35,
+        "afterCount": 104,
+        "afterPct": 1.05,
+        "pctPointChange": 0.7
+      },
+      {
+        "name": "中国农业大学",
+        "beforeCount": 72,
+        "beforePct": 0.72,
+        "afterCount": 135,
+        "afterPct": 1.36,
+        "pctPointChange": 0.64
+      },
+      {
+        "name": "重庆大学",
+        "beforeCount": 38,
+        "beforePct": 0.38,
+        "afterCount": 101,
+        "afterPct": 1.02,
+        "pctPointChange": 0.64
+      },
+      {
+        "name": "宁夏大学",
+        "beforeCount": 63,
+        "beforePct": 0.63,
+        "afterCount": 104,
+        "afterPct": 1.05,
+        "pctPointChange": 0.42
+      },
+      {
+        "name": "青海大学",
+        "beforeCount": 111,
+        "beforePct": 1.12,
+        "afterCount": 151,
+        "afterPct": 1.52,
+        "pctPointChange": 0.4
+      },
+      {
+        "name": "石河子大学",
+        "beforeCount": 257,
+        "beforePct": 2.58,
+        "afterCount": 295,
+        "afterPct": 2.97,
+        "pctPointChange": 0.39
+      },
+      {
+        "name": "厦门大学",
+        "beforeCount": 19,
+        "beforePct": 0.19,
+        "afterCount": 54,
+        "afterPct": 0.54,
+        "pctPointChange": 0.35
+      },
+      {
+        "name": "西藏大学",
+        "beforeCount": 129,
+        "beforePct": 1.3,
+        "afterCount": 163,
+        "afterPct": 1.64,
+        "pctPointChange": 0.34
+      },
+      {
+        "name": "新疆大学",
+        "beforeCount": 43,
+        "beforePct": 0.43,
+        "afterCount": 69,
+        "afterPct": 0.69,
+        "pctPointChange": 0.26
+      },
+      {
+        "name": "中国石油大学（北京）克拉玛依校区",
+        "beforeCount": 55,
+        "beforePct": 0.55,
+        "afterCount": 79,
+        "afterPct": 0.79,
+        "pctPointChange": 0.24
+      }
+    ],
+    "dropTop10": [
+      {
+        "name": "未录取",
+        "beforeCount": 1552,
+        "beforePct": 15.61,
+        "afterCount": 1223,
+        "afterPct": 12.3,
+        "pctPointChange": -3.31
+      },
+      {
+        "name": "池州学院",
+        "beforeCount": 18,
+        "beforePct": 0.18,
+        "afterCount": 4,
+        "afterPct": 0.04,
+        "pctPointChange": -0.14
+      },
+      {
+        "name": "怀化学院",
+        "beforeCount": 15,
+        "beforePct": 0.15,
+        "afterCount": 1,
+        "afterPct": 0.01,
+        "pctPointChange": -0.14
+      },
+      {
+        "name": "合肥师范学院",
+        "beforeCount": 19,
+        "beforePct": 0.19,
+        "afterCount": 8,
+        "afterPct": 0.08,
+        "pctPointChange": -0.11
+      },
+      {
+        "name": "邵阳学院",
+        "beforeCount": 18,
+        "beforePct": 0.18,
+        "afterCount": 7,
+        "afterPct": 0.07,
+        "pctPointChange": -0.11
+      },
+      {
+        "name": "陕西国际商贸学院",
+        "beforeCount": 17,
+        "beforePct": 0.17,
+        "afterCount": 6,
+        "afterPct": 0.06,
+        "pctPointChange": -0.11
+      },
+      {
+        "name": "黄冈师范学院",
+        "beforeCount": 17,
+        "beforePct": 0.17,
+        "afterCount": 6,
+        "afterPct": 0.06,
+        "pctPointChange": -0.11
+      },
+      {
+        "name": "连云港师范学院",
+        "beforeCount": 16,
+        "beforePct": 0.16,
+        "afterCount": 5,
+        "afterPct": 0.05,
+        "pctPointChange": -0.11
+      },
+      {
+        "name": "成都师范学院",
+        "beforeCount": 14,
+        "beforePct": 0.14,
+        "afterCount": 3,
+        "afterPct": 0.03,
+        "pctPointChange": -0.11
+      },
+      {
+        "name": "豫章师范学院",
+        "beforeCount": 13,
+        "beforePct": 0.13,
+        "afterCount": 2,
+        "afterPct": 0.02,
+        "pctPointChange": -0.11
+      }
+    ]
+  }
+}

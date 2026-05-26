@@ -279,6 +279,7 @@ export interface FinalResult {
 }
 
 export interface SaveData {
+  schemaVersion: number;
   times: number;
   inheritedTalentId: number | null;
   seenTalentIds: number[];

@@ -8,7 +8,6 @@ import type {
   RunLog,
   SaveData,
   Talent,
-  TalentRarity,
   University,
 } from '../app/types';
 import { LifeEngine, remainingRetakesForState } from '../engine/life';
@@ -22,14 +21,32 @@ import {
   universityGroupLabels,
 } from '../engine/universities';
 import { createWxContentLoader, type WxContentLoader } from './contentLoader';
+import {
+  achievementGradeName,
+  admissionTierName,
+  ageStageName,
+  screenName,
+  talentRarityLabel,
+  talentRarityName,
+  universityTierLabel,
+  type Screen,
+} from './labels';
+import {
+  cancelNextFrame,
+  createOffscreenCanvas,
+  createRuntimeCanvas,
+  getWxApi,
+  requestNextFrame,
+} from './runtime';
 import { createWxSaveStorage } from './storage';
+import { propRows, rarityColors, theme, type PropKey } from './theme';
 
-type Screen = 'home' | 'talents' | 'properties' | 'trajectory' | 'summary' | 'achievements' | 'universities';
-type PropKey = keyof Allocation;
-
-const AUTO_RUN_INTERVAL_MS = 500;
 const HOME_CONTENT_PRELOAD_DELAY_MS = 1200;
 const ADMISSION_LINES_PRELOAD_DELAY_MS = 1500;
+const SCROLLBAR_FADE_MS = 900;
+const INERTIA_FRICTION = 0.93;
+const INERTIA_MIN_VELOCITY = 0.04;
+const AUTO_RUN_INTERVAL_MS = 500;
 
 type Action =
   | { type: 'start' }
@@ -110,43 +127,6 @@ interface UiState {
   achievementToasts: Achievement[];
 }
 
-const theme = {
-  ink: '#172033',
-  title: '#111b2b',
-  heroTitle: '#0f2235',
-  subtle: '#687386',
-  paper: '#fffdf8',
-  paperStrong: '#ffffff',
-  line: '#e5ded3',
-  warm: '#f6efe4',
-  sky: '#dff2ff',
-  blue: '#3a86e8',
-  blueDeep: '#153f63',
-  blueMid: '#2e78b7',
-  teal: '#2f7c80',
-  gold: '#f6a623',
-  purple: '#8758d8',
-  green: '#45b37d',
-  danger: '#d9480f',
-  ghostBorder: 'rgba(157, 148, 134, 0.32)',
-  shadow: 'rgba(40, 54, 78, 0.11)',
-  shadowSoft: 'rgba(40, 54, 78, 0.08)',
-} as const;
-
-const propRows: Array<{ key: PropKey; label: string; color: string }> = [
-  { key: 'INT', label: '学力', color: theme.blue },
-  { key: 'STR', label: '精力', color: theme.green },
-  { key: 'MNY', label: '资源', color: theme.gold },
-  { key: 'SPR', label: '心态', color: theme.teal },
-];
-
-const rarityColors: Record<TalentRarity, { bg: string; fg: string; border: string }> = {
-  common: { bg: '#f3f0e8', fg: '#514d46', border: '#d8d0c2' },
-  rare: { bg: '#e5f1ff', fg: '#155996', border: '#5aa7ff' },
-  epic: { bg: '#f0e8ff', fg: '#6840b6', border: '#a56cff' },
-  legendary: { bg: '#fff1d8', fg: '#8a4d00', border: '#f0a23a' },
-};
-
 class WxGameApp {
   private readonly ctx: CanvasRenderingContext2D;
   private readonly contentLoader: WxContentLoader;
@@ -191,7 +171,21 @@ class WxGameApp {
   private currentOffsetY = 0;
   private currentButtonViewport: Rect | null = null;
   private logLayoutCache: LogLayoutCache | null = null;
+  private wrapTextCache = new Map<string, string[]>();
   private renderFrameHandle: number | null = null;
+  private lastFont = '';
+  private backgroundCanvas: HTMLCanvasElement | null = null;
+  private backgroundCanvasKey = '';
+  private inertiaVelocity = 0;
+  private inertiaRafHandle: number | null = null;
+  private lastTouchMoveY = 0;
+  private lastTouchMoveTime = 0;
+  private scrollbarVisibleUntil = 0;
+  private scrollbarFadeTimer: ReturnType<typeof setTimeout> | null = null;
+  private scrollDirtyOnly = false;
+  private shareImageTempPath: string | null = null;
+  private shareImageResultKey: string | null = null;
+  private shareImagePending = false;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
@@ -253,6 +247,9 @@ class WxGameApp {
     }
     this.ctx.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
     this.ctx.textBaseline = 'alphabetic';
+    this.lastFont = '';
+    this.backgroundCanvas = null;
+    this.backgroundCanvasKey = '';
   }
 
   private bindInput(): void {
@@ -279,7 +276,11 @@ class WxGameApp {
 
   private bindShare(): void {
     this.wxApi?.showShareMenu?.({ withShareTicket: true });
-    this.wxApi?.onShareAppMessage?.(() => ({ title: this.resultShareTitle() }));
+    this.wxApi?.onShareAppMessage?.(() => {
+      const payload: WxSharePayload = { title: this.resultShareTitle() };
+      if (this.shareImageTempPath) payload.imageUrl = this.shareImageTempPath;
+      return payload;
+    });
   }
 
   private bindLifecycle(): void {
@@ -319,6 +320,58 @@ class WxGameApp {
   private resetTouchState(): void {
     this.isTouchScrolling = false;
     this.isTouchMoved = false;
+    this.stopInertia();
+  }
+
+  private stopInertia(): void {
+    if (this.inertiaRafHandle !== null) {
+      cancelNextFrame(this.inertiaRafHandle);
+      this.inertiaRafHandle = null;
+    }
+    this.inertiaVelocity = 0;
+  }
+
+  private kickInertia(): void {
+    if (Math.abs(this.inertiaVelocity) < INERTIA_MIN_VELOCITY) {
+      this.inertiaVelocity = 0;
+      return;
+    }
+    if (this.maxScrollY <= 0) {
+      this.inertiaVelocity = 0;
+      return;
+    }
+    if (this.inertiaRafHandle !== null) return;
+    let lastTime = Date.now();
+    const step = (): void => {
+      const now = Date.now();
+      const dt = Math.min(48, now - lastTime);
+      lastTime = now;
+      this.scrollY = this.clamp(this.scrollY + this.inertiaVelocity * dt, 0, this.maxScrollY);
+      if (this.scrollY <= 0 || this.scrollY >= this.maxScrollY) {
+        this.inertiaVelocity = 0;
+      } else {
+        this.inertiaVelocity *= Math.pow(INERTIA_FRICTION, dt / 16);
+      }
+      this.showScrollbarPulse();
+      this.scrollDirtyOnly = true;
+      this.requestRender();
+      if (Math.abs(this.inertiaVelocity) < INERTIA_MIN_VELOCITY) {
+        this.inertiaRafHandle = null;
+        this.inertiaVelocity = 0;
+        return;
+      }
+      this.inertiaRafHandle = requestNextFrame(step);
+    };
+    this.inertiaRafHandle = requestNextFrame(step);
+  }
+
+  private showScrollbarPulse(): void {
+    this.scrollbarVisibleUntil = Date.now() + SCROLLBAR_FADE_MS;
+    if (this.scrollbarFadeTimer !== null) clearTimeout(this.scrollbarFadeTimer);
+    this.scrollbarFadeTimer = setTimeout(() => {
+      this.scrollbarFadeTimer = null;
+      this.requestRender();
+    }, SCROLLBAR_FADE_MS + 60);
   }
 
   private getTouch(event: WxTouchEvent): WxTouchPoint | null {
@@ -326,9 +379,12 @@ class WxGameApp {
   }
 
   private handleTouchStart(x: number, y: number): void {
+    this.stopInertia();
     this.touchStartX = x;
     this.touchStartY = y;
     this.touchStartScrollY = this.scrollY;
+    this.lastTouchMoveY = y;
+    this.lastTouchMoveTime = Date.now();
     this.isTouchMoved = false;
     this.isTouchScrolling = this.pointInRect(x, y, this.contentViewport());
   }
@@ -339,11 +395,25 @@ class WxGameApp {
     if (Math.abs(deltaY) > 4 || Math.abs(this.touchStartX - x) > 4) this.isTouchMoved = true;
     if (this.maxScrollY <= 0) return;
     this.scrollY = this.clamp(this.touchStartScrollY + deltaY, 0, this.maxScrollY);
+    const now = Date.now();
+    const dt = now - this.lastTouchMoveTime;
+    if (dt > 0) {
+      const sample = (this.lastTouchMoveY - y) / dt;
+      this.inertiaVelocity = this.inertiaVelocity * 0.4 + sample * 0.6;
+    }
+    this.lastTouchMoveY = y;
+    this.lastTouchMoveTime = now;
+    this.showScrollbarPulse();
+    this.scrollDirtyOnly = true;
     this.requestRender();
   }
 
   private handleTouchEnd(x: number, y: number): void {
-    if (!this.isTouchMoved) this.handlePointer(x, y);
+    if (!this.isTouchMoved) {
+      this.handlePointer(x, y);
+    } else if (this.isTouchScrolling) {
+      this.kickInertia();
+    }
     this.isTouchScrolling = false;
     this.isTouchMoved = false;
   }
@@ -358,6 +428,7 @@ class WxGameApp {
     );
     if (!button) return;
 
+    this.wxApi?.vibrateShort?.({ type: 'light' });
     void this.runAction(button.action);
   }
 
@@ -366,8 +437,13 @@ class WxGameApp {
       this.state.message = null;
       await this.handleAction(action);
     } catch (error) {
-      this.state.message = error instanceof Error ? error.message : '操作失败';
-      this.wxApi?.showToast?.({ title: this.state.message.slice(0, 12), icon: 'none' });
+      const message = error instanceof Error ? error.message : '操作失败';
+      this.state.message = message;
+      if (this.wxApi?.showModal) {
+        this.wxApi.showModal({ title: '操作失败', content: message, showCancel: false, confirmText: '我知道了' });
+      } else {
+        this.wxApi?.showToast?.({ title: message.slice(0, 12), icon: 'none' });
+      }
     }
     this.render();
   }
@@ -456,6 +532,8 @@ class WxGameApp {
       this.clearAchievementToasts();
       this.switchScreen('trajectory');
       this.preloadAdmissionLines();
+      this.shareImageTempPath = null;
+      this.shareImageResultKey = null;
       return;
     }
 
@@ -705,6 +783,7 @@ class WxGameApp {
       this.state.persistedResult = true;
       this.state.recentAchievements = recorded.unlockedAchievements;
       if (recorded.unlockedAchievements.length > 0) this.showAchievementToasts(recorded.unlockedAchievements);
+      this.prepareShareImage();
     }
     if (options.lockRetake ?? true) this.state.retakeLocked = true;
   }
@@ -730,10 +809,132 @@ class WxGameApp {
     this.commitFinalResult({ lockRetake: false });
     const title = this.resultShareTitle(this.state.result);
     if (this.wxApi?.shareAppMessage) {
-      this.wxApi.shareAppMessage({ title });
+      const payload: WxSharePayload = { title };
+      if (this.shareImageTempPath) payload.imageUrl = this.shareImageTempPath;
+      this.wxApi.shareAppMessage(payload);
+      if (!this.shareImageTempPath) this.prepareShareImage();
       return;
     }
     this.state.message = title;
+  }
+
+  private prepareShareImage(): void {
+    if (!this.wxApi?.canvasToTempFilePath) return;
+    const result = this.state.result;
+    if (!result) return;
+    const key = this.shareImageKey(result);
+    if (this.shareImageResultKey === key && this.shareImageTempPath) return;
+    if (this.shareImagePending) return;
+
+    const cardWidth = 500;
+    const cardHeight = 400;
+    const offscreen = createOffscreenCanvas(this.wxApi, cardWidth, cardHeight);
+    if (!offscreen) return;
+    const ctx = offscreen.getContext('2d');
+    if (!ctx) return;
+
+    this.shareImagePending = true;
+    this.shareImageResultKey = key;
+    this.renderShareCard(ctx, cardWidth, cardHeight, result);
+
+    try {
+      this.wxApi.canvasToTempFilePath({
+        canvas: offscreen,
+        destWidth: cardWidth,
+        destHeight: cardHeight,
+        fileType: 'jpg',
+        quality: 0.85,
+        success: ({ tempFilePath }) => {
+          this.shareImagePending = false;
+          this.shareImageTempPath = tempFilePath;
+        },
+        fail: () => {
+          this.shareImagePending = false;
+          this.shareImageResultKey = null;
+        },
+      });
+    } catch {
+      this.shareImagePending = false;
+      this.shareImageResultKey = null;
+    }
+  }
+
+  private shareImageKey(result: FinalResult): string {
+    const universityCode = result.admission.admittedUniversity?.code ?? 'none';
+    return `${result.ending.id}|${result.admission.finalScore}|${universityCode}|${result.state.retakeCount}`;
+  }
+
+  private renderShareCard(
+    ctx: CanvasRenderingContext2D,
+    width: number,
+    height: number,
+    result: FinalResult,
+  ): void {
+    const bg = ctx.createLinearGradient(0, 0, width, height);
+    bg.addColorStop(0, '#0f2235');
+    bg.addColorStop(0.55, '#1d4f6e');
+    bg.addColorStop(1, '#2f7c80');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+    for (let x = 0.5; x < width; x += 32) ctx.fillRect(x, 0, 1, height);
+
+    const padding = 30;
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
+    ctx.font = '700 18px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText('重回高三人生模拟', padding, padding + 18);
+
+    ctx.fillStyle = '#ffd87a';
+    ctx.font = '800 28px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText(this.truncateForShare(ctx, result.ending.name, width - padding * 2), padding, padding + 64);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.78)';
+    ctx.font = '500 14px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    const subtitle = `${result.admission.subjectTrackName ?? ''} · ${admissionTierName(result.admission.admissionTier)}`;
+    ctx.fillText(this.truncateForShare(ctx, subtitle.trim().replace(/^· /, ''), width - padding * 2), padding, padding + 92);
+
+    const universityName = result.admission.admittedUniversity?.name
+      ?? result.admission.admittedLine?.universityName
+      ?? '未录取到样本院校';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '800 22px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText(this.truncateForShare(ctx, universityName, width - padding * 2), padding, padding + 152);
+
+    if (!result.admission.scoreHidden) {
+      ctx.fillStyle = '#ffd87a';
+      ctx.font = '800 56px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+      const scoreText = String(result.admission.finalScore);
+      ctx.fillText(scoreText, padding, padding + 222);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
+      ctx.font = '500 14px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+      ctx.fillText('高考分数', padding + ctx.measureText(scoreText).width + 12, padding + 222);
+    }
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.86)';
+    ctx.font = '500 13px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    const stats = [
+      `已重开 ${this.game.save.times} 次`,
+      `${this.game.save.unlockedEndingIds.length} 个结局`,
+      `${this.game.save.achievedIds.length} 个成就`,
+      `${this.game.save.unlockedUniversityCodes.length} 所院校`,
+    ];
+    stats.forEach((text, index) => {
+      ctx.fillText(text, padding, padding + 282 + index * 22);
+    });
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.font = '500 12px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    const tip = '点开看看你的高考会落在哪所学校';
+    const tipWidth = ctx.measureText(tip).width;
+    ctx.fillText(tip, width - padding - tipWidth, height - padding);
+  }
+
+  private truncateForShare(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string {
+    if (ctx.measureText(text).width <= maxWidth) return text;
+    const chars = Array.from(text);
+    while (chars.length > 1 && ctx.measureText(`${chars.join('')}…`).width > maxWidth) chars.pop();
+    return `${chars.join('')}…`;
   }
 
   private resultShareTitle(result: FinalResult | null = this.state.result): string {
@@ -762,13 +963,28 @@ class WxGameApp {
     if (this.activeScrollScreen !== this.state.screen) this.resetScroll(this.state.screen);
     this.buttons = [];
     this.ctx.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.drawBackground();
 
-    this.drawHeader();
+    const isScrollOnly = this.scrollDirtyOnly;
+    this.scrollDirtyOnly = false;
+
+    if (!isScrollOnly) {
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      this.drawBackground();
+      this.drawHeader();
+    }
 
     const viewport = this.contentViewport();
     this.scrollY = this.clamp(this.scrollY, 0, this.maxScrollY);
+
+    if (isScrollOnly) {
+      this.ctx.save();
+      this.ctx.beginPath();
+      this.ctx.rect(viewport.x, viewport.y, viewport.width, viewport.height);
+      this.ctx.clip();
+      this.ctx.clearRect(viewport.x, viewport.y, viewport.width, viewport.height);
+      this.drawBackground();
+    }
+
     const contentHeight = this.drawScrollableContent(viewport);
     this.maxScrollY = Math.max(0, contentHeight - viewport.height);
     if (this.scrollY > this.maxScrollY) {
@@ -777,8 +993,38 @@ class WxGameApp {
       return;
     }
 
-    this.drawFooter();
-    this.drawAchievementToast();
+    if (isScrollOnly) {
+      this.ctx.restore();
+    } else {
+      this.drawFooter();
+    }
+    this.drawScrollIndicator(viewport, contentHeight);
+    if (!isScrollOnly) this.drawAchievementToast();
+  }
+
+  private drawScrollIndicator(viewport: Rect, contentHeight: number): void {
+    if (this.maxScrollY <= 0 || contentHeight <= viewport.height) return;
+    const now = Date.now();
+    const remaining = this.scrollbarVisibleUntil - now;
+    if (remaining <= 0) return;
+    const alpha = Math.min(0.45, remaining / SCROLLBAR_FADE_MS * 0.45);
+    if (alpha <= 0.02) return;
+
+    const trackPadding = 4;
+    const trackWidth = 3;
+    const trackX = this.width - trackPadding - trackWidth;
+    const trackTop = viewport.y + 4;
+    const trackHeight = viewport.height - 8;
+    const ratio = viewport.height / contentHeight;
+    const thumbHeight = Math.max(28, trackHeight * ratio);
+    const progress = this.maxScrollY > 0 ? this.scrollY / this.maxScrollY : 0;
+    const thumbY = trackTop + (trackHeight - thumbHeight) * progress;
+
+    this.ctx.save();
+    this.ctx.fillStyle = `rgba(40, 54, 78, ${alpha.toFixed(3)})`;
+    this.roundRect(trackX, thumbY, trackWidth, thumbHeight, trackWidth / 2);
+    this.ctx.fill();
+    this.ctx.restore();
   }
 
   private requestRender(): void {
@@ -792,23 +1038,46 @@ class WxGameApp {
   }
 
   private drawBackground(): void {
-    const bg = this.ctx.createLinearGradient(0, 0, 0, this.height);
+    const key = `${this.width}x${this.height}@${this.pixelRatio}`;
+    if (this.backgroundCanvas && this.backgroundCanvasKey === key) {
+      this.ctx.drawImage(this.backgroundCanvas, 0, 0, this.width, this.height);
+      return;
+    }
+
+    const offscreen = createOffscreenCanvas(
+      this.wxApi,
+      Math.max(1, Math.floor(this.width * this.pixelRatio)),
+      Math.max(1, Math.floor(this.height * this.pixelRatio)),
+    );
+    const targetCtx = offscreen?.getContext('2d') ?? this.ctx;
+    if (offscreen) targetCtx.setTransform(this.pixelRatio, 0, 0, this.pixelRatio, 0, 0);
+
+    const bg = targetCtx.createLinearGradient(0, 0, 0, this.height);
     bg.addColorStop(0, 'rgba(214, 235, 250, 0.72)');
     bg.addColorStop(0.34, 'rgba(255, 250, 240, 0.94)');
     bg.addColorStop(1, theme.warm);
-    this.ctx.fillStyle = bg;
-    this.ctx.fillRect(0, 0, this.width, this.height);
+    targetCtx.fillStyle = bg;
+    targetCtx.fillRect(0, 0, this.width, this.height);
 
-    this.ctx.save();
-    this.ctx.strokeStyle = 'rgba(47, 124, 128, 0.04)';
-    this.ctx.lineWidth = 1;
+    targetCtx.save();
+    targetCtx.strokeStyle = 'rgba(47, 124, 128, 0.04)';
+    targetCtx.lineWidth = 1;
     for (let x = 0.5; x < this.width; x += 32) {
-      this.ctx.beginPath();
-      this.ctx.moveTo(x, 0);
-      this.ctx.lineTo(x, this.height);
-      this.ctx.stroke();
+      targetCtx.beginPath();
+      targetCtx.moveTo(x, 0);
+      targetCtx.lineTo(x, this.height);
+      targetCtx.stroke();
     }
-    this.ctx.restore();
+    targetCtx.restore();
+
+    if (offscreen) {
+      this.backgroundCanvas = offscreen;
+      this.backgroundCanvasKey = key;
+      this.ctx.drawImage(offscreen, 0, 0, this.width, this.height);
+    } else {
+      this.backgroundCanvas = null;
+      this.backgroundCanvasKey = '';
+    }
   }
 
   private drawHeader(): void {
@@ -987,16 +1256,18 @@ class WxGameApp {
       cursor = this.drawWrappedText('从童年到高考收官季，重新填一份人生志愿。', 36, cursor, this.width - 72, 19, 2);
       cursor += 14;
       cursor = this.drawStageTrack(cursor);
-      cursor += inherited ? 14 : 22;
+      cursor += inherited ? 8 : 22;
       if (inherited) {
-        cursor = this.drawInheritedTalentBanner(cursor, inherited, '继承天赋');
-        cursor += 2;
+        this.setFont(13, 600);
+        this.ctx.fillStyle = theme.teal;
+        this.ctx.fillText(this.fitText(`✨ 继承：${inherited.name}`, this.width - 90), 36, cursor + 12);
+        cursor += 24;
       }
       const gap = 8;
       const buttonWidth = (this.width - 72 - gap) / 2;
       this.drawButton(
         { type: 'viewUniversities' },
-        `院校 ${this.game.save.unlockedUniversityCodes.length}/${this.contentLoader.summary.universities}`,
+        `院校 ${this.game.save.unlockedUniversityCodes.length}`,
         36,
         cursor + 6,
         buttonWidth,
@@ -1005,7 +1276,7 @@ class WxGameApp {
       );
       this.drawButton(
         { type: 'viewAchievements' },
-        `成就 ${this.game.save.achievedIds.length}/${this.contentLoader.summary.achievements}`,
+        `成就 ${this.game.save.achievedIds.length}`,
         36 + buttonWidth + gap,
         cursor + 6,
         buttonWidth,
@@ -2076,6 +2347,10 @@ class WxGameApp {
   }
 
   private wrapText(text: string, maxWidth: number, maxLines: number): string[] {
+    const cacheKey = `${this.lastFont}|${maxWidth}|${maxLines}|${text}`;
+    const cached = this.wrapTextCache.get(cacheKey);
+    if (cached) return cached;
+
     const chars = Array.from(String(text));
     const lines: string[] = [];
     let line = '';
@@ -2096,6 +2371,9 @@ class WxGameApp {
     }
     if (!truncated && line && lines.length < maxLines) lines.push(line);
     if (truncated && lines.length > 0) lines[lines.length - 1] = this.fitText(`${lines[lines.length - 1]}...`, maxWidth);
+
+    if (this.wrapTextCache.size > 512) this.wrapTextCache.clear();
+    this.wrapTextCache.set(cacheKey, lines);
     return lines;
   }
 
@@ -2122,7 +2400,9 @@ class WxGameApp {
   }
 
   private setFont(size: number, weight = 400): void {
-    this.ctx.font = `${weight} ${size}px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif`;
+    const next = `${weight} ${size}px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif`;
+    this.ctx.font = next;
+    this.lastFont = next;
   }
 
   private remainingPoints(): number {
@@ -2206,98 +2486,6 @@ class WxGameApp {
   private clamp(value: number, min: number, max: number): number {
     return Math.min(max, Math.max(min, value));
   }
-}
-
-function talentRarityName(grade: number): TalentRarity {
-  return (['common', 'rare', 'epic', 'legendary'] as TalentRarity[])[grade] ?? 'common';
-}
-
-function talentRarityLabel(rarity: TalentRarity): string {
-  return {
-    common: '普通',
-    rare: '稀有',
-    epic: '史诗',
-    legendary: '传说',
-  }[rarity];
-}
-
-function achievementGradeName(grade: number): string {
-  return ['普通', '稀有', '史诗', '传说'][grade] ?? '普通';
-}
-
-function universityTierLabel(tier: University['prestigeTier']): string {
-  return {
-    top: '顶尖',
-    strong: '强校',
-    solid: '稳健',
-    regional: '区域',
-    private: '民办',
-  }[tier];
-}
-
-function admissionTierName(tier: AdmissionResult['admissionTier']): string {
-  return {
-    '985': '985',
-    '211': '211',
-    doubleFirstClass: '双一流',
-    undergraduate: '本科',
-    college: '专科/后续批次',
-    retake: '复读/再规划',
-    slide: '滑档',
-  }[tier];
-}
-
-function ageStageName(age: number): string {
-  const names: Record<number, string> = {
-    6: '一年级',
-    7: '二年级',
-    8: '三年级',
-    9: '四年级',
-    10: '五年级',
-    11: '六年级',
-    12: '七年级',
-    13: '八年级',
-    14: '九年级',
-    15: '高一',
-    16: '高二',
-    17: '高三',
-    18: '高考收官',
-  };
-  return names[age] ?? `${age} 岁`;
-}
-
-function screenName(screen: Screen): string {
-  return {
-    home: '首页',
-    talents: '天赋',
-    properties: '属性',
-    trajectory: '轨迹',
-    summary: '结局',
-    achievements: '成就',
-    universities: '院校',
-  }[screen];
-}
-
-function createRuntimeCanvas(wxApi: WxMiniGameAPI | undefined): HTMLCanvasElement {
-  if (wxApi) return wxApi.createCanvas();
-  if (typeof document !== 'undefined') {
-    const canvas = document.createElement('canvas');
-    document.body.style.margin = '0';
-    document.body.append(canvas);
-    return canvas;
-  }
-  throw new Error('No canvas runtime is available');
-}
-
-function getWxApi(): WxMiniGameAPI | undefined {
-  return typeof wx === 'undefined' ? undefined : wx;
-}
-
-function requestNextFrame(callback: FrameRequestCallback): number {
-  if (typeof globalThis.requestAnimationFrame === 'function') {
-    return globalThis.requestAnimationFrame(callback);
-  }
-  return Number(setTimeout(() => callback(Date.now()), 16));
 }
 
 const wxApi = getWxApi();

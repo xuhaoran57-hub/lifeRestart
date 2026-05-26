@@ -37,6 +37,29 @@ declare global {
     shareTicket?: string;
   }
 
+  interface WxModalOptions {
+    title?: string;
+    content?: string;
+    showCancel?: boolean;
+    confirmText?: string;
+    cancelText?: string;
+    success?: (res: { confirm: boolean; cancel: boolean }) => void;
+  }
+
+  interface WxCanvasToTempOptions {
+    canvas: HTMLCanvasElement;
+    x?: number;
+    y?: number;
+    width?: number;
+    height?: number;
+    destWidth?: number;
+    destHeight?: number;
+    fileType?: 'jpg' | 'png';
+    quality?: number;
+    success?: (res: { tempFilePath: string }) => void;
+    fail?: (err: unknown) => void;
+  }
+
   interface WxMiniGameAPI {
     createCanvas(): HTMLCanvasElement;
     getSystemInfoSync(): WxSystemInfo;
@@ -51,6 +74,13 @@ declare global {
     onShareAppMessage?(callback: () => WxSharePayload): void;
     shareAppMessage?(options: WxSharePayload): void;
     showToast?(options: { title: string; icon?: 'success' | 'error' | 'loading' | 'none'; duration?: number }): void;
+    showModal?(options: WxModalOptions): void;
+    canvasToTempFilePath?(options: WxCanvasToTempOptions): void;
+    onError?(callback: (error: { message?: string; stack?: string } | string) => void): void;
+    onUnhandledRejection?(callback: (event: { reason?: unknown; promise?: unknown }) => void): void;
+    onMemoryWarning?(callback: (event: { level: number }) => void): void;
+    setKeepScreenOn?(options: { keepScreenOn: boolean }): void;
+    vibrateShort?(options?: { type?: 'heavy' | 'medium' | 'light' }): void;
   }
 
   // Provided by the WeChat Mini Game runtime.
