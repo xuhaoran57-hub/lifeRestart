@@ -1,4 +1,8 @@
 {
   "deviceOrientation": "portrait",
-  "showStatusBar": false
+  "showStatusBar": false,
+  "subpackages": [
+    { "name": "sim", "root": "sim/" },
+    { "name": "adm", "root": "adm/" }
+  ]
 }

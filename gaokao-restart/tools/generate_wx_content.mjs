@@ -1,34 +1,49 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const sourceRoot = join(projectRoot, 'src', 'content', 'zh-cn');
-const targetRoot = join(projectRoot, 'wxgame', 'content', 'zh-cn');
+const wxRoot = join(projectRoot, 'wxgame');
 
-const plainContentFiles = [
-  'achievements.json',
-  'ages.json',
-  'characters.json',
-  'endings.json',
-  'events.json',
-  'talents.json',
-  join('admissions', 'profiles.json'),
-  join('admissions', 'universities.json'),
-];
+// Map each content file to the subpackage (folder) it ships in.
+// Keeping content out of the main package is the whole point of this split.
+const subpackageFiles = {
+  sim: [
+    'talents.json',
+    'achievements.json',
+    'ages.json',
+    'events.json',
+    'endings.json',
+    'characters.json',
+  ],
+  adm: [
+    { source: join('admissions', 'profiles.json'), target: 'profiles.json' },
+    { source: join('admissions', 'universities.json'), target: 'universities.json' },
+  ],
+};
 
 async function readJson(relativePath) {
   return JSON.parse(await readFile(join(sourceRoot, relativePath), 'utf8'));
 }
 
-async function writeJson(relativePath, value) {
-  const target = join(targetRoot, relativePath);
+async function writeJson(target, value) {
   await mkdir(dirname(target), { recursive: true });
   await writeFile(target, JSON.stringify(value), 'utf8');
 }
 
-for (const file of plainContentFiles) {
-  await writeJson(file, await readJson(file));
+// Remove stale outputs from previous layouts so the main package never
+// accidentally keeps shipping the content JSON.
+for (const stale of ['content', 'sim', 'adm']) {
+  await rm(join(wxRoot, stale), { recursive: true, force: true });
+}
+
+for (const [subpackage, files] of Object.entries(subpackageFiles)) {
+  for (const entry of files) {
+    const source = typeof entry === 'string' ? entry : entry.source;
+    const target = typeof entry === 'string' ? entry : entry.target;
+    await writeJson(join(wxRoot, subpackage, target), await readJson(source));
+  }
 }
 
 const admissionLines = await readJson(join('admissions', 'admission-lines.json'));
@@ -48,4 +63,9 @@ const slimAdmissionLines = {
   }),
 };
 
-await writeJson(join('admissions', 'admission-lines.slim.json'), slimAdmissionLines);
+await writeJson(join(wxRoot, 'adm', 'admission-lines.slim.json'), slimAdmissionLines);
+
+// WeChat requires a game.js entry in each subpackage root.
+for (const sub of ['sim', 'adm']) {
+  await writeFile(join(wxRoot, sub, 'game.js'), '', 'utf8');
+}

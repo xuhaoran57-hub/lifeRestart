@@ -81,6 +81,12 @@ declare global {
     onMemoryWarning?(callback: (event: { level: number }) => void): void;
     setKeepScreenOn?(options: { keepScreenOn: boolean }): void;
     vibrateShort?(options?: { type?: 'heavy' | 'medium' | 'light' }): void;
+    loadSubpackage?(options: {
+      name: string;
+      success?: () => void;
+      fail?: (err: { errMsg?: string }) => void;
+      complete?: () => void;
+    }): unknown;
   }
 
   // Provided by the WeChat Mini Game runtime.

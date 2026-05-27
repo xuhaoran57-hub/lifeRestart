@@ -15,8 +15,16 @@ interface WxFileSystemApi {
   readFileSync(path: string, encoding: 'utf8'): string | ArrayBuffer;
 }
 
+interface WxLoadSubpackageOptions {
+  name: string;
+  success?: () => void;
+  fail?: (err: { errMsg?: string }) => void;
+  complete?: () => void;
+}
+
 interface WxContentApi {
   getFileSystemManager?(): WxFileSystemApi;
+  loadSubpackage?(options: WxLoadSubpackageOptions): unknown;
 }
 
 export interface WxContentSummary {
@@ -25,6 +33,7 @@ export interface WxContentSummary {
 }
 
 type ContentStage = 'talents' | 'simulation' | 'admissionBasics' | 'admissionLines';
+type Subpackage = 'sim' | 'adm';
 type SlimAdmissionLineRow = [number, string, string, number, number | null, 1?, number?];
 
 interface SlimAdmissionLinesPayload {
@@ -32,8 +41,21 @@ interface SlimAdmissionLinesPayload {
   lines: SlimAdmissionLineRow[];
 }
 
-const contentRoot = 'content/zh-cn';
-const browserContentRoots = [contentRoot, `wxgame/${contentRoot}`];
+// Each content file lives under exactly one wxgame subpackage. Web/browser
+// builds keep the legacy `content/zh-cn/...` layout served from the dev root.
+const wxFilePaths: Record<string, { subpackage: Subpackage; path: string }> = {
+  'talents.json': { subpackage: 'sim', path: 'sim/talents.json' },
+  'achievements.json': { subpackage: 'sim', path: 'sim/achievements.json' },
+  'ages.json': { subpackage: 'sim', path: 'sim/ages.json' },
+  'events.json': { subpackage: 'sim', path: 'sim/events.json' },
+  'endings.json': { subpackage: 'sim', path: 'sim/endings.json' },
+  'characters.json': { subpackage: 'sim', path: 'sim/characters.json' },
+  'admissions/profiles.json': { subpackage: 'adm', path: 'adm/profiles.json' },
+  'admissions/universities.json': { subpackage: 'adm', path: 'adm/universities.json' },
+  'admissions/admission-lines.slim.json': { subpackage: 'adm', path: 'adm/admission-lines.slim.json' },
+};
+
+const browserContentRoots = ['content/zh-cn', 'wxgame/content/zh-cn'];
 
 const defaultSummary: WxContentSummary = {
   achievements: 54,
@@ -48,6 +70,7 @@ export class WxContentLoader {
 
   private readonly loadedStages = new Set<ContentStage>();
   private readonly pendingStages = new Map<ContentStage, Promise<void>>();
+  private readonly subpackagePromises = new Map<Subpackage, Promise<void>>();
 
   constructor(private readonly wxApi: WxContentApi | undefined) {}
 
@@ -139,7 +162,10 @@ export class WxContentLoader {
   private async readContent<T>(relativePath: string): Promise<T> {
     const fileSystem = this.wxApi?.getFileSystemManager?.();
     if (fileSystem) {
-      const raw = fileSystem.readFileSync(`${contentRoot}/${relativePath}`, 'utf8');
+      const mapping = wxFilePaths[relativePath];
+      if (!mapping) throw new Error(`No wxgame mapping for content file: ${relativePath}`);
+      await this.ensureSubpackage(mapping.subpackage);
+      const raw = fileSystem.readFileSync(mapping.path, 'utf8');
       return JSON.parse(typeof raw === 'string' ? raw : new TextDecoder().decode(raw)) as T;
     }
 
@@ -153,6 +179,30 @@ export class WxContentLoader {
     }
 
     throw new Error(`Failed to load content: ${relativePath}`);
+  }
+
+  private ensureSubpackage(name: Subpackage): Promise<void> {
+    const cached = this.subpackagePromises.get(name);
+    if (cached) return cached;
+    const loadSubpackage = this.wxApi?.loadSubpackage;
+    // Older basic libraries (or non-wx fallbacks) do not provide
+    // loadSubpackage; in that case the file system reads succeed directly.
+    if (typeof loadSubpackage !== 'function') {
+      const resolved = Promise.resolve();
+      this.subpackagePromises.set(name, resolved);
+      return resolved;
+    }
+    const pending = new Promise<void>((resolve, reject) => {
+      loadSubpackage.call(this.wxApi, {
+        name,
+        success: () => resolve(),
+        fail: err => reject(new Error(err?.errMsg ?? `Failed to load subpackage ${name}`)),
+      });
+    });
+    // Cache only after success; on failure allow a retry on next access.
+    pending.catch(() => this.subpackagePromises.delete(name));
+    this.subpackagePromises.set(name, pending);
+    return pending;
   }
 }
 

@@ -206,12 +206,17 @@ class WxGameApp {
     };
     this.resize();
     this.bindInput();
-    this.bindShare();
-    this.bindLifecycle();
   }
 
   start(): void {
     this.render();
+    // Defer non-essential wx registrations until after the first frame so
+    // they do not inflate the "first paint preparation" budget. Share menu
+    // and lifecycle handlers are not needed for the initial home screen.
+    setTimeout(() => {
+      this.bindShare();
+      this.bindLifecycle();
+    }, 0);
     this.preloadHomeContent();
   }
 
