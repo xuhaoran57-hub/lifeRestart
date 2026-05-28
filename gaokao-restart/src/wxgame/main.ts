@@ -1373,16 +1373,29 @@ class WxGameApp {
     const selected = new Set(this.state.selectedTalentIds);
     const gap = 8;
     const cardWidth = (this.width - 40 - gap) / 2;
-    const cardHeight = this.talentCardHeight();
+    const rowHeights: number[] = [];
+    for (let index = 0; index < this.state.candidates.length; index += 2) {
+      const leftHeight = this.talentCardHeight(this.state.candidates[index], cardWidth);
+      const rightTalent = this.state.candidates[index + 1];
+      const rightHeight = rightTalent ? this.talentCardHeight(rightTalent, cardWidth) : leftHeight;
+      rowHeights.push(Math.max(leftHeight, rightHeight));
+    }
+    let gridHeight = 0;
+    const rowTops = rowHeights.map(height => {
+      const top = gridHeight;
+      gridHeight += height + gap;
+      return top;
+    });
+    if (rowHeights.length > 0) gridHeight -= gap;
     this.state.candidates.forEach((talent, index) => {
       const active = selected.has(talent.id);
       const inherited = this.state.inheritedCandidateId === talent.id;
+      const rowIndex = Math.floor(index / 2);
       const cardX = 20 + (index % 2) * (cardWidth + gap);
-      const cardY = y + Math.floor(index / 2) * (cardHeight + gap);
-      this.drawTalentCard(cardX, cardY, cardWidth, talent, active, inherited);
+      const cardY = y + rowTops[rowIndex];
+      this.drawTalentCard(cardX, cardY, cardWidth, rowHeights[rowIndex], talent, active, inherited);
     });
-    const rows = Math.ceil(this.state.candidates.length / 2);
-    y += rows * cardHeight + Math.max(0, rows - 1) * gap + 10;
+    y += gridHeight + 10;
     if (this.state.message) y = this.drawMessage(y, this.state.message);
     return y;
   }
@@ -1571,10 +1584,17 @@ class WxGameApp {
     this.drawButton({ type: 'requestRestart' }, '看完后重开', 20, footerY, this.width - 40, buttonHeight, 'secondary');
   }
 
-  private drawTalentCard(x: number, y: number, width: number, talent: Talent, active: boolean, inherited: boolean): void {
+  private drawTalentCard(
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    talent: Talent,
+    active: boolean,
+    inherited: boolean,
+  ): void {
     const rarity = talent.rarity ?? talentRarityName(talent.grade);
     const colors = rarityColors[rarity];
-    const height = this.talentCardHeight();
 
     const bg = this.ctx.createLinearGradient(x, y, x, y + height);
     if (active) {
@@ -1626,7 +1646,14 @@ class WxGameApp {
 
     this.setFont(12, 400);
     this.ctx.fillStyle = '#5d5a54';
-    this.drawWrappedText(talent.description, x + 10, y + 63, width - (active ? 44 : 20), 16, 2);
+    this.drawWrappedText(
+      talent.description,
+      x + 10,
+      y + 63,
+      this.talentDescriptionWidth(width),
+      16,
+      this.talentDescriptionLineCount(talent, width),
+    );
 
     this.registerButton({ type: 'toggleTalent', talentId: talent.id }, x, y, width, height);
   }
@@ -1971,7 +1998,7 @@ class WxGameApp {
   private drawInheritancePanel(y: number, result: FinalResult): number {
     const talents = result.state.selectedTalentIds
       .map(id => this.game.content.talents.find(item => item.id === id))
-      .filter((item): item is Talent => item !== undefined && item.inheritAllowed !== false);
+      .filter((item): item is Talent => item !== undefined);
     const inherited = this.savedInheritedTalent();
 
     return this.drawPanel(y, () => {
@@ -2433,8 +2460,28 @@ class WxGameApp {
     return this.game.content.ages.length + retakeRounds;
   }
 
-  private talentCardHeight(): number {
-    return this.height <= 640 ? 100 : 108;
+  private talentCardHeight(talent: Talent, width: number): number {
+    const descriptionTop = 63;
+    const lineHeight = 16;
+    const bottomPadding = 14;
+    const lineCount = this.talentDescriptionLineCount(talent, width);
+    return Math.max(this.height <= 640 ? 112 : 116, descriptionTop + lineCount * lineHeight + bottomPadding);
+  }
+
+  private talentDescriptionWidth(cardWidth: number): number {
+    return Math.max(48, cardWidth - 20);
+  }
+
+  private talentDescriptionLineCount(talent: Talent, cardWidth: number): number {
+    this.setFont(12, 400);
+    return Math.max(
+      1,
+      this.wrapText(
+        talent.description,
+        this.talentDescriptionWidth(cardWidth),
+        Number.MAX_SAFE_INTEGER,
+      ).length,
+    );
   }
 
   private logCardHeight(log: RunLog): number {

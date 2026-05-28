@@ -97,21 +97,17 @@ describe('resolveAdmission', () => {
     expect(second.admittedLine?.groupCode).toBe(first.admittedLine?.groupCode);
   });
 
-  it('links sino-foreign cooperation admission probability to resource level', () => {
-    let richCooperation = 0;
-    let lowResourceCooperation = 0;
-    const content = cooperationFixtureContent();
+  it('hard-filters sino-foreign cooperation lines by resource need', () => {
+    const content = cooperationOnlyFixtureContent();
 
-    for (let seed = 1; seed <= 100; seed += 1) {
-      const rich = resolveAdmission(content, stateWithScoreProps({ MNY: 8, HVOL: 80, RSK: 12 }), exam(565), new Random(seed));
-      const low = resolveAdmission(content, stateWithScoreProps({ MNY: 2, HVOL: 80, RSK: 12 }), exam(565), new Random(seed));
-      if (rich.isSinoForeign) richCooperation += 1;
-      if (low.isSinoForeign) lowResourceCooperation += 1;
-    }
+    const insufficient = resolveAdmission(content, stateWithScoreProps({ MNY: 6, HVOL: 80, RSK: 12 }), exam(565), new Random(1));
+    const eligible = resolveAdmission(content, stateWithScoreProps({ MNY: 7, HVOL: 80, RSK: 12 }), exam(565), new Random(1));
 
-    expect(richCooperation).toBeGreaterThan(lowResourceCooperation + 25);
-    expect(richCooperation).toBeGreaterThanOrEqual(80);
-    expect(lowResourceCooperation).toBeLessThanOrEqual(65);
+    expect(insufficient.admitted).toBe(false);
+    expect(insufficient.isSinoForeign).toBeUndefined();
+    expect(eligible.admitted).toBe(true);
+    expect(eligible.isSinoForeign).toBe(true);
+    expect(eligible.resourceGap).toBe(0);
   });
 });
 
@@ -216,6 +212,14 @@ function cooperationFixtureContent(): GameContent {
         resourceNeed: 7,
       },
     ],
+  };
+}
+
+function cooperationOnlyFixtureContent(): GameContent {
+  const content = cooperationFixtureContent();
+  return {
+    ...content,
+    admissionLines: content.admissionLines.filter(line => line.lineType === 'sinoForeign'),
   };
 }
 

@@ -517,7 +517,7 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
     .filter(line => line.profileId === profile.id)
     .map(line => ({ line, university: universities.get(line.universityCode), margin: exam.finalScore - line.minScore }))
     .filter(item => item.university);
-  const reachable = lines.filter(item => item.margin >= 0);
+  const reachable = lines.filter(item => item.margin >= 0 && isResourceEligibleLine(item.line, props.MNY));
   const reachable985 = reachable.filter(item => item.university.tags.includes('985'));
   const reachable211Plus = reachable.filter(isAtLeast211Candidate);
   const reachable211Only = reachable.filter(item => universityAdmissionTier(item.university) === '211');
@@ -527,7 +527,7 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
   const highestReachableLineScore = reachable.reduce((max, item) => Math.max(max, item.line.minScore), 0);
   const strategyScore = props.HVOL - props.RSK * 0.35 + routeBonus(selectedTalentIds, eventIds);
   const slide = shouldSlide(props, selectedTalentIds, eventIds, strategyScore, reachable, reachable211Plus.length > 0, random);
-  const picked = slide ? null : pickAdmittedLine(reachable, reachable985, reachable211Plus, reachable211Only, strategyScore, props.RSK, exam.finalScore, props.MNY, random);
+  const picked = slide ? null : pickAdmittedLine(reachable, reachable985, reachable211Plus, reachable211Only, strategyScore, props.RSK, exam.finalScore, random);
   const highScoreLowAdmission = isHighScoreLowAdmission(exam.finalScore, lowestReachable985, lowestReachable211, picked, slide);
 
   if (!picked) {
@@ -571,27 +571,27 @@ function resolveAdmission(props, selectedTalentIds, eventIds, subjectTrack, exam
   };
 }
 
-function pickAdmittedLine(reachable, reachable985, reachable211Plus, reachable211Only, strategyScore, risk, finalScore, resourceLevel, random) {
+function pickAdmittedLine(reachable, reachable985, reachable211Plus, reachable211Only, strategyScore, risk, finalScore, random) {
   if (reachable.length === 0) return null;
   const lowestReachable985 = pickLowestLine(reachable985);
   const lowestReachable211 = pickLowestLine(reachable211Only.length > 0 ? reachable211Only : reachable211Plus);
 
   if (lowestReachable985 && random.next() < commit985Chance(finalScore - lowestReachable985.line.minScore, strategyScore, risk)) {
-    return pickFromCandidatePool(reachable985, strategyScore, finalScore, resourceLevel, random);
+    return pickFromCandidatePool(reachable985, strategyScore, finalScore, random);
   }
 
   if (lowestReachable211 && random.next() < commit211Chance(finalScore - lowestReachable211.line.minScore, strategyScore, risk)) {
-    return pickFromCandidatePool(reachable211Only.length > 0 ? reachable211Only : reachable211Plus, strategyScore, finalScore, resourceLevel, random);
+    return pickFromCandidatePool(reachable211Only.length > 0 ? reachable211Only : reachable211Plus, strategyScore, finalScore, random);
   }
 
   if (reachable211Only.length > 0) {
-    return pickFromCandidatePool(reachable211Only, strategyScore, finalScore, resourceLevel, random);
+    return pickFromCandidatePool(reachable211Only, strategyScore, finalScore, random);
   }
 
-  return pickFromCandidatePool(reachable, strategyScore, finalScore, resourceLevel, random);
+  return pickFromCandidatePool(reachable, strategyScore, finalScore, random);
 }
 
-function pickFromCandidatePool(candidates, strategyScore, finalScore, resourceLevel, random) {
+function pickFromCandidatePool(candidates, strategyScore, finalScore, random) {
   if (candidates.length === 0) return null;
   const sorted = [...candidates].sort((a, b) =>
     b.line.minScore - a.line.minScore || linePrestigeScore(b) - linePrestigeScore(a),
@@ -601,13 +601,13 @@ function pickFromCandidatePool(candidates, strategyScore, finalScore, resourceLe
   const targetRank = targetAdmissionRank(strategyScore, finalScore);
   const highLineCandidates = ranked.filter(item => item.line.minScore >= 650);
   if (highLineCandidates.length > 0 && random.next() < highLineCommitChance(strategyScore)) {
-    return pickWeighted(highLineCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore, resourceLevel), random);
+    return pickWeighted(highLineCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
   }
   const reasonableCandidates = ranked.filter(item => item.margin <= reasonableMarginLimit(strategyScore, finalScore));
   if (reasonableCandidates.length > 0 && random.next() < reasonableMarginCommitChance(strategyScore)) {
-    return pickWeighted(reasonableCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore, resourceLevel), random);
+    return pickWeighted(reasonableCandidates, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
   }
-  return pickWeighted(ranked, item => admissionChoiceWeight(item, targetRank, strategyScore, resourceLevel), random);
+  return pickWeighted(ranked, item => admissionChoiceWeight(item, targetRank, strategyScore), random);
 }
 
 function commit985Chance(lowestMargin, strategyScore, risk) {
@@ -662,7 +662,7 @@ function targetAdmissionRank(strategyScore, finalScore) {
   return target;
 }
 
-function admissionChoiceWeight(candidate, targetRank, strategyScore, resourceLevel) {
+function admissionChoiceWeight(candidate, targetRank, strategyScore) {
   const spread = strategyScore >= 65 ? 0.12 : strategyScore >= 35 ? 0.24 : 0.3;
   const rankFit = Math.max(0, 1 - Math.abs(candidate.rankPercentile - targetRank) / spread);
   const targetMargin = strategyScore >= 65 ? 8 : strategyScore >= 35 ? 12 : 16;
@@ -671,7 +671,7 @@ function admissionChoiceWeight(candidate, targetRank, strategyScore, resourceLev
   const prestigeWeight = strategyScore >= 65 ? 36 : strategyScore >= 35 ? 22 : 8;
   const tierBonus = admissionTierWeight(candidate.university, strategyScore);
   const baseWeight = 2 + rankFit * rankFit * 145 + marginFit * 42 + prestige * prestigeWeight + tierBonus;
-  return Math.max(0.2, baseWeight * marginPenalty(candidate.margin, strategyScore) * resourceFitMultiplier(candidate.line, resourceLevel, strategyScore));
+  return Math.max(0.2, baseWeight * marginPenalty(candidate.margin, strategyScore));
 }
 
 function marginPenalty(margin, strategyScore) {
@@ -704,26 +704,16 @@ function admissionTierWeight(university, strategyScore) {
   return 0;
 }
 
-function resourceFitMultiplier(line, resourceLevel, strategyScore) {
-  if (!isSinoForeignLine(line)) return 1;
-  const gap = resourceLevel - lineResourceNeed(line);
-  const base = gap >= 2
-    ? 6
-    : gap >= 0
-      ? 4
-      : gap >= -1
-        ? 1.6
-        : 0.32;
-  const strategyMultiplier = strategyScore >= 65 ? 1.25 : strategyScore < 35 ? 0.82 : 1;
-  return base * strategyMultiplier;
-}
-
 function isSinoForeignLine(line) {
   return line.lineType === 'sinoForeign';
 }
 
 function lineResourceNeed(line) {
   return isSinoForeignLine(line) ? line.resourceNeed ?? 6 : 0;
+}
+
+function isResourceEligibleLine(line, resourceLevel) {
+  return !isSinoForeignLine(line) || Math.floor(resourceLevel) >= lineResourceNeed(line);
 }
 
 function resourceGap(line, resourceLevel) {

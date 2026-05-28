@@ -1246,7 +1246,7 @@
     "name": "学费压力下的选择",
     "tier": "C",
     "description": "你录到了中外合作项目，但资源并不宽裕，这条路从一开始就带着现实压力。",
-    "condition": "(COOP=1)&(RESOURCE_GAP<0)&(SLIDE=0)",
+    "condition": "(COOP=1)&(RESOURCE_GAP=0)&(SLIDE=0)",
     "priority": 82,
     "scoreBonus": 6,
     "tags": [

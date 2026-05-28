@@ -54,7 +54,12 @@ export function drawTalentCandidates(
   const inherited = inheritedTalentId
     ? content.talents.find(item => item.id === inheritedTalentId) ?? null
     : null;
-  const pools = buildRarityPools(content.talents.filter(item => item.id !== inherited?.id), random);
+  const talentMap = getTalentMap(content);
+  const availableTalents = content.talents.filter(item =>
+    item.id !== inherited?.id
+    && (!inherited || !hasTalentConflict(item, [inherited.id], talentMap))
+  );
+  const pools = buildRarityPools(availableTalents, random);
   const rates = getTalentRarityRates(content, achievedIds);
   const drawCount = Math.max(0, inherited ? count - 1 : count);
   const candidates: Talent[] = [];

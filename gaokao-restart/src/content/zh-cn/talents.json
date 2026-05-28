@@ -32,7 +32,7 @@
     "exclude": [
       21003
     ],
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "史诗",
@@ -184,7 +184,7 @@
       "SPR": -1,
       "MNY": 1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -334,7 +334,7 @@
       "VOL": 10
     },
     "condition": "AGE?[18]",
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "志愿信息",
       "稀有",
@@ -409,7 +409,7 @@
       "VOL": 15,
       "INT": 1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "史诗"
@@ -430,7 +430,7 @@
       "INT": 1,
       "SPR": 1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "稀有"
@@ -451,7 +451,7 @@
       "MNY": 1,
       "SPR": -1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -516,7 +516,7 @@
       "MNY": 2,
       "VOL": 5
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "史诗"
@@ -558,7 +558,7 @@
       "VOL": 8,
       "SPR": -1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -580,7 +580,7 @@
       "MNY": -1,
       "STR": 1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -602,7 +602,7 @@
       "SPR": 1,
       "VOL": -10
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -624,7 +624,7 @@
       "SPR": 2,
       "VOL": 5
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "史诗"
@@ -646,7 +646,7 @@
       "SPR": -2,
       "RSK": 5
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -689,7 +689,7 @@
       "MNY": -1,
       "RSK": 5
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -733,7 +733,7 @@
       "RSK": 3,
       "VOL": 5
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "稀有"
@@ -754,7 +754,7 @@
       "MNY": -2,
       "SPR": 1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "普通",
@@ -777,7 +777,7 @@
       "INT": 2,
       "VOL": 18
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "传说"
@@ -2016,7 +2016,7 @@
       "VOL": 12,
       "SPR": 1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "社会关系",
       "史诗"
@@ -2037,7 +2037,7 @@
       "SPR": -1,
       "RSK": 6
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "社会关系",
       "普通",
@@ -2079,7 +2079,7 @@
       "VOL": -8,
       "SPR": -1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "社会关系",
       "普通",
@@ -2144,7 +2144,7 @@
       "SPR": -2,
       "RSK": 8
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "社会关系",
       "普通",
@@ -2187,7 +2187,7 @@
       "SPR": -1,
       "RSK": 5
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "社会关系",
       "普通",
@@ -2803,7 +2803,7 @@
       "VOL": 12,
       "SCOREMOD": 8
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "考场变量",
       "史诗",
@@ -2825,7 +2825,7 @@
       "SPR": -2,
       "RSK": 12
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "考场变量",
       "普通",
@@ -3294,7 +3294,7 @@
       "VOL": 5,
       "SPR": -1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "志愿信息",
       "普通",
@@ -3451,7 +3451,7 @@
       "VOL": -10,
       "SPR": -1
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "志愿信息",
       "普通",
@@ -3613,7 +3613,7 @@
       "RSK": -10,
       "SCOREMOD": 35
     },
-    "inheritAllowed": false,
+    "inheritAllowed": true,
     "tags": [
       "家庭背景",
       "传说",

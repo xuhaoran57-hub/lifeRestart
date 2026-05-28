@@ -3,7 +3,13 @@ import type { GameContent } from '../src/app/types';
 import { zhCnContent } from '../src/content/zh-cn';
 import { isEventAvailable } from '../src/engine/events';
 import { LifeEngine } from '../src/engine/life';
-import { drawTalentCandidates, getTalentRarityRates, validateTalentSelection } from '../src/engine/talents';
+import {
+  drawTalentCandidates,
+  getTalentMap,
+  getTalentRarityRates,
+  hasTalentConflict,
+  validateTalentSelection,
+} from '../src/engine/talents';
 
 describe('LifeEngine', () => {
   it('runs a full 70-round game with a deterministic seed', () => {
@@ -48,6 +54,15 @@ describe('LifeEngine', () => {
     expect(roundKeysForEvent(32765)).toEqual(['17-4']);
     expect(roundKeysForEvent(32766)).toEqual(['17-6']);
     expect(roundKeysForEvent(32818)).toEqual(['17-10']);
+  });
+
+  it('defers the 31022 anxiety follow-up to exam day', () => {
+    const anxietyEvent = zhCnContent.events.find(item => item.id === 31022);
+    const examSlipEvent = zhCnContent.events.find(item => item.id === 31026);
+
+    expect(anxietyEvent?.branch).toBeUndefined();
+    expect(roundKeysForEvent(31026)).toEqual(['18-2']);
+    expect(examSlipEvent?.include).toContain('EVT?[31022]');
   });
 
   it('resolves subject track on senior 1 round 4', () => {
@@ -172,6 +187,10 @@ describe('LifeEngine', () => {
     expect(validateTalentSelection([21002, 21003, 21004], zhCnContent)).toBe('选择中存在互斥天赋');
   });
 
+  it('allows every selected talent to be inherited', () => {
+    expect(zhCnContent.talents.every(talent => talent.inheritAllowed !== false)).toBe(true);
+  });
+
   it('adjusts talent rarity rates with achievement progress', () => {
     const allAchievements = zhCnContent.achievements.map(item => item.id);
     const halfAchievements = allAchievements.slice(0, allAchievements.length / 2);
@@ -216,6 +235,29 @@ describe('LifeEngine', () => {
     expect(rarityCounts.epic).toBeLessThan(1100);
     expect(rarityCounts.legendary).toBeGreaterThan(120);
     expect(rarityCounts.legendary).toBeLessThan(320);
+  });
+
+  it('does not draw candidates that conflict with the inherited talent', () => {
+    const content: GameContent = {
+      ...zhCnContent,
+      talents: [
+        { id: 90001, name: 'Inherited', grade: 0, description: 'locked', exclude: [90002] },
+        { id: 90002, name: 'Conflicting', grade: 0, description: 'blocked' },
+        { id: 90003, name: 'Compatible', grade: 0, description: 'allowed' },
+      ],
+    };
+    const candidates = drawTalentCandidates(content, 3, 90001, 20260528);
+
+    expect(candidates.map(item => item.id)).toContain(90001);
+    expect(candidates.map(item => item.id)).toContain(90003);
+    expect(candidates.map(item => item.id)).not.toContain(90002);
+
+    const talentMap = getTalentMap(zhCnContent);
+    for (const inheritedId of [21003, 21801]) {
+      for (const talent of drawTalentCandidates(zhCnContent, 10, inheritedId, 20260528).slice(1)) {
+        expect(hasTalentConflict(talent, [inheritedId], talentMap)).toBe(false);
+      }
+    }
   });
 
   it('keeps age 18 prep, exam, volunteer, and score events in their own rounds', () => {
