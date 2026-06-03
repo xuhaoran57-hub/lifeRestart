@@ -47,6 +47,8 @@ const SCROLLBAR_FADE_MS = 900;
 const INERTIA_FRICTION = 0.93;
 const INERTIA_MIN_VELOCITY = 0.04;
 const AUTO_RUN_INTERVAL_MS = 500;
+const BGM_SOURCE = 'audio/campus-breeze.wav';
+const BGM_VOLUME = 0.32;
 
 type Action =
   | { type: 'start' }
@@ -108,6 +110,67 @@ interface WxGameModel {
   persist(save: SaveData): void;
 }
 
+class WxBgmPlayer {
+  private wxAudio: WxInnerAudioContext | null = null;
+  private webAudio: HTMLAudioElement | null = null;
+  private shouldPlay = false;
+
+  constructor(private readonly wxApi: WxMiniGameAPI | undefined) {}
+
+  start(): void {
+    this.shouldPlay = true;
+    this.resume();
+  }
+
+  resume(): void {
+    if (!this.shouldPlay) return;
+    this.ensureAudio();
+    try {
+      if (this.wxAudio) {
+        this.wxAudio.play();
+        return;
+      }
+      if (this.webAudio) {
+        const playResult = this.webAudio.play();
+        if (typeof playResult?.catch === 'function') playResult.catch(() => {});
+      }
+    } catch {
+      // Some runtimes require a user gesture before audio can start.
+    }
+  }
+
+  pause(): void {
+    try {
+      this.wxAudio?.pause();
+      this.webAudio?.pause();
+    } catch {
+      // Audio is cosmetic; never let playback errors interrupt the game.
+    }
+  }
+
+  private ensureAudio(): void {
+    if (this.wxAudio || this.webAudio) return;
+    if (this.wxApi?.createInnerAudioContext) {
+      const audio = this.wxApi.createInnerAudioContext();
+      audio.src = BGM_SOURCE;
+      audio.loop = true;
+      audio.autoplay = false;
+      audio.volume = BGM_VOLUME;
+      audio.obeyMuteSwitch = true;
+      audio.onError?.(() => {});
+      this.wxAudio = audio;
+      return;
+    }
+
+    if (typeof Audio !== 'undefined') {
+      const audio = new Audio(BGM_SOURCE);
+      audio.loop = true;
+      audio.volume = BGM_VOLUME;
+      this.webAudio = audio;
+    }
+  }
+}
+
 interface UiState {
   screen: Screen;
   previousScreen: Screen | null;
@@ -131,6 +194,7 @@ class WxGameApp {
   private readonly ctx: CanvasRenderingContext2D;
   private readonly contentLoader: WxContentLoader;
   private readonly game: WxGameModel;
+  private readonly bgm: WxBgmPlayer;
   private readonly state: UiState = {
     screen: 'home',
     previousScreen: null,
@@ -196,6 +260,7 @@ class WxGameApp {
     this.ctx = context;
     const storage = createWxSaveStorage(wxApi);
     this.contentLoader = createWxContentLoader(wxApi);
+    this.bgm = new WxBgmPlayer(wxApi);
     this.game = {
       content: this.contentLoader.content,
       save: loadSave(storage),
@@ -210,6 +275,7 @@ class WxGameApp {
 
   start(): void {
     this.render();
+    this.bgm.start();
     // Defer non-essential wx registrations until after the first frame so
     // they do not inflate the "first paint preparation" budget. Share menu
     // and lifecycle handlers are not needed for the initial home screen.
@@ -291,6 +357,7 @@ class WxGameApp {
   private bindLifecycle(): void {
     this.wxApi?.onHide?.(() => {
       this.isAppVisible = false;
+      this.bgm.pause();
       this.stopAutoRun();
       this.clearLifecycleRenderTimer();
       this.resetTouchState();
@@ -298,6 +365,7 @@ class WxGameApp {
 
     this.wxApi?.onShow?.(() => {
       this.isAppVisible = true;
+      this.bgm.resume();
       this.resetTouchState();
       this.renderAfterLifecycleRestore();
     });
@@ -384,6 +452,7 @@ class WxGameApp {
   }
 
   private handleTouchStart(x: number, y: number): void {
+    this.bgm.resume();
     this.stopInertia();
     this.touchStartX = x;
     this.touchStartY = y;

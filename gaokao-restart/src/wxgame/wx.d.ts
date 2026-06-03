@@ -31,6 +31,19 @@ declare global {
     query?: string;
   }
 
+  interface WxInnerAudioContext {
+    src: string;
+    loop: boolean;
+    autoplay: boolean;
+    volume: number;
+    obeyMuteSwitch?: boolean;
+    play(): void;
+    pause(): void;
+    stop(): void;
+    destroy(): void;
+    onError?(callback: (error: { errMsg?: string; errCode?: number }) => void): void;
+  }
+
   interface WxShowOptions {
     scene?: number;
     query?: Record<string, string>;
@@ -81,6 +94,7 @@ declare global {
     onMemoryWarning?(callback: (event: { level: number }) => void): void;
     setKeepScreenOn?(options: { keepScreenOn: boolean }): void;
     vibrateShort?(options?: { type?: 'heavy' | 'medium' | 'light' }): void;
+    createInnerAudioContext?(): WxInnerAudioContext;
     loadSubpackage?(options: {
       name: string;
       success?: () => void;
