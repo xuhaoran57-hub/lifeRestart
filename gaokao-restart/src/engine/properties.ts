@@ -1,15 +1,15 @@
 import type { CorePropCode, PhaseCode, Props } from '../app/types';
 
-const initialPhaseBase = 245;
+const initialPhaseBase = 240;
 const phaseOrder: PhaseCode[] = ['preschool', 'primary', 'middle', 'senior1', 'senior2', 'senior3', 'final'];
 const phaseBaseGain: Record<PhaseCode, number> = {
   preschool: 0,
-  primary: 58,
-  middle: 52,
-  senior1: 22,
-  senior2: 22,
-  senior3: 14,
-  final: 6,
+  primary: 37,
+  middle: 31,
+  senior1: 15,
+  senior2: 10,
+  senior3: 5,
+  final: 2,
 };
 
 const phaseBase = phaseOrder.reduce<Record<PhaseCode, number>>((result, phase, index) => {

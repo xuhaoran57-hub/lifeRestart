@@ -58,25 +58,30 @@ export function calculateExamScore(props: Props, random: Random): ExamScoreResul
 }
 
 function scoreBandCalibration(rawScore: number, props: Props): number {
-  const elitePrepared = props.INT >= 9 && props.SCOREMOD >= 34 && props.RSK < 68;
-  if (elitePrepared && rawScore >= 588 && rawScore < 602) return 14;
-  if (rawScore >= 555 && rawScore < 602) return elitePrepared ? 7 : -8;
-  if (rawScore >= 602 && rawScore < 640 && elitePrepared) return 4;
+  const elitePrepared = props.INT >= 9 && props.SCOREMOD >= 35 && props.RSK < 60;
+  if (rawScore >= 635 && elitePrepared) return 12;
+  if (rawScore >= 615 && elitePrepared) return 7;
+  if (rawScore >= 602 && elitePrepared) return 3;
+  if (rawScore >= 555 && rawScore < 602) return elitePrepared ? 2 : -8;
   return 0;
 }
 
 function rollBreakthroughBonus(props: Props, potentialScore: number, random: Random): number {
-  const baseChance = potentialScore >= 575 ? (potentialScore - 575) / 560 : 0;
+  const topPrepared = potentialScore >= 540 && props.INT >= 9 && props.SCOREMOD >= 30 && props.RSK < 65;
+  const baseChance = potentialScore >= 540 ? (potentialScore - 540) / 360 : 0;
   const aptitudeChance =
-    Math.max(0, props.INT - 8) * 0.016
-    + Math.max(0, props.STR - 8) * 0.01
-    + Math.max(0, props.SPR - 6) * 0.008
+    Math.max(0, props.INT - 8) * 0.018
+    + Math.max(0, props.STR - 8) * 0.012
+    + Math.max(0, props.SPR - 6) * 0.01
     + Math.max(0, props.HVOL - 55) * 0.001
-    + Math.max(0, props.SCOREMOD - 15) * 0.0014;
+    + Math.max(0, props.SCOREMOD - 15) * 0.0016;
+  const topPreparedChance = topPrepared ? 0.12 + Math.max(0, potentialScore - 570) * 0.001 : 0;
   const riskPenalty = props.RSK >= 55 ? 0.02 : 0;
-  const chance = clamp(baseChance + aptitudeChance - riskPenalty, 0, 0.22);
+  const chance = clamp(baseChance + aptitudeChance + topPreparedChance - riskPenalty, 0, topPrepared ? 0.34 : 0.2);
   if (random.next() >= chance) return 0;
-  return Math.round(clamp(22 + random.next() * 42 + Math.max(0, potentialScore - 615) * 0.35, 18, 85));
+  const baseBonus = topPrepared ? 34 + random.next() * 54 : 22 + random.next() * 42;
+  const potentialBonus = Math.max(0, potentialScore - 585) * (topPrepared ? 0.43 : 0.35);
+  return Math.round(clamp(baseBonus + potentialBonus, 18, topPrepared ? 106 : 85));
 }
 
 function rollSetbackPenalty(props: Props, potentialScore: number, random: Random): number {

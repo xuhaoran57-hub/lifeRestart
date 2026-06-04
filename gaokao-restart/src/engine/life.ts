@@ -512,13 +512,13 @@ function applyRetakeExamCalibration(exam: ExamScoreResult, state: GameState): Ex
 }
 
 function retakeScoreModBoost(previousScore: number): number {
-  if (previousScore < 550) return 24;
-  if (previousScore < 570) return 22;
-  return 20;
+  if (previousScore < 550) return 5;
+  if (previousScore < 570) return 2;
+  return 0;
 }
 
 function retakeBaseModBoost(previousScore: number): number {
-  return previousScore < 550 ? 5 : 4;
+  return 0;
 }
 
 function applyRetakeGainSoftCap(exam: ExamScoreResult, state: GameState): ExamScoreResult {

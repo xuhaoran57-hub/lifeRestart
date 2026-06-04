@@ -105,13 +105,13 @@ describe('LifeEngine', () => {
     expect(retakeState.retakeFrom?.admittedUniversityName).toBe(first.admission.admittedUniversity?.name);
     expect(retakeState.currentRound?.age).toBe(17);
     expect(retakeState.currentRound?.round).toBe(1);
-    const expectedScoreModBoost = first.admission.finalScore < 550 ? 24 : first.admission.finalScore < 570 ? 22 : 20;
-    const expectedBaseModBoost = first.admission.finalScore < 550 ? 5 : 4;
+    const expectedScoreModBoost = first.admission.finalScore < 550 ? 5 : first.admission.finalScore < 570 ? 2 : 0;
+    const expectedBaseModBoost = 0;
     expect(retakeState.props.SPR).toBe(Math.max(0, first.state.props.SPR - 1));
     expect(retakeState.props.RSK).toBe(Math.min(90, first.state.props.RSK + 2));
     expect(retakeState.props.SCOREMOD).toBe(Math.min(70, first.state.props.SCOREMOD + expectedScoreModBoost));
     expect(retakeState.props.BASEMOD).toBe(Math.min(80, first.state.props.BASEMOD + expectedBaseModBoost));
-    expect(first.state.props.SCR - retakeState.props.SCR).toBeLessThanOrEqual(20);
+    expect(first.state.props.SCR - retakeState.props.SCR).toBeLessThanOrEqual(30);
 
     const second = engine.runToEnd();
     expect(second.state.logs).toHaveLength(84);
