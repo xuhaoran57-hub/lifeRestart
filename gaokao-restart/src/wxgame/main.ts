@@ -493,17 +493,27 @@ class WxGameApp {
   }
 
   private handlePointer(x: number, y: number): void {
-    const button = this.buttons.find(item =>
-      !item.disabled
-      && x >= item.x
-      && x <= item.x + item.width
-      && y >= item.y
-      && y <= item.y + item.height,
-    );
+    const button = this.findButtonAt(x, y);
     if (!button) return;
 
     this.wxApi?.vibrateShort?.({ type: 'light' });
     void this.runAction(button.action);
+  }
+
+  private findButtonAt(x: number, y: number): Button | null {
+    for (let index = this.buttons.length - 1; index >= 0; index -= 1) {
+      const button = this.buttons[index];
+      if (
+        !button.disabled
+        && x >= button.x
+        && x <= button.x + button.width
+        && y >= button.y
+        && y <= button.y + button.height
+      ) {
+        return button;
+      }
+    }
+    return null;
   }
 
   private async runAction(action: Action): Promise<void> {
@@ -2395,8 +2405,11 @@ class WxGameApp {
   private registerButton(action: Action, x: number, y: number, width: number, height: number, disabled = false): void {
     const screenY = y + this.currentOffsetY;
     const rect = { x, y: screenY, width, height };
-    if (this.currentButtonViewport && !this.rectIntersects(rect, this.currentButtonViewport)) return;
-    this.buttons.push({ action, x, y: screenY, width, height, disabled });
+    const hitRect = this.currentButtonViewport
+      ? this.rectIntersection(rect, this.currentButtonViewport)
+      : rect;
+    if (!hitRect) return;
+    this.buttons.push({ action, x: hitRect.x, y: hitRect.y, width: hitRect.width, height: hitRect.height, disabled });
   }
 
   private drawMiniPill(label: string, x: number, y: number, bg: string, fg: string): number {
@@ -2602,6 +2615,15 @@ class WxGameApp {
 
   private rectIntersects(a: Rect, b: Rect): boolean {
     return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
+  }
+
+  private rectIntersection(a: Rect, b: Rect): Rect | null {
+    const x = Math.max(a.x, b.x);
+    const y = Math.max(a.y, b.y);
+    const right = Math.min(a.x + a.width, b.x + b.width);
+    const bottom = Math.min(a.y + a.height, b.y + b.height);
+    if (right <= x || bottom <= y) return null;
+    return { x, y, width: right - x, height: bottom - y };
   }
 
   private clamp(value: number, min: number, max: number): number {

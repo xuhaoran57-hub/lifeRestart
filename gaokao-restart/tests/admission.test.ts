@@ -109,6 +109,15 @@ describe('resolveAdmission', () => {
     expect(eligible.isSinoForeign).toBe(true);
     expect(eligible.resourceGap).toBe(0);
   });
+
+  it('weights eligible sino-foreign cooperation lines higher when resource is higher', () => {
+    const content = cooperationFixtureContent();
+
+    const thresholdResourceCount = countSinoForeignAdmissions(content, 7);
+    const highResourceCount = countSinoForeignAdmissions(content, 10);
+
+    expect(highResourceCount).toBeGreaterThan(thresholdResourceCount);
+  });
 });
 
 function exam(finalScore: number): ExamScoreResult {
@@ -221,6 +230,20 @@ function cooperationOnlyFixtureContent(): GameContent {
     ...content,
     admissionLines: content.admissionLines.filter(line => line.lineType === 'sinoForeign'),
   };
+}
+
+function countSinoForeignAdmissions(content: GameContent, resourceLevel: number): number {
+  let count = 0;
+  for (let seed = 1; seed <= 200; seed += 1) {
+    const result = resolveAdmission(
+      content,
+      stateWithScoreProps({ MNY: resourceLevel, HVOL: 45, RSK: 12 }),
+      exam(565),
+      new Random(seed),
+    );
+    if (result.admittedLine?.lineType === 'sinoForeign') count += 1;
+  }
+  return count;
 }
 
 function highLinePeerFixtureContent(): GameContent {

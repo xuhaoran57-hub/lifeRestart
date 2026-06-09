@@ -29,6 +29,7 @@
 - `11-simulation-optimization-plan.md`：5000 局模拟后的结局覆盖、录取分布和数值优化计划。
 - `admission-data-sources.md`：录取投档线与院校标签来源记录。
 - `14-web-to-wxgame-sync-rule.md`：网页版本变更同步到微信小游戏的执行规则。
+- `16-wxgame-promotion-plan.md`：微信小游戏上线后的推广、裂变、内容和广告测试落地方案。
 
 ## 4. 子 agent 执行顺序
 
