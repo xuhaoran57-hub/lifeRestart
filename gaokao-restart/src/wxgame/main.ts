@@ -110,6 +110,19 @@ interface WxGameModel {
   persist(save: SaveData): void;
 }
 
+interface ResultShareView {
+  title: string;
+  headline: string;
+  scoreText: string;
+  schoolText: string;
+  tierText: string;
+  marketingTag: string;
+  challengeLine: string;
+  subjectText: string;
+  talentNames: string[];
+  endingName: string;
+}
+
 class WxBgmPlayer {
   private wxAudio: WxInnerAudioContext | null = null;
   private webAudio: HTMLAudioElement | null = null;
@@ -945,7 +958,8 @@ class WxGameApp {
 
   private shareImageKey(result: FinalResult): string {
     const universityCode = result.admission.admittedUniversity?.code ?? 'none';
-    return `${result.ending.id}|${result.admission.finalScore}|${universityCode}|${result.state.retakeCount}`;
+    const talentKey = result.state.selectedTalentIds.join(',');
+    return `${result.ending.id}|${result.admission.finalScore}|${universityCode}|${result.state.retakeCount}|${talentKey}|${this.resultMarketingTag(result)}`;
   }
 
   private renderShareCard(
@@ -954,62 +968,60 @@ class WxGameApp {
     height: number,
     result: FinalResult,
   ): void {
+    const view = this.resultShareView(result);
     const bg = ctx.createLinearGradient(0, 0, width, height);
-    bg.addColorStop(0, '#0f2235');
-    bg.addColorStop(0.55, '#1d4f6e');
-    bg.addColorStop(1, '#2f7c80');
+    bg.addColorStop(0, '#13223a');
+    bg.addColorStop(0.48, '#1d5a70');
+    bg.addColorStop(1, '#2d7b69');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
-    for (let x = 0.5; x < width; x += 32) ctx.fillRect(x, 0, 1, height);
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.07)';
+    for (let x = 0.5; x < width; x += 34) ctx.fillRect(x, 0, 1, height);
+    ctx.fillStyle = 'rgba(255, 216, 122, 0.16)';
+    ctx.beginPath();
+    ctx.arc(width - 70, 62, 118, 0, Math.PI * 2);
+    ctx.fill();
 
     const padding = 30;
     ctx.fillStyle = 'rgba(255, 255, 255, 0.94)';
     ctx.font = '700 18px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
     ctx.fillText('重回高三人生模拟', padding, padding + 18);
 
-    ctx.fillStyle = '#ffd87a';
-    ctx.font = '800 28px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-    ctx.fillText(this.truncateForShare(ctx, result.ending.name, width - padding * 2), padding, padding + 64);
+    this.drawSharePill(ctx, view.marketingTag, width - padding - this.sharePillWidth(ctx, view.marketingTag, 14), padding + 1, '#ffe3a3', '#573800');
 
     ctx.fillStyle = 'rgba(255, 255, 255, 0.78)';
-    ctx.font = '500 14px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-    const subtitle = `${result.admission.subjectTrackName ?? ''} · ${admissionTierName(result.admission.admissionTier)}`;
-    ctx.fillText(this.truncateForShare(ctx, subtitle.trim().replace(/^· /, ''), width - padding * 2), padding, padding + 92);
+    ctx.font = '700 16px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText(view.headline, padding, padding + 58);
 
-    const universityName = result.admission.admittedUniversity?.name
-      ?? result.admission.admittedLine?.universityName
-      ?? '未录取到样本院校';
+    ctx.fillStyle = '#ffd87a';
+    ctx.font = '800 58px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText(this.truncateForShare(ctx, view.scoreText, width - padding * 2), padding, padding + 122);
+
     ctx.fillStyle = '#ffffff';
     ctx.font = '800 22px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-    ctx.fillText(this.truncateForShare(ctx, universityName, width - padding * 2), padding, padding + 152);
+    ctx.fillText(this.truncateForShare(ctx, view.schoolText, width - padding * 2), padding, padding + 162);
 
-    if (!result.admission.scoreHidden) {
-      ctx.fillStyle = '#ffd87a';
-      ctx.font = '800 56px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-      const scoreText = String(result.admission.finalScore);
-      ctx.fillText(scoreText, padding, padding + 222);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
-      ctx.font = '500 14px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-      ctx.fillText('高考分数', padding + ctx.measureText(scoreText).width + 12, padding + 222);
-    }
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.78)';
+    ctx.font = '600 14px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText(this.truncateForShare(ctx, `${view.tierText} · ${view.subjectText} · ${view.endingName}`, width - padding * 2), padding, padding + 190);
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.86)';
-    ctx.font = '500 13px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-    const stats = [
-      `已重开 ${this.game.save.times} 次`,
-      `${this.game.save.unlockedEndingIds.length} 个结局`,
-      `${this.game.save.achievedIds.length} 个成就`,
-      `${this.game.save.unlockedUniversityCodes.length} 所院校`,
-    ];
-    stats.forEach((text, index) => {
-      ctx.fillText(text, padding, padding + 282 + index * 22);
+    let tagX = padding;
+    const tagY = padding + 222;
+    view.talentNames.slice(0, 3).forEach(name => {
+      const label = name.length > 8 ? `${name.slice(0, 8)}…` : name;
+      const tagWidth = this.sharePillWidth(ctx, label, 13);
+      this.drawSharePill(ctx, label, tagX, tagY, 'rgba(255, 255, 255, 0.14)', '#ffffff', 13);
+      tagX += tagWidth + 8;
     });
 
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.font = '700 18px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
+    ctx.fillText(this.truncateForShare(ctx, view.challengeLine, width - padding * 2), padding, height - 68);
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.68)';
     ctx.font = '500 12px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif';
-    const tip = '点开看看你的高考会落在哪所学校';
+    const tip = '点击重开你的高三';
     const tipWidth = ctx.measureText(tip).width;
     ctx.fillText(tip, width - padding - tipWidth, height - padding);
   }
@@ -1023,10 +1035,123 @@ class WxGameApp {
 
   private resultShareTitle(result: FinalResult | null = this.state.result): string {
     if (!result) return '重回高三人生模拟';
-    const universityName = result.admission.admittedUniversity?.name
+    return this.resultShareView(result).title;
+  }
+
+  private resultShareView(result: FinalResult): ResultShareView {
+    const schoolText = this.resultSchoolText(result);
+    const marketingTag = this.resultMarketingTag(result);
+    const talentNames = this.resultTalentNames(result);
+    const tierText = `等级 ${result.ending.tier}`;
+    const subjectText = result.admission.subjectTrackName || '高考';
+    const scoreText = result.admission.scoreHidden ? '保送' : `${result.admission.finalScore} 分`;
+    const admitted = result.admission.admitted || Boolean(result.admission.scoreHidden);
+    const headline = result.admission.scoreHidden ? '我重开高三，提前上岸' : '我重开高三';
+    let title: string;
+    if (result.admission.scoreHidden) {
+      title = `我重开高三，${marketingTag}到${schoolText}`;
+    } else if (admitted) {
+      title = `我重开高三考了 ${result.admission.finalScore} 分，被${schoolText}录取`;
+    } else if (result.admission.admissionTier === 'slide' || result.ending.tags?.includes('滑档')) {
+      title = `我重开高三考了 ${result.admission.finalScore} 分，结果志愿翻车`;
+    } else {
+      title = `我重开高三考了 ${result.admission.finalScore} 分，你敢试一次吗？`;
+    }
+
+    return {
+      title,
+      headline,
+      scoreText,
+      schoolText,
+      tierText,
+      marketingTag,
+      challengeLine: this.resultChallengeLine(result, marketingTag),
+      subjectText,
+      talentNames,
+      endingName: result.ending.name,
+    };
+  }
+
+  private resultSchoolText(result: FinalResult): string {
+    return result.admission.admittedUniversity?.name
       ?? result.admission.admittedLine?.universityName
-      ?? '大学';
-    return `这次重开我考上了${universityName}，你也来试试吧`;
+      ?? (result.admission.scoreHidden ? '录取资格' : '未录取到样本院校');
+  }
+
+  private resultTalentNames(result: FinalResult): string[] {
+    return result.state.selectedTalentIds
+      .map(id => this.game.content.talents.find(item => item.id === id)?.name)
+      .filter((item): item is string => Boolean(item));
+  }
+
+  private resultMarketingTag(result: FinalResult): string {
+    const endingName = result.ending.name;
+    const tags = result.ending.tags ?? [];
+    const admission = result.admission;
+    if (admission.scoreHidden || endingName.includes('保送') || tags.includes('保送')) return '保送上岸';
+    if (endingName.includes('志愿填报鬼才')) return '志愿鬼才';
+    if (admission.admissionTier === 'slide' || tags.includes('滑档') || endingName.includes('翻车')) return '滑档警示';
+    if (result.state.retakeCount > 0 && admission.admitted) return '复读回本';
+    if (admission.admissionTier === '985' && (admission.margin ?? 0) >= 20) return '稳上 985';
+    if (admission.admissionTier === '985') return '惊险 985';
+    if (admission.admissionTier === '211' || admission.admissionTier === 'doubleFirstClass') return '名校上岸';
+    if (admission.admitted) return '平凡但上岸';
+    if (endingName.includes('复读') || admission.admissionTier === 'retake') return '再战一年';
+    return '高三重开';
+  }
+
+  private resultChallengeLine(result: FinalResult, marketingTag: string): string {
+    if (marketingTag.includes('985')) return '班群挑战：谁能重开进 985？';
+    if (marketingTag === '滑档警示') return '你敢不敢再填一次志愿？';
+    if (marketingTag === '志愿鬼才') return '谁能把每一分都用到极致？';
+    if (marketingTag === '复读回本') return '复读一年到底值不值？';
+    if (result.admission.scoreHidden) return '你能不能刷出隐藏上岸路线？';
+    return '你能不能刷出更好的学校？';
+  }
+
+  private sharePillWidth(ctx: CanvasRenderingContext2D, label: string, fontSize = 14): number {
+    ctx.font = `700 ${fontSize}px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif`;
+    return ctx.measureText(label).width + 22;
+  }
+
+  private drawSharePill(
+    ctx: CanvasRenderingContext2D,
+    label: string,
+    x: number,
+    y: number,
+    bg: string,
+    fg: string,
+    fontSize = 14,
+  ): void {
+    const width = this.sharePillWidth(ctx, label, fontSize);
+    ctx.fillStyle = bg;
+    this.roundRectWithContext(ctx, x, y, width, 26, 13);
+    ctx.fill();
+    ctx.fillStyle = fg;
+    ctx.font = `700 ${fontSize}px Inter, "Microsoft YaHei", "PingFang SC", system-ui, sans-serif`;
+    ctx.fillText(label, x + 11, y + 18);
+  }
+
+  private roundRectWithContext(
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+  ): void {
+    const r = Math.min(radius, width / 2, height / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + width - r, y);
+    ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+    ctx.lineTo(x + width, y + height - r);
+    ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+    ctx.lineTo(x + r, y + height);
+    ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
   }
 
   private switchScreen(screen: Screen): void {
@@ -1539,13 +1664,35 @@ class WxGameApp {
   private drawSummary(y: number): number {
     const result = this.state.result;
     if (!result) return y;
+    const shareView = this.resultShareView(result);
     y = this.drawPanel(y, () => {
       let cursor = y + 26;
-      this.drawMiniPill(`等级 ${result.ending.tier}`, 36, cursor - 12, '#f3ecdf', '#665335');
+      let pillX = 36;
+      const tagWidth = this.drawMiniPill(shareView.marketingTag, pillX, cursor - 12, '#ffe7ae', '#7a4a00');
+      pillX += tagWidth + 6;
+      this.drawMiniPill(`等级 ${result.ending.tier}`, pillX, cursor - 12, '#f3ecdf', '#665335');
       cursor += 30;
       this.setFont(22, 800);
       this.ctx.fillStyle = theme.title;
       cursor = this.drawWrappedText(result.ending.name, 36, cursor, this.width - 72, 29, 2);
+      this.setFont(16, 800);
+      this.ctx.fillStyle = theme.blueDeep;
+      const resultLine = result.admission.scoreHidden
+        ? shareView.schoolText
+        : `${shareView.scoreText} · ${shareView.schoolText}`;
+      cursor = this.drawWrappedText(resultLine, 36, cursor + 4, this.width - 72, 23, 2);
+      if (shareView.talentNames.length > 0) {
+        this.setFont(13, 700);
+        this.ctx.fillStyle = theme.teal;
+        cursor = this.drawWrappedText(
+          `本局天赋：${shareView.talentNames.slice(0, 3).join(' / ')}`,
+          36,
+          cursor + 2,
+          this.width - 72,
+          19,
+          2,
+        );
+      }
       this.setFont(15, 400);
       this.ctx.fillStyle = '#5d5a54';
       cursor = this.drawWrappedText(result.ending.description, 36, cursor + 8, this.width - 72, 24, 5);
@@ -1648,6 +1795,15 @@ class WxGameApp {
 
     if (this.state.screen === 'universities') {
       this.drawButton({ type: 'closeUniversities' }, '返回', 20, footerY, this.width - 40, buttonHeight, 'primary');
+      return;
+    }
+
+    if (this.state.screen === 'summary' && !this.state.confirmingRestart) {
+      const gap = 10;
+      const leftWidth = Math.round((this.width - 40 - gap) * 0.62);
+      const rightWidth = this.width - 40 - gap - leftWidth;
+      this.drawButton({ type: 'shareResult' }, '晒出结果', 20, footerY, leftWidth, buttonHeight, 'primary');
+      this.drawButton({ type: 'requestRestart' }, '再来一局', 20 + leftWidth + gap, footerY, rightWidth, buttonHeight, 'secondary');
       return;
     }
 
@@ -2033,7 +2189,7 @@ class WxGameApp {
         this.setFont(14, 400);
         this.ctx.fillStyle = '#5d5a54';
         cursor = this.drawWrappedText(admission.reason, 36, cursor + 8, this.width - 72, 22, 6);
-        this.drawButton({ type: 'shareResult' }, '分享录取结果', 36, cursor + 10, this.width - 72, 42, 'primary');
+        this.drawButton({ type: 'shareResult' }, '晒出结果', 36, cursor + 10, this.width - 72, 42, 'primary');
         cursor += 62;
         return cursor + 4;
       }
@@ -2054,12 +2210,12 @@ class WxGameApp {
         const buttonWidth = (this.width - 72 - gap) / 2;
         const remaining = this.state.result ? remainingRetakesForState(this.state.result.state) : 0;
         const retakeLabel = remaining > 1 ? `复读一年(${remaining})` : '复读一年';
-        this.drawButton({ type: 'shareResult' }, '分享录取', 36, cursor + 10, buttonWidth, 42, 'primary');
+        this.drawButton({ type: 'shareResult' }, '晒出结果', 36, cursor + 10, buttonWidth, 42, 'primary');
         this.drawButton({ type: 'retake' }, retakeLabel, 36 + buttonWidth + gap, cursor + 10, buttonWidth, 42, 'secondary');
         cursor += 62;
         return cursor + 4;
       }
-      this.drawButton({ type: 'shareResult' }, '分享录取结果', 36, cursor + 10, this.width - 72, 42, 'primary');
+      this.drawButton({ type: 'shareResult' }, '晒出结果', 36, cursor + 10, this.width - 72, 42, 'primary');
       cursor += 62;
       return cursor + 4;
     });
